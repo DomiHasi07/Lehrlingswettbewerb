@@ -437,7 +437,7 @@ namespace WindowsFormsApp3
            
             SizeF size = TextRenderer.MeasureText(str, new Font("Microsoft Sans Serif", Text_Size));
             int stringBreite = Int32.Parse(size.ToString());
-            retString = str.Substring(0, 190);
+           // retString = str.Substring(0, 190);
             MessageBox.Show(size.ToString());
         }
 
