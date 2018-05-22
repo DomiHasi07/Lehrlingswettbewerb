@@ -109,6 +109,12 @@ namespace WindowsFormsApp3
         {
             InitializeComponent();
             Auswahl_Text_Größe.Text = Text_Size.ToString();
+            richTextBox1.Click += RichTextBox1_Click;
+        }
+
+        private void RichTextBox1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Question_TextChanged_1(object sender, EventArgs e)
@@ -400,6 +406,11 @@ namespace WindowsFormsApp3
 
             Array.Clear(Zufallsfragen, 0, Zufallsfragen.Length);
             Start.Text = "Start";
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         void Disable_Ans_Buttons()
