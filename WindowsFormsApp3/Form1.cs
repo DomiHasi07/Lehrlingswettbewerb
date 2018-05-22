@@ -110,6 +110,7 @@ namespace WindowsFormsApp3
             InitializeComponent();
             Auswahl_Text_Größe.Text = Text_Size.ToString();
         }
+
         private void Question_TextChanged_1(object sender, EventArgs e)
         {
             Size size = TextRenderer.MeasureText(Question.Text, Question.Font);
