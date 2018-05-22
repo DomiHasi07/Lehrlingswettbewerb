@@ -17,8 +17,8 @@ namespace WindowsFormsApp3
         int maxZeichen = 190;
         string tempQuestion;
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
-        int Zufallszahl, current_Q = 1;
-        int[] Zufallsfragen = new int[5];
+        int Zufallszahl, current_Q = 0;
+        int[] Zufallsfragen;
         int[] Zufallsantworten = new int[4];
         string right_Answer, given_Answer;
 
@@ -54,7 +54,7 @@ namespace WindowsFormsApp3
                 new string[]
                 {
                     "Sperrbereich, Durchbruchspannung, Durchlassspannung, Durchlassbereich",
-                    "Temperaturkoeffizient, Dotierung, Umgebungstemperatur, Sperrschichttemperatur",
+                    "Temperaturkoeffizient, Dotierung, Umgeb    ungstemperatur, Sperrschichttemperatur",
                     "Verlustleistung, maximaler Spitzenstrom, Durchlassstrom, Spitzenspannung",
                     "Diodenkapazität, Schaltzeiten, Sperrstrom, Durchlassspannung"
                 }
@@ -110,47 +110,13 @@ namespace WindowsFormsApp3
             InitializeComponent();
             Auswahl_Text_Größe.Text = Text_Size.ToString();
         }
-
-        void write_Question()
+        private void Question_TextChanged_1(object sender, EventArgs e)
         {
-            Aufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][0];
-            Question.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][1];
-            right_Answer = Fragenkatalog[Zufallsfragen[current_Q] - 1][1][0];
-        }
+            Size size = TextRenderer.MeasureText(Question.Text, Question.Font);
+            Question.Width = size.Width;
+            if (Question.Width > 190)
 
-        void change_FontSize()
-        {
-            Auswahl_Text_Größe.Text = Text_Size.ToString();
-            currentFont = new Font(Font.FontFamily, Text_Size);
-            if (Text_Size < 15)
-            {
-                Question.Font = currentFont;
-                Aufgaben_Gebiet.Font = currentFont;
-            }
-
-            Btn_Answer1.Font = currentFont;
-            Btn_Answer2.Font = currentFont;
-            Btn_Answer3.Font = currentFont;
-            Btn_Answer4.Font = currentFont;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Auswahl_Text_Göße(object sender, EventArgs e)
-        {
-            try
-            {
-                Text_Size = float.Parse(Auswahl_Text_Größe.Text);
-                change_FontSize();
-
-            }
-            catch
-            {
-
-            }
+                Question.Height = size.Height;
         }
 
         private void Aufgaben_Gebiet_TextChanged(object sender, EventArgs e)
@@ -158,84 +124,29 @@ namespace WindowsFormsApp3
 
         }
 
-        private void Start_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (!Start_was_pressed)
-            {
-                Start_Sequenz();
-                Start_was_pressed = true;
-            }
-            else
-            {
-                Reset();
-                Start_was_pressed = false;
-                Next.Text = "Next";
-            }
-        }
-
-        void Start_Sequenz()
-        {
-            for (int i = 0; i < Fragenkatalog.Length; i++)
-            {
-                Zufallszahl = rnd.Next(1, Fragenkatalog.Length + 1);
-                if (!Zufallsfragen.Contains(Zufallszahl))
-                    Zufallsfragen[i] = Zufallszahl;
-                else
-                    i--;
-            }
-
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
-            Aufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[0] - 1][0][0];
-            Question.Text = Fragenkatalog[Zufallsfragen[0] - 1][0][1];
-
-            right_Answer = Fragenkatalog[Zufallsfragen[0] - 1][1][0];
-
-            for (int i = 0; i < 4; i++)
-            {
-                answers[i].Enabled = true;
-                answers[i].Text = Fragenkatalog[Zufallsfragen[0] - 1][1][i];
-            }
-            Next.Enabled = true;
-            Start.Text = "Reset";
 
         }
 
-        void Reset()
+        private void Btn_Text_smaller_click(object sender, EventArgs e)
         {
-            Aufgaben_Gebiet.Text = "";
-            Question.Text = "";
-            Disable_and_delete_Ans_Buttons();
-
-            Next.Enabled = false;
-            Next_was_pressed = false;
-            Btn_Color("Clear");
-            given_Answer = "";
-            current_Q = 1;
-
-            Array.Clear(Zufallsfragen, 0, Zufallsfragen.Length);
-            Start.Text = "Start";
-        }
-
-        void Disable_Ans_Buttons()
-        {
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
-            for (int i = 0; i < 4; i++)
+            if (Text_Size > 5)
             {
-                answers[i].Enabled = false;
-            }
+                try
+                {
+                    Text_Size -= 1;
+                    change_FontSize();
+                }
+                catch
+                {
 
+                }
+            }
+            Textkürzen(Btn_Answer4.Text);
         }
 
-        void Enable_Ans_Buttons()
-        {
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
-            for (int i = 0; i < 4; i++)
-            {
-                answers[i].Enabled = true;
-            }
-        }
-
-        private void text_Click(object sender, EventArgs e)
+        private void Btn_Text_bigger_click(object sender, EventArgs e)
         {
             if (Text_Size < 20)
             {
@@ -258,11 +169,25 @@ namespace WindowsFormsApp3
             {
                 Text_Size = float.Parse(Auswahl_Text_Größe.Text);
                 change_FontSize();
-
             }
             catch
             {
 
+            }
+        }
+
+        private void Start_Click(object sender, EventArgs e)
+        {
+            if (!Start_was_pressed)
+            {
+                Start_Sequenz();
+                Start_was_pressed = true;
+            }
+            else
+            {
+                Reset();
+                Start_was_pressed = false;
+                Next.Text = "Next";
             }
         }
 
@@ -273,7 +198,7 @@ namespace WindowsFormsApp3
                 Btn_Color("Clear");
                 Enable_Ans_Buttons();
                 write_Question();
-                create_Answers();
+                write_Answers();
                 if (current_Q == Fragenkatalog.Length)
                 {
                     Next.Text = "Finish";
@@ -332,43 +257,7 @@ namespace WindowsFormsApp3
 
             given_Answer = Btn_Answer4.Text;
         }
-
-        void Disable_and_delete_Ans_Buttons()
-        {
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
-            for (int i = 0; i < 4; i++)
-            {
-                answers[i].Enabled = false;
-                answers[i].Text = "";
-            }
-        }
-
-        private void Btn_Text_smaller_Click_1(object sender, EventArgs e)
-        {
-            if (Text_Size > 5)
-            {
-                try
-                {
-                    Text_Size -= 1;
-                    change_FontSize();
-                }
-                catch
-                {
-
-                }
-            }
-            Textkürzen(Btn_Answer4.Text);
-        }
-
-        private void Question_TextChanged_1(object sender, EventArgs e)
-        {
-            Size size = TextRenderer.MeasureText(Question.Text, Question.Font);
-            Question.Width = size.Width;
-            if(Question.Width > 190)
-
-            Question.Height = size.Height;
-        }
-
+   
         void Btn_Color(string x)
         {
             switch (x)
@@ -410,9 +299,25 @@ namespace WindowsFormsApp3
 
             }
         }
+        
+        void Textkürzen(string str)
+        {
+           
+            SizeF size = TextRenderer.MeasureText(str, new Font("Microsoft Sans Serif", Text_Size));
+            //nt stringBreite = Int32.Parse(size.ToString());
+            //retString = str.Substring(0, 190);
+            MessageBox.Show(size.ToString());
+        }
 
-        void create_Answers()
-        { 
+        void write_Question()
+        {
+            Aufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][0];
+            Question.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][1];
+            right_Answer = Fragenkatalog[Zufallsfragen[current_Q] - 1][1][0];
+        }
+
+        void write_Answers()
+        {
             for (int i = 0; i < 4; i++)
             {
                 Zufallszahl = rnd.Next(1, 5);
@@ -432,15 +337,88 @@ namespace WindowsFormsApp3
             Array.Clear(Zufallsantworten, 0, Zufallsantworten.Length);
         }
 
-        void Textkürzen(string str)
+        void change_FontSize()
         {
-           
-            SizeF size = TextRenderer.MeasureText(str, new Font("Microsoft Sans Serif", Text_Size));
-            int stringBreite = Int32.Parse(size.ToString());
-           // retString = str.Substring(0, 190);
-            MessageBox.Show(size.ToString());
+            Auswahl_Text_Größe.Text = Text_Size.ToString();
+            currentFont = new Font(Font.FontFamily, Text_Size);
+            if (Text_Size < 15)
+            {
+                Question.Font = currentFont;
+                Aufgaben_Gebiet.Font = currentFont;
+            }
+
+            Btn_Answer1.Font = currentFont;
+            Btn_Answer2.Font = currentFont;
+            Btn_Answer3.Font = currentFont;
+            Btn_Answer4.Font = currentFont;
         }
 
+        void Disable_and_delete_Ans_Buttons()
+        {
+            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
+            for (int i = 0; i < 4; i++)
+            {
+                answers[i].Enabled = false;
+                answers[i].Text = "";
+            }
+        }
+
+        void Start_Sequenz()
+        {
+            Zufallsfragen = new int[Fragenkatalog.Length];
+
+            for (int i = 0; i < Fragenkatalog.Length; i++)
+            {
+                Zufallszahl = rnd.Next(1, Fragenkatalog.Length + 1);
+                if (!Zufallsfragen.Contains(Zufallszahl))
+                    Zufallsfragen[i] = Zufallszahl;
+                else
+                    i--;
+            }
+
+            write_Question();
+            Enable_Ans_Buttons();
+            write_Answers();
+
+            Next.Enabled = true;
+            Start.Text = "Reset";
+
+        }
+
+        void Reset()
+        {
+            Aufgaben_Gebiet.Text = "";
+            Question.Text = "";
+            Disable_and_delete_Ans_Buttons();
+
+            Next.Enabled = false;
+            Next_was_pressed = false;
+            Btn_Color("Clear");
+            given_Answer = "";
+            current_Q = 0;
+
+            Array.Clear(Zufallsfragen, 0, Zufallsfragen.Length);
+            Start.Text = "Start";
+        }
+
+        void Disable_Ans_Buttons()
+        {
+            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
+            for (int i = 0; i < 4; i++)
+            {
+                answers[i].Enabled = false;
+            }
+
+        }
+
+        void Enable_Ans_Buttons()
+        {
+            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
+            for (int i = 0; i < 4; i++)
+            {
+                answers[i].Enabled = true;
+            }
+        }
     }
 
 }

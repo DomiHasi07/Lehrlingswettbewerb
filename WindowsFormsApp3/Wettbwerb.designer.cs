@@ -184,6 +184,7 @@
             this.Aufgaben_Gebiet.Multiline = true;
             this.Aufgaben_Gebiet.Name = "Aufgaben_Gebiet";
             this.Aufgaben_Gebiet.ReadOnly = true;
+            this.Aufgaben_Gebiet.ShortcutsEnabled = false;
             this.Aufgaben_Gebiet.Size = new System.Drawing.Size(190, 20);
             this.Aufgaben_Gebiet.TabIndex = 13;
             this.Aufgaben_Gebiet.TextChanged += new System.EventHandler(this.Aufgaben_Gebiet_TextChanged);

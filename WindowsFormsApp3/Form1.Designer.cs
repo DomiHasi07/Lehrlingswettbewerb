@@ -34,9 +34,9 @@
             this.Aufgaben_Gebiet = new System.Windows.Forms.TextBox();
             this.Question = new System.Windows.Forms.TextBox();
             this.Auswahl_Text_Größe = new System.Windows.Forms.ComboBox();
-            this.Btn_Text_smaller = new System.Windows.Forms.Button();
+            this.Btn_Text_bigger = new System.Windows.Forms.Button();
             this.text_size = new System.Windows.Forms.Label();
-            this.text = new System.Windows.Forms.Button();
+            this.Btn_Text_smaller = new System.Windows.Forms.Button();
             this.Btn_Answer4 = new System.Windows.Forms.Button();
             this.Btn_Answer3 = new System.Windows.Forms.Button();
             this.Btn_Answer2 = new System.Windows.Forms.Button();
@@ -121,19 +121,19 @@
             this.Auswahl_Text_Größe.TabIndex = 24;
             this.Auswahl_Text_Größe.SelectedIndexChanged += new System.EventHandler(this.Auswahl_Text_Größe_SelectedIndexChanged);
             // 
-            // Btn_Text_smaller
+            // Btn_Text_bigger
             // 
-            this.Btn_Text_smaller.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Btn_Text_smaller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Btn_Text_smaller.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_Text_smaller.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Text_smaller.Location = new System.Drawing.Point(85, 51);
-            this.Btn_Text_smaller.Margin = new System.Windows.Forms.Padding(0);
-            this.Btn_Text_smaller.Name = "Btn_Text_smaller";
-            this.Btn_Text_smaller.Size = new System.Drawing.Size(30, 26);
-            this.Btn_Text_smaller.TabIndex = 23;
-            this.Btn_Text_smaller.UseVisualStyleBackColor = false;
-            this.Btn_Text_smaller.Click += new System.EventHandler(this.Btn_Text_smaller_Click_1);
+            this.Btn_Text_bigger.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Btn_Text_bigger.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Btn_Text_bigger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Text_bigger.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Text_bigger.Location = new System.Drawing.Point(85, 51);
+            this.Btn_Text_bigger.Margin = new System.Windows.Forms.Padding(0);
+            this.Btn_Text_bigger.Name = "Btn_Text_bigger";
+            this.Btn_Text_bigger.Size = new System.Drawing.Size(30, 26);
+            this.Btn_Text_bigger.TabIndex = 23;
+            this.Btn_Text_bigger.UseVisualStyleBackColor = false;
+            this.Btn_Text_bigger.Click += new System.EventHandler(this.Btn_Text_bigger_click);
             // 
             // text_size
             // 
@@ -145,19 +145,19 @@
             this.text_size.TabIndex = 22;
             this.text_size.Text = "Schriftgröße";
             // 
-            // text
+            // Btn_Text_smaller
             // 
-            this.text.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.text.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.text.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text.Location = new System.Drawing.Point(43, 51);
-            this.text.Margin = new System.Windows.Forms.Padding(0);
-            this.text.Name = "text";
-            this.text.Size = new System.Drawing.Size(30, 26);
-            this.text.TabIndex = 21;
-            this.text.UseVisualStyleBackColor = false;
-            this.text.Click += new System.EventHandler(this.text_Click);
+            this.Btn_Text_smaller.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Btn_Text_smaller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Btn_Text_smaller.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Text_smaller.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Text_smaller.Location = new System.Drawing.Point(43, 51);
+            this.Btn_Text_smaller.Margin = new System.Windows.Forms.Padding(0);
+            this.Btn_Text_smaller.Name = "Btn_Text_smaller";
+            this.Btn_Text_smaller.Size = new System.Drawing.Size(30, 26);
+            this.Btn_Text_smaller.TabIndex = 21;
+            this.Btn_Text_smaller.UseVisualStyleBackColor = false;
+            this.Btn_Text_smaller.Click += new System.EventHandler(this.Btn_Text_smaller_click);
             // 
             // Btn_Answer4
             // 
@@ -228,9 +228,9 @@
             this.Controls.Add(this.Aufgaben_Gebiet);
             this.Controls.Add(this.Question);
             this.Controls.Add(this.Auswahl_Text_Größe);
-            this.Controls.Add(this.Btn_Text_smaller);
+            this.Controls.Add(this.Btn_Text_bigger);
             this.Controls.Add(this.text_size);
-            this.Controls.Add(this.text);
+            this.Controls.Add(this.Btn_Text_smaller);
             this.Controls.Add(this.Btn_Answer4);
             this.Controls.Add(this.Btn_Answer3);
             this.Controls.Add(this.Btn_Answer2);
@@ -251,9 +251,9 @@
         private System.Windows.Forms.TextBox Aufgaben_Gebiet;
         private System.Windows.Forms.TextBox Question;
         private System.Windows.Forms.ComboBox Auswahl_Text_Größe;
-        private System.Windows.Forms.Button Btn_Text_smaller;
+        private System.Windows.Forms.Button Btn_Text_bigger;
         private System.Windows.Forms.Label text_size;
-        private System.Windows.Forms.Button text;
+        private System.Windows.Forms.Button Btn_Text_smaller;
         private System.Windows.Forms.Button Btn_Answer4;
         private System.Windows.Forms.Button Btn_Answer3;
         private System.Windows.Forms.Button Btn_Answer2;
