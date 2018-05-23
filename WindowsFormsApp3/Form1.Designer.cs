@@ -48,7 +48,7 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(240, 133);
+            this.textBox1.Location = new System.Drawing.Point(213, 81);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(300, 20);
@@ -57,7 +57,7 @@
             // Next
             // 
             this.Next.Enabled = false;
-            this.Next.Location = new System.Drawing.Point(546, 133);
+            this.Next.Location = new System.Drawing.Point(519, 81);
             this.Next.Name = "Next";
             this.Next.Size = new System.Drawing.Size(197, 48);
             this.Next.TabIndex = 28;
@@ -67,7 +67,7 @@
             // 
             // Start
             // 
-            this.Start.Location = new System.Drawing.Point(37, 133);
+            this.Start.Location = new System.Drawing.Point(10, 81);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(197, 48);
             this.Start.TabIndex = 27;
@@ -97,7 +97,7 @@
             "18",
             "19",
             "20"});
-            this.Auswahl_Text_Größe.Location = new System.Drawing.Point(128, 51);
+            this.Auswahl_Text_Größe.Location = new System.Drawing.Point(132, 38);
             this.Auswahl_Text_Größe.Name = "Auswahl_Text_Größe";
             this.Auswahl_Text_Größe.Size = new System.Drawing.Size(45, 26);
             this.Auswahl_Text_Größe.TabIndex = 24;
@@ -109,7 +109,7 @@
             this.Btn_Text_bigger.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Btn_Text_bigger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Text_bigger.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Text_bigger.Location = new System.Drawing.Point(85, 51);
+            this.Btn_Text_bigger.Location = new System.Drawing.Point(89, 38);
             this.Btn_Text_bigger.Margin = new System.Windows.Forms.Padding(0);
             this.Btn_Text_bigger.Name = "Btn_Text_bigger";
             this.Btn_Text_bigger.Size = new System.Drawing.Size(30, 26);
@@ -121,7 +121,7 @@
             // 
             this.text_size.AutoSize = true;
             this.text_size.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text_size.Location = new System.Drawing.Point(64, 32);
+            this.text_size.Location = new System.Drawing.Point(68, 19);
             this.text_size.Name = "text_size";
             this.text_size.Size = new System.Drawing.Size(80, 16);
             this.text_size.TabIndex = 22;
@@ -133,7 +133,7 @@
             this.Btn_Text_smaller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Btn_Text_smaller.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Text_smaller.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Text_smaller.Location = new System.Drawing.Point(43, 51);
+            this.Btn_Text_smaller.Location = new System.Drawing.Point(47, 38);
             this.Btn_Text_smaller.Margin = new System.Windows.Forms.Padding(0);
             this.Btn_Text_smaller.Name = "Btn_Text_smaller";
             this.Btn_Text_smaller.Size = new System.Drawing.Size(30, 26);
@@ -146,7 +146,7 @@
             this.richAnswer4.BackColor = System.Drawing.Color.Gainsboro;
             this.richAnswer4.Cursor = System.Windows.Forms.Cursors.Default;
             this.richAnswer4.Enabled = false;
-            this.richAnswer4.Location = new System.Drawing.Point(393, 279);
+            this.richAnswer4.Location = new System.Drawing.Point(366, 227);
             this.richAnswer4.Name = "richAnswer4";
             this.richAnswer4.ReadOnly = true;
             this.richAnswer4.Size = new System.Drawing.Size(350, 40);
@@ -156,7 +156,9 @@
             // 
             // richQuestion
             // 
-            this.richQuestion.Location = new System.Drawing.Point(37, 187);
+            this.richQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richQuestion.Location = new System.Drawing.Point(10, 135);
             this.richQuestion.Name = "richQuestion";
             this.richQuestion.ReadOnly = true;
             this.richQuestion.Size = new System.Drawing.Size(706, 40);
@@ -165,7 +167,7 @@
             // 
             // richAufgaben_Gebiet
             // 
-            this.richAufgaben_Gebiet.Location = new System.Drawing.Point(240, 159);
+            this.richAufgaben_Gebiet.Location = new System.Drawing.Point(213, 107);
             this.richAufgaben_Gebiet.Name = "richAufgaben_Gebiet";
             this.richAufgaben_Gebiet.ReadOnly = true;
             this.richAufgaben_Gebiet.Size = new System.Drawing.Size(300, 22);
@@ -177,7 +179,7 @@
             this.richAnswer3.BackColor = System.Drawing.Color.Gainsboro;
             this.richAnswer3.Cursor = System.Windows.Forms.Cursors.Default;
             this.richAnswer3.Enabled = false;
-            this.richAnswer3.Location = new System.Drawing.Point(37, 279);
+            this.richAnswer3.Location = new System.Drawing.Point(10, 227);
             this.richAnswer3.Name = "richAnswer3";
             this.richAnswer3.ReadOnly = true;
             this.richAnswer3.Size = new System.Drawing.Size(350, 40);
@@ -189,7 +191,7 @@
             this.richAnswer2.BackColor = System.Drawing.Color.Gainsboro;
             this.richAnswer2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.richAnswer2.Enabled = false;
-            this.richAnswer2.Location = new System.Drawing.Point(393, 233);
+            this.richAnswer2.Location = new System.Drawing.Point(366, 181);
             this.richAnswer2.Name = "richAnswer2";
             this.richAnswer2.ReadOnly = true;
             this.richAnswer2.Size = new System.Drawing.Size(350, 40);
@@ -201,7 +203,7 @@
             this.richAnswer1.BackColor = System.Drawing.Color.Gainsboro;
             this.richAnswer1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.richAnswer1.Enabled = false;
-            this.richAnswer1.Location = new System.Drawing.Point(37, 233);
+            this.richAnswer1.Location = new System.Drawing.Point(10, 181);
             this.richAnswer1.Name = "richAnswer1";
             this.richAnswer1.ReadOnly = true;
             this.richAnswer1.ShortcutsEnabled = false;
@@ -213,7 +215,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(150, 35);
+            this.label1.Location = new System.Drawing.Point(154, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 39;
@@ -222,8 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(774, 335);
+            this.ClientSize = new System.Drawing.Size(730, 279);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richAnswer1);
             this.Controls.Add(this.richAnswer2);
@@ -238,6 +239,7 @@
             this.Controls.Add(this.Btn_Text_bigger);
             this.Controls.Add(this.text_size);
             this.Controls.Add(this.Btn_Text_smaller);
+            this.MinimumSize = new System.Drawing.Size(746, 318);
             this.Name = "Test";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

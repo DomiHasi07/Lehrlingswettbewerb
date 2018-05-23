@@ -112,45 +112,40 @@ namespace WindowsFormsApp3
             Auswahl_Text_Größe.Text = Text_Size.ToString();
         }
 
-        private void richAnswer1_Click(object sender, EventArgs e)
+        private void Answer_Button_Click(object sender, EventArgs e)
         {
-            Hintergrundfarbe("Antwort1");
+            switch ((sender as RichTextBox).Name)
+            {
+                case "richAnswer1":
+                    Hintergrundfarbe("Antwort1");
+                    given_Answer = richAnswer1.Text;
+                    break;
 
-            given_Answer = richAnswer1.Text;
-        }
+                case "richAnswer2":
+                    Hintergrundfarbe("Antwort2");
+                    given_Answer = richAnswer2.Text;
+                    break;
 
-        private void richAnswer2_Click(object sender, EventArgs e)
-        {
-            Hintergrundfarbe("Antwort2");
+                case "richAnswer3":
+                    Hintergrundfarbe("Antwort3");
+                    given_Answer = richAnswer3.Text;
+                    break;
 
-            given_Answer = richAnswer2.Text;
-        }
+                case "richAnswer4":
+                    Hintergrundfarbe("Antwort4");
+                    given_Answer = richAnswer4.Text;
+                    break;
 
-        private void richAnswer3_Click(object sender, EventArgs e)
-        {
-            Hintergrundfarbe("Antwort3");
-
-            given_Answer = richAnswer3.Text;
-        }
-
-        private void richAnswer4_Click(object sender, EventArgs e)
-        {
-            Hintergrundfarbe("Antwort4");
-
-            given_Answer = richAnswer4.Text;
-        }
-
-        private void Aufgaben_Gebiet_TextChanged(object sender, EventArgs e)
-        {
-
+            }
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            richAnswer1.Click += richAnswer1_Click;
-            richAnswer2.Click += richAnswer2_Click;
-            richAnswer3.Click += richAnswer3_Click;
-            richAnswer4.Click += richAnswer4_Click;
+            richAnswer1.Click += Answer_Button_Click;
+            richAnswer2.Click += Answer_Button_Click;
+            richAnswer3.Click += Answer_Button_Click;
+            richAnswer4.Click += Answer_Button_Click;
 
             richAnswer1.SelectionAlignment = HorizontalAlignment.Center;
             richAnswer2.SelectionAlignment = HorizontalAlignment.Center;
@@ -158,114 +153,96 @@ namespace WindowsFormsApp3
             richAnswer4.SelectionAlignment = HorizontalAlignment.Center;
             richQuestion.SelectionAlignment = HorizontalAlignment.Center;
             richAufgaben_Gebiet.SelectionAlignment = HorizontalAlignment.Center;
-            richAnswer1.SelectionChanged += RichAnswer1_SelectionChanged;
-            richAnswer2.SelectionChanged += RichAnswer2_SelectionChanged;
-            richAnswer3.SelectionChanged += RichAnswer3_SelectionChanged;
-            richAnswer4.SelectionChanged += RichAnswer4_SelectionChanged;
-            richQuestion.SelectionChanged += RichQuestion_SelectionChanged;
-            richAufgaben_Gebiet.SelectionChanged += RichAufgaben_Gebiet_SelectionChanged;
+           
+            richAnswer1.Enter += RichBox_Enter;
+            richAnswer2.Enter += RichBox_Enter;
+            richAnswer3.Enter += RichBox_Enter;
+            richAnswer4.Enter += RichBox_Enter;
+            richAufgaben_Gebiet.Enter += RichBox_Enter;
+            richQuestion.Enter += RichBox_Enter;
 
-            richAnswer1.Enter += RichAnswer1_Enter;
-            richAnswer1.Leave += RichAnswer1_Leave;
-            richAnswer2.Enter += RichAnswer2_Enter;
-            richAnswer2.Leave += RichAnswer2_Leave;
-            richAnswer3.Enter += RichAnswer3_Enter;
-            richAnswer3.Leave += RichAnswer3_Leave;
-            richAnswer4.Enter += RichAnswer4_Enter;
-            richAnswer4.Leave += RichAnswer4_Leave;
+            richAnswer1.Leave += RichBox_Leave;
+            richAnswer2.Leave += RichBox_Leave;
+            richAnswer3.Leave += RichBox_Leave;
+            richAnswer4.Leave += RichBox_Leave;
+            richAufgaben_Gebiet.Leave += RichBox_Leave;
+            richQuestion.Leave += RichBox_Leave;
 
-            richAnswer1.MouseEnter += RichAnswer1_MouseEnter;
-            richAnswer1.MouseLeave += RichAnswer1_MouseLeave;
+            richAnswer1.MouseEnter += Answer_Button_MouseEnter;
+            richAnswer2.MouseEnter += Answer_Button_MouseEnter;
+            richAnswer3.MouseEnter += Answer_Button_MouseEnter;
+            richAnswer4.MouseEnter += Answer_Button_MouseEnter;
+
+            richAnswer4.MouseLeave += Answer_Button_MouseLeave;
+            richAnswer1.MouseLeave += Answer_Button_MouseLeave;
+            richAnswer2.MouseLeave += Answer_Button_MouseLeave;
+            richAnswer3.MouseLeave += Answer_Button_MouseLeave;
+        }
+
+        private void Answer_Button_MouseLeave(object sender, EventArgs e)
+        {
+            switch ((sender as RichTextBox).Name)
+            {
+                case "richAnswer1":
+                    if (richAnswer1.BackColor != Color.White)
+                        richAnswer1.BackColor = Color.Gainsboro;
+                    break;
+
+                case "richAnswer2":
+                    if (richAnswer2.BackColor != Color.White)
+                        richAnswer2.BackColor = Color.Gainsboro;
+                    break;
+
+                case "richAnswer3":
+                    if (richAnswer3.BackColor != Color.White)
+                        richAnswer3.BackColor = Color.Gainsboro;
+                    break;
+
+                case "richAnswer4":
+                    if (richAnswer4.BackColor != Color.White)
+                        richAnswer4.BackColor = Color.Gainsboro;
+                    break;
+            }
             
+           
         }
 
-        private void RichAnswer1_MouseLeave(object sender, EventArgs e)
+        private void Answer_Button_MouseEnter(object sender, EventArgs e)
         {
-            if (richAnswer1.BackColor == Color.White)
-                richAnswer1.BackColor = Color.White;
-            else 
-                richAnswer1.BackColor = Color.Gainsboro;
+            switch ((sender as RichTextBox).Name)
+            {
+                case "richAnswer1":
+                    if (richAnswer1.BackColor != Color.White)
+                        richAnswer1.BackColor = SystemColors.GradientInactiveCaption;
+                    break;
+
+                case "richAnswer2":
+                    if (richAnswer2.BackColor != Color.White)
+                        richAnswer2.BackColor = SystemColors.GradientInactiveCaption;
+                    break;
+
+                case "richAnswer3":
+                    if (richAnswer3.BackColor != Color.White)
+                        richAnswer3.BackColor = SystemColors.GradientInactiveCaption;
+                    break;
+
+                case "richAnswer4":
+                    if (richAnswer4.BackColor != Color.White)
+                        richAnswer4.BackColor = SystemColors.GradientInactiveCaption;
+                    break;
+            }
+           
         }
 
-        private void RichAnswer1_MouseEnter(object sender, EventArgs e)
-        {
-            if (richAnswer1.BackColor != Color.White)
-                richAnswer1.BackColor = SystemColors.GradientInactiveCaption;
-        }
-
-        private void RichAnswer4_Leave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
-        }
-
-        private void RichAnswer4_Enter(object sender, EventArgs e)
-        {
-            label1.Focus();
-            Cursor = Cursors.Arrow;
-        }
-
-        private void RichAnswer3_Leave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
-
-        }
-
-        private void RichAnswer3_Enter(object sender, EventArgs e)
-        {
-            label1.Focus();
-            Cursor = Cursors.Arrow;
-        }
-
-        private void RichAnswer2_Enter(object sender, EventArgs e)
-        {
-            label1.Focus();
-            Cursor = Cursors.Arrow;
-        }
-
-        private void RichAnswer2_Leave(object sender, EventArgs e)
+        private void RichBox_Leave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
         }
 
-        private void RichAnswer1_Leave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
-        }
-
-        private void RichAnswer1_Enter(object sender, EventArgs e)
+        private void RichBox_Enter(object sender, EventArgs e)
         {
             label1.Focus();
             Cursor = Cursors.Arrow;
-        }
-
-        private void RichAufgaben_Gebiet_SelectionChanged(object sender, EventArgs e)
-        {
-            richQuestion.DeselectAll();
-        }
-
-        private void RichQuestion_SelectionChanged(object sender, EventArgs e)
-        {
-            richAufgaben_Gebiet.DeselectAll();
-        }
-
-        private void RichAnswer4_SelectionChanged(object sender, EventArgs e)
-        {
-            richAnswer4.DeselectAll();
-        }
-
-        private void RichAnswer3_SelectionChanged(object sender, EventArgs e)
-        {
-            richAnswer3.DeselectAll();
-        }
-
-        private void RichAnswer2_SelectionChanged(object sender, EventArgs e)
-        {
-            richAnswer2.DeselectAll();
-        }
-
-        private void RichAnswer1_SelectionChanged(object sender, EventArgs e)
-        {
-            richAnswer1.DeselectAll();
         }
 
         private void Btn_Text_smaller_click(object sender, EventArgs e)
@@ -332,15 +309,16 @@ namespace WindowsFormsApp3
         {
             if (Next_was_pressed)
             {
-                Hintergrundfarbe("Clear");
-                Enable_Ans_Buttons();
-                write_Question();
-                write_Answers();
-                if (current_Q == Fragenkatalog.Length)
+                if (current_Q > Fragenkatalog.Length)
+                    System.Windows.Forms.Application.Exit();
+                else
                 {
-                    Next.Text = "Finish";
+                    Hintergrundfarbe("Clear");
+                    Enable_Ans_Buttons();
+                    write_Question();
+                    write_Answers();
+                    Next_was_pressed = false;
                 }
-                Next_was_pressed = false;
             }
             else
             {
@@ -353,12 +331,12 @@ namespace WindowsFormsApp3
                     textBox1.BackColor = Color.Red;
                 }
                 Disable_Ans_Buttons();
-                if (current_Q < Fragenkatalog.Length)
-                    Next_was_pressed = true;
+                Next_was_pressed = true;
                 if (current_Q == Fragenkatalog.Length)
                 {
-                       
+                    Next.Text = "Programm beenden";
                 }
+                
                 current_Q++;
             }
         }
