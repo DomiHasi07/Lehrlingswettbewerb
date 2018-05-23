@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp3
 {
-    partial class Form1
+    partial class Test
     {
         /// <summary>
         /// Required designer variable.
@@ -41,21 +41,25 @@
             this.richAnswer3 = new System.Windows.Forms.RichTextBox();
             this.richAnswer2 = new System.Windows.Forms.RichTextBox();
             this.richAnswer1 = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(44, 380);
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(240, 133);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(300, 20);
             this.textBox1.TabIndex = 29;
             // 
             // Next
             // 
             this.Next.Enabled = false;
-            this.Next.Location = new System.Drawing.Point(107, 100);
+            this.Next.Location = new System.Drawing.Point(546, 133);
             this.Next.Name = "Next";
-            this.Next.Size = new System.Drawing.Size(95, 35);
+            this.Next.Size = new System.Drawing.Size(197, 48);
             this.Next.TabIndex = 28;
             this.Next.Text = "Next";
             this.Next.UseVisualStyleBackColor = true;
@@ -63,9 +67,9 @@
             // 
             // Start
             // 
-            this.Start.Location = new System.Drawing.Point(12, 100);
+            this.Start.Location = new System.Drawing.Point(37, 133);
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(95, 35);
+            this.Start.Size = new System.Drawing.Size(197, 48);
             this.Start.TabIndex = 27;
             this.Start.Text = "Start";
             this.Start.UseVisualStyleBackColor = true;
@@ -140,11 +144,12 @@
             // richAnswer4
             // 
             this.richAnswer4.BackColor = System.Drawing.Color.Gainsboro;
+            this.richAnswer4.Cursor = System.Windows.Forms.Cursors.Default;
             this.richAnswer4.Enabled = false;
-            this.richAnswer4.Location = new System.Drawing.Point(343, 282);
+            this.richAnswer4.Location = new System.Drawing.Point(393, 279);
             this.richAnswer4.Name = "richAnswer4";
             this.richAnswer4.ReadOnly = true;
-            this.richAnswer4.Size = new System.Drawing.Size(300, 40);
+            this.richAnswer4.Size = new System.Drawing.Size(350, 40);
             this.richAnswer4.TabIndex = 30;
             this.richAnswer4.Text = "";
             this.richAnswer4.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -154,13 +159,13 @@
             this.richQuestion.Location = new System.Drawing.Point(37, 187);
             this.richQuestion.Name = "richQuestion";
             this.richQuestion.ReadOnly = true;
-            this.richQuestion.Size = new System.Drawing.Size(606, 40);
+            this.richQuestion.Size = new System.Drawing.Size(706, 40);
             this.richQuestion.TabIndex = 34;
             this.richQuestion.Text = "";
             // 
             // richAufgaben_Gebiet
             // 
-            this.richAufgaben_Gebiet.Location = new System.Drawing.Point(188, 159);
+            this.richAufgaben_Gebiet.Location = new System.Drawing.Point(240, 159);
             this.richAufgaben_Gebiet.Name = "richAufgaben_Gebiet";
             this.richAufgaben_Gebiet.ReadOnly = true;
             this.richAufgaben_Gebiet.Size = new System.Drawing.Size(300, 22);
@@ -170,11 +175,12 @@
             // richAnswer3
             // 
             this.richAnswer3.BackColor = System.Drawing.Color.Gainsboro;
+            this.richAnswer3.Cursor = System.Windows.Forms.Cursors.Default;
             this.richAnswer3.Enabled = false;
-            this.richAnswer3.Location = new System.Drawing.Point(37, 282);
+            this.richAnswer3.Location = new System.Drawing.Point(37, 279);
             this.richAnswer3.Name = "richAnswer3";
             this.richAnswer3.ReadOnly = true;
-            this.richAnswer3.Size = new System.Drawing.Size(300, 40);
+            this.richAnswer3.Size = new System.Drawing.Size(350, 40);
             this.richAnswer3.TabIndex = 36;
             this.richAnswer3.Text = "";
             // 
@@ -183,32 +189,42 @@
             this.richAnswer2.BackColor = System.Drawing.Color.Gainsboro;
             this.richAnswer2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.richAnswer2.Enabled = false;
-            this.richAnswer2.Location = new System.Drawing.Point(343, 233);
+            this.richAnswer2.Location = new System.Drawing.Point(393, 233);
             this.richAnswer2.Name = "richAnswer2";
             this.richAnswer2.ReadOnly = true;
-            this.richAnswer2.Size = new System.Drawing.Size(300, 40);
+            this.richAnswer2.Size = new System.Drawing.Size(350, 40);
             this.richAnswer2.TabIndex = 37;
             this.richAnswer2.Text = "";
             // 
             // richAnswer1
             // 
             this.richAnswer1.BackColor = System.Drawing.Color.Gainsboro;
+            this.richAnswer1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.richAnswer1.Enabled = false;
             this.richAnswer1.Location = new System.Drawing.Point(37, 233);
             this.richAnswer1.Name = "richAnswer1";
             this.richAnswer1.ReadOnly = true;
             this.richAnswer1.ShortcutsEnabled = false;
-            this.richAnswer1.Size = new System.Drawing.Size(300, 40);
+            this.richAnswer1.Size = new System.Drawing.Size(350, 40);
             this.richAnswer1.TabIndex = 38;
             this.richAnswer1.Text = "";
             this.richAnswer1.TextChanged += new System.EventHandler(this.richAnswer1_TextChanged);
             // 
-            // Form1
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(150, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 39;
+            // 
+            // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(823, 450);
+            this.ClientSize = new System.Drawing.Size(774, 335);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.richAnswer1);
             this.Controls.Add(this.richAnswer2);
             this.Controls.Add(this.richAnswer3);
@@ -222,7 +238,7 @@
             this.Controls.Add(this.Btn_Text_bigger);
             this.Controls.Add(this.text_size);
             this.Controls.Add(this.Btn_Text_smaller);
-            this.Name = "Form1";
+            this.Name = "Test";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -245,5 +261,6 @@
         private System.Windows.Forms.RichTextBox richAnswer3;
         private System.Windows.Forms.RichTextBox richAnswer2;
         private System.Windows.Forms.RichTextBox richAnswer1;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -12,13 +12,13 @@ using System.Runtime.InteropServices;
 namespace WindowsFormsApp3
 {
    
-    public partial class Form1 : Form
+    public partial class Test : Form
     {
         float Text_Size = 10;
         int maxZeichen = 190;
         string tempQuestion;
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
-        int Zufallszahl, current_Q = 0;
+        int Zufallszahl, current_Q = 1;
         int[] Zufallsfragen;
         int[] Zufallsantworten = new int[4];
         string right_Answer, given_Answer;
@@ -27,9 +27,6 @@ namespace WindowsFormsApp3
 
         bool Start_was_pressed = false;
         bool Next_was_pressed = false;
-
-        [DllImport("user32.dll")]
-        static extern bool HideCaret(IntPtr hWnd);
 
         string[][][] Fragenkatalog =
         {
@@ -109,23 +106,10 @@ namespace WindowsFormsApp3
                 }
             }
         };
-        public Form1()
+        public Test()
         {
             InitializeComponent();
             Auswahl_Text_Größe.Text = Text_Size.ToString();
-
-            richAnswer1.Click += richAnswer1_Click;
-            richAnswer2.Click += richAnswer2_Click;
-            richAnswer3.Click += richAnswer3_Click;
-            richAnswer4.Click += richAnswer4_Click;
-            
-            richAnswer1.SelectionAlignment = HorizontalAlignment.Center;
-            richAnswer2.SelectionAlignment = HorizontalAlignment.Center;
-            richAnswer3.SelectionAlignment = HorizontalAlignment.Center;
-            richAnswer4.SelectionAlignment = HorizontalAlignment.Center;
-            richQuestion.SelectionAlignment = HorizontalAlignment.Center;
-            richAufgaben_Gebiet.SelectionAlignment = HorizontalAlignment.Center;
-
         }
 
         private void richAnswer1_Click(object sender, EventArgs e)
@@ -163,7 +147,108 @@ namespace WindowsFormsApp3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richAnswer1.Click += richAnswer1_Click;
+            richAnswer2.Click += richAnswer2_Click;
+            richAnswer3.Click += richAnswer3_Click;
+            richAnswer4.Click += richAnswer4_Click;
 
+            richAnswer1.SelectionAlignment = HorizontalAlignment.Center;
+            richAnswer2.SelectionAlignment = HorizontalAlignment.Center;
+            richAnswer3.SelectionAlignment = HorizontalAlignment.Center;
+            richAnswer4.SelectionAlignment = HorizontalAlignment.Center;
+            richQuestion.SelectionAlignment = HorizontalAlignment.Center;
+            richAufgaben_Gebiet.SelectionAlignment = HorizontalAlignment.Center;
+            richAnswer1.SelectionChanged += RichAnswer1_SelectionChanged;
+            richAnswer2.SelectionChanged += RichAnswer2_SelectionChanged;
+            richAnswer3.SelectionChanged += RichAnswer3_SelectionChanged;
+            richAnswer4.SelectionChanged += RichAnswer4_SelectionChanged;
+            richQuestion.SelectionChanged += RichQuestion_SelectionChanged;
+            richAufgaben_Gebiet.SelectionChanged += RichAufgaben_Gebiet_SelectionChanged;
+
+            richAnswer1.Enter += RichAnswer1_Enter;
+            richAnswer1.Leave += RichAnswer1_Leave;
+            richAnswer2.Enter += RichAnswer2_Enter;
+            richAnswer2.Leave += RichAnswer2_Leave;
+            richAnswer3.Enter += RichAnswer3_Enter;
+            richAnswer3.Leave += RichAnswer3_Leave;
+            richAnswer4.Enter += RichAnswer4_Enter;
+            richAnswer4.Leave += RichAnswer4_Leave;
+            
+        }
+
+        private void RichAnswer4_Leave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void RichAnswer4_Enter(object sender, EventArgs e)
+        {
+            label1.Focus();
+            Cursor = Cursors.Arrow;
+        }
+
+        private void RichAnswer3_Leave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+
+        }
+
+        private void RichAnswer3_Enter(object sender, EventArgs e)
+        {
+            label1.Focus();
+            Cursor = Cursors.Arrow;
+        }
+
+        private void RichAnswer2_Enter(object sender, EventArgs e)
+        {
+            label1.Focus();
+            Cursor = Cursors.Arrow;
+        }
+
+        private void RichAnswer2_Leave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void RichAnswer1_Leave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void RichAnswer1_Enter(object sender, EventArgs e)
+        {
+            label1.Focus();
+            Cursor = Cursors.Arrow;
+        }
+
+        private void RichAufgaben_Gebiet_SelectionChanged(object sender, EventArgs e)
+        {
+            richQuestion.DeselectAll();
+        }
+
+        private void RichQuestion_SelectionChanged(object sender, EventArgs e)
+        {
+            richAufgaben_Gebiet.DeselectAll();
+        }
+
+        private void RichAnswer4_SelectionChanged(object sender, EventArgs e)
+        {
+            richAnswer4.DeselectAll();
+        }
+
+        private void RichAnswer3_SelectionChanged(object sender, EventArgs e)
+        {
+            richAnswer3.DeselectAll();
+        }
+
+        private void RichAnswer2_SelectionChanged(object sender, EventArgs e)
+        {
+            richAnswer2.DeselectAll();
+        }
+
+        private void RichAnswer1_SelectionChanged(object sender, EventArgs e)
+        {
+            richAnswer1.DeselectAll();
         }
 
         private void Btn_Text_smaller_click(object sender, EventArgs e)
@@ -239,8 +324,6 @@ namespace WindowsFormsApp3
                     Next.Text = "Finish";
                 }
                 Next_was_pressed = false;
-
-
             }
             else
             {
@@ -257,10 +340,9 @@ namespace WindowsFormsApp3
                     Next_was_pressed = true;
                 if (current_Q == Fragenkatalog.Length)
                 {
-                    
+                       
                 }
-
-
+                current_Q++;
             }
         }
 
@@ -330,9 +412,9 @@ namespace WindowsFormsApp3
 
         void write_Question()
         {
-            richAufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][0];
-            richQuestion.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][1];
-            right_Answer = Fragenkatalog[Zufallsfragen[current_Q] - 1][1][0];
+            richAufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][0] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
+            richQuestion.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][1];
+            right_Answer = Fragenkatalog[Zufallsfragen[current_Q-1]][1][0];
         }
 
         void write_Answers()
@@ -350,9 +432,8 @@ namespace WindowsFormsApp3
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = true;
-                answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][1][Zufallsantworten[i] - 1];
+                answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q-1]][1][Zufallsantworten[i] - 1];
             }
-            current_Q++;
             Array.Clear(Zufallsantworten, 0, Zufallsantworten.Length);
             
         }
@@ -392,6 +473,11 @@ namespace WindowsFormsApp3
                 else
                     i--;
             }
+            for (int i = 0; i < Zufallsfragen.Length; i++)
+            {
+                Zufallsfragen[i] = Zufallsfragen[i] - 1;
+            }
+           
 
             write_Question();
             Enable_Ans_Buttons();
@@ -412,7 +498,7 @@ namespace WindowsFormsApp3
             Next_was_pressed = false;
             Hintergrundfarbe("Clear");
             given_Answer = "";
-            current_Q = 0;
+            current_Q = 1;
 
             Array.Clear(Zufallsfragen, 0, Zufallsfragen.Length);
             Start.Text = "Start";
@@ -420,7 +506,6 @@ namespace WindowsFormsApp3
 
         private void richAnswer1_TextChanged(object sender, EventArgs e)
         {
-            richAnswer1.SelectionLength = 0;
         }
 
         void Disable_Ans_Buttons()
