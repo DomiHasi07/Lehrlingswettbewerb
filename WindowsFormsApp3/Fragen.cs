@@ -22,6 +22,7 @@ namespace WindowsFormsApp3
         int[] Zufallsfragen;
         int[] Zufallsantworten = new int[4];
         string right_Answer, given_Answer;
+        int CountOfRightAnswers;
 
         Random rnd = new Random();
 
@@ -307,10 +308,10 @@ namespace WindowsFormsApp3
 
         private void Next_Click(object sender, EventArgs e)
         {
-            if (Next_was_pressed)
+            if (Next_was_pressed)   //nächste Frage anzeigen
             {
                 if (current_Q > Fragenkatalog.Length)
-                    System.Windows.Forms.Application.Exit();
+                    Endauswertung();
                 else
                 {
                     Hintergrundfarbe("Clear");
@@ -320,23 +321,15 @@ namespace WindowsFormsApp3
                     Next_was_pressed = false;
                 }
             }
-            else
+            else            //Einloggen der Antworten
             {
-                if (given_Answer == right_Answer)
-                {
-                    textBox1.BackColor = Color.Green;
-                }
-                else
-                {
-                    textBox1.BackColor = Color.Red;
-                }
+                Fragenauswertung();
                 Disable_Ans_Buttons();
                 Next_was_pressed = true;
                 if (current_Q == Fragenkatalog.Length)
                 {
-                    Next.Text = "Programm beenden";
+                    Next.Text = "Fragen auswerten";
                 }
-                
                 current_Q++;
             }
         }
@@ -383,7 +376,7 @@ namespace WindowsFormsApp3
                     richAnswer2.BackColor = Color.Gainsboro;
                     richAnswer3.BackColor = Color.Gainsboro;
                     richAnswer4.BackColor = Color.Gainsboro;
-                    textBox1.BackColor = Color.White;
+                    TextBox_Auswertung.BackColor = Color.White;
                     break;
 
                 case "Startfarbe":
@@ -497,6 +490,10 @@ namespace WindowsFormsApp3
 
             Array.Clear(Zufallsfragen, 0, Zufallsfragen.Length);
             Start.Text = "Start";
+
+            CountOfRightAnswers = 0;
+            TextBox_Auswertung.Text = "";
+
         }
 
         private void richAnswer1_TextChanged(object sender, EventArgs e)
@@ -520,6 +517,30 @@ namespace WindowsFormsApp3
             {
                 answers[i].Enabled = true;
             }
+        }
+
+        void Fragenauswertung()
+        {
+            if (given_Answer == right_Answer)
+            {
+                TextBox_Auswertung.BackColor = Color.Green;
+                CountOfRightAnswers++;
+            }
+            else
+            {
+                TextBox_Auswertung.BackColor = Color.Red;
+            }
+        }
+        void Endauswertung()
+        {
+            Auswertung f2 = new Auswertung();
+            f2.ShowDialog();
+            /*
+            double Prozent_richtige_Fragen;
+            Prozent_richtige_Fragen = (Convert.ToDouble(CountOfRightAnswers) / (Convert.ToDouble(current_Q)-1))*100;
+            TextBox_Auswertung.BackColor = Color.White;
+            TextBox_Auswertung.Text = Prozent_richtige_Fragen.ToString("0.00") + " % der Antworten waren richtig";
+            */
         }
     }
 

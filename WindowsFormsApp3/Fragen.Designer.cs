@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TextBox_Auswertung = new System.Windows.Forms.TextBox();
             this.Next = new System.Windows.Forms.Button();
             this.Start = new System.Windows.Forms.Button();
             this.Auswahl_Text_Größe = new System.Windows.Forms.ComboBox();
@@ -44,15 +44,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // TextBox_Auswertung
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(213, 81);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(300, 20);
-            this.textBox1.TabIndex = 29;
+            this.TextBox_Auswertung.BackColor = System.Drawing.Color.White;
+            this.TextBox_Auswertung.Enabled = false;
+            this.TextBox_Auswertung.Location = new System.Drawing.Point(213, 81);
+            this.TextBox_Auswertung.Name = "TextBox_Auswertung";
+            this.TextBox_Auswertung.ReadOnly = true;
+            this.TextBox_Auswertung.Size = new System.Drawing.Size(300, 20);
+            this.TextBox_Auswertung.TabIndex = 29;
             // 
             // Next
             // 
@@ -232,7 +232,7 @@
             this.Controls.Add(this.richAufgaben_Gebiet);
             this.Controls.Add(this.richQuestion);
             this.Controls.Add(this.richAnswer4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TextBox_Auswertung);
             this.Controls.Add(this.Next);
             this.Controls.Add(this.Start);
             this.Controls.Add(this.Auswahl_Text_Größe);
@@ -250,7 +250,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TextBox_Auswertung;
         private System.Windows.Forms.Button Next;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.ComboBox Auswahl_Text_Größe;
