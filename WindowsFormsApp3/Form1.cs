@@ -173,7 +173,24 @@ namespace WindowsFormsApp3
             richAnswer3.Leave += RichAnswer3_Leave;
             richAnswer4.Enter += RichAnswer4_Enter;
             richAnswer4.Leave += RichAnswer4_Leave;
+
+            richAnswer1.MouseEnter += RichAnswer1_MouseEnter;
+            richAnswer1.MouseLeave += RichAnswer1_MouseLeave;
             
+        }
+
+        private void RichAnswer1_MouseLeave(object sender, EventArgs e)
+        {
+            if (richAnswer1.BackColor == Color.White)
+                richAnswer1.BackColor = Color.White;
+            else 
+                richAnswer1.BackColor = Color.Gainsboro;
+        }
+
+        private void RichAnswer1_MouseEnter(object sender, EventArgs e)
+        {
+            if (richAnswer1.BackColor != Color.White)
+                richAnswer1.BackColor = SystemColors.GradientInactiveCaption;
         }
 
         private void RichAnswer4_Leave(object sender, EventArgs e)
