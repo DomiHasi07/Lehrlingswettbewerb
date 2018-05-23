@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace WindowsFormsApp3
 {
@@ -26,6 +27,9 @@ namespace WindowsFormsApp3
 
         bool Start_was_pressed = false;
         bool Next_was_pressed = false;
+
+        [DllImport("user32.dll")]
+        static extern bool HideCaret(IntPtr hWnd);
 
         string[][][] Fragenkatalog =
         {
@@ -98,7 +102,7 @@ namespace WindowsFormsApp3
                 },
                 new string[]
                 {
-                    "Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial" +Environment.NewLine + "auf einem Schenkel voneinander getrennt.",
+                    "Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial auf einem Schenkel voneinander getrennt.",
                     "Ober- und Unterspannungswicklung jeder Phase sind jeweils antiparallel voneinander geschaltet.",
                     "Ober- und Unterspannungswicklung jeder Phase sind parallel auf dem Joch geschalten.",
                     "Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial in Serie geschalten."
@@ -109,21 +113,47 @@ namespace WindowsFormsApp3
         {
             InitializeComponent();
             Auswahl_Text_Größe.Text = Text_Size.ToString();
-            richTextBox1.Click += RichTextBox1_Click;
+
+            richAnswer1.Click += richAnswer1_Click;
+            richAnswer2.Click += richAnswer2_Click;
+            richAnswer3.Click += richAnswer3_Click;
+            richAnswer4.Click += richAnswer4_Click;
+            
+            richAnswer1.SelectionAlignment = HorizontalAlignment.Center;
+            richAnswer2.SelectionAlignment = HorizontalAlignment.Center;
+            richAnswer3.SelectionAlignment = HorizontalAlignment.Center;
+            richAnswer4.SelectionAlignment = HorizontalAlignment.Center;
+            richQuestion.SelectionAlignment = HorizontalAlignment.Center;
+            richAufgaben_Gebiet.SelectionAlignment = HorizontalAlignment.Center;
+
         }
 
-        private void RichTextBox1_Click(object sender, EventArgs e)
+        private void richAnswer1_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Hintergrundfarbe("Antwort1");
+
+            given_Answer = richAnswer1.Text;
         }
 
-        private void Question_TextChanged_1(object sender, EventArgs e)
+        private void richAnswer2_Click(object sender, EventArgs e)
         {
-            Size size = TextRenderer.MeasureText(Question.Text, Question.Font);
-            Question.Width = size.Width;
-            if (Question.Width > 190)
+            Hintergrundfarbe("Antwort2");
 
-                Question.Height = size.Height;
+            given_Answer = richAnswer2.Text;
+        }
+
+        private void richAnswer3_Click(object sender, EventArgs e)
+        {
+            Hintergrundfarbe("Antwort3");
+
+            given_Answer = richAnswer3.Text;
+        }
+
+        private void richAnswer4_Click(object sender, EventArgs e)
+        {
+            Hintergrundfarbe("Antwort4");
+
+            given_Answer = richAnswer4.Text;
         }
 
         private void Aufgaben_Gebiet_TextChanged(object sender, EventArgs e)
@@ -150,7 +180,6 @@ namespace WindowsFormsApp3
 
                 }
             }
-            Textkürzen(Btn_Answer4.Text);
         }
 
         private void Btn_Text_bigger_click(object sender, EventArgs e)
@@ -167,7 +196,6 @@ namespace WindowsFormsApp3
 
                 }
             }
-            Textkürzen(Btn_Answer4.Text);
         }
 
         private void Auswahl_Text_Größe_SelectedIndexChanged(object sender, EventArgs e)
@@ -202,7 +230,7 @@ namespace WindowsFormsApp3
         {
             if (Next_was_pressed)
             {
-                Btn_Color("Clear");
+                Hintergrundfarbe("Clear");
                 Enable_Ans_Buttons();
                 write_Question();
                 write_Answers();
@@ -236,72 +264,56 @@ namespace WindowsFormsApp3
             }
         }
 
-        private void Btn_Answer1_Click(object sender, EventArgs e)
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            Btn_Color(nameof(Btn_Answer1));
-
-            given_Answer = Btn_Answer1.Text;
+            
         }
 
-        private void Btn_Answer2_Click_1(object sender, EventArgs e)
-        {
-
-            Btn_Color(nameof(Btn_Answer2));
-
-            given_Answer = Btn_Answer2.Text;
-        }
-
-        private void Btn_Answer3_Click_1(object sender, EventArgs e)
-        {
-            Btn_Color(nameof(Btn_Answer3));
-
-            given_Answer = Btn_Answer3.Text;
-        }
-
-        private void Btn_Answer4_Click(object sender, EventArgs e)
-        {
-            Btn_Color(nameof(Btn_Answer4));
-
-            given_Answer = Btn_Answer4.Text;
-        }
-   
-        void Btn_Color(string x)
+        void Hintergrundfarbe(string x)
         {
             switch (x)
             {
-                case "Btn_Answer1":
-                    Btn_Answer1.BackColor = Color.White;
-                    Btn_Answer2.BackColor = Color.Gainsboro;
-                    Btn_Answer3.BackColor = Color.Gainsboro;
-                    Btn_Answer4.BackColor = Color.Gainsboro;
+                case "Antwort1":
+                    richAnswer1.BackColor = Color.White;
+                    richAnswer2.BackColor = Color.Gainsboro;
+                    richAnswer3.BackColor = Color.Gainsboro;
+                    richAnswer4.BackColor = Color.Gainsboro;
                     break;
 
-                case "Btn_Answer2":
-                    Btn_Answer1.BackColor = Color.Gainsboro;
-                    Btn_Answer2.BackColor = Color.White;
-                    Btn_Answer3.BackColor = Color.Gainsboro;
-                    Btn_Answer4.BackColor = Color.Gainsboro;
+                case "Antwort2":
+                    richAnswer1.BackColor = Color.Gainsboro;
+                    richAnswer2.BackColor = Color.White;
+                    richAnswer3.BackColor = Color.Gainsboro;
+                    richAnswer4.BackColor = Color.Gainsboro;
                     break;
 
-                case "Btn_Answer3":
-                    Btn_Answer1.BackColor = Color.Gainsboro;
-                    Btn_Answer2.BackColor = Color.Gainsboro;
-                    Btn_Answer3.BackColor = Color.White;
-                    Btn_Answer4.BackColor = Color.Gainsboro;
+                case "Antwort3":
+                    richAnswer1.BackColor = Color.Gainsboro;
+                    richAnswer2.BackColor = Color.Gainsboro;
+                    richAnswer3.BackColor = Color.White;
+                    richAnswer4.BackColor = Color.Gainsboro;
                     break;
 
-                case "Btn_Answer4":
-                    Btn_Answer1.BackColor = Color.Gainsboro;
-                    Btn_Answer2.BackColor = Color.Gainsboro;
-                    Btn_Answer3.BackColor = Color.Gainsboro;
-                    Btn_Answer4.BackColor = Color.White;
+                case "Antwort4":
+                    richAnswer1.BackColor = Color.Gainsboro;
+                    richAnswer2.BackColor = Color.Gainsboro;
+                    richAnswer3.BackColor = Color.Gainsboro;
+                    richAnswer4.BackColor = Color.White;
                     break;
+
                 case "Clear":
-                    Btn_Answer1.BackColor = Color.Gainsboro;
-                    Btn_Answer2.BackColor = Color.Gainsboro;
-                    Btn_Answer3.BackColor = Color.Gainsboro;
-                    Btn_Answer4.BackColor = Color.Gainsboro;
+                    richAnswer1.BackColor = Color.Gainsboro;
+                    richAnswer2.BackColor = Color.Gainsboro;
+                    richAnswer3.BackColor = Color.Gainsboro;
+                    richAnswer4.BackColor = Color.Gainsboro;
                     textBox1.BackColor = Color.White;
+                    break;
+
+                case "Startfarbe":
+                    richAnswer1.BackColor = Color.Gainsboro;
+                    richAnswer2.BackColor = Color.Gainsboro;
+                    richAnswer3.BackColor = Color.Gainsboro;
+                    richAnswer4.BackColor = Color.Gainsboro;
                     break;
 
             }
@@ -313,13 +325,13 @@ namespace WindowsFormsApp3
             SizeF size = TextRenderer.MeasureText(str, new Font("Microsoft Sans Serif", Text_Size));
             //nt stringBreite = Int32.Parse(size.ToString());
             //retString = str.Substring(0, 190);
-            MessageBox.Show(size.ToString());
+            //MessageBox.Show(size.ToString());
         }
 
         void write_Question()
         {
-            Aufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][0];
-            Question.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][1];
+            richAufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][0];
+            richQuestion.Text = Fragenkatalog[Zufallsfragen[current_Q] - 1][0][1];
             right_Answer = Fragenkatalog[Zufallsfragen[current_Q] - 1][1][0];
         }
 
@@ -334,7 +346,7 @@ namespace WindowsFormsApp3
                     i--;
             }
 
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
+            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = true;
@@ -342,27 +354,25 @@ namespace WindowsFormsApp3
             }
             current_Q++;
             Array.Clear(Zufallsantworten, 0, Zufallsantworten.Length);
+            
         }
 
         void change_FontSize()
         {
             Auswahl_Text_Größe.Text = Text_Size.ToString();
             currentFont = new Font(Font.FontFamily, Text_Size);
-            if (Text_Size < 15)
-            {
-                Question.Font = currentFont;
-                Aufgaben_Gebiet.Font = currentFont;
-            }
-
-            Btn_Answer1.Font = currentFont;
-            Btn_Answer2.Font = currentFont;
-            Btn_Answer3.Font = currentFont;
-            Btn_Answer4.Font = currentFont;
+            
+            richAnswer1.Font = currentFont;
+            richAnswer2.Font = currentFont;
+            richAnswer3.Font = currentFont;
+            richAnswer4.Font = currentFont;
+            richQuestion.Font = currentFont;
+            richAufgaben_Gebiet.Font = currentFont;
         }
 
         void Disable_and_delete_Ans_Buttons()
         {
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
+            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = false;
@@ -394,13 +404,13 @@ namespace WindowsFormsApp3
 
         void Reset()
         {
-            Aufgaben_Gebiet.Text = "";
-            Question.Text = "";
+            richAufgaben_Gebiet.Text = "";
+            richQuestion.Text = "";
             Disable_and_delete_Ans_Buttons();
 
             Next.Enabled = false;
             Next_was_pressed = false;
-            Btn_Color("Clear");
+            Hintergrundfarbe("Clear");
             given_Answer = "";
             current_Q = 0;
 
@@ -408,14 +418,14 @@ namespace WindowsFormsApp3
             Start.Text = "Start";
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void richAnswer1_TextChanged(object sender, EventArgs e)
         {
-
+            richAnswer1.SelectionLength = 0;
         }
 
         void Disable_Ans_Buttons()
         {
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
+            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = false;
@@ -425,7 +435,7 @@ namespace WindowsFormsApp3
 
         void Enable_Ans_Buttons()
         {
-            var answers = new[] { Btn_Answer1, Btn_Answer2, Btn_Answer3, Btn_Answer4 };
+            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = true;
