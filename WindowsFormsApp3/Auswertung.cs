@@ -17,14 +17,25 @@ namespace WindowsFormsApp3
             InitializeComponent();
         }
 
+        public static int return_Anzahl_Fragen;
+        public static int return_richtige_Antworten;
+
         private void Auswertung_Load(object sender, EventArgs e)
         {
+            int falsche_Antworten = return_Anzahl_Fragen - return_richtige_Antworten;
 
-        }
+            chart_Fragenauswertung.Series["alle_Antworten"].Points.Add(return_richtige_Antworten);
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[0].Color = Color.LightGreen;
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[0].AxisLabel = "Antworten richtig";
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[0].LegendText = "Antworten richtig";
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[0].Label = return_richtige_Antworten.ToString();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            chart_Fragenauswertung.Series["alle_Antworten"].Points.Add(falsche_Antworten);
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[1].Color = Color.Red;
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[1].AxisLabel = "Antworten falsch";
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[1].LegendText = "Antworten falsch";
+            chart_Fragenauswertung.Series["alle_Antworten"].Points[1].Label = falsche_Antworten.ToString();
         }
+       
     }
 }

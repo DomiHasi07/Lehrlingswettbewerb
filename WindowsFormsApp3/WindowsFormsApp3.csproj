@@ -52,19 +52,28 @@
     <Compile Include="Auswertung.Designer.cs">
       <DependentUpon>Auswertung.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fragen.cs">
+    <Compile Include="Beenden.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fragen.Designer.cs">
-      <DependentUpon>Fragen.cs</DependentUpon>
+    <Compile Include="Beenden.Designer.cs">
+      <DependentUpon>Beenden.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main_Form.Designer.cs">
+      <DependentUpon>Main_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Auswertung.resx">
       <DependentUpon>Auswertung.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fragen.resx">
-      <DependentUpon>Fragen.cs</DependentUpon>
+    <EmbeddedResource Include="Beenden.resx">
+      <DependentUpon>Beenden.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main_Form.resx">
+      <DependentUpon>Main_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

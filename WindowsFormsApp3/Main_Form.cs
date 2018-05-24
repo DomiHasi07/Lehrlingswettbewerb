@@ -11,7 +11,8 @@ using System.Runtime.InteropServices;
 
 namespace WindowsFormsApp3
 {
-   
+    
+
     public partial class Test : Form
     {
         float Text_Size = 10;
@@ -533,15 +534,34 @@ namespace WindowsFormsApp3
         }
         void Endauswertung()
         {
-            Auswertung f2 = new Auswertung();
-            f2.ShowDialog();
-            /*
-            double Prozent_richtige_Fragen;
-            Prozent_richtige_Fragen = (Convert.ToDouble(CountOfRightAnswers) / (Convert.ToDouble(current_Q)-1))*100;
-            TextBox_Auswertung.BackColor = Color.White;
-            TextBox_Auswertung.Text = Prozent_richtige_Fragen.ToString("0.00") + " % der Antworten waren richtig";
-            */
+            using (var form = new Beenden())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue1;
+
+                    if (val=="Auswertung")
+                    {
+
+                        Auswertung.return_richtige_Antworten = CountOfRightAnswers;
+                        Auswertung.return_Anzahl_Fragen = current_Q-1;
+
+                        this.Visible = false;
+                        Auswertung Auswertung_Dialog = new Auswertung();
+                        Auswertung_Dialog.ShowDialog();
+                        this.Visible = true;
+                    }
+                    else if(val == "Beenden")
+                    {
+                        System.Windows.Forms.Application.Exit();
+                    }
+                    
+                }
+            }
         }
+
+        
     }
 
 }
