@@ -532,6 +532,7 @@ namespace WindowsFormsApp3
                 TextBox_Auswertung.BackColor = Color.Red;
             }
         }
+
         void Endauswertung()
         {
             using (var form = new Beenden())

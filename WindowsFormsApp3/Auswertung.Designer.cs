@@ -32,6 +32,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart_Fragenauswertung = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Prozentwechsler = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Fragenauswertung)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,11 +53,22 @@
             this.chart_Fragenauswertung.TabIndex = 0;
             this.chart_Fragenauswertung.Text = "chart1";
             // 
+            // Prozentwechsler
+            // 
+            this.Prozentwechsler.Location = new System.Drawing.Point(336, 333);
+            this.Prozentwechsler.Name = "Prozentwechsler";
+            this.Prozentwechsler.Size = new System.Drawing.Size(95, 23);
+            this.Prozentwechsler.TabIndex = 1;
+            this.Prozentwechsler.Text = "% / Ganzzahl";
+            this.Prozentwechsler.UseVisualStyleBackColor = true;
+            this.Prozentwechsler.Click += new System.EventHandler(this.Prozentwechsler_Click);
+            // 
             // Auswertung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(445, 370);
+            this.Controls.Add(this.Prozentwechsler);
             this.Controls.Add(this.chart_Fragenauswertung);
             this.Name = "Auswertung";
             this.Text = "Auswertung";
@@ -69,5 +81,6 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_Fragenauswertung;
+        private System.Windows.Forms.Button Prozentwechsler;
     }
 }
