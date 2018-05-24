@@ -19,11 +19,11 @@ namespace WindowsFormsApp3
         int maxZeichen = 190;
         string tempQuestion;
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
-        int Zufallszahl, current_Q = 1;
-        int[] Zufallsfragen;
+        int Zufallszahl, CountOfRightAnswers, current_Q = 1;
+        int[] Zufallsfragen, falsche_Antworten;
         int[] Zufallsantworten = new int[4];
         string right_Answer, given_Answer;
-        int CountOfRightAnswers;
+        string[] alleFalschenAntworten;
 
         Random rnd = new Random();
 
@@ -312,7 +312,8 @@ namespace WindowsFormsApp3
             if (Next_was_pressed)   //nächste Frage anzeigen
             {
                 if (current_Q > Fragenkatalog.Length)
-                    Endauswertung();
+                    Endauswertung_Prozent();
+                    //Endauswertung_Fragen();
                 else
                 {
                     Hintergrundfarbe("Clear");
@@ -453,6 +454,7 @@ namespace WindowsFormsApp3
         void Start_Sequenz()
         {
             Zufallsfragen = new int[Fragenkatalog.Length];
+            falsche_Antworten = new int[Fragenkatalog.Length];
 
             for (int i = 0; i < Fragenkatalog.Length; i++)
             {
@@ -526,6 +528,7 @@ namespace WindowsFormsApp3
             {
                 TextBox_Auswertung.BackColor = Color.Green;
                 CountOfRightAnswers++;
+                falsche_Antworten[current_Q - 1] = 1;
             }
             else
             {
@@ -533,7 +536,7 @@ namespace WindowsFormsApp3
             }
         }
 
-        void Endauswertung()
+        void Endauswertung_Prozent()
         {
             using (var form = new Beenden())
             {
@@ -544,7 +547,6 @@ namespace WindowsFormsApp3
 
                     if (val=="Auswertung")
                     {
-
                         Auswertung.return_richtige_Antworten = CountOfRightAnswers;
                         Auswertung.return_Anzahl_Fragen = current_Q-1;
 
@@ -561,8 +563,34 @@ namespace WindowsFormsApp3
                 }
             }
         }
+        void Endauswertung_Fragen()
+        {
+            int Anzahl_falsche_Antworten = 0; ;
 
-        
+            for (int i = 0; i < Fragenkatalog.Length; i++)
+            {
+                if(falsche_Antworten[i]==0)
+                {
+                    Anzahl_falsche_Antworten++;
+                }
+            }
+
+            int[] alleFalschenAntworten = new int[Anzahl_falsche_Antworten];
+            int x = 0;
+
+            for (int i = 0; i < Fragenkatalog.Length; i++)
+            {
+                
+                if (falsche_Antworten[i]==0)
+                {
+                    
+                    alleFalschenAntworten[x] = Zufallsfragen[i];
+                    x++;
+                }
+
+            }
+        }
+
     }
 
 }
