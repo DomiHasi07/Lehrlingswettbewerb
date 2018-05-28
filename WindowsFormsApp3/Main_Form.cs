@@ -116,38 +116,42 @@ namespace WindowsFormsApp3
 
         private void Answer_Button_Click(object sender, EventArgs e)
         {
-            switch ((sender as RichTextBox).Name)
+            if(!Next_was_pressed)
             {
-                case "richAnswer1":
-                    Hintergrundfarbe("Antwort1");
-                    given_Answer = richAnswer1.Text;
-                    break;
+                switch ((sender as RichTextBox).Name)
+                {
+                    case "richAnswer1":
+                        Hintergrundfarbe("Antwort1");
+                        given_Answer = richAnswer1.Text;
+                        break;
 
-                case "richAnswer2":
-                    Hintergrundfarbe("Antwort2");
-                    given_Answer = richAnswer2.Text;
-                    break;
+                    case "richAnswer2":
+                        Hintergrundfarbe("Antwort2");
+                        given_Answer = richAnswer2.Text;
+                        break;
 
-                case "richAnswer3":
-                    Hintergrundfarbe("Antwort3");
-                    given_Answer = richAnswer3.Text;
-                    break;
+                    case "richAnswer3":
+                        Hintergrundfarbe("Antwort3");
+                        given_Answer = richAnswer3.Text;
+                        break;
 
-                case "richAnswer4":
-                    Hintergrundfarbe("Antwort4");
-                    given_Answer = richAnswer4.Text;
-                    break;
-
+                    case "richAnswer4":
+                        Hintergrundfarbe("Antwort4");
+                        given_Answer = richAnswer4.Text;
+                        break;
+                }
             }
-           
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            richAnswer1.Click += Answer_Button_Click;
-            richAnswer2.Click += Answer_Button_Click;
-            richAnswer3.Click += Answer_Button_Click;
-            richAnswer4.Click += Answer_Button_Click;
+            if (!Next_was_pressed)
+            {
+                richAnswer1.Click += Answer_Button_Click;
+                richAnswer2.Click += Answer_Button_Click;
+                richAnswer3.Click += Answer_Button_Click;
+                richAnswer4.Click += Answer_Button_Click;
+            }
+            
 
             richAnswer1.SelectionAlignment = HorizontalAlignment.Center;
             richAnswer2.SelectionAlignment = HorizontalAlignment.Center;
@@ -183,57 +187,60 @@ namespace WindowsFormsApp3
 
         private void Answer_Button_MouseLeave(object sender, EventArgs e)
         {
-            switch ((sender as RichTextBox).Name)
+            if(!Next_was_pressed)
             {
-                case "richAnswer1":
-                    if (richAnswer1.BackColor != Color.White)
-                        richAnswer1.BackColor = Color.Gainsboro;
-                    break;
+                switch ((sender as RichTextBox).Name)
+                {
+                    case "richAnswer1":
+                        if (richAnswer1.BackColor != Color.White)
+                            richAnswer1.BackColor = Color.Gainsboro;
+                        break;
 
-                case "richAnswer2":
-                    if (richAnswer2.BackColor != Color.White)
-                        richAnswer2.BackColor = Color.Gainsboro;
-                    break;
+                    case "richAnswer2":
+                        if (richAnswer2.BackColor != Color.White)
+                            richAnswer2.BackColor = Color.Gainsboro;
+                        break;
 
-                case "richAnswer3":
-                    if (richAnswer3.BackColor != Color.White)
-                        richAnswer3.BackColor = Color.Gainsboro;
-                    break;
+                    case "richAnswer3":
+                        if (richAnswer3.BackColor != Color.White)
+                            richAnswer3.BackColor = Color.Gainsboro;
+                        break;
 
-                case "richAnswer4":
-                    if (richAnswer4.BackColor != Color.White)
-                        richAnswer4.BackColor = Color.Gainsboro;
-                    break;
+                    case "richAnswer4":
+                        if (richAnswer4.BackColor != Color.White)
+                            richAnswer4.BackColor = Color.Gainsboro;
+                        break;
+                }
             }
-            
-           
         }
 
         private void Answer_Button_MouseEnter(object sender, EventArgs e)
         {
-            switch ((sender as RichTextBox).Name)
+            if(!Next_was_pressed)
             {
-                case "richAnswer1":
-                    if (richAnswer1.BackColor != Color.White)
-                        richAnswer1.BackColor = SystemColors.GradientInactiveCaption;
-                    break;
+                switch ((sender as RichTextBox).Name)
+                {
+                    case "richAnswer1":
+                        if (richAnswer1.BackColor != Color.White)
+                            richAnswer1.BackColor = SystemColors.GradientInactiveCaption;
+                        break;
 
-                case "richAnswer2":
-                    if (richAnswer2.BackColor != Color.White)
-                        richAnswer2.BackColor = SystemColors.GradientInactiveCaption;
-                    break;
+                    case "richAnswer2":
+                        if (richAnswer2.BackColor != Color.White)
+                            richAnswer2.BackColor = SystemColors.GradientInactiveCaption;
+                        break;
 
-                case "richAnswer3":
-                    if (richAnswer3.BackColor != Color.White)
-                        richAnswer3.BackColor = SystemColors.GradientInactiveCaption;
-                    break;
+                    case "richAnswer3":
+                        if (richAnswer3.BackColor != Color.White)
+                            richAnswer3.BackColor = SystemColors.GradientInactiveCaption;
+                        break;
 
-                case "richAnswer4":
-                    if (richAnswer4.BackColor != Color.White)
-                        richAnswer4.BackColor = SystemColors.GradientInactiveCaption;
-                    break;
+                    case "richAnswer4":
+                        if (richAnswer4.BackColor != Color.White)
+                            richAnswer4.BackColor = SystemColors.GradientInactiveCaption;
+                        break;
+                }
             }
-           
         }
 
         private void RichBox_Leave(object sender, EventArgs e)
@@ -309,6 +316,7 @@ namespace WindowsFormsApp3
 
         private void Next_Click(object sender, EventArgs e)
         {
+            
             if (Next_was_pressed)   //nächste Frage anzeigen
             {
                 if (current_Q > Fragenkatalog.Length)
@@ -317,7 +325,6 @@ namespace WindowsFormsApp3
                 else
                 {
                     Hintergrundfarbe("Clear");
-                    Enable_Ans_Buttons();
                     write_Question();
                     write_Answers();
                     Next_was_pressed = false;
@@ -326,7 +333,6 @@ namespace WindowsFormsApp3
             else            //Einloggen der Antworten
             {
                 Fragenauswertung();
-                Disable_Ans_Buttons();
                 Next_was_pressed = true;
                 if (current_Q == Fragenkatalog.Length)
                 {
@@ -334,6 +340,8 @@ namespace WindowsFormsApp3
                 }
                 current_Q++;
             }
+            
+           
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -391,15 +399,6 @@ namespace WindowsFormsApp3
             }
         }
         
-        void Textkürzen(string str)
-        {
-           
-            SizeF size = TextRenderer.MeasureText(str, new Font("Microsoft Sans Serif", Text_Size));
-            //nt stringBreite = Int32.Parse(size.ToString());
-            //retString = str.Substring(0, 190);
-            //MessageBox.Show(size.ToString());
-        }
-
         void write_Question()
         {
             richAufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][0] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
@@ -423,6 +422,7 @@ namespace WindowsFormsApp3
             {
                 answers[i].Enabled = true;
                 answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q-1]][1][Zufallsantworten[i] - 1];
+                answers[i].ForeColor = Color.Black;
             }
             Array.Clear(Zufallsantworten, 0, Zufallsantworten.Length);
             
@@ -519,11 +519,28 @@ namespace WindowsFormsApp3
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = true;
+                answers[i].ForeColor = Color.Black;
             }
         }
 
         void Fragenauswertung()
         {
+            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
+            for (int i = 0; i < 4; i++)
+            {
+                if(answers[i].Text == right_Answer)
+                {
+                    answers[i].BackColor = Color.Green;
+                }
+                else
+                {
+                    answers[i].BackColor = Color.Red;
+                }
+                answers[i].ForeColor = Color.White;
+            }
+
+
+            
             if (given_Answer == right_Answer)
             {
                 TextBox_Auswertung.BackColor = Color.Green;
@@ -534,6 +551,7 @@ namespace WindowsFormsApp3
             {
                 TextBox_Auswertung.BackColor = Color.Red;
             }
+            
         }
 
         void Endauswertung_Prozent()
@@ -563,7 +581,8 @@ namespace WindowsFormsApp3
                 }
             }
         }
-        void Endauswertung_Fragen()
+
+        public int[]  Endauswertung_Fragen()
         {
             int Anzahl_falsche_Antworten = 0; ;
 
@@ -580,15 +599,15 @@ namespace WindowsFormsApp3
 
             for (int i = 0; i < Fragenkatalog.Length; i++)
             {
-                
                 if (falsche_Antworten[i]==0)
                 {
-                    
                     alleFalschenAntworten[x] = Zufallsfragen[i];
                     x++;
-                }
 
+                    
+                }
             }
+            return alleFalschenAntworten;
         }
 
     }
