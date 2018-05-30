@@ -31,11 +31,12 @@
             this.Btn_CloseProgramm = new System.Windows.Forms.Button();
             this.btn_Auswertung = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.Btn_restart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Btn_CloseProgramm
             // 
-            this.Btn_CloseProgramm.Location = new System.Drawing.Point(138, 39);
+            this.Btn_CloseProgramm.Location = new System.Drawing.Point(264, 39);
             this.Btn_CloseProgramm.Name = "Btn_CloseProgramm";
             this.Btn_CloseProgramm.Size = new System.Drawing.Size(120, 30);
             this.Btn_CloseProgramm.TabIndex = 0;
@@ -63,11 +64,22 @@
             this.label1.Text = "Möchten Sie die Fragen auswerten oder Beenden?";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // Btn_restart
+            // 
+            this.Btn_restart.Location = new System.Drawing.Point(138, 39);
+            this.Btn_restart.Name = "Btn_restart";
+            this.Btn_restart.Size = new System.Drawing.Size(120, 30);
+            this.Btn_restart.TabIndex = 3;
+            this.Btn_restart.Text = "Neustarten";
+            this.Btn_restart.UseVisualStyleBackColor = true;
+            this.Btn_restart.Click += new System.EventHandler(this.Btn_restart_Click);
+            // 
             // Beenden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 81);
+            this.ClientSize = new System.Drawing.Size(449, 81);
+            this.Controls.Add(this.Btn_restart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Auswertung);
             this.Controls.Add(this.Btn_CloseProgramm);
@@ -84,5 +96,6 @@
         private System.Windows.Forms.Button Btn_CloseProgramm;
         private System.Windows.Forms.Button btn_Auswertung;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button Btn_restart;
     }
 }

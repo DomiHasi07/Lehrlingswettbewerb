@@ -32,14 +32,14 @@ namespace WindowsFormsApp3
 
         string[][][] Fragenkatalog =
         {
-            new string[][]
+            new string[2][]
             {
-                new string[]
+                new string[2]
                 {
                     "Grundlagen EBT A26",
                     "An welchen Eingang muss ein Signal anglegt werde, damit ein RS-Flip-Flop gesetzt wird?",
                 },
-                new string[]
+                new string[4]
                 {
                     "Set",
                     "Reset",
@@ -310,18 +310,19 @@ namespace WindowsFormsApp3
             {
                 Reset();
                 Start_was_pressed = false;
-                Next.Text = "Next";
             }
         }
 
         private void Next_Click(object sender, EventArgs e)
         {
-            
             if (Next_was_pressed)   //nächste Frage anzeigen
             {
                 if (current_Q > Fragenkatalog.Length)
+                {
+                    timer1.Stop();
                     Endauswertung_Prozent();
                     //Endauswertung_Fragen();
+                }
                 else
                 {
                     Hintergrundfarbe("Clear");
@@ -329,6 +330,7 @@ namespace WindowsFormsApp3
                     write_Answers();
                     Next_was_pressed = false;
                 }
+                timer1.Stop();
             }
             else            //Einloggen der Antworten
             {
@@ -339,9 +341,9 @@ namespace WindowsFormsApp3
                     Next.Text = "Fragen auswerten";
                 }
                 current_Q++;
+                timer1.Interval = 4000;
+                timer1.Start();
             }
-            
-           
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -496,6 +498,7 @@ namespace WindowsFormsApp3
 
             CountOfRightAnswers = 0;
             TextBox_Auswertung.Text = "";
+            Next.Text = "Next";
 
         }
 
@@ -511,6 +514,25 @@ namespace WindowsFormsApp3
                 answers[i].Enabled = false;
             }
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (current_Q > Fragenkatalog.Length)
+            {
+                timer1.Stop();
+                Endauswertung_Prozent();
+            }
+               
+            //Endauswertung_Fragen();
+            else
+            {
+                Hintergrundfarbe("Clear");
+                write_Question();
+                write_Answers();
+                Next_was_pressed = false;
+            }
+            timer1.Stop();
         }
 
         void Enable_Ans_Buttons()
@@ -530,11 +552,11 @@ namespace WindowsFormsApp3
             {
                 if(answers[i].Text == right_Answer)
                 {
-                    answers[i].BackColor = Color.Green;
+                    answers[i].BackColor = Color.ForestGreen;
                 }
                 else
                 {
-                    answers[i].BackColor = Color.Red;
+                    answers[i].BackColor = Color.IndianRed;
                 }
                 answers[i].ForeColor = Color.White;
             }
@@ -563,21 +585,29 @@ namespace WindowsFormsApp3
                 {
                     string val = form.ReturnValue1;
 
-                    if (val=="Auswertung")
+                    switch (val)
                     {
-                        Auswertung.return_richtige_Antworten = CountOfRightAnswers;
-                        Auswertung.return_Anzahl_Fragen = current_Q-1;
+                        case "Auswertung":
+                            Auswertung.return_richtige_Antworten = CountOfRightAnswers;
+                            Auswertung.return_Anzahl_Fragen = current_Q - 1;
+                            Auswertung.return_Fragenkatalog = Fragenkatalog;
+                            Auswertung.return_falschBeantworteteFragen = Endauswertung_Fragen();
 
-                        this.Visible = false;
-                        Auswertung Auswertung_Dialog = new Auswertung();
-                        Auswertung_Dialog.ShowDialog();
-                        this.Visible = true;
+                            this.Visible = false;
+                            Auswertung Auswertung_Dialog = new Auswertung();
+                            Auswertung_Dialog.ShowDialog();
+                            this.Visible = true;
+                            break;
+
+                        case "Beenden":
+                            System.Windows.Forms.Application.Exit();
+                            break;
+
+                        case "Restart":
+                            Reset();
+                            Start_Sequenz();
+                            break;
                     }
-                    else if(val == "Beenden")
-                    {
-                        System.Windows.Forms.Application.Exit();
-                    }
-                    
                 }
             }
         }
@@ -594,22 +624,18 @@ namespace WindowsFormsApp3
                 }
             }
 
-            int[] alleFalschenAntworten = new int[Anzahl_falsche_Antworten];
+            int[] falschBeantworteteFragen = new int[Anzahl_falsche_Antworten];
             int x = 0;
 
             for (int i = 0; i < Fragenkatalog.Length; i++)
             {
                 if (falsche_Antworten[i]==0)
                 {
-                    alleFalschenAntworten[x] = Zufallsfragen[i];
+                    falschBeantworteteFragen[x] = Zufallsfragen[i];
                     x++;
-
-                    
                 }
             }
-            return alleFalschenAntworten;
+            return falschBeantworteteFragen;
         }
-
     }
-
 }

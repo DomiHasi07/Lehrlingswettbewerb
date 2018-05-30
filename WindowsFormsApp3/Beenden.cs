@@ -43,5 +43,12 @@ namespace WindowsFormsApp3
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void Btn_restart_Click(object sender, EventArgs e)
+        {
+            this.ReturnValue1 = "Restart";
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
     }
 }

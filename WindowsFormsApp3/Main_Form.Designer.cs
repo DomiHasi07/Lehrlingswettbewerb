@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TextBox_Auswertung = new System.Windows.Forms.TextBox();
             this.Next = new System.Windows.Forms.Button();
             this.Start = new System.Windows.Forms.Button();
@@ -42,6 +43,8 @@
             this.richAnswer2 = new System.Windows.Forms.RichTextBox();
             this.richAnswer1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TextBox_Auswertung
@@ -220,11 +223,25 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 39;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(519, 27);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(197, 48);
+            this.button1.TabIndex = 40;
+            this.button1.Text = "Falsche Fragen wiederholen";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 279);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richAnswer1);
             this.Controls.Add(this.richAnswer2);
@@ -264,5 +281,7 @@
         private System.Windows.Forms.RichTextBox richAnswer2;
         private System.Windows.Forms.RichTextBox richAnswer1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
     }
 }
