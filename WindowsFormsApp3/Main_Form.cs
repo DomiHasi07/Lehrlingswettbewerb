@@ -20,10 +20,11 @@ namespace WindowsFormsApp3
         string tempQuestion;
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
         int Zufallszahl, CountOfRightAnswers, current_Q = 1;
-        int[] Zufallsfragen, falsche_Antworten;
+        int[] Zufallsfragen, falsche_Antworten, falsch_beantwortet_Fragen;
         int[] Zufallsantworten = new int[4];
         string right_Answer, given_Answer;
         string[] alleFalschenAntworten;
+        int Anzahl_falsche_Antworten = 0; 
 
         Random rnd = new Random();
 
@@ -500,6 +501,8 @@ namespace WindowsFormsApp3
             TextBox_Auswertung.Text = "";
             Next.Text = "Next";
 
+            Anzahl_falsche_Antworten = 0;
+
         }
 
         private void richAnswer1_TextChanged(object sender, EventArgs e)
@@ -597,6 +600,7 @@ namespace WindowsFormsApp3
                             Auswertung Auswertung_Dialog = new Auswertung();
                             Auswertung_Dialog.ShowDialog();
                             this.Visible = true;
+                            falsche_Fragen_ueben();
                             break;
 
                         case "Beenden":
@@ -614,7 +618,7 @@ namespace WindowsFormsApp3
 
         public int[]  Endauswertung_Fragen()
         {
-            int Anzahl_falsche_Antworten = 0; ;
+            
 
             for (int i = 0; i < Fragenkatalog.Length; i++)
             {
@@ -637,5 +641,24 @@ namespace WindowsFormsApp3
             }
             return falschBeantworteteFragen;
         }
+
+        void falsche_Fragen_ueben()
+        {
+            falsch_beantwortet_Fragen = new int[Anzahl_falsche_Antworten];
+
+            for (int i = 0; i < falsch_beantwortet_Fragen.Length; i++)
+            {
+                Zufallszahl = rnd.Next(1, falsch_beantwortet_Fragen.Length + 1);
+                if (!falsch_beantwortet_Fragen.Contains(Zufallszahl))
+                    falsch_beantwortet_Fragen[i] = Zufallszahl;
+                else
+                    i--;
+            }
+            for (int i = 0; i < Zufallsfragen.Length; i++)
+            {
+                Zufallsfragen[i] = Zufallsfragen[i] - 1;
+            }
+        }
+       
     }
 }
