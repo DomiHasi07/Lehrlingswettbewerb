@@ -411,20 +411,13 @@ namespace WindowsFormsApp3
 
         void write_Answers()
         {
-            for (int i = 0; i < 4; i++)
-            {
-                Zufallszahl = rnd.Next(1, 5);
-                if (!Zufallsantworten.Contains(Zufallszahl))
-                    Zufallsantworten[i] = Zufallszahl;
-                else
-                    i--;
-            }
 
+            Zufallsantworten = Zufallszahlen_generieren(4);
             var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = true;
-                answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q-1]][1][Zufallsantworten[i] - 1];
+                answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q-1]][1][Zufallsantworten[i]];
                 answers[i].ForeColor = Color.Black;
             }
             Array.Clear(Zufallsantworten, 0, Zufallsantworten.Length);
@@ -456,22 +449,21 @@ namespace WindowsFormsApp3
 
         void Start_Sequenz()
         {
+            /*
             Zufallsfragen = new int[Fragenkatalog.Length];
             falsche_Antworten = new int[Fragenkatalog.Length];
-
+            
+            List<int> possible = Enumerable.Range(0, Fragenkatalog.Length).ToList();
             for (int i = 0; i < Fragenkatalog.Length; i++)
             {
-                Zufallszahl = rnd.Next(1, Fragenkatalog.Length + 1);
-                if (!Zufallsfragen.Contains(Zufallszahl))
-                    Zufallsfragen[i] = Zufallszahl;
-                else
-                    i--;
+                 int index = rnd.Next(0, possible.Count);
+                 Zufallsfragen[i]=(possible[index]);
+                 possible.RemoveAt(index);
             }
-            for (int i = 0; i < Zufallsfragen.Length; i++)
-            {
-                Zufallsfragen[i] = Zufallsfragen[i] - 1;
-            }
-           
+            */
+            falsche_Antworten = new int[Fragenkatalog.Length];
+            Zufallsfragen = Zufallszahlen_generieren(Fragenkatalog.Length);
+
 
             write_Question();
             Enable_Ans_Buttons();
@@ -601,6 +593,7 @@ namespace WindowsFormsApp3
                             Auswertung_Dialog.ShowDialog();
                             this.Visible = true;
                             falsche_Fragen_ueben();
+                            Anzahl_falsche_Antworten = 0;
                             break;
 
                         case "Beenden":
@@ -646,18 +639,20 @@ namespace WindowsFormsApp3
         {
             falsch_beantwortet_Fragen = new int[Anzahl_falsche_Antworten];
 
-            for (int i = 0; i < falsch_beantwortet_Fragen.Length; i++)
+            Zufallsfragen = Zufallszahlen_generieren(Anzahl_falsche_Antworten);
+        }
+
+        int[] Zufallszahlen_generieren(int how_many_numbers)
+        {
+            int[] Zufallszahlen = new int[how_many_numbers];
+            List<int> possible = Enumerable.Range(0, how_many_numbers).ToList();
+            for (int i = 0; i < how_many_numbers; i++)
             {
-                Zufallszahl = rnd.Next(1, falsch_beantwortet_Fragen.Length + 1);
-                if (!falsch_beantwortet_Fragen.Contains(Zufallszahl))
-                    falsch_beantwortet_Fragen[i] = Zufallszahl;
-                else
-                    i--;
+                int index = rnd.Next(0, possible.Count);
+                Zufallszahlen[i] = (possible[index]);
+                possible.RemoveAt(index);
             }
-            for (int i = 0; i < Zufallsfragen.Length; i++)
-            {
-                Zufallsfragen[i] = Zufallsfragen[i] - 1;
-            }
+            return Zufallszahlen;
         }
        
     }
