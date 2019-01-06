@@ -15,232 +15,286 @@ namespace WindowsFormsApp3
 
     public partial class Test : Form
     {
-        float Text_Size = 10;
-        int maxZeichen = 190;
-        string tempQuestion;
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
-        int Zufallszahl, CountOfRightAnswers, current_Q = 1;
-        int[] Zufallsfragen, falsche_Antworten, falsch_beantwortet_Fragen;
+        int current_Q = 1;
+        int[] Zufallsfragen, falsche_Antworten_Postion;
         int[] Zufallsantworten = new int[4];
         string right_Answer, given_Answer;
-        string[] alleFalschenAntworten;
-        int Anzahl_falsche_Antworten = 0; 
+        DataSet Eingelesene_Fragen = new DataSet();
+        Button[] answers;
+
 
         Random rnd = new Random();
 
         bool Start_was_pressed = false;
         bool Next_was_pressed = false;
 
-        string[][][] Fragenkatalog =
-        {
-            new string[2][]
-            {
-                new string[2]
-                {
-                    "Grundlagen EBT A26",
-                    "An welchen Eingang muss ein Signal anglegt werde, damit ein RS-Flip-Flop gesetzt wird?",
-                },
-                new string[4]
-                {
-                    "Set",
-                    "Reset",
-                    "Ausgang",
-                    "Clock"
-                }
-            },
-            new string[][]
-            {
-                new string[]
-                {
-                    "Grundlagen EBT A27",
-                    "Was kann aus einer Diodenkennlinie entnommen werden?"
-                },
-                new string[]
-                {
-                    "Sperrbereich, Durchbruchspannung, Durchlassspannung, Durchlassbereich",
-                    "Temperaturkoeffizient, Dotierung, Umgeb    ungstemperatur, Sperrschichttemperatur",
-                    "Verlustleistung, maximaler Spitzenstrom, Durchlassstrom, Spitzenspannung",
-                    "Diodenkapazität, Schaltzeiten, Sperrstrom, Durchlassspannung"
-                }
-            },
-            new string[][]
-            {
-                new string[]
-                {
-                     "Grundlagen EBT A28",
-                     "Transistoren können in drei unterschiedlichen Grundschaltungen betrieben werden. Nenn Sie die am häufigsten vewendete Grundschaltung!"
-                },
-                new string[]
-                {
-                    "Ermitter-Grund-Schaltung",
-                    "Kollektor-Grund-Schaltung",
-                    "Basis-Schaltung",
-                    "Darlington-Schaltung"
-                }
-            },
-            new string[][]
-            {
-                new string[]
-                {
-                     "Elektrische Geräte B1",
-                     "Warum ist der Kern bei einem Trafo aus einzenlen Blechen zusammengesetzt"
-                },
-                new string[]
-                {
-                    "Damit die Wirbelstromverluste reduziert werden können",
-                    "Damit der Kern schwerer wird",
-                    "Damit die Spannung höher wird",
-                    "Damit der Spannungsabfall reduziert wird"
-                }
-            },
-            new string[][]
-            {
-                new string[]
-                {
-                     "Elektrische Geräte B2",
-                     "Bei einem Drehstromtransformator befindet sich auf jedem der drei Kernschenkel je eine Ober- und eine Unterspannungswicklung. Wie können die Wicklungen geschaltet werden?"
-                },
-                new string[]
-                {
-                    "Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial auf einem Schenkel voneinander getrennt.",
-                    "Ober- und Unterspannungswicklung jeder Phase sind jeweils antiparallel voneinander geschaltet.",
-                    "Ober- und Unterspannungswicklung jeder Phase sind parallel auf dem Joch geschalten.",
-                    "Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial in Serie geschalten."
-                }
-            }
-        };
+        string[][][] Fragenkatalog;
+
         public Test()
         {
             InitializeComponent();
-            Auswahl_Text_Größe.Text = Text_Size.ToString();
+
+            Eingelesene_Fragen.ReadXml(@"C:\Users\DomiHasi\Documents\Arbeit\Visual Studio\XML_Dateien\Test1.xml");
+
+            Fragenkatalog_OV();
+
+            answers = new Button[] { Btn_Answer_1, Btn_Answer_2, Btn_Answer_3, Btn_Answer_4 };
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.Resize += Test_Resize;
+           /* lbl_Question.TextChanged += Lbl_Question_TextChanged;
+            Btn_Answer1.TextChanged += Btn_Answer1_TextChanged;
+            Btn_Answer2.TextChanged += Btn_Answer2_TextChanged;
+            Btn_Answer3.TextChanged += Btn_Answer3_TextChanged;
+            Btn_Answer4.TextChanged += Btn_Answer4_TextChanged;*/
+        }
+
+       /* private void Btn_Answer1_TextChanged(object sender, EventArgs e)
+        {
+            string txt = Btn_Answer1.Text;
+            if (txt.Length > 0)
+            {
+                int best_size = 100;
+                int lbl_wid = Btn_Answer1.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer1.DisplayRectangle.Height - 5;
+
+                using (Graphics gr = Btn_Answer1.CreateGraphics())
+                {
+                    for (int i = 1; i <= 100; i++)
+                    {
+                        using (Font test_font = new Font(Btn_Answer1.Font.FontFamily, i))
+                        {
+                            SizeF text_size = gr.MeasureString(txt, test_font);
+                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
+                            {
+                                best_size = i - 1;
+                                break;
+                            }
+
+                        }
+                    }
+                    if (best_size < 12)
+                    {
+                        for (int i = 1; i <= 100; i++)
+                        {
+                            using (Font test_font = new Font(Btn_Answer1.Font.FontFamily, i))
+                            {
+                                SizeF text_size = gr.MeasureString(txt, test_font);
+                                if ((text_size.Width) > lbl_wid*2 || (text_size.Height > (lbl_hgt / 2.5)))
+                                {
+                                    best_size = i - 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                   
+                }
+
+                Btn_Answer1.Font = new Font(Btn_Answer1.Font.FontFamily, best_size);
+            }
+        }
+
+        private void Btn_Answer2_TextChanged(object sender, EventArgs e)
+        {
+            string txt = Btn_Answer2.Text;
+            if (txt.Length > 0)
+            {
+                int best_size = 100;
+                int lbl_wid = Btn_Answer2.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer2.DisplayRectangle.Height - 13;
+
+                using (Graphics gr = Btn_Answer2.CreateGraphics())
+                {
+                    for (int i = 1; i <= 100; i++)
+                    {
+                        using (Font test_font = new Font(Btn_Answer2.Font.FontFamily, i))
+                        {
+                            SizeF text_size = gr.MeasureString(txt, test_font);
+                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
+                            {
+                                best_size = i - 1;
+                                break;
+                            }
+
+                        }
+                    }
+                    if (best_size < 12)
+                    {
+                        for (int i = 1; i <= 100; i++)
+                        {
+                            using (Font test_font = new Font(Btn_Answer2.Font.FontFamily, i))
+                            {
+                                SizeF text_size = gr.MeasureString(txt, test_font);
+                                if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
+                                {
+                                    best_size = i - 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                Btn_Answer2.Font = new Font(Btn_Answer2.Font.FontFamily, best_size);
+            }
+        }
+
+        private void Btn_Answer3_TextChanged(object sender, EventArgs e)
+        {
+            string txt = Btn_Answer3.Text;
+            if (txt.Length > 0)
+            {
+                int best_size = 100;
+                int lbl_wid = Btn_Answer3.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer3.DisplayRectangle.Height - 13;
+
+                using (Graphics gr = Btn_Answer3.CreateGraphics())
+                {
+                    for (int i = 1; i <= 100; i++)
+                    {
+                        using (Font test_font = new Font(Btn_Answer3.Font.FontFamily, i))
+                        {
+                            SizeF text_size = gr.MeasureString(txt, test_font);
+                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
+                            {
+                                best_size = i - 1;
+                                break;
+                            }
+
+                        }
+                    }
+                    if (best_size < 12)
+                    {
+                        for (int i = 1; i <= 100; i++)
+                        {
+                            using (Font test_font = new Font(Btn_Answer3.Font.FontFamily, i))
+                            {
+                                SizeF text_size = gr.MeasureString(txt, test_font);
+                                if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
+                                {
+                                    best_size = i - 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                Btn_Answer3.Font = new Font(Btn_Answer3.Font.FontFamily, best_size);
+            }
+        }
+
+        private void Btn_Answer4_TextChanged(object sender, EventArgs e)
+        {
+            string txt = Btn_Answer4.Text;
+            if (txt.Length > 0)
+            {
+                int best_size = 100;
+                int lbl_wid = Btn_Answer4.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer4.DisplayRectangle.Height - 13;
+
+                using (Graphics gr = Btn_Answer4.CreateGraphics())
+                {
+                    for (int i = 1; i <= 100; i++)
+                    {
+                        using (Font test_font = new Font(Btn_Answer4.Font.FontFamily, i))
+                        {
+                            SizeF text_size = gr.MeasureString(txt, test_font);
+                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
+                            {
+                                best_size = i - 1;
+                                break;
+                            }
+
+                        }
+                    }
+                    if (best_size < 12)
+                    {
+                        for (int i = 1; i <= 100; i++)
+                        {
+                            using (Font test_font = new Font(Btn_Answer4.Font.FontFamily, i))
+                            {
+                                SizeF text_size = gr.MeasureString(txt, test_font);
+                                if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
+                                {
+                                    best_size = i - 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                Btn_Answer4.Font = new Font(Btn_Answer4.Font.FontFamily, best_size);
+            }
+        }*/
+
+        private void Test_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void Lbl_Question_TextChanged(object sender, EventArgs e)
+        {
+            string txt = lbl_Question.Text;
+            if(txt.Length>0)
+            {
+                int best_size = 100;
+                int lbl_wid = lbl_Question.DisplayRectangle.Width - 3;
+                int lbl_hgt = lbl_Question.DisplayRectangle.Height - 3;
+
+                using (Graphics gr = lbl_Question.CreateGraphics())
+                {
+                    for (int i = 1; i <= 100; i++)
+                    {
+                        using (Font test_font = new Font(lbl_Question.Font.FontFamily, i))
+                        {
+                            SizeF text_size = gr.MeasureString(txt, test_font);
+                            if((text_size.Height>lbl_hgt)||( text_size.Width > lbl_wid))
+                            {
+                                best_size = i - 1;
+                                break;
+                            }
+                            
+                        }
+                    }
+                    if (best_size < 12)
+                    {
+                        for (int i = 1; i <= 100; i++)
+                        {
+                            using (Font test_font = new Font(lbl_Question.Font.FontFamily, i))
+                            {
+                                SizeF text_size = gr.MeasureString(txt, test_font);
+                                if ((text_size.Width/2)>lbl_wid||(text_size.Height > (lbl_hgt / 2)))
+                                {
+                                    best_size = i - 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+
+                lbl_Question.Font = new Font(lbl_Question.Font.FontFamily, best_size);
+            }
         }
 
         private void Answer_Button_Click(object sender, EventArgs e)
         {
-            if(!Next_was_pressed)
-            {
-                switch ((sender as RichTextBox).Name)
-                {
-                    case "richAnswer1":
-                        Hintergrundfarbe("Antwort1");
-                        given_Answer = richAnswer1.Text;
-                        break;
-
-                    case "richAnswer2":
-                        Hintergrundfarbe("Antwort2");
-                        given_Answer = richAnswer2.Text;
-                        break;
-
-                    case "richAnswer3":
-                        Hintergrundfarbe("Antwort3");
-                        given_Answer = richAnswer3.Text;
-                        break;
-
-                    case "richAnswer4":
-                        Hintergrundfarbe("Antwort4");
-                        given_Answer = richAnswer4.Text;
-                        break;
-                }
-            }
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
             if (!Next_was_pressed)
-            {
-                richAnswer1.Click += Answer_Button_Click;
-                richAnswer2.Click += Answer_Button_Click;
-                richAnswer3.Click += Answer_Button_Click;
-                richAnswer4.Click += Answer_Button_Click;
-            }
-            
+            {              
+                Hintergrundfarbe("");
+                (sender as Button).BackColor = Color.White;
 
-            richAnswer1.SelectionAlignment = HorizontalAlignment.Center;
-            richAnswer2.SelectionAlignment = HorizontalAlignment.Center;
-            richAnswer3.SelectionAlignment = HorizontalAlignment.Center;
-            richAnswer4.SelectionAlignment = HorizontalAlignment.Center;
-            richQuestion.SelectionAlignment = HorizontalAlignment.Center;
-            richAufgaben_Gebiet.SelectionAlignment = HorizontalAlignment.Center;
-           
-            richAnswer1.Enter += RichBox_Enter;
-            richAnswer2.Enter += RichBox_Enter;
-            richAnswer3.Enter += RichBox_Enter;
-            richAnswer4.Enter += RichBox_Enter;
-            richAufgaben_Gebiet.Enter += RichBox_Enter;
-            richQuestion.Enter += RichBox_Enter;
-
-            richAnswer1.Leave += RichBox_Leave;
-            richAnswer2.Leave += RichBox_Leave;
-            richAnswer3.Leave += RichBox_Leave;
-            richAnswer4.Leave += RichBox_Leave;
-            richAufgaben_Gebiet.Leave += RichBox_Leave;
-            richQuestion.Leave += RichBox_Leave;
-
-            richAnswer1.MouseEnter += Answer_Button_MouseEnter;
-            richAnswer2.MouseEnter += Answer_Button_MouseEnter;
-            richAnswer3.MouseEnter += Answer_Button_MouseEnter;
-            richAnswer4.MouseEnter += Answer_Button_MouseEnter;
-
-            richAnswer4.MouseLeave += Answer_Button_MouseLeave;
-            richAnswer1.MouseLeave += Answer_Button_MouseLeave;
-            richAnswer2.MouseLeave += Answer_Button_MouseLeave;
-            richAnswer3.MouseLeave += Answer_Button_MouseLeave;
-        }
-
-        private void Answer_Button_MouseLeave(object sender, EventArgs e)
-        {
-            if(!Next_was_pressed)
-            {
-                switch ((sender as RichTextBox).Name)
-                {
-                    case "richAnswer1":
-                        if (richAnswer1.BackColor != Color.White)
-                            richAnswer1.BackColor = Color.Gainsboro;
-                        break;
-
-                    case "richAnswer2":
-                        if (richAnswer2.BackColor != Color.White)
-                            richAnswer2.BackColor = Color.Gainsboro;
-                        break;
-
-                    case "richAnswer3":
-                        if (richAnswer3.BackColor != Color.White)
-                            richAnswer3.BackColor = Color.Gainsboro;
-                        break;
-
-                    case "richAnswer4":
-                        if (richAnswer4.BackColor != Color.White)
-                            richAnswer4.BackColor = Color.Gainsboro;
-                        break;
-                }
-            }
-        }
-
-        private void Answer_Button_MouseEnter(object sender, EventArgs e)
-        {
-            if(!Next_was_pressed)
-            {
-                switch ((sender as RichTextBox).Name)
-                {
-                    case "richAnswer1":
-                        if (richAnswer1.BackColor != Color.White)
-                            richAnswer1.BackColor = SystemColors.GradientInactiveCaption;
-                        break;
-
-                    case "richAnswer2":
-                        if (richAnswer2.BackColor != Color.White)
-                            richAnswer2.BackColor = SystemColors.GradientInactiveCaption;
-                        break;
-
-                    case "richAnswer3":
-                        if (richAnswer3.BackColor != Color.White)
-                            richAnswer3.BackColor = SystemColors.GradientInactiveCaption;
-                        break;
-
-                    case "richAnswer4":
-                        if (richAnswer4.BackColor != Color.White)
-                            richAnswer4.BackColor = SystemColors.GradientInactiveCaption;
-                        break;
-                }
+                given_Answer = (sender as Button).Name;
             }
         }
 
@@ -255,51 +309,6 @@ namespace WindowsFormsApp3
             Cursor = Cursors.Arrow;
         }
 
-        private void Btn_Text_smaller_click(object sender, EventArgs e)
-        {
-            if (Text_Size > 5)
-            {
-                try
-                {
-                    Text_Size -= 1;
-                    change_FontSize();
-                }
-                catch
-                {
-
-                }
-            }
-        }
-
-        private void Btn_Text_bigger_click(object sender, EventArgs e)
-        {
-            if (Text_Size < 20)
-            {
-                try
-                {
-                    Text_Size += 1;
-                    change_FontSize();
-                }
-                catch
-                {
-
-                }
-            }
-        }
-
-        private void Auswahl_Text_Größe_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Text_Size = float.Parse(Auswahl_Text_Größe.Text);
-                change_FontSize();
-            }
-            catch
-            {
-
-            }
-        }
-
         private void Start_Click(object sender, EventArgs e)
         {
             if (!Start_was_pressed)
@@ -309,7 +318,9 @@ namespace WindowsFormsApp3
             }
             else
             {
+                timer1.Stop();
                 Reset();
+                Fragenkatalog_OV();
                 Start_was_pressed = false;
             }
         }
@@ -322,7 +333,6 @@ namespace WindowsFormsApp3
                 {
                     timer1.Stop();
                     Endauswertung_Prozent();
-                    //Endauswertung_Fragen();
                 }
                 else
                 {
@@ -347,99 +357,41 @@ namespace WindowsFormsApp3
             }
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         void Hintergrundfarbe(string x)
         {
-            switch (x)
+            for (int i = 0; i < 4; i++)
             {
-                case "Antwort1":
-                    richAnswer1.BackColor = Color.White;
-                    richAnswer2.BackColor = Color.Gainsboro;
-                    richAnswer3.BackColor = Color.Gainsboro;
-                    richAnswer4.BackColor = Color.Gainsboro;
-                    break;
-
-                case "Antwort2":
-                    richAnswer1.BackColor = Color.Gainsboro;
-                    richAnswer2.BackColor = Color.White;
-                    richAnswer3.BackColor = Color.Gainsboro;
-                    richAnswer4.BackColor = Color.Gainsboro;
-                    break;
-
-                case "Antwort3":
-                    richAnswer1.BackColor = Color.Gainsboro;
-                    richAnswer2.BackColor = Color.Gainsboro;
-                    richAnswer3.BackColor = Color.White;
-                    richAnswer4.BackColor = Color.Gainsboro;
-                    break;
-
-                case "Antwort4":
-                    richAnswer1.BackColor = Color.Gainsboro;
-                    richAnswer2.BackColor = Color.Gainsboro;
-                    richAnswer3.BackColor = Color.Gainsboro;
-                    richAnswer4.BackColor = Color.White;
-                    break;
-
-                case "Clear":
-                    richAnswer1.BackColor = Color.Gainsboro;
-                    richAnswer2.BackColor = Color.Gainsboro;
-                    richAnswer3.BackColor = Color.Gainsboro;
-                    richAnswer4.BackColor = Color.Gainsboro;
-                    TextBox_Auswertung.BackColor = Color.White;
-                    break;
-
-                case "Startfarbe":
-                    richAnswer1.BackColor = Color.Gainsboro;
-                    richAnswer2.BackColor = Color.Gainsboro;
-                    richAnswer3.BackColor = Color.Gainsboro;
-                    richAnswer4.BackColor = Color.Gainsboro;
-                    break;
-
+                answers[i].BackColor = Color.Gainsboro;
+            }
+            if(x == "Clear")
+            {
+                TextBox_Auswertung.BackColor = Color.White;
             }
         }
         
         void write_Question()
         {
-            richAufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][0] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
-            richQuestion.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][1];
+            richAufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][0] +" "+ Fragenkatalog[Zufallsfragen[current_Q-1]][0][2] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
+            lbl_Question.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][1];
             right_Answer = Fragenkatalog[Zufallsfragen[current_Q-1]][1][0];
         }
 
         void write_Answers()
         {
 
+            Array.Clear(Zufallsantworten, 0, Zufallsantworten.Length);
             Zufallsantworten = Zufallszahlen_generieren(4);
-            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = true;
                 answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q-1]][1][Zufallsantworten[i]];
                 answers[i].ForeColor = Color.Black;
             }
-            Array.Clear(Zufallsantworten, 0, Zufallsantworten.Length);
             
-        }
-
-        void change_FontSize()
-        {
-            Auswahl_Text_Größe.Text = Text_Size.ToString();
-            currentFont = new Font(Font.FontFamily, Text_Size);
-            
-            richAnswer1.Font = currentFont;
-            richAnswer2.Font = currentFont;
-            richAnswer3.Font = currentFont;
-            richAnswer4.Font = currentFont;
-            richQuestion.Font = currentFont;
-            richAufgaben_Gebiet.Font = currentFont;
         }
 
         void Disable_and_delete_Ans_Buttons()
         {
-            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = false;
@@ -449,21 +401,8 @@ namespace WindowsFormsApp3
 
         void Start_Sequenz()
         {
-            /*
-            Zufallsfragen = new int[Fragenkatalog.Length];
-            falsche_Antworten = new int[Fragenkatalog.Length];
-            
-            List<int> possible = Enumerable.Range(0, Fragenkatalog.Length).ToList();
-            for (int i = 0; i < Fragenkatalog.Length; i++)
-            {
-                 int index = rnd.Next(0, possible.Count);
-                 Zufallsfragen[i]=(possible[index]);
-                 possible.RemoveAt(index);
-            }
-            */
-            falsche_Antworten = new int[Fragenkatalog.Length];
+            falsche_Antworten_Postion = new int[Fragenkatalog.Length];
             Zufallsfragen = Zufallszahlen_generieren(Fragenkatalog.Length);
-
 
             write_Question();
             Enable_Ans_Buttons();
@@ -477,7 +416,7 @@ namespace WindowsFormsApp3
         void Reset()
         {
             richAufgaben_Gebiet.Text = "";
-            richQuestion.Text = "";
+            lbl_Question.Text = "";
             Disable_and_delete_Ans_Buttons();
 
             Next.Enabled = false;
@@ -489,86 +428,94 @@ namespace WindowsFormsApp3
             Array.Clear(Zufallsfragen, 0, Zufallsfragen.Length);
             Start.Text = "Start";
 
-            CountOfRightAnswers = 0;
             TextBox_Auswertung.Text = "";
             Next.Text = "Next";
 
-            Anzahl_falsche_Antworten = 0;
-
-        }
-
-        private void richAnswer1_TextChanged(object sender, EventArgs e)
-        {
+            Btn_Fragen_wiederholen.Visible = false;  
         }
 
         void Disable_Ans_Buttons()
         {
-            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = false;
             }
 
         }
-
+        
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (current_Q > Fragenkatalog.Length)
-            {
+            
+                if (current_Q > Fragenkatalog.Length)
+                {
+                    timer1.Stop();
+                    Endauswertung_Prozent();    
+                }
+                else
+                {
+                    Hintergrundfarbe("Clear");
+                    write_Question();
+                    write_Answers();
+                    Next_was_pressed = false;
+                }
                 timer1.Stop();
-                Endauswertung_Prozent();
-            }
-               
-            //Endauswertung_Fragen();
-            else
-            {
-                Hintergrundfarbe("Clear");
-                write_Question();
-                write_Answers();
-                Next_was_pressed = false;
-            }
-            timer1.Stop();
+            
+            
+        }
+
+        private void Btn_Fragen_wiederholen_Click(object sender, EventArgs e)
+        {
+            falsche_Fragen_ueben();
         }
 
         void Enable_Ans_Buttons()
         {
-            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 answers[i].Enabled = true;
                 answers[i].ForeColor = Color.Black;
             }
         }
 
+        private void lbl_Question_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         void Fragenauswertung()
         {
-            var answers = new[] { richAnswer1, richAnswer2, richAnswer3, richAnswer4 };
-            for (int i = 0; i < 4; i++)
+            Int32 given_answer_ID;
+
+            if (given_Answer != null && given_Answer != "")
             {
-                if(answers[i].Text == right_Answer)
+                String[] Temp = given_Answer.Split('_');
+                given_answer_ID = Int32.Parse(Temp[2]) - 1;
+                if (given_answer_ID == Array.IndexOf(Zufallsantworten, 0))
                 {
-                    answers[i].BackColor = Color.ForestGreen;
+                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "1";
+                    TextBox_Auswertung.BackColor = Color.Green;
                 }
                 else
                 {
-                    answers[i].BackColor = Color.IndianRed;
+                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "0";
+                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][1] = given_answer_ID.ToString();
+                    TextBox_Auswertung.BackColor = Color.Red;
                 }
-                answers[i].ForeColor = Color.White;
-            }
-
-
-            
-            if (given_Answer == right_Answer)
-            {
-                TextBox_Auswertung.BackColor = Color.Green;
-                CountOfRightAnswers++;
-                falsche_Antworten[current_Q - 1] = 1;
             }
             else
             {
+                Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "0";
+                Fragenkatalog[Zufallsfragen[current_Q - 1]][2][1] = "4";
                 TextBox_Auswertung.BackColor = Color.Red;
             }
-            
+            given_Answer = "";
+
+            for (int i = 0; i < 4; i++)
+            {
+                answers[i].BackColor = Color.IndianRed;
+                answers[i].ForeColor = Color.White;
+            }
+            answers[Array.IndexOf(Zufallsantworten, 0)].BackColor = Color.Green;
         }
 
         void Endauswertung_Prozent()
@@ -583,17 +530,14 @@ namespace WindowsFormsApp3
                     switch (val)
                     {
                         case "Auswertung":
-                            Auswertung.return_richtige_Antworten = CountOfRightAnswers;
-                            Auswertung.return_Anzahl_Fragen = current_Q - 1;
                             Auswertung.return_Fragenkatalog = Fragenkatalog;
-                            Auswertung.return_falschBeantworteteFragen = Endauswertung_Fragen();
 
                             this.Visible = false;
                             Auswertung Auswertung_Dialog = new Auswertung();
                             Auswertung_Dialog.ShowDialog();
                             this.Visible = true;
-                            falsche_Fragen_ueben();
-                            Anzahl_falsche_Antworten = 0;
+
+                            Btn_Fragen_wiederholen.Visible = true;
                             break;
 
                         case "Beenden":
@@ -602,6 +546,7 @@ namespace WindowsFormsApp3
 
                         case "Restart":
                             Reset();
+                            Fragenkatalog_OV();
                             Start_Sequenz();
                             break;
                     }
@@ -609,37 +554,52 @@ namespace WindowsFormsApp3
             }
         }
 
-        public int[]  Endauswertung_Fragen()
-        {
-            
-
-            for (int i = 0; i < Fragenkatalog.Length; i++)
-            {
-                if(falsche_Antworten[i]==0)
-                {
-                    Anzahl_falsche_Antworten++;
-                }
-            }
-
-            int[] falschBeantworteteFragen = new int[Anzahl_falsche_Antworten];
-            int x = 0;
-
-            for (int i = 0; i < Fragenkatalog.Length; i++)
-            {
-                if (falsche_Antworten[i]==0)
-                {
-                    falschBeantworteteFragen[x] = Zufallsfragen[i];
-                    x++;
-                }
-            }
-            return falschBeantworteteFragen;
-        }
-
         void falsche_Fragen_ueben()
         {
-            falsch_beantwortet_Fragen = new int[Anzahl_falsche_Antworten];
+            int Anzahl_falsche_Fragen = 0, j = 0;
+            string[][][] Fragenkatalog_neu;
 
-            Zufallsfragen = Zufallszahlen_generieren(Anzahl_falsche_Antworten);
+            for (int i = 0;i<Fragenkatalog.Length;i++)
+            {
+                if(Fragenkatalog[i][2][0] == "0")
+                {
+                    Anzahl_falsche_Fragen++;
+                }
+            }
+            if (Anzahl_falsche_Fragen > 0)
+            {
+                Fragenkatalog_neu = new string[Anzahl_falsche_Fragen][][];
+
+                for (int i = 0; i < Fragenkatalog.Length; i++)
+                {
+                    if (Fragenkatalog[i][2][0] == "0")
+                    {
+                        Fragenkatalog_neu[j] = new string[3][];
+                        Fragenkatalog_neu[j][0] = new string[3];
+                        Fragenkatalog_neu[j][1] = new string[4];
+                        Fragenkatalog_neu[j][2] = new string[2];
+
+
+                        Fragenkatalog_neu[j][0][0] = Fragenkatalog[i][0][0];
+                        Fragenkatalog_neu[j][0][1] = Fragenkatalog[i][0][1];
+                        Fragenkatalog_neu[j][0][2] = Fragenkatalog[i][0][2];
+                        Fragenkatalog_neu[j][1][0] = Fragenkatalog[i][1][0];
+                        Fragenkatalog_neu[j][1][1] = Fragenkatalog[i][1][1];
+                        Fragenkatalog_neu[j][1][2] = Fragenkatalog[i][1][2];
+                        Fragenkatalog_neu[j][1][3] = Fragenkatalog[i][1][3];
+
+                        j++;
+                    }
+                }
+                Fragenkatalog = Fragenkatalog_neu;
+            }
+            else
+            {
+                MessageBox.Show("Du hast alle Fragen richtig beantwortet. Das Programm wird neugestartet", "Neustart");
+                Fragenkatalog_OV();
+            }
+            Reset();
+            Start_Sequenz();
         }
 
         int[] Zufallszahlen_generieren(int how_many_numbers)
@@ -654,6 +614,27 @@ namespace WindowsFormsApp3
             }
             return Zufallszahlen;
         }
+
+        void Fragenkatalog_OV()
+        {      
+            Fragenkatalog = new string[Eingelesene_Fragen.Tables[0].Rows.Count][][];
+            for (int i = 0; i < Eingelesene_Fragen.Tables[0].Rows.Count; i++)
+            {
+                Fragenkatalog[i] = new string[3][];
+                Fragenkatalog[i][0] = new string[3];
+                Fragenkatalog[i][1] = new string[4];
+                Fragenkatalog[i][2] = new string[2];
+
+
+                Fragenkatalog[i][0][0] = Eingelesene_Fragen.Tables[0].Rows[i]["Themengebiet"].ToString();
+                Fragenkatalog[i][0][1] = Eingelesene_Fragen.Tables[0].Rows[i]["Frage"].ToString();
+                Fragenkatalog[i][0][2] = Eingelesene_Fragen.Tables[0].Rows[i]["Nummer"].ToString();
+                Fragenkatalog[i][1][0] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort1"].ToString();
+                Fragenkatalog[i][1][1] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort2"].ToString();
+                Fragenkatalog[i][1][2] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort3"].ToString();
+                Fragenkatalog[i][1][3] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort4"].ToString();
+            }
+        }    
        
     }
 }
