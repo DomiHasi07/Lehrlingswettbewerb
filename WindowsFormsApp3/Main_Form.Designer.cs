@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp3
 {
-    partial class Test
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -42,8 +42,8 @@
             this.lbl_Question = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.richAufgaben_Gebiet = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.tmr_Frage = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -195,7 +195,6 @@
             this.tableLayoutPanel2.Controls.Add(this.Btn_Fragen_wiederholen, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.Next, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.Start, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.progressBar1, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 12);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -215,13 +214,6 @@
             this.richAufgaben_Gebiet.TabIndex = 43;
             this.richAufgaben_Gebiet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(3, 3);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(205, 42);
-            this.progressBar1.TabIndex = 41;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -230,7 +222,11 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 39;
             // 
-            // Test
+            // tmr_Frage
+            // 
+            this.tmr_Frage.Tick += new System.EventHandler(this.tmr_Frage_Tick);
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -239,7 +235,8 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(746, 318);
-            this.Name = "Test";
+            this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -265,8 +262,8 @@
         private System.Windows.Forms.Button Btn_Answer_2;
         private System.Windows.Forms.Button Btn_Answer_3;
         private System.Windows.Forms.Button Btn_Answer_4;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label richAufgaben_Gebiet;
         private System.Windows.Forms.Label lbl_Question;
+        private System.Windows.Forms.Timer tmr_Frage;
     }
 }

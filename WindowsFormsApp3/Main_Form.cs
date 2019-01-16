@@ -13,25 +13,25 @@ namespace WindowsFormsApp3
 {
     
 
-    public partial class Test : Form
+    public partial class Main : Form
     {
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
         int current_Q = 1;
+        float Zeit_pro_Frage = 0;
         int[] Zufallsfragen, falsche_Antworten_Postion;
         int[] Zufallsantworten = new int[4];
         string right_Answer, given_Answer;
         DataSet Eingelesene_Fragen = new DataSet();
         Button[] answers;
 
-
         Random rnd = new Random();
 
         bool Start_was_pressed = false;
         bool Next_was_pressed = false;
 
-        string[][][] Fragenkatalog;
+        public static string[][][] Fragenkatalog;
 
-        public Test()
+        public Main()
         {
             InitializeComponent();
 
@@ -40,6 +40,18 @@ namespace WindowsFormsApp3
             Fragenkatalog_OV();
 
             answers = new Button[] { Btn_Answer_1, Btn_Answer_2, Btn_Answer_3, Btn_Answer_4 };
+
+            int Anzahl_Kat = 0;
+            string Kat = "";
+
+            for (int i = 0; i < Fragenkatalog.Length; i++)
+            {
+                if (Kat != Fragenkatalog[i][0][2].Substring(0, 1))
+                {
+                    Kat = Fragenkatalog[i][0][2].Substring(0, 1);
+                    Anzahl_Kat++;
+                }
+            }
             
         }
 
@@ -329,9 +341,11 @@ namespace WindowsFormsApp3
         {
             if (Next_was_pressed)   //nächste Frage anzeigen
             {
+                timer1.Stop();
+                tmr_Frage.Start();
+
                 if (current_Q > Fragenkatalog.Length)
                 {
-                    timer1.Stop();
                     Endauswertung_Prozent();
                 }
                 else
@@ -341,10 +355,12 @@ namespace WindowsFormsApp3
                     write_Answers();
                     Next_was_pressed = false;
                 }
-                timer1.Stop();
+                
             }
             else            //Einloggen der Antworten
             {
+                tmr_Frage.Stop();
+
                 Fragenauswertung();
                 Next_was_pressed = true;
                 if (current_Q == Fragenkatalog.Length)
@@ -352,6 +368,7 @@ namespace WindowsFormsApp3
                     Next.Text = "Fragen auswerten";
                 }
                 current_Q++;
+
                 timer1.Interval = 4000;
                 timer1.Start();
             }
@@ -411,6 +428,7 @@ namespace WindowsFormsApp3
             Next.Enabled = true;
             Start.Text = "Reset";
 
+            tmr_Frage.Start();
         }
 
         void Reset()
@@ -431,7 +449,8 @@ namespace WindowsFormsApp3
             TextBox_Auswertung.Text = "";
             Next.Text = "Next";
 
-            Btn_Fragen_wiederholen.Visible = false;  
+            Btn_Fragen_wiederholen.Visible = false;
+            Zeit_pro_Frage = 0;
         }
 
         void Disable_Ans_Buttons()
@@ -445,22 +464,20 @@ namespace WindowsFormsApp3
         
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
-                if (current_Q > Fragenkatalog.Length)
-                {
-                    timer1.Stop();
-                    Endauswertung_Prozent();    
-                }
-                else
-                {
-                    Hintergrundfarbe("Clear");
-                    write_Question();
-                    write_Answers();
-                    Next_was_pressed = false;
-                }
-                timer1.Stop();
-            
-            
+            timer1.Stop();
+            if (current_Q > Fragenkatalog.Length)
+            {
+                Endauswertung_Prozent();    
+            }
+            else
+            {
+                Hintergrundfarbe("Clear");
+                write_Question();
+                write_Answers();
+                Next_was_pressed = false;
+                tmr_Frage.Start();
+            }
+                
         }
 
         private void Btn_Fragen_wiederholen_Click(object sender, EventArgs e)
@@ -492,23 +509,24 @@ namespace WindowsFormsApp3
                 given_answer_ID = Int32.Parse(Temp[2]) - 1;
                 if (given_answer_ID == Array.IndexOf(Zufallsantworten, 0))
                 {
-                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "1";
+                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "11";
                     TextBox_Auswertung.BackColor = Color.Green;
                 }
                 else
                 {
-                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "0";
-                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][1] = given_answer_ID.ToString();
+                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = Zufallsantworten[given_answer_ID].ToString();
                     TextBox_Auswertung.BackColor = Color.Red;
                 }
             }
             else
             {
-                Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "0";
-                Fragenkatalog[Zufallsfragen[current_Q - 1]][2][1] = "4";
+                Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "4";
                 TextBox_Auswertung.BackColor = Color.Red;
             }
             given_Answer = "";
+
+            Fragenkatalog[Zufallsfragen[current_Q - 1]][2][1] = (Zeit_pro_Frage / 10).ToString("0.0");
+            Zeit_pro_Frage = 0;
 
             for (int i = 0; i < 4; i++)
             {
@@ -516,6 +534,7 @@ namespace WindowsFormsApp3
                 answers[i].ForeColor = Color.White;
             }
             answers[Array.IndexOf(Zufallsantworten, 0)].BackColor = Color.Green;
+
         }
 
         void Endauswertung_Prozent()
@@ -530,7 +549,7 @@ namespace WindowsFormsApp3
                     switch (val)
                     {
                         case "Auswertung":
-                            Auswertung.return_Fragenkatalog = Fragenkatalog;
+                            //Auswertung.return_Fragenkatalog = Fragenkatalog;
 
                             this.Visible = false;
                             Auswertung Auswertung_Dialog = new Auswertung();
@@ -561,7 +580,7 @@ namespace WindowsFormsApp3
 
             for (int i = 0;i<Fragenkatalog.Length;i++)
             {
-                if(Fragenkatalog[i][2][0] == "0")
+                if(Fragenkatalog[i][2][0] != "11")
                 {
                     Anzahl_falsche_Fragen++;
                 }
@@ -572,7 +591,7 @@ namespace WindowsFormsApp3
 
                 for (int i = 0; i < Fragenkatalog.Length; i++)
                 {
-                    if (Fragenkatalog[i][2][0] == "0")
+                    if (Fragenkatalog[i][2][0] != "11")
                     {
                         Fragenkatalog_neu[j] = new string[3][];
                         Fragenkatalog_neu[j][0] = new string[3];
@@ -602,6 +621,11 @@ namespace WindowsFormsApp3
             Start_Sequenz();
         }
 
+        private void tmr_Frage_Tick(object sender, EventArgs e)
+        {
+            Zeit_pro_Frage++;
+        }
+
         int[] Zufallszahlen_generieren(int how_many_numbers)
         {
             int[] Zufallszahlen = new int[how_many_numbers];
@@ -616,23 +640,28 @@ namespace WindowsFormsApp3
         }
 
         void Fragenkatalog_OV()
-        {      
-            Fragenkatalog = new string[Eingelesene_Fragen.Tables[0].Rows.Count][][];
-            for (int i = 0; i < Eingelesene_Fragen.Tables[0].Rows.Count; i++)
+        {
+            DataTable dt = new DataTable();
+            dt = Eingelesene_Fragen.Tables[0];
+            dt.DefaultView.Sort = "Nummer ASC";
+            dt = dt.DefaultView.ToTable();
+
+
+            Fragenkatalog = new string[dt.Rows.Count][][];
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Fragenkatalog[i] = new string[3][];
                 Fragenkatalog[i][0] = new string[3];
                 Fragenkatalog[i][1] = new string[4];
                 Fragenkatalog[i][2] = new string[2];
 
-
-                Fragenkatalog[i][0][0] = Eingelesene_Fragen.Tables[0].Rows[i]["Themengebiet"].ToString();
-                Fragenkatalog[i][0][1] = Eingelesene_Fragen.Tables[0].Rows[i]["Frage"].ToString();
-                Fragenkatalog[i][0][2] = Eingelesene_Fragen.Tables[0].Rows[i]["Nummer"].ToString();
-                Fragenkatalog[i][1][0] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort1"].ToString();
-                Fragenkatalog[i][1][1] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort2"].ToString();
-                Fragenkatalog[i][1][2] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort3"].ToString();
-                Fragenkatalog[i][1][3] = Eingelesene_Fragen.Tables[0].Rows[i]["Antwort4"].ToString();
+                Fragenkatalog[i][0][0] = dt.Rows[i]["Themengebiet"].ToString();
+                Fragenkatalog[i][0][1] = dt.Rows[i]["Frage"].ToString();
+                Fragenkatalog[i][0][2] = dt.Rows[i]["Nummer"].ToString();
+                Fragenkatalog[i][1][0] = dt.Rows[i]["Antwort1"].ToString();
+                Fragenkatalog[i][1][1] = dt.Rows[i]["Antwort2"].ToString();
+                Fragenkatalog[i][1][2] = dt.Rows[i]["Antwort3"].ToString();
+                Fragenkatalog[i][1][3] = dt.Rows[i]["Antwort4"].ToString();
             }
         }    
        

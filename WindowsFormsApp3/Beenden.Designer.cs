@@ -84,6 +84,7 @@
             this.Controls.Add(this.btn_Auswertung);
             this.Controls.Add(this.Btn_CloseProgramm);
             this.Name = "Beenden";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Beenden";
             this.Load += new System.EventHandler(this.Auswertung_Load);
             this.ResumeLayout(false);
