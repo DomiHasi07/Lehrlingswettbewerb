@@ -623,6 +623,11 @@ namespace WindowsFormsApp3
             Zeit_pro_Frage++;
         }
 
+        private void richAufgaben_Gebiet_Click(object sender, EventArgs e)
+        {
+
+        }
+
         int[] Zufallszahlen_generieren(int how_many_numbers)
         {
             int[] Zufallszahlen = new int[how_many_numbers];
