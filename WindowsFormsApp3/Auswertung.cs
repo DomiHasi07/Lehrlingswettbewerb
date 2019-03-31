@@ -25,17 +25,17 @@ namespace WindowsFormsApp3
 
         bool Btn_Prozentwechsler_was_pressed = false;
         public static string[][][] Fragen;
-                                                                                                                                    /*
-                                                                                                                                     * Fragen[i][0][0] = Kat ausgeschrieben
-                                                                                                                                     * Fragen[i][0][1] = Frage
-                                                                                                                                     * Fragen[i][0][2] = Fragennummer
-                                                                                                                                     * Fragen[i][1][0] = richtige Antwort
-                                                                                                                                     * Fragen[i][1][1] = 2. Antwort
-                                                                                                                                     * Fragen[i][1][2] = 3. Antwort
-                                                                                                                                     * Fragen[i][1][3] = 4. Antwort
-                                                                                                                                     * Fragen[i][2][0] = gegebene Antwort
-                                                                                                                                     * Fragen[i][2][1] = Zeit pro Frage
-                                                                                                                                     */
+        /*
+         * Fragen[i][0][0] = Kat ausgeschrieben
+         * Fragen[i][0][1] = Frage
+         * Fragen[i][0][2] = Fragennummer
+         * Fragen[i][1][0] = richtige Antwort
+         * Fragen[i][1][1] = 2. Antwort
+         * Fragen[i][1][2] = 3. Antwort
+         * Fragen[i][1][3] = 4. Antwort
+         * Fragen[i][2][0] = gegebene Antwort
+         * Fragen[i][2][1] = Zeit pro Frage
+         */
         string[][] Kat_Arr;
         int richtige_Antworten, falsche_Antworten, Anzahl_Fragen, Anzahl_Kat;
         double Prozent_richtige_Antworten, Prozent_falsche_Antworten;
@@ -232,11 +232,6 @@ namespace WindowsFormsApp3
             rich_Fragen.DeselectAll();
         }
 
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void neue_Zeile(int Anzahl)
         {
             for (int i = 0; i < Anzahl; i++)
@@ -280,13 +275,13 @@ namespace WindowsFormsApp3
         {
             string temp_Kat = "";
             string[][] temp_Arr = new string[x][];
-                                                                                                                /*
-                                                                                                                 * temp_Arr[i][0] = Kat Kürzel
-                                                                                                                 * temp_Arr[i][1] = Kat_Ausgeschrieben
-                                                                                                                 * temp_Arr[i][2] = wieviele Fragen die Kat hat
-                                                                                                                 * temp_Arr[i][3] = wieviele Fragen richtig beantwortet worden sind
-                                                                                                                 * temp_Arr[i][4] = wieviele Fragen falsch beantwortet worden sind
-                                                                                                                 */
+            /*
+             * temp_Arr[i][0] = Kat Kürzel
+             * temp_Arr[i][1] = Kat_Ausgeschrieben
+             * temp_Arr[i][2] = wieviele Fragen die Kat hat
+             * temp_Arr[i][3] = wieviele Fragen richtig beantwortet worden sind
+             * temp_Arr[i][4] = wieviele Fragen falsch beantwortet worden sind
+             */
             int j = 0, temp_Anz = 0, richtige_Fragen = 0;
 
 
