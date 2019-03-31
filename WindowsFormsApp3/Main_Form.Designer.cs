@@ -213,7 +213,6 @@
             this.richAufgaben_Gebiet.Size = new System.Drawing.Size(276, 48);
             this.richAufgaben_Gebiet.TabIndex = 43;
             this.richAufgaben_Gebiet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.richAufgaben_Gebiet.Click += new System.EventHandler(this.richAufgaben_Gebiet_Click);
             // 
             // label1
             // 

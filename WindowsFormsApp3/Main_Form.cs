@@ -37,7 +37,7 @@ namespace WindowsFormsApp3
 
             //Test
 
-            Eingelesene_Fragen.ReadXml(@"C:\Users\DomiHasi\Documents\Arbeit\Visual Studio\XML_Dateien\Test1.xml");
+            Eingelesene_Fragen.ReadXml(@"C:\Users\DomiH\Google Drive\Arbeit\Visual_Studio\XML_Dateien\Test1.xml");
 
             Fragenkatalog_OV();
 
@@ -621,11 +621,6 @@ namespace WindowsFormsApp3
         private void tmr_Frage_Tick(object sender, EventArgs e)
         {
             Zeit_pro_Frage++;
-        }
-
-        private void richAufgaben_Gebiet_Click(object sender, EventArgs e)
-        {
-
         }
 
         int[] Zufallszahlen_generieren(int how_many_numbers)
