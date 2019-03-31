@@ -7,7 +7,7 @@
     <ProjectGuid>{FA9A1E8B-7D31-436A-8C92-7E8429DAF2BC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WindowsFormsApp3</RootNamespace>
-    <AssemblyName>WindowsFormsApp3</AssemblyName>
+    <AssemblyName>Fragebogen</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -66,6 +66,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Start_Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Start_Screen.Designer.cs">
+      <DependentUpon>Start_Screen.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Auswertung.resx">
       <DependentUpon>Auswertung.cs</DependentUpon>
     </EmbeddedResource>
@@ -83,6 +89,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -96,6 +103,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="minussign_87504 - Kopiddfe.jpg" />
+    <Content Include="pluszeichen_318-32580.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

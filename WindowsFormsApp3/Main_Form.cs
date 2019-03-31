@@ -35,7 +35,9 @@ namespace WindowsFormsApp3
         {
             InitializeComponent();
 
-            Eingelesene_Fragen.ReadXml(@"C:\Users\DomiH\Google Drive\Arbeit\Visual_Studio\XML_Dateien\Test1.xml");
+            //Test
+
+            Eingelesene_Fragen.ReadXml(@"C:\Users\DomiHasi\Documents\Arbeit\Visual Studio\XML_Dateien\Test1.xml");
 
             Fragenkatalog_OV();
 
@@ -58,11 +60,6 @@ namespace WindowsFormsApp3
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Resize += Test_Resize;
-           /* lbl_Question.TextChanged += Lbl_Question_TextChanged;
-            Btn_Answer1.TextChanged += Btn_Answer1_TextChanged;
-            Btn_Answer2.TextChanged += Btn_Answer2_TextChanged;
-            Btn_Answer3.TextChanged += Btn_Answer3_TextChanged;
-            Btn_Answer4.TextChanged += Btn_Answer4_TextChanged;*/
         }
 
        /* private void Btn_Answer1_TextChanged(object sender, EventArgs e)
