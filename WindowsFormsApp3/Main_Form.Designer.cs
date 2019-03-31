@@ -34,7 +34,7 @@
             this.Start = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Btn_Fragen_wiederholen = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbl_1 = new System.Windows.Forms.TableLayoutPanel();
             this.Btn_Answer_4 = new System.Windows.Forms.Button();
             this.Btn_Answer_1 = new System.Windows.Forms.Button();
             this.Btn_Answer_3 = new System.Windows.Forms.Button();
@@ -44,7 +44,7 @@
             this.richAufgaben_Gebiet = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tmr_Frage = new System.Windows.Forms.Timer(this.components);
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tbl_1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,27 +99,27 @@
             this.Btn_Fragen_wiederholen.Visible = false;
             this.Btn_Fragen_wiederholen.Click += new System.EventHandler(this.Btn_Fragen_wiederholen_Click);
             // 
-            // tableLayoutPanel1
+            // tbl_1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tbl_1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.Btn_Answer_4, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.Btn_Answer_1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.Btn_Answer_3, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.Btn_Answer_2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lbl_Question, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 112);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(709, 155);
-            this.tableLayoutPanel1.TabIndex = 41;
+            this.tbl_1.ColumnCount = 2;
+            this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_1.Controls.Add(this.Btn_Answer_4, 2, 2);
+            this.tbl_1.Controls.Add(this.Btn_Answer_1, 0, 1);
+            this.tbl_1.Controls.Add(this.Btn_Answer_3, 1, 1);
+            this.tbl_1.Controls.Add(this.Btn_Answer_2, 0, 2);
+            this.tbl_1.Controls.Add(this.lbl_Question, 0, 0);
+            this.tbl_1.Location = new System.Drawing.Point(10, 112);
+            this.tbl_1.Name = "tbl_1";
+            this.tbl_1.RowCount = 3;
+            this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_1.Size = new System.Drawing.Size(709, 155);
+            this.tbl_1.TabIndex = 41;
             // 
             // Btn_Answer_4
             // 
@@ -172,7 +172,7 @@
             // lbl_Question
             // 
             this.lbl_Question.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.lbl_Question, 2);
+            this.tbl_1.SetColumnSpan(this.lbl_Question, 2);
             this.lbl_Question.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Question.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Question.Location = new System.Drawing.Point(3, 0);
@@ -213,6 +213,7 @@
             this.richAufgaben_Gebiet.Size = new System.Drawing.Size(276, 48);
             this.richAufgaben_Gebiet.TabIndex = 43;
             this.richAufgaben_Gebiet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.richAufgaben_Gebiet.Click += new System.EventHandler(this.richAufgaben_Gebiet_Click);
             // 
             // label1
             // 
@@ -232,15 +233,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(731, 279);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tbl_1);
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(746, 318);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Quiz";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tbl_1.ResumeLayout(false);
+            this.tbl_1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
@@ -255,7 +256,7 @@
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button Btn_Fragen_wiederholen;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tbl_1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Btn_Answer_1;

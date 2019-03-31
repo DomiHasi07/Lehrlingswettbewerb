@@ -40,22 +40,19 @@
             this.rich_Fragen = new System.Windows.Forms.RichTextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.Btn_Kat = new System.Windows.Forms.Button();
             this.chart_Kat = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.Splt_Main_Panel = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Fragenauswertung)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Kat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Splt_Main_Panel)).BeginInit();
+            this.Splt_Main_Panel.Panel1.SuspendLayout();
+            this.Splt_Main_Panel.Panel2.SuspendLayout();
+            this.Splt_Main_Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart_Fragenauswertung
@@ -95,7 +92,7 @@
             this.rich_Fragen.Location = new System.Drawing.Point(0, 0);
             this.rich_Fragen.Name = "rich_Fragen";
             this.rich_Fragen.ReadOnly = true;
-            this.rich_Fragen.Size = new System.Drawing.Size(871, 713);
+            this.rich_Fragen.Size = new System.Drawing.Size(870, 713);
             this.rich_Fragen.TabIndex = 0;
             this.rich_Fragen.Text = "";
             // 
@@ -112,13 +109,15 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel2);
+            this.splitContainer2.Panel2.Controls.Add(this.chart_Kat);
             this.splitContainer2.Size = new System.Drawing.Size(437, 713);
             this.splitContainer2.SplitterDistance = 356;
+            this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 4;
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.chart_Fragenauswertung, 0, 0);
@@ -132,31 +131,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(437, 356);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.Btn_Kat, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.chart_Kat, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(437, 353);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // Btn_Kat
-            // 
-            this.Btn_Kat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Kat.Location = new System.Drawing.Point(3, 326);
-            this.Btn_Kat.Name = "Btn_Kat";
-            this.Btn_Kat.Size = new System.Drawing.Size(431, 24);
-            this.Btn_Kat.TabIndex = 2;
-            this.Btn_Kat.Text = "Falsche/Richtige Antworten";
-            this.Btn_Kat.UseVisualStyleBackColor = true;
-            // 
             // chart_Kat
             // 
             chartArea2.Name = "ChartArea1";
@@ -164,7 +138,7 @@
             this.chart_Kat.Dock = System.Windows.Forms.DockStyle.Fill;
             legend2.Name = "Legend1";
             this.chart_Kat.Legends.Add(legend2);
-            this.chart_Kat.Location = new System.Drawing.Point(3, 3);
+            this.chart_Kat.Location = new System.Drawing.Point(0, 0);
             this.chart_Kat.Name = "chart_Kat";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
@@ -175,38 +149,40 @@
             series3.Name = "falsch";
             this.chart_Kat.Series.Add(series2);
             this.chart_Kat.Series.Add(series3);
-            this.chart_Kat.Size = new System.Drawing.Size(431, 317);
+            this.chart_Kat.Size = new System.Drawing.Size(437, 352);
             this.chart_Kat.TabIndex = 3;
             this.chart_Kat.Text = "chart1";
             // 
-            // splitContainer3
+            // Splt_Main_Panel
             // 
-            this.splitContainer3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Splt_Main_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer3.Location = new System.Drawing.Point(12, 12);
-            this.splitContainer3.Name = "splitContainer3";
+            this.Splt_Main_Panel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Splt_Main_Panel.Location = new System.Drawing.Point(12, 12);
+            this.Splt_Main_Panel.Name = "Splt_Main_Panel";
             // 
-            // splitContainer3.Panel1
+            // Splt_Main_Panel.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.splitContainer2);
+            this.Splt_Main_Panel.Panel1.Controls.Add(this.splitContainer2);
             // 
-            // splitContainer3.Panel2
+            // Splt_Main_Panel.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.rich_Fragen);
-            this.splitContainer3.Size = new System.Drawing.Size(1312, 713);
-            this.splitContainer3.SplitterDistance = 437;
-            this.splitContainer3.TabIndex = 5;
+            this.Splt_Main_Panel.Panel2.Controls.Add(this.rich_Fragen);
+            this.Splt_Main_Panel.Size = new System.Drawing.Size(1312, 713);
+            this.Splt_Main_Panel.SplitterDistance = 437;
+            this.Splt_Main_Panel.SplitterWidth = 5;
+            this.Splt_Main_Panel.TabIndex = 5;
             // 
             // Auswertung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1336, 737);
-            this.Controls.Add(this.splitContainer3);
+            this.Controls.Add(this.Splt_Main_Panel);
             this.Name = "Auswertung";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ric";
+            this.Text = "Auswertung";
             this.Load += new System.EventHandler(this.Auswertung_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart_Fragenauswertung)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -214,12 +190,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart_Kat)).EndInit();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
+            this.Splt_Main_Panel.Panel1.ResumeLayout(false);
+            this.Splt_Main_Panel.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Splt_Main_Panel)).EndInit();
+            this.Splt_Main_Panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -230,10 +205,8 @@
         private System.Windows.Forms.Button Btn_Prozent;
         private System.Windows.Forms.RichTextBox rich_Fragen;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.SplitContainer Splt_Main_Panel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button Btn_Kat;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_Kat;
     }
 }

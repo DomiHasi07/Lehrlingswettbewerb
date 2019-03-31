@@ -35,6 +35,8 @@ namespace WindowsFormsApp3
         {
             InitializeComponent();
 
+            //Test
+
             Eingelesene_Fragen.ReadXml(@"C:\Users\DomiHasi\Documents\Arbeit\Visual Studio\XML_Dateien\Test1.xml");
 
             Fragenkatalog_OV();
@@ -58,11 +60,6 @@ namespace WindowsFormsApp3
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Resize += Test_Resize;
-           /* lbl_Question.TextChanged += Lbl_Question_TextChanged;
-            Btn_Answer1.TextChanged += Btn_Answer1_TextChanged;
-            Btn_Answer2.TextChanged += Btn_Answer2_TextChanged;
-            Btn_Answer3.TextChanged += Btn_Answer3_TextChanged;
-            Btn_Answer4.TextChanged += Btn_Answer4_TextChanged;*/
         }
 
        /* private void Btn_Answer1_TextChanged(object sender, EventArgs e)
@@ -624,6 +621,11 @@ namespace WindowsFormsApp3
         private void tmr_Frage_Tick(object sender, EventArgs e)
         {
             Zeit_pro_Frage++;
+        }
+
+        private void richAufgaben_Gebiet_Click(object sender, EventArgs e)
+        {
+
         }
 
         int[] Zufallszahlen_generieren(int how_many_numbers)
