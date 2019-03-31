@@ -48,7 +48,7 @@ namespace WindowsFormsApp3
 
             for(int i = 0;i < Fragen.Length; i++)
             {
-                if(Fragen[i][2][0] == "11")
+                if(Fragen[i][2][0] == "right")
                 {
                     richtige_Antworten++;
                 }
@@ -89,9 +89,9 @@ namespace WindowsFormsApp3
                 string temp_Antwort = "";
                 Color temp_Color;
 
-                if (Fragen[i][2][0] != "11")
+                if (Fragen[i][2][0] != "right")
                 {     
-                    if (Fragen[i][2][0] != "4")
+                    if (Fragen[i][2][0] != "skipped")
                     {
                         temp_Antwort = Fragen[i][1][Int32.Parse(Fragen[i][2][0])];
                     }
@@ -310,7 +310,7 @@ namespace WindowsFormsApp3
                     j++;
                 }
                 temp_Anz++;
-                if(Fragen[i][2][0]=="11")
+                if(Fragen[i][2][0]=="right")
                 {
                     richtige_Fragen++;
                 }

@@ -28,8 +28,14 @@ namespace WindowsFormsApp3
 
         bool Start_was_pressed = false;
         bool Next_was_pressed = false;
+        bool skip_question_mode = false;
+        bool Ende = false;
+
+        bool skip_enabled;
 
         public static string[][][] Fragenkatalog;
+        string[][][] answered_Qestions;
+        
 
         public Main()
         {
@@ -37,7 +43,8 @@ namespace WindowsFormsApp3
 
             //Test
 
-            Eingelesene_Fragen.ReadXml(@"C:\Users\DomiH\Google Drive\Arbeit\Visual_Studio\XML_Dateien\Test1.xml");
+            Eingelesene_Fragen.ReadXml(Start_Screen.filepath);
+            skip_enabled = Start_Screen.cb1_status;
 
             Fragenkatalog_OV();
 
@@ -341,9 +348,81 @@ namespace WindowsFormsApp3
                 timer1.Stop();
                 tmr_Frage.Start();
 
-                if (current_Q > Fragenkatalog.Length)
+                if (current_Q > Fragenkatalog.Length || Ende == true)
                 {
-                    Endauswertung_Prozent();
+                    if(skip_enabled)
+                    {
+                        string[][][] skipped_Questions;
+                        int j = 0;
+                        int x = 0;
+                        int y = 0;
+                        for (int i = 0; i < Fragenkatalog.Length; i++)
+                        {
+                            if (Fragenkatalog[i][2][0] != "skipped")
+                                j++;
+                        }
+
+                        skipped_Questions = new string[Fragenkatalog.Length - j][][];
+                        for (int i = 0; i < Fragenkatalog.Length; i++)
+                        {
+                            if (Fragenkatalog[i][2][0] == "skipped")
+                            {
+                                skipped_Questions[y] = Fragenkatalog[i];
+                                y++;
+                            }
+                        }
+                        if (skip_question_mode == false)
+                        {
+                            answered_Qestions = new string[j][][];
+
+                            for (int i = 0; i < Fragenkatalog.Length; i++)
+                            {
+                                if (Fragenkatalog[i][2][0] != "skipped")
+                                {
+                                    answered_Qestions[x] = Fragenkatalog[i];
+                                    x++;
+                                }
+                            }
+                            skip_question_mode = true;
+                        }
+                        else
+                        {
+                            string[][][] temp = new string[j + answered_Qestions.Length][][];
+
+                            for (int i = 0; i < answered_Qestions.Length; i++)
+                            {
+                                temp[x] = answered_Qestions[i];
+                                x++;
+                            }
+                            for (int i = 0; i < Fragenkatalog.Length; i++)
+                            {
+                                if (Fragenkatalog[i][2][0] != "skipped")
+                                {
+                                    temp[x] = Fragenkatalog[i];
+                                    x++;
+                                }
+                            }
+                            answered_Qestions = temp;
+                        }
+
+                        if (skipped_Questions.Length > 0)
+                        {
+                            Fragenkatalog = skipped_Questions;
+                            Reset();
+                            Start_Sequenz();
+                        }
+                        else
+                        {
+                            Fragenkatalog = answered_Qestions;
+                            skip_question_mode = false;
+                            Ende = true;
+                            Endauswertung_Prozent();
+                        }
+                    }
+                    else
+                    {
+                        Endauswertung_Prozent();
+                    }
                 }
                 else
                 {
@@ -352,6 +431,7 @@ namespace WindowsFormsApp3
                     write_Answers();
                     Next_was_pressed = false;
                 }
+
                 
             }
             else            //Einloggen der Antworten
@@ -360,12 +440,28 @@ namespace WindowsFormsApp3
 
                 Fragenauswertung();
                 Next_was_pressed = true;
-                if (current_Q == Fragenkatalog.Length)
-                {
-                    Next.Text = "Fragen auswerten";
-                }
                 current_Q++;
-
+                if (current_Q-1 >= Fragenkatalog.Length)
+                {
+                    if (skip_enabled)
+                    {
+                        int j = 0;
+                        for (int i = 0; i < Fragenkatalog.Length; i++)
+                        {
+                            if (Fragenkatalog[i][2][0] == "skipped")
+                                j++;
+                        }
+                        if (j == 0)
+                        {
+                            Next.Text = "Fragen auswerten";
+                        }
+                    }
+                    else
+                    {
+                        Next.Text = "Fragen auswerten";
+                    }
+                }
+                
                 timer1.Interval = 4000;
                 timer1.Start();
             }
@@ -436,6 +532,7 @@ namespace WindowsFormsApp3
 
             Next.Enabled = false;
             Next_was_pressed = false;
+            Ende = false;
             Hintergrundfarbe("Clear");
             given_Answer = "";
             current_Q = 1;
@@ -448,6 +545,7 @@ namespace WindowsFormsApp3
 
             Btn_Fragen_wiederholen.Visible = false;
             Zeit_pro_Frage = 0;
+            
         }
 
         void Disable_Ans_Buttons()
@@ -506,7 +604,7 @@ namespace WindowsFormsApp3
                 given_answer_ID = Int32.Parse(Temp[2]) - 1;
                 if (given_answer_ID == Array.IndexOf(Zufallsantworten, 0))
                 {
-                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "11";
+                    Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "right";
                     TextBox_Auswertung.BackColor = Color.Green;
                 }
                 else
@@ -517,7 +615,7 @@ namespace WindowsFormsApp3
             }
             else
             {
-                Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "4";
+                Fragenkatalog[Zufallsfragen[current_Q - 1]][2][0] = "skipped";
                 TextBox_Auswertung.BackColor = Color.Red;
             }
             given_Answer = "";
@@ -557,7 +655,7 @@ namespace WindowsFormsApp3
                             break;
 
                         case "Beenden":
-                            System.Windows.Forms.Application.Exit();
+                            this.Close();
                             break;
 
                         case "Restart":
@@ -577,7 +675,7 @@ namespace WindowsFormsApp3
 
             for (int i = 0;i<Fragenkatalog.Length;i++)
             {
-                if(Fragenkatalog[i][2][0] != "11")
+                if(Fragenkatalog[i][2][0] != "right")
                 {
                     Anzahl_falsche_Fragen++;
                 }
@@ -588,7 +686,7 @@ namespace WindowsFormsApp3
 
                 for (int i = 0; i < Fragenkatalog.Length; i++)
                 {
-                    if (Fragenkatalog[i][2][0] != "11")
+                    if (Fragenkatalog[i][2][0] != "right")
                     {
                         Fragenkatalog_neu[j] = new string[3][];
                         Fragenkatalog_neu[j][0] = new string[3];
