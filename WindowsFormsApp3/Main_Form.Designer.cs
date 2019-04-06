@@ -32,7 +32,7 @@
             this.TextBox_Auswertung = new System.Windows.Forms.TextBox();
             this.Next = new System.Windows.Forms.Button();
             this.Start = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tmr_Auswertung = new System.Windows.Forms.Timer(this.components);
             this.Btn_Fragen_wiederholen = new System.Windows.Forms.Button();
             this.tbl_1 = new System.Windows.Forms.TableLayoutPanel();
             this.Btn_Answer_4 = new System.Windows.Forms.Button();
@@ -85,7 +85,7 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.tmr_Auswertung.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Btn_Fragen_wiederholen
             // 
@@ -238,7 +238,6 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quiz";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tbl_1.ResumeLayout(false);
             this.tbl_1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -253,7 +252,7 @@
         private System.Windows.Forms.TextBox TextBox_Auswertung;
         private System.Windows.Forms.Button Next;
         private System.Windows.Forms.Button Start;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer tmr_Auswertung;
         private System.Windows.Forms.Button Btn_Fragen_wiederholen;
         private System.Windows.Forms.TableLayoutPanel tbl_1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
