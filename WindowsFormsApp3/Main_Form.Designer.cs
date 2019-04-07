@@ -41,7 +41,7 @@
             this.Btn_Answer_2 = new System.Windows.Forms.Button();
             this.lbl_Question = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.richAufgaben_Gebiet = new System.Windows.Forms.Label();
+            this.lbl_Aufgaben_Gebiet = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tmr_Frage = new System.Windows.Forms.Timer(this.components);
             this.tbl_1.SuspendLayout();
@@ -83,7 +83,7 @@
             this.Start.UseVisualStyleBackColor = true;
             this.Start.Click += new System.EventHandler(this.Start_Click);
             // 
-            // timer1
+            // tmr_Auswertung
             // 
             this.tmr_Auswertung.Tick += new System.EventHandler(this.timer1_Tick);
             // 
@@ -180,7 +180,6 @@
             this.lbl_Question.Size = new System.Drawing.Size(703, 50);
             this.lbl_Question.TabIndex = 46;
             this.lbl_Question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_Question.Click += new System.EventHandler(this.lbl_Question_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -190,7 +189,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.Controls.Add(this.richAufgaben_Gebiet, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lbl_Aufgaben_Gebiet, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.TextBox_Auswertung, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.Btn_Fragen_wiederholen, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.Next, 2, 1);
@@ -203,16 +202,16 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(706, 97);
             this.tableLayoutPanel2.TabIndex = 42;
             // 
-            // richAufgaben_Gebiet
+            // lbl_Aufgaben_Gebiet
             // 
-            this.richAufgaben_Gebiet.AutoSize = true;
-            this.richAufgaben_Gebiet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richAufgaben_Gebiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richAufgaben_Gebiet.Location = new System.Drawing.Point(214, 0);
-            this.richAufgaben_Gebiet.Name = "richAufgaben_Gebiet";
-            this.richAufgaben_Gebiet.Size = new System.Drawing.Size(276, 48);
-            this.richAufgaben_Gebiet.TabIndex = 43;
-            this.richAufgaben_Gebiet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Aufgaben_Gebiet.AutoSize = true;
+            this.lbl_Aufgaben_Gebiet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_Aufgaben_Gebiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Aufgaben_Gebiet.Location = new System.Drawing.Point(214, 0);
+            this.lbl_Aufgaben_Gebiet.Name = "lbl_Aufgaben_Gebiet";
+            this.lbl_Aufgaben_Gebiet.Size = new System.Drawing.Size(276, 48);
+            this.lbl_Aufgaben_Gebiet.TabIndex = 43;
+            this.lbl_Aufgaben_Gebiet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -261,7 +260,7 @@
         private System.Windows.Forms.Button Btn_Answer_2;
         private System.Windows.Forms.Button Btn_Answer_3;
         private System.Windows.Forms.Button Btn_Answer_4;
-        private System.Windows.Forms.Label richAufgaben_Gebiet;
+        private System.Windows.Forms.Label lbl_Aufgaben_Gebiet;
         private System.Windows.Forms.Label lbl_Question;
         private System.Windows.Forms.Timer tmr_Frage;
     }

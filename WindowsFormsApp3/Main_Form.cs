@@ -304,17 +304,6 @@ namespace WindowsFormsApp3
             }
         }
 
-        private void RichBox_Leave(object sender, EventArgs e)
-        {
-            Cursor = Cursors.Default;
-        }
-
-        private void RichBox_Enter(object sender, EventArgs e)
-        {
-            label1.Focus();
-            Cursor = Cursors.Arrow;
-        }
-
         private void Start_Click(object sender, EventArgs e)
         {
             if (!Start_was_pressed)
@@ -336,14 +325,13 @@ namespace WindowsFormsApp3
             if (Next_was_pressed)   //nächste Frage anzeigen
             {
                 tmr_Auswertung.Stop();
-                tmr_Frage.Start();
-
-
+                
                 if (current_Q > Fragenkatalog.Length || Ende == true)
                 {
                     if(skip_enabled)
                     {
                         skip_mode();
+                        tmr_Frage.Start();
                     }
                     else
                     {
@@ -356,6 +344,7 @@ namespace WindowsFormsApp3
                     write_Question();
                     write_Answers();
                     Next_was_pressed = false;
+                    tmr_Frage.Start();
                 }
 
                 
@@ -365,7 +354,7 @@ namespace WindowsFormsApp3
                 tmr_Frage.Stop();
                 if (Fragenauswertung())
                 {
-                    if (current_Q - 1 >= Fragenkatalog.Length)
+                    if (current_Q >= Fragenkatalog.Length)
                     {
                         if (skip_enabled)
                         {
@@ -394,14 +383,13 @@ namespace WindowsFormsApp3
                 {
                     current_Q++;
                     tmr_Auswertung.Stop();
-                    tmr_Frage.Start();
-
 
                     if (current_Q > Fragenkatalog.Length || Ende == true)
                     {
                         if (skip_enabled)
                         {
                             skip_mode();
+                            tmr_Frage.Start();
                         }
                         else
                         {
@@ -414,6 +402,7 @@ namespace WindowsFormsApp3
                         write_Question();
                         write_Answers();
                         Next_was_pressed = false;
+                        tmr_Frage.Start();
                     }
                 }
             }
@@ -433,7 +422,7 @@ namespace WindowsFormsApp3
         
         void write_Question()
         {
-            richAufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][0] +" "+ Fragenkatalog[Zufallsfragen[current_Q-1]][0][2] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
+            lbl_Aufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][0] +" "+ Fragenkatalog[Zufallsfragen[current_Q-1]][0][2] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
             lbl_Question.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][1];
             right_Answer = Fragenkatalog[Zufallsfragen[current_Q-1]][1][0];
         }
@@ -452,7 +441,7 @@ namespace WindowsFormsApp3
             
         }
 
-        void Disable_and_delete_Ans_Buttons()
+        void Disable_and_clear_Ans_Buttons()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -478,9 +467,9 @@ namespace WindowsFormsApp3
 
         void Reset()
         {
-            richAufgaben_Gebiet.Text = "";
+            lbl_Aufgaben_Gebiet.Text = "";
             lbl_Question.Text = "";
-            Disable_and_delete_Ans_Buttons();
+            Disable_and_clear_Ans_Buttons();
 
             Next.Enabled = false;
             Next_was_pressed = false;
@@ -512,9 +501,17 @@ namespace WindowsFormsApp3
         private void timer1_Tick(object sender, EventArgs e)
         {
             tmr_Auswertung.Stop();
-            if (current_Q > Fragenkatalog.Length)
+            if (current_Q > Fragenkatalog.Length || Ende == true)
             {
-                Endauswertung_Prozent();    
+                if (skip_enabled)
+                {
+                    skip_mode();
+                    tmr_Frage.Start();
+                }
+                else
+                {
+                    Endauswertung_Prozent();
+                }
             }
             else
             {
@@ -539,11 +536,6 @@ namespace WindowsFormsApp3
                 answers[i].Enabled = true;
                 answers[i].ForeColor = Color.Black;
             }
-        }
-
-        private void lbl_Question_Click(object sender, EventArgs e)
-        {
-            
         }
 
         bool Fragenauswertung()
@@ -680,9 +672,11 @@ namespace WindowsFormsApp3
         void skip_mode()
         {
             string[][][] skipped_Questions;
+
             int j = 0;
             int x = 0;
             int y = 0;
+
             for (int i = 0; i < Fragenkatalog.Length; i++)
             {
                 if (Fragenkatalog[i][2][0] != "skipped")
@@ -698,6 +692,7 @@ namespace WindowsFormsApp3
                     y++;
                 }
             }
+
             if (skip_question_mode == false)
             {
                 answered_Qestions = new string[j][][];
@@ -721,6 +716,7 @@ namespace WindowsFormsApp3
                     temp[x] = answered_Qestions[i];
                     x++;
                 }
+
                 for (int i = 0; i < Fragenkatalog.Length; i++)
                 {
                     if (Fragenkatalog[i][2][0] != "skipped")

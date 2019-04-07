@@ -38,9 +38,9 @@
             this.cb1.AutoSize = true;
             this.cb1.Location = new System.Drawing.Point(12, 41);
             this.cb1.Name = "cb1";
-            this.cb1.Size = new System.Drawing.Size(211, 17);
+            this.cb1.Size = new System.Drawing.Size(200, 17);
             this.cb1.TabIndex = 0;
-            this.cb1.Text = "nicht beanwortete Fragen überspringen";
+            this.cb1.Text = "Fragen können überspringen werden";
             this.cb1.UseVisualStyleBackColor = true;
             // 
             // CmB_1
@@ -74,6 +74,7 @@
             this.Controls.Add(this.CmB_1);
             this.Controls.Add(this.cb1);
             this.Name = "Start_Screen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Start_Screen";
             this.Load += new System.EventHandler(this.Start_Screen_Load);
             this.ResumeLayout(false);
