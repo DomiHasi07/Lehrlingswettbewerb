@@ -601,8 +601,8 @@ namespace WindowsFormsApp3
                             //Auswertung.return_Fragenkatalog = Fragenkatalog;
 
                             this.Visible = false;
-                            Auswertung Auswertung_Dialog = new Auswertung();
-                            Auswertung_Dialog.ShowDialog();
+                            //Auswertung Auswertung_Dialog = new Auswertung();
+                            //Auswertung_Dialog.ShowDialog();
                             this.Visible = true;
 
                             Btn_Fragen_wiederholen.Visible = true;

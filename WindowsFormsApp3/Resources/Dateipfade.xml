@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<Fragenkatalog>
+  <Daten>
+    <Key>1</Key>
+    <Dateipfad>C:\Users\DomiHasi\Source\Repos\Lehrlingswettbewerb\WindowsFormsApp3\Resources\Test1.xml</Dateipfad>
+    <Anzeige>Fragenkatalog Test 1</Anzeige>
+  </Daten>
+  <Daten>
+    <Key>2</Key>
+    <Dateipfad>C:\Users\DomiHasi\Source\Repos\Lehrlingswettbewerb\WindowsFormsApp3\Resources\Test2.xml</Dateipfad>
+    <Anzeige>Fragenkatalog Test 2</Anzeige>
+  </Daten>
+  <Daten>
+    <Key>3</Key>
+    <Dateipfad>C:\Users\DomiHasi\Source\Repos\Lehrlingswettbewerb\WindowsFormsApp3\Resources\Test3.xml</Dateipfad>
+    <Anzeige>Fragenkatalog Test 3</Anzeige>
+  </Daten>
+  <Daten>
+    <Key>4</Key>
+    <Dateipfad>C:\Users\DomiHasi\Source\Repos\Lehrlingswettbewerb\WindowsFormsApp3\Resources\Test4.xml</Dateipfad>
+    <Anzeige>Fragenkatalog Test 4</Anzeige>
+  </Daten>
+</Fragenkatalog>
