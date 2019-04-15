@@ -28,64 +28,107 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cb1 = new System.Windows.Forms.CheckBox();
-            this.CmB_1 = new System.Windows.Forms.ComboBox();
-            this.Btn_Start = new System.Windows.Forms.Button();
+            this.tbl_Buttons = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Btn_1 = new System.Windows.Forms.Button();
+            this.Btn_3 = new System.Windows.Forms.Button();
+            this.Btn_2 = new System.Windows.Forms.Button();
+            this.Btn_4 = new System.Windows.Forms.Button();
+            this.tbl_Buttons.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cb1
+            // tbl_Buttons
             // 
-            this.cb1.AutoSize = true;
-            this.cb1.Location = new System.Drawing.Point(12, 41);
-            this.cb1.Name = "cb1";
-            this.cb1.Size = new System.Drawing.Size(200, 17);
-            this.cb1.TabIndex = 0;
-            this.cb1.Text = "Fragen können überspringen werden";
-            this.cb1.UseVisualStyleBackColor = true;
+            this.tbl_Buttons.ColumnCount = 2;
+            this.tbl_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.Controls.Add(this.textBox1, 0, 0);
+            this.tbl_Buttons.Controls.Add(this.Btn_1, 0, 1);
+            this.tbl_Buttons.Controls.Add(this.Btn_3, 0, 2);
+            this.tbl_Buttons.Controls.Add(this.Btn_2, 1, 1);
+            this.tbl_Buttons.Controls.Add(this.Btn_4, 1, 2);
+            this.tbl_Buttons.Location = new System.Drawing.Point(30, 112);
+            this.tbl_Buttons.Name = "tbl_Buttons";
+            this.tbl_Buttons.RowCount = 3;
+            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.Size = new System.Drawing.Size(250, 165);
+            this.tbl_Buttons.TabIndex = 0;
             // 
-            // CmB_1
+            // textBox1
             // 
-            this.CmB_1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmB_1.FormattingEnabled = true;
-            this.CmB_1.Location = new System.Drawing.Point(12, 10);
-            this.CmB_1.Name = "CmB_1";
-            this.CmB_1.Size = new System.Drawing.Size(292, 21);
-            this.CmB_1.TabIndex = 1;
-            this.CmB_1.SelectedIndexChanged += new System.EventHandler(this.CmB_1_SelectedIndexChanged);
+            this.tbl_Buttons.SetColumnSpan(this.textBox1, 2);
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(3, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(244, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // Btn_Start
+            // Btn_1
             // 
-            this.Btn_Start.BackColor = System.Drawing.SystemColors.Control;
-            this.Btn_Start.Enabled = false;
-            this.Btn_Start.Location = new System.Drawing.Point(229, 37);
-            this.Btn_Start.Name = "Btn_Start";
-            this.Btn_Start.Size = new System.Drawing.Size(75, 23);
-            this.Btn_Start.TabIndex = 2;
-            this.Btn_Start.Text = "Quiz  starten";
-            this.Btn_Start.UseVisualStyleBackColor = false;
-            this.Btn_Start.Click += new System.EventHandler(this.Btn_Start_Click);
+            this.Btn_1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_1.Location = new System.Drawing.Point(3, 33);
+            this.Btn_1.Name = "Btn_1";
+            this.Btn_1.Size = new System.Drawing.Size(119, 61);
+            this.Btn_1.TabIndex = 0;
+            this.Btn_1.Text = "button1";
+            this.Btn_1.UseVisualStyleBackColor = true;
+            // 
+            // Btn_3
+            // 
+            this.Btn_3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_3.Location = new System.Drawing.Point(3, 100);
+            this.Btn_3.Name = "Btn_3";
+            this.Btn_3.Size = new System.Drawing.Size(119, 62);
+            this.Btn_3.TabIndex = 1;
+            this.Btn_3.Text = "button3";
+            this.Btn_3.UseVisualStyleBackColor = true;
+            // 
+            // Btn_2
+            // 
+            this.Btn_2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_2.Location = new System.Drawing.Point(128, 33);
+            this.Btn_2.Name = "Btn_2";
+            this.Btn_2.Size = new System.Drawing.Size(119, 61);
+            this.Btn_2.TabIndex = 1;
+            this.Btn_2.Text = "button2";
+            this.Btn_2.UseVisualStyleBackColor = true;
+            // 
+            // Btn_4
+            // 
+            this.Btn_4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_4.Location = new System.Drawing.Point(128, 100);
+            this.Btn_4.Name = "Btn_4";
+            this.Btn_4.Size = new System.Drawing.Size(119, 62);
+            this.Btn_4.TabIndex = 2;
+            this.Btn_4.Text = "button4";
+            this.Btn_4.UseVisualStyleBackColor = true;
             // 
             // Start_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 75);
-            this.Controls.Add(this.Btn_Start);
-            this.Controls.Add(this.CmB_1);
-            this.Controls.Add(this.cb1);
+            this.ClientSize = new System.Drawing.Size(660, 289);
+            this.Controls.Add(this.tbl_Buttons);
             this.Name = "Start_Screen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Start_Screen";
             this.Load += new System.EventHandler(this.Start_Screen_Load);
+            this.tbl_Buttons.ResumeLayout(false);
+            this.tbl_Buttons.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.CheckBox cb1;
-        private System.Windows.Forms.ComboBox CmB_1;
-        private System.Windows.Forms.Button Btn_Start;
+        private System.Windows.Forms.TableLayoutPanel tbl_Buttons;
+        private System.Windows.Forms.Button Btn_1;
+        private System.Windows.Forms.Button Btn_3;
+        private System.Windows.Forms.Button Btn_2;
+        private System.Windows.Forms.Button Btn_4;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
