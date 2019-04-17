@@ -42,7 +42,7 @@ namespace WindowsFormsApp3
             InitializeComponent();
 
             Eingelesene_Fragen.ReadXml(Start_Screen.filepath);
-            skip_enabled = Start_Screen.cb1_status;
+            skip_enabled = true;
 
             Fragenkatalog_OV();
 
