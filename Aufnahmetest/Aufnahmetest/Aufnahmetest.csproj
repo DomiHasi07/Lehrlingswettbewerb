@@ -112,9 +112,5 @@
   <ItemGroup>
     <Folder Include="System\Windows\Forms\" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Test1.xml" />
-    <Content Include="Test2.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

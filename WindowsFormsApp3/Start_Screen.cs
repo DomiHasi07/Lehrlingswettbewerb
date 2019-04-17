@@ -20,7 +20,7 @@ namespace WindowsFormsApp3
         public Start_Screen()
         {
             InitializeComponent();
-            tempDS.ReadXml(Path.Combine(Directory.GetCurrentDirectory(),"\\Dateipfade.xml")); 
+            tempDS.ReadXml(@"C:\Users\DomiHasi\Source\Repos\Lehrlingswettbewerb\WindowsFormsApp3\Resources\Dateipfade.xml"); 
         }
 
         private void Start_Screen_Load(object sender, EventArgs e)
