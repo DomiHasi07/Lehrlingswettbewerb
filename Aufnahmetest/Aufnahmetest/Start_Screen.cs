@@ -13,9 +13,9 @@ namespace WindowsFormsApp3
 {
     public partial class Start_Screen : Form
     {
-        public static string filepath;
-        string pressed_Button;
+        public static Button pressed_Button;
         bool button_pressed = false;
+        int Themen = 0;
         
         DataSet tempDS = new DataSet();
         Button[] buttons;
@@ -37,7 +37,7 @@ namespace WindowsFormsApp3
         {
             Button_Farbe();
             (sender as Button).BackColor = Color.White;
-            pressed_Button = (sender as Button).Tag.ToString();
+            pressed_Button = (sender as Button);
             button_pressed = true;
             Btn_Start.Enabled = true;
         }
@@ -46,7 +46,8 @@ namespace WindowsFormsApp3
         {
             foreach (Button button in buttons)
             {
-                button.BackColor = SystemColors.ControlLight;
+                if(button.BackColor!= SystemColors.ControlDarkDark)
+                    button.BackColor = SystemColors.ControlLight;
             }
         }
 
@@ -58,7 +59,37 @@ namespace WindowsFormsApp3
             }
             else
             {
-                filepath = Path.Combine(Directory.GetCurrentDirectory(), "\\Test" + pressed_Button + ".xml");
+                if (Themen < 4)
+                {
+                    pressed_Button.Enabled = false;
+                    pressed_Button.BackColor = SystemColors.ControlDarkDark;
+                    Main mainForm = new Main();
+                    this.Hide();
+                    mainForm.ShowDialog();
+                    this.Show();
+                    Themen++;
+                    if (Themen < 3)
+                    {
+                        button_pressed = false;
+                        Btn_Start.Enabled = false;
+                    }
+                    else if (Themen == 3)
+                    {
+                        foreach (Button button in buttons)
+                        {
+                            if (button.Enabled)
+                            {
+                                pressed_Button = button;
+                                button.Focus();
+                            }
+                        }
+                    }
+                    else if (Themen == 4)
+                    {
+                        Btn_Start.Text = "Beenden";
+                        pressed_Button = null;
+                    }
+                }
             }
         }
 

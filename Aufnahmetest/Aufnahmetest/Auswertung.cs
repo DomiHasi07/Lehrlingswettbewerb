@@ -25,17 +25,6 @@ namespace WindowsFormsApp3
 
         bool Btn_Prozentwechsler_was_pressed = false;
         public static string[][][] Fragen;
-                                                                                                                                    /*
-                                                                                                                                     * Fragen[i][0][0] = Kat ausgeschrieben
-                                                                                                                                     * Fragen[i][0][1] = Frage
-                                                                                                                                     * Fragen[i][0][2] = Fragennummer
-                                                                                                                                     * Fragen[i][1][0] = richtige Antwort
-                                                                                                                                     * Fragen[i][1][1] = 2. Antwort
-                                                                                                                                     * Fragen[i][1][2] = 3. Antwort
-                                                                                                                                     * Fragen[i][1][3] = 4. Antwort
-                                                                                                                                     * Fragen[i][2][0] = gegebene Antwort
-                                                                                                                                     * Fragen[i][2][1] = Zeit pro Frage
-                                                                                                                                     */
         string[][] Kat_Arr;
         int richtige_Antworten, falsche_Antworten, Anzahl_Fragen, Anzahl_Kat;
         double Prozent_richtige_Antworten, Prozent_falsche_Antworten;
@@ -219,13 +208,13 @@ namespace WindowsFormsApp3
 
         private void Text_einfärben(string Frage, string Antwort, Color Farbe)
         {
-            int Position = rich_Fragen.Find(Frage,RichTextBoxFinds.MatchCase);
+            int Position = rich_Fragen.Find(Frage,RichTextBoxFinds.WholeWord);
             rich_Fragen.Select(Position, Frage.Length);
             rich_Fragen.SelectionColor = Farbe;
 
             if (Antwort != "")
             {
-                Position = rich_Fragen.Find(Antwort, RichTextBoxFinds.MatchCase);
+                Position = rich_Fragen.Find(Antwort, RichTextBoxFinds.WholeWord);
                 rich_Fragen.Select(Position,Antwort.Length);
                 rich_Fragen.SelectionColor = Farbe;
             }

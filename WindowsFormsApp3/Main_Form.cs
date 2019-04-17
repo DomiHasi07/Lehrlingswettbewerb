@@ -598,7 +598,6 @@ namespace WindowsFormsApp3
                     switch (val)
                     {
                         case "Auswertung":
-                            //Auswertung.return_Fragenkatalog = Fragenkatalog;
 
                             this.Visible = false;
                             Auswertung Auswertung_Dialog = new Auswertung();

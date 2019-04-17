@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.TextBox_Auswertung = new System.Windows.Forms.TextBox();
-            this.Next = new System.Windows.Forms.Button();
-            this.Start = new System.Windows.Forms.Button();
+            this.Btn_Next = new System.Windows.Forms.Button();
+            this.Btn_Start = new System.Windows.Forms.Button();
             this.tmr_Auswertung = new System.Windows.Forms.Timer(this.components);
-            this.Btn_Fragen_wiederholen = new System.Windows.Forms.Button();
+            this.Btn_skip = new System.Windows.Forms.Button();
             this.tbl_1 = new System.Windows.Forms.TableLayoutPanel();
             this.Btn_Answer_4 = new System.Windows.Forms.Button();
             this.Btn_Answer_1 = new System.Windows.Forms.Button();
@@ -60,44 +60,44 @@
             this.TextBox_Auswertung.Size = new System.Drawing.Size(276, 43);
             this.TextBox_Auswertung.TabIndex = 29;
             // 
-            // Next
+            // Btn_Next
             // 
-            this.Next.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Next.Enabled = false;
-            this.Next.Location = new System.Drawing.Point(496, 51);
-            this.Next.Name = "Next";
-            this.Next.Size = new System.Drawing.Size(207, 43);
-            this.Next.TabIndex = 28;
-            this.Next.Text = "Next";
-            this.Next.UseVisualStyleBackColor = true;
-            this.Next.Click += new System.EventHandler(this.Next_Click);
+            this.Btn_Next.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_Next.Enabled = false;
+            this.Btn_Next.Location = new System.Drawing.Point(496, 51);
+            this.Btn_Next.Name = "Btn_Next";
+            this.Btn_Next.Size = new System.Drawing.Size(207, 43);
+            this.Btn_Next.TabIndex = 28;
+            this.Btn_Next.Text = "Next";
+            this.Btn_Next.UseVisualStyleBackColor = true;
+            this.Btn_Next.Click += new System.EventHandler(this.Next_Click);
             // 
-            // Start
+            // Btn_Start
             // 
-            this.Start.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Start.Location = new System.Drawing.Point(3, 51);
-            this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(205, 43);
-            this.Start.TabIndex = 27;
-            this.Start.Text = "Start";
-            this.Start.UseVisualStyleBackColor = true;
-            this.Start.Click += new System.EventHandler(this.Start_Click);
+            this.Btn_Start.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_Start.Location = new System.Drawing.Point(3, 51);
+            this.Btn_Start.Name = "Btn_Start";
+            this.Btn_Start.Size = new System.Drawing.Size(205, 43);
+            this.Btn_Start.TabIndex = 27;
+            this.Btn_Start.Text = "Start";
+            this.Btn_Start.UseVisualStyleBackColor = true;
+            this.Btn_Start.Click += new System.EventHandler(this.Start_Click);
             // 
             // tmr_Auswertung
             // 
             this.tmr_Auswertung.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Btn_Fragen_wiederholen
+            // Btn_skip
             // 
-            this.Btn_Fragen_wiederholen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Fragen_wiederholen.Location = new System.Drawing.Point(496, 3);
-            this.Btn_Fragen_wiederholen.Name = "Btn_Fragen_wiederholen";
-            this.Btn_Fragen_wiederholen.Size = new System.Drawing.Size(207, 42);
-            this.Btn_Fragen_wiederholen.TabIndex = 40;
-            this.Btn_Fragen_wiederholen.Text = "Falsche Fragen wiederholen";
-            this.Btn_Fragen_wiederholen.UseVisualStyleBackColor = true;
-            this.Btn_Fragen_wiederholen.Visible = false;
-            this.Btn_Fragen_wiederholen.Click += new System.EventHandler(this.Btn_Fragen_wiederholen_Click);
+            this.Btn_skip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_skip.Location = new System.Drawing.Point(496, 3);
+            this.Btn_skip.Name = "Btn_skip";
+            this.Btn_skip.Size = new System.Drawing.Size(207, 42);
+            this.Btn_skip.TabIndex = 40;
+            this.Btn_skip.Text = "Falsche Fragen wiederholen";
+            this.Btn_skip.UseVisualStyleBackColor = true;
+            this.Btn_skip.Visible = false;
+            this.Btn_skip.Click += new System.EventHandler(this.Btn_skip_Click);
             // 
             // tbl_1
             // 
@@ -130,6 +130,7 @@
             this.Btn_Answer_4.Name = "Btn_Answer_4";
             this.Btn_Answer_4.Size = new System.Drawing.Size(349, 47);
             this.Btn_Answer_4.TabIndex = 45;
+            this.Btn_Answer_4.Tag = "3";
             this.Btn_Answer_4.UseVisualStyleBackColor = true;
             this.Btn_Answer_4.Click += new System.EventHandler(this.Answer_Button_Click);
             // 
@@ -142,6 +143,7 @@
             this.Btn_Answer_1.Name = "Btn_Answer_1";
             this.Btn_Answer_1.Size = new System.Drawing.Size(348, 46);
             this.Btn_Answer_1.TabIndex = 43;
+            this.Btn_Answer_1.Tag = "0";
             this.Btn_Answer_1.UseVisualStyleBackColor = true;
             this.Btn_Answer_1.Click += new System.EventHandler(this.Answer_Button_Click);
             // 
@@ -154,6 +156,7 @@
             this.Btn_Answer_3.Name = "Btn_Answer_3";
             this.Btn_Answer_3.Size = new System.Drawing.Size(349, 46);
             this.Btn_Answer_3.TabIndex = 44;
+            this.Btn_Answer_3.Tag = "2";
             this.Btn_Answer_3.UseVisualStyleBackColor = true;
             this.Btn_Answer_3.Click += new System.EventHandler(this.Answer_Button_Click);
             // 
@@ -166,6 +169,7 @@
             this.Btn_Answer_2.Name = "Btn_Answer_2";
             this.Btn_Answer_2.Size = new System.Drawing.Size(348, 47);
             this.Btn_Answer_2.TabIndex = 43;
+            this.Btn_Answer_2.Tag = "1";
             this.Btn_Answer_2.UseVisualStyleBackColor = true;
             this.Btn_Answer_2.Click += new System.EventHandler(this.Answer_Button_Click);
             // 
@@ -191,9 +195,9 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.Controls.Add(this.lbl_Aufgaben_Gebiet, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.TextBox_Auswertung, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.Btn_Fragen_wiederholen, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.Next, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.Start, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.Btn_skip, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Btn_Next, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.Btn_Start, 0, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 12);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -237,6 +241,7 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quiz";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.tbl_1.ResumeLayout(false);
             this.tbl_1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -249,10 +254,10 @@
         #endregion
 
         private System.Windows.Forms.TextBox TextBox_Auswertung;
-        private System.Windows.Forms.Button Next;
-        private System.Windows.Forms.Button Start;
+        private System.Windows.Forms.Button Btn_Next;
+        private System.Windows.Forms.Button Btn_Start;
         private System.Windows.Forms.Timer tmr_Auswertung;
-        private System.Windows.Forms.Button Btn_Fragen_wiederholen;
+        private System.Windows.Forms.Button Btn_skip;
         private System.Windows.Forms.TableLayoutPanel tbl_1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
