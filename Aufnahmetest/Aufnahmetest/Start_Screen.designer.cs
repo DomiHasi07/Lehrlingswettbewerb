@@ -47,7 +47,7 @@
             this.tbl_Buttons.Controls.Add(this.Btn_3, 0, 2);
             this.tbl_Buttons.Controls.Add(this.Btn_2, 1, 1);
             this.tbl_Buttons.Controls.Add(this.Btn_4, 1, 2);
-            this.tbl_Buttons.Location = new System.Drawing.Point(30, 112);
+            this.tbl_Buttons.Location = new System.Drawing.Point(12, 12);
             this.tbl_Buttons.Name = "tbl_Buttons";
             this.tbl_Buttons.RowCount = 3;
             this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 289);
+            this.ClientSize = new System.Drawing.Size(408, 252);
             this.Controls.Add(this.tbl_Buttons);
             this.Name = "Start_Screen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
