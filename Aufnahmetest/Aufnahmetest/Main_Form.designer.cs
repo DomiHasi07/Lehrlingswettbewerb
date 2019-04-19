@@ -29,44 +29,32 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.TextBox_Auswertung = new System.Windows.Forms.TextBox();
             this.Btn_Next = new System.Windows.Forms.Button();
             this.Btn_Start = new System.Windows.Forms.Button();
             this.tmr_Auswertung = new System.Windows.Forms.Timer(this.components);
-            this.Btn_skip = new System.Windows.Forms.Button();
-            this.tbl_1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbl_Buttons = new System.Windows.Forms.TableLayoutPanel();
             this.Btn_Answer_4 = new System.Windows.Forms.Button();
             this.Btn_Answer_1 = new System.Windows.Forms.Button();
             this.Btn_Answer_3 = new System.Windows.Forms.Button();
             this.Btn_Answer_2 = new System.Windows.Forms.Button();
             this.lbl_Question = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.Tbl_Menu = new System.Windows.Forms.TableLayoutPanel();
             this.lbl_Aufgaben_Gebiet = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tmr_Frage = new System.Windows.Forms.Timer(this.components);
-            this.tbl_1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tbL_Main = new System.Windows.Forms.TableLayoutPanel();
+            this.tbl_Buttons.SuspendLayout();
+            this.Tbl_Menu.SuspendLayout();
+            this.tbL_Main.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TextBox_Auswertung
-            // 
-            this.TextBox_Auswertung.BackColor = System.Drawing.Color.White;
-            this.TextBox_Auswertung.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextBox_Auswertung.Enabled = false;
-            this.TextBox_Auswertung.Location = new System.Drawing.Point(214, 51);
-            this.TextBox_Auswertung.Multiline = true;
-            this.TextBox_Auswertung.Name = "TextBox_Auswertung";
-            this.TextBox_Auswertung.ReadOnly = true;
-            this.TextBox_Auswertung.Size = new System.Drawing.Size(276, 43);
-            this.TextBox_Auswertung.TabIndex = 29;
             // 
             // Btn_Next
             // 
             this.Btn_Next.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Next.Enabled = false;
-            this.Btn_Next.Location = new System.Drawing.Point(496, 51);
+            this.Btn_Next.Location = new System.Drawing.Point(612, 3);
             this.Btn_Next.Name = "Btn_Next";
-            this.Btn_Next.Size = new System.Drawing.Size(207, 43);
+            this.Btn_Next.Size = new System.Drawing.Size(257, 48);
             this.Btn_Next.TabIndex = 28;
             this.Btn_Next.Text = "Next";
             this.Btn_Next.UseVisualStyleBackColor = true;
@@ -75,9 +63,9 @@
             // Btn_Start
             // 
             this.Btn_Start.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Start.Location = new System.Drawing.Point(3, 51);
+            this.Btn_Start.Location = new System.Drawing.Point(3, 3);
             this.Btn_Start.Name = "Btn_Start";
-            this.Btn_Start.Size = new System.Drawing.Size(205, 43);
+            this.Btn_Start.Size = new System.Drawing.Size(255, 48);
             this.Btn_Start.TabIndex = 27;
             this.Btn_Start.Text = "Start";
             this.Btn_Start.UseVisualStyleBackColor = true;
@@ -87,48 +75,35 @@
             // 
             this.tmr_Auswertung.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Btn_skip
+            // tbl_Buttons
             // 
-            this.Btn_skip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_skip.Location = new System.Drawing.Point(496, 3);
-            this.Btn_skip.Name = "Btn_skip";
-            this.Btn_skip.Size = new System.Drawing.Size(207, 42);
-            this.Btn_skip.TabIndex = 40;
-            this.Btn_skip.Text = "Falsche Fragen wiederholen";
-            this.Btn_skip.UseVisualStyleBackColor = true;
-            this.Btn_skip.Visible = false;
-            this.Btn_skip.Click += new System.EventHandler(this.Btn_skip_Click);
-            // 
-            // tbl_1
-            // 
-            this.tbl_1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbl_Buttons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbl_1.ColumnCount = 2;
-            this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_1.Controls.Add(this.Btn_Answer_4, 2, 2);
-            this.tbl_1.Controls.Add(this.Btn_Answer_1, 0, 1);
-            this.tbl_1.Controls.Add(this.Btn_Answer_3, 1, 1);
-            this.tbl_1.Controls.Add(this.Btn_Answer_2, 0, 2);
-            this.tbl_1.Controls.Add(this.lbl_Question, 0, 0);
-            this.tbl_1.Location = new System.Drawing.Point(10, 112);
-            this.tbl_1.Name = "tbl_1";
-            this.tbl_1.RowCount = 3;
-            this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_1.Size = new System.Drawing.Size(709, 155);
-            this.tbl_1.TabIndex = 41;
+            this.tbl_Buttons.ColumnCount = 2;
+            this.tbl_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.Controls.Add(this.Btn_Answer_4, 2, 2);
+            this.tbl_Buttons.Controls.Add(this.Btn_Answer_1, 0, 1);
+            this.tbl_Buttons.Controls.Add(this.Btn_Answer_3, 1, 1);
+            this.tbl_Buttons.Controls.Add(this.Btn_Answer_2, 0, 2);
+            this.tbl_Buttons.Controls.Add(this.lbl_Question, 0, 0);
+            this.tbl_Buttons.Location = new System.Drawing.Point(3, 63);
+            this.tbl_Buttons.Name = "tbl_Buttons";
+            this.tbl_Buttons.RowCount = 3;
+            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Buttons.Size = new System.Drawing.Size(872, 155);
+            this.tbl_Buttons.TabIndex = 41;
             // 
             // Btn_Answer_4
             // 
             this.Btn_Answer_4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Answer_4.Enabled = false;
             this.Btn_Answer_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Answer_4.Location = new System.Drawing.Point(357, 105);
+            this.Btn_Answer_4.Location = new System.Drawing.Point(439, 105);
             this.Btn_Answer_4.Name = "Btn_Answer_4";
-            this.Btn_Answer_4.Size = new System.Drawing.Size(349, 47);
+            this.Btn_Answer_4.Size = new System.Drawing.Size(430, 47);
             this.Btn_Answer_4.TabIndex = 45;
             this.Btn_Answer_4.Tag = "3";
             this.Btn_Answer_4.UseVisualStyleBackColor = true;
@@ -141,7 +116,7 @@
             this.Btn_Answer_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Answer_1.Location = new System.Drawing.Point(3, 53);
             this.Btn_Answer_1.Name = "Btn_Answer_1";
-            this.Btn_Answer_1.Size = new System.Drawing.Size(348, 46);
+            this.Btn_Answer_1.Size = new System.Drawing.Size(430, 46);
             this.Btn_Answer_1.TabIndex = 43;
             this.Btn_Answer_1.Tag = "0";
             this.Btn_Answer_1.UseVisualStyleBackColor = true;
@@ -152,9 +127,9 @@
             this.Btn_Answer_3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Answer_3.Enabled = false;
             this.Btn_Answer_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Answer_3.Location = new System.Drawing.Point(357, 53);
+            this.Btn_Answer_3.Location = new System.Drawing.Point(439, 53);
             this.Btn_Answer_3.Name = "Btn_Answer_3";
-            this.Btn_Answer_3.Size = new System.Drawing.Size(349, 46);
+            this.Btn_Answer_3.Size = new System.Drawing.Size(430, 46);
             this.Btn_Answer_3.TabIndex = 44;
             this.Btn_Answer_3.Tag = "2";
             this.Btn_Answer_3.UseVisualStyleBackColor = true;
@@ -167,7 +142,7 @@
             this.Btn_Answer_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Answer_2.Location = new System.Drawing.Point(3, 105);
             this.Btn_Answer_2.Name = "Btn_Answer_2";
-            this.Btn_Answer_2.Size = new System.Drawing.Size(348, 47);
+            this.Btn_Answer_2.Size = new System.Drawing.Size(430, 47);
             this.Btn_Answer_2.TabIndex = 43;
             this.Btn_Answer_2.Tag = "1";
             this.Btn_Answer_2.UseVisualStyleBackColor = true;
@@ -176,46 +151,46 @@
             // lbl_Question
             // 
             this.lbl_Question.AutoSize = true;
-            this.tbl_1.SetColumnSpan(this.lbl_Question, 2);
+            this.tbl_Buttons.SetColumnSpan(this.lbl_Question, 2);
             this.lbl_Question.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Question.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Question.Location = new System.Drawing.Point(3, 0);
             this.lbl_Question.Name = "lbl_Question";
-            this.lbl_Question.Size = new System.Drawing.Size(703, 50);
+            this.lbl_Question.Size = new System.Drawing.Size(866, 50);
             this.lbl_Question.TabIndex = 46;
             this.lbl_Question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanel2
+            // Tbl_Menu
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.Controls.Add(this.lbl_Aufgaben_Gebiet, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.TextBox_Auswertung, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.Btn_skip, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.Btn_Next, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.Btn_Start, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 12);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(706, 97);
-            this.tableLayoutPanel2.TabIndex = 42;
+            this.Tbl_Menu.ColumnCount = 3;
+            this.Tbl_Menu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.Tbl_Menu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.Tbl_Menu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.Tbl_Menu.Controls.Add(this.lbl_Aufgaben_Gebiet, 1, 0);
+            this.Tbl_Menu.Controls.Add(this.Btn_Next, 2, 0);
+            this.Tbl_Menu.Controls.Add(this.Btn_Start, 0, 0);
+            this.Tbl_Menu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Tbl_Menu.Location = new System.Drawing.Point(3, 3);
+            this.Tbl_Menu.Name = "Tbl_Menu";
+            this.Tbl_Menu.RowCount = 1;
+            this.Tbl_Menu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Tbl_Menu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Tbl_Menu.Size = new System.Drawing.Size(872, 54);
+            this.Tbl_Menu.TabIndex = 42;
             // 
             // lbl_Aufgaben_Gebiet
             // 
             this.lbl_Aufgaben_Gebiet.AutoSize = true;
+            this.lbl_Aufgaben_Gebiet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Aufgaben_Gebiet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Aufgaben_Gebiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Aufgaben_Gebiet.Location = new System.Drawing.Point(214, 0);
+            this.lbl_Aufgaben_Gebiet.Location = new System.Drawing.Point(264, 4);
+            this.lbl_Aufgaben_Gebiet.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lbl_Aufgaben_Gebiet.Name = "lbl_Aufgaben_Gebiet";
-            this.lbl_Aufgaben_Gebiet.Size = new System.Drawing.Size(276, 48);
+            this.lbl_Aufgaben_Gebiet.Size = new System.Drawing.Size(342, 46);
             this.lbl_Aufgaben_Gebiet.TabIndex = 43;
             this.lbl_Aufgaben_Gebiet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Aufgaben_Gebiet.Visible = false;
             // 
             // label1
             // 
@@ -229,37 +204,48 @@
             // 
             this.tmr_Frage.Tick += new System.EventHandler(this.tmr_Frage_Tick);
             // 
+            // tbL_Main
+            // 
+            this.tbL_Main.ColumnCount = 1;
+            this.tbL_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbL_Main.Controls.Add(this.Tbl_Menu, 0, 0);
+            this.tbL_Main.Controls.Add(this.tbl_Buttons, 0, 1);
+            this.tbL_Main.Location = new System.Drawing.Point(12, 12);
+            this.tbL_Main.Name = "tbL_Main";
+            this.tbL_Main.RowCount = 2;
+            this.tbL_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tbL_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbL_Main.Size = new System.Drawing.Size(878, 221);
+            this.tbL_Main.TabIndex = 44;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 279);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tbl_1);
+            this.ClientSize = new System.Drawing.Size(900, 248);
+            this.Controls.Add(this.tbL_Main);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(746, 318);
+            this.MinimumSize = new System.Drawing.Size(746, 250);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
-            this.tbl_1.ResumeLayout(false);
-            this.tbl_1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.tbl_Buttons.ResumeLayout(false);
+            this.tbl_Buttons.PerformLayout();
+            this.Tbl_Menu.ResumeLayout(false);
+            this.Tbl_Menu.PerformLayout();
+            this.tbL_Main.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox TextBox_Auswertung;
         private System.Windows.Forms.Button Btn_Next;
         private System.Windows.Forms.Button Btn_Start;
         private System.Windows.Forms.Timer tmr_Auswertung;
-        private System.Windows.Forms.Button Btn_skip;
-        private System.Windows.Forms.TableLayoutPanel tbl_1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tbl_Buttons;
+        private System.Windows.Forms.TableLayoutPanel Tbl_Menu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Btn_Answer_1;
         private System.Windows.Forms.Button Btn_Answer_2;
@@ -268,5 +254,6 @@
         private System.Windows.Forms.Label lbl_Aufgaben_Gebiet;
         private System.Windows.Forms.Label lbl_Question;
         private System.Windows.Forms.Timer tmr_Frage;
+        private System.Windows.Forms.TableLayoutPanel tbL_Main;
     }
 }

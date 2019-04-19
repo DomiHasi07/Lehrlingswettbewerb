@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace WindowsFormsApp3
 {
@@ -295,7 +296,6 @@ namespace WindowsFormsApp3
             }
             else
             {
-                tmr_Auswertung.Stop();
                 Reset();
                 Fragenkatalog_OV();
                 Start_was_pressed = false;
@@ -306,67 +306,75 @@ namespace WindowsFormsApp3
         {
             if(!Ende)
             {
-                if (Next_was_pressed)   //nächste Frage anzeigen
-                {
-                    tmr_Auswertung.Stop();
+                tmr_Frage.Stop();
+                Disable_Ans_Buttons();
+                Fragenauswertung();
 
-                    if (current_Q > Fragenkatalog.Length)
-                    {
-                        skip_mode();
-                        tmr_Frage.Start();
-                    }
-                    else
-                    {
-                        Hintergrundfarbe("Clear");
-                        write_Question();
-                        write_Answers();
-                        Next_was_pressed = false;
-                        tmr_Frage.Start();
-                    }
-                }
-                else          //Einloggen der Antworten
-                {
-                    tmr_Frage.Stop();
-                    Disable_Ans_Buttons();
-                    if (Fragenauswertung())
-                    {
-                        if (current_Q >= Fragenkatalog.Length)
-                        {
-                            if (skip_question_mode)
-                            {
-                                Btn_Next.Text = "Auswerten";
-                            }
-                        }
-                        Next_was_pressed = true;
-                        current_Q++;
-                        tmr_Auswertung.Interval = 4000;
-                        tmr_Auswertung.Start();
-                    }
-                    else
-                    {
-                        current_Q++;
-                        tmr_Auswertung.Stop();
+                current_Q++;
 
-                        if (current_Q > Fragenkatalog.Length)
-                        {
-                            skip_mode();
-                            if(!Ende)
-                                tmr_Frage.Start();
-                        }
-                        else
-                        {
-                            Hintergrundfarbe("Clear");
-                            write_Question();
-                            write_Answers();
-                            Next_was_pressed = false;
-                            tmr_Frage.Start();
-                        }
-                    }
+                if (current_Q > Fragenkatalog.Length)
+                {
+                    skip_mode();
+                    if (!Ende)
+                        tmr_Frage.Start();
                 }
+                else
+                {
+                    Hintergrundfarbe("Clear");
+                    write_Question();
+                    write_Answers();
+                    tmr_Frage.Start();
+                }
+
             }
             else
             {
+                int Anzahl_richtiger_Fragen = 0;
+                int Anzahl_skipped_Fragen = 0;
                 this.Close();
+                using (StreamWriter sw = File.CreateText("Test.Txt"))
+                {
+                    for(int i = 1;i<Fragenkatalog.Length+1;i++)
+                    {
+                        if(Fragenkatalog[i-1][2][0]=="right")
+                        {
+                            sw.WriteLine("Frage " + i + " wurde richtig beantwortet");
+                            Anzahl_richtiger_Fragen++;
+                        }
+                        else if(Fragenkatalog[i-1][2][0]=="skipped")
+                        {
+                            sw.WriteLine("Frage " + i  + " wurde übersprungen");
+                            Anzahl_skipped_Fragen++;
+                        }
+                        else
+                        {
+                            sw.WriteLine("Frage " + i + " wurde falsch beantwortet");
+                        }
+                    }
+                    sw.WriteLine("");
+                    if(Anzahl_richtiger_Fragen==Fragenkatalog.Length)
+                    {
+                        sw.WriteLine("Alle Fragen wurden richtig beantwortet");
+                    }
+                    else if(Anzahl_richtiger_Fragen == 0)
+                    {
+                        sw.WriteLine("Keine Frage wurde richtig beantwortet");
+                    }
+                    else
+                    {
+                        if (Anzahl_richtiger_Fragen == 1)
+                            sw.WriteLine(Anzahl_richtiger_Fragen + " von " + Fragenkatalog.Length + " Fragen wurde richtig beantwortet");
+                        else
+                            sw.WriteLine(Anzahl_richtiger_Fragen + " von " + Fragenkatalog.Length + " Fragen wurden richtig beantwortet");
+                        if (Anzahl_skipped_Fragen == 1)
+                            sw.WriteLine(Anzahl_skipped_Fragen + " Frage wurde übersprungen");
+                        else if (Anzahl_skipped_Fragen > 1)
+                            sw.WriteLine(Anzahl_skipped_Fragen + " Fragen wurden übersprungen");
+                        else if (Anzahl_skipped_Fragen == 0)
+                            sw.WriteLine("Es wurde keine Frage übersprungen");
+                    }
+                   
+                }
             }
             
         }
@@ -376,10 +384,6 @@ namespace WindowsFormsApp3
             for (int i = 0; i < 4; i++)
             {
                 answers[i].BackColor = Color.Gainsboro;
-            }
-            if(x == "Clear")
-            {
-                TextBox_Auswertung.BackColor = Color.White;
             }
         }
         
@@ -437,10 +441,8 @@ namespace WindowsFormsApp3
 
             Btn_Start.Text = "Start";
 
-            TextBox_Auswertung.Text = "";
             Btn_Next.Text = "Next";
 
-            Btn_skip.Visible = false;
             Zeit_pro_Frage = 0;
         }
 
@@ -455,7 +457,6 @@ namespace WindowsFormsApp3
         
         private void timer1_Tick(object sender, EventArgs e)
         {
-            tmr_Auswertung.Stop();
             if (current_Q > Fragenkatalog.Length || Ende == true)
             {
                 skip_mode();
@@ -483,6 +484,7 @@ namespace WindowsFormsApp3
                 answers[i].Enabled = true;
                 answers[i].ForeColor = Color.Black;
             }
+            lbl_Aufgaben_Gebiet.Visible = true;
         }
 
         bool Fragenauswertung()
@@ -495,47 +497,22 @@ namespace WindowsFormsApp3
                 if (given_answer_ID == Array.IndexOf(Zufallsantworten, 0))
                 {
                     Fragenkatalog[current_Q - 1][2][0] = "right";
-                    TextBox_Auswertung.BackColor = Color.Green;
                 }
                 else
                 {
                     Fragenkatalog[current_Q - 1][2][0] = Zufallsantworten[given_answer_ID].ToString();
-                    TextBox_Auswertung.BackColor = Color.Red;
                 }
             }
             else
             {
                 Fragenkatalog[current_Q - 1][2][0] = "skipped";               
-                if(skip_question_mode)
-                TextBox_Auswertung.BackColor = Color.Red;             
             }
             given_Answer = null;
 
             Fragenkatalog[current_Q - 1][2][1] = (Zeit_pro_Frage / 10).ToString("0.0");
             Zeit_pro_Frage = 0;
 
-            if (Fragenkatalog[current_Q - 1][2][0] != "skipped")
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    answers[i].BackColor = Color.IndianRed;
-                    answers[i].ForeColor = Color.White;
-                }
-
-                answers[Array.IndexOf(Zufallsantworten, 0)].BackColor = Color.Green;
-            }
-            
             return Fragenkatalog[current_Q - 1][2][0] != "skipped";
-        }
-
-        void Endauswertung()
-        {
-            this.Visible = false;
-            Auswertung Auswertung_Dialog = new Auswertung();
-            Auswertung_Dialog.ShowDialog();
-            Btn_Next.Text = "zurück";
-            Btn_Start.Visible = false;
-            this.Visible = true;
         }
 
         void skip_mode()
@@ -587,8 +564,7 @@ namespace WindowsFormsApp3
                 {
                     skip_question_mode = false;
                     Ende = true;
-                    Btn_Next.Text = "Auswerten";
-                    Endauswertung();
+                    Btn_Next.Text = "Beenden";
                 }
             }
             else
@@ -610,8 +586,7 @@ namespace WindowsFormsApp3
                 Fragenkatalog = temp;
                 skip_question_mode = false;
                 Ende = true;
-                Btn_Next.Text = "Auswerten";
-                Endauswertung();
+                Btn_Next.Text = "Beenden";
             }
         }
 
@@ -622,7 +597,6 @@ namespace WindowsFormsApp3
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            tmr_Auswertung.Stop();
             tmr_Frage.Stop();
         }
 
@@ -663,7 +637,7 @@ namespace WindowsFormsApp3
                 Fragenkatalog[i][1][2] = dt.Rows[i]["Antwort3"].ToString();
                 Fragenkatalog[i][1][3] = dt.Rows[i]["Antwort4"].ToString();
             }
-        }    
-       
+        }
+
     }
 }

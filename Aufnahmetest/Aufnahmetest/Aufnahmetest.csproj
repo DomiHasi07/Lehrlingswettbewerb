@@ -55,12 +55,6 @@
     <Compile Include="Auswertung.designer.cs">
       <DependentUpon>Auswertung.cs</DependentUpon>
     </Compile>
-    <Compile Include="Beenden.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Beenden.designer.cs">
-      <DependentUpon>Beenden.cs</DependentUpon>
-    </Compile>
     <Compile Include="Main_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,9 +71,6 @@
     </Compile>
     <EmbeddedResource Include="Auswertung.resx">
       <DependentUpon>Auswertung.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Beenden.resx">
-      <DependentUpon>Beenden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
