@@ -63,9 +63,6 @@ namespace WindowsFormsApp3
 
             
             pBx_1.SizeMode = PictureBoxSizeMode.StretchImage;
-            MyImage = new Bitmap(@"C:\Users\DomiHasi\Documents\Arbeit\Visual Studio\XML_Dateien\Quiz.png");
-            pBx_1.Image = (Image)MyImage;
-
         }
 
         private void Btn_Answer1_TextChanged(object sender, EventArgs e)
@@ -432,6 +429,15 @@ namespace WindowsFormsApp3
             lbl_Aufgaben_Gebiet.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][0] +" "+ Fragenkatalog[Zufallsfragen[current_Q-1]][0][2] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
             lbl_Question.Text = Fragenkatalog[Zufallsfragen[current_Q-1]][0][1];
             right_Answer = Fragenkatalog[Zufallsfragen[current_Q-1]][1][0];
+            if(Fragenkatalog[Zufallsfragen[current_Q-1]][0][3] != "")
+            {
+                pBx_1.Image = new Bitmap(@"Bilder\" + Fragenkatalog[Zufallsfragen[current_Q - 1]][0][3]);
+            }
+            else
+            {
+                pBx_1.Image = null;
+                Main.ActiveForm.Width = tbl_1.Width + 40;
+            }
         }
 
         void write_Answers()
