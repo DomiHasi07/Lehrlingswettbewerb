@@ -5,7 +5,7 @@
     <Themengebiet>Grundlagen EBT</Themengebiet>
     <Frage>An welchen Eingang muss ein Signal angelegt werden, damit ein RS-Flip-Flop gesetzt wird?</Frage>
     <Bild></Bild>
-    <Antwort1>Set</Antwort1>
+    <RichtigeAntwort>Set</RichtigeAntwort>
     <Antwort2>Clock</Antwort2>
     <Antwort3>Reset</Antwort3>
     <Antwort4>Ausgang</Antwort4>
@@ -15,7 +15,7 @@
     <Themengebiet>Grundlagen EBT</Themengebiet>
     <Frage>Was kann aus einer Diodenkennlinie entnommen werden?</Frage>
     <Bild></Bild>
-    <Antwort1>Sperrbereich, Durchbruchspannung, Durchlassspannung, Durchlassbereich</Antwort1>
+    <RichtigeAntwort>Sperrbereich, Durchbruchspannung, Durchlassspannung, Durchlassbereich</RichtigeAntwort>
     <Antwort2>Diodenkapazität, Schaltzeiten, Sperrstrom, Durchlassspannung</Antwort2>
     <Antwort3>Temperaturkoeffizient, Dotierung, Umgebungstemperatur, Sperrschichttemperatur</Antwort3>
     <Antwort4>Verlustleistung, maximaler Spitzenstrom, Durchlassstrom, Spitzenspannung</Antwort4>
@@ -25,7 +25,7 @@
     <Themengebiet>Grundlagen EBT</Themengebiet>
     <Frage>Transistoren können in drei unterschiedlichen Grundschaltungen betrieben werden. Nenn Sie die am häufigsten vewendete Grundschaltung!</Frage>
     <Bild></Bild>
-    <Antwort1>Ermitter-Grund-Schaltung</Antwort1>
+    <RichtigeAntwort>Ermitter-Grund-Schaltung</RichtigeAntwort>
     <Antwort2>Darlington-Schaltung</Antwort2>
     <Antwort3>Kollektor-Grund-Schaltung</Antwort3>
     <Antwort4>Basis-Schaltung</Antwort4>
@@ -35,17 +35,17 @@
     <Themengebiet>Elektrische Geräte</Themengebiet>
     <Frage>Warum ist der Kern bei einem Trafo aus einzenlen Blechen zusammengesetzt?</Frage>
     <Bild></Bild>
-    <Antwort1>Damit die Wirbelstromverluste reduziert werden können</Antwort1>
+    <RichtigeAntwort>Damit die Wirbelstromverluste reduziert werden können</RichtigeAntwort>
     <Antwort2>Damit der Spannungsabfall reduziert wird</Antwort2>
     <Antwort3>Damit der Kern schwerer wird</Antwort3>
     <Antwort4>Damit die Spannung höher wird</Antwort4>
-  </Fragenkatalog>
+</Fragenkatalog>
   <Fragenkatalog>
     <Nummer>B2</Nummer>
     <Themengebiet>Elektrische Geräte</Themengebiet>
     <Frage>Bei einem Drehstromtransformator befindet sich auf jedem der drei Kernschenkel je eine Ober- und eine Unterspannungswicklung. Wie können die Wicklungen geschaltet werden?</Frage>
     <Bild></Bild>
-    <Antwort1>Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial auf einem Schenkel voneinander getrennt.</Antwort1>
+    <RichtigeAntwort>Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial auf einem Schenkel voneinander getrennt.</RichtigeAntwort>
     <Antwort2>Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial in Serie geschalten.</Antwort2>
     <Antwort3>Ober- und Unterspannungswicklung jeder Phase sind jeweils antiparallel voneinander geschaltet.</Antwort3>
     <Antwort4>Ober- und Unterspannungswicklung jeder Phase sind parallel auf dem Joch geschalten.</Antwort4>
@@ -55,17 +55,17 @@
     <Themengebiet>Grundlagen EBT</Themengebiet>
     <Frage>Wie verhält sich die Wärmeleistung einer Kochplatte, wenn diese statt 400V an 230V angeschlossen wird?</Frage>
     <Bild></Bild>
-    <Antwort1>Die Wärmeleistung erhöht sich um das 3-fache.</Antwort1>
+    <RichtigeAntwort>Die Wärmeleistung erhöht sich um das 3-fache.</RichtigeAntwort>
     <Antwort2>Die Wärmeleistung bleibt gleich.</Antwort2>
     <Antwort3>Die Wärmeleistung erhöht sich um das 1,73-fache.</Antwort3>
     <Antwort4>Die Wärmeleistung erhöht sich um das 4-fache.</Antwort4>
-  </Fragenkatalog>
+</Fragenkatalog>
   <Fragenkatalog>
     <Nummer>E1</Nummer>
     <Themengebiet>Arbeitstechnik</Themengebiet>
     <Frage>Die Ausgangsspannung einer Brückengleichrichterschaltung mit vier Si-Dioden sinkt auf ca. die Hälfte des Nennwertes ab. Nennen Sie eine mögliche Ursache dieses Schaltungsverhaltens!</Frage>
     <Bild></Bild>
-    <Antwort1>Eine Diode defekt, Eingangsspannung sinkt auf die Hälfte ab</Antwort1>
+    <RichtigeAntwort>Eine Diode defekt, Eingangsspannung sinkt auf die Hälfte ab</RichtigeAntwort>
     <Antwort2>Der Verbraucher hat einen zu hohen Widerstand</Antwort2>
     <Antwort3>Der Diodenwiderstand ist zu groß</Antwort3>
     <Antwort4>Der Eingangsstrom ist nahe dem Kurzschlussstrom</Antwort4>

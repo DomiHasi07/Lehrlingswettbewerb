@@ -807,7 +807,7 @@ namespace WindowsFormsApp3
                 Fragenkatalog[i][0][1] = dt.Rows[i]["Frage"].ToString();
                 Fragenkatalog[i][0][2] = dt.Rows[i]["Nummer"].ToString();
                 Fragenkatalog[i][0][3] = dt.Rows[i]["Bild"].ToString();
-                Fragenkatalog[i][1][0] = dt.Rows[i]["Antwort1"].ToString();
+                Fragenkatalog[i][1][0] = dt.Rows[i]["RichtigeAntwort"].ToString();
                 Fragenkatalog[i][1][1] = dt.Rows[i]["Antwort2"].ToString();
                 Fragenkatalog[i][1][2] = dt.Rows[i]["Antwort3"].ToString();
                 Fragenkatalog[i][1][3] = dt.Rows[i]["Antwort4"].ToString();
