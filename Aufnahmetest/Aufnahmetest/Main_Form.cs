@@ -625,14 +625,15 @@ namespace WindowsFormsApp3
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Fragenkatalog[i] = new string[3][];
-                Fragenkatalog[i][0] = new string[3];
+                Fragenkatalog[i][0] = new string[4];
                 Fragenkatalog[i][1] = new string[4];
                 Fragenkatalog[i][2] = new string[2];
 
                 Fragenkatalog[i][0][0] = dt.Rows[i]["Themengebiet"].ToString();
                 Fragenkatalog[i][0][1] = dt.Rows[i]["Frage"].ToString();
                 Fragenkatalog[i][0][2] = dt.Rows[i]["Nummer"].ToString();
-                Fragenkatalog[i][1][0] = dt.Rows[i]["Antwort1"].ToString();
+                Fragenkatalog[i][0][3] = dt.Rows[i]["Bild"].ToString();
+                Fragenkatalog[i][1][0] = dt.Rows[i]["RichtigeAntwort"].ToString();
                 Fragenkatalog[i][1][1] = dt.Rows[i]["Antwort2"].ToString();
                 Fragenkatalog[i][1][2] = dt.Rows[i]["Antwort3"].ToString();
                 Fragenkatalog[i][1][3] = dt.Rows[i]["Antwort4"].ToString();
