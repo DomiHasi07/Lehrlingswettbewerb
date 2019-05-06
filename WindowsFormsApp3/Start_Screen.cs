@@ -20,19 +20,10 @@ namespace WindowsFormsApp3
         public Start_Screen()
         {
             InitializeComponent();
-            tempDS.ReadXml(@"C:\Users\DomiHasi\Source\Repos\Lehrlingswettbewerb\WindowsFormsApp3\Resources\Dateipfade.xml"); 
         }
 
         private void Start_Screen_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < tempDS.Tables[0].Rows.Count;i++)
-                CmB_1.Items.Add(tempDS.Tables[0].Rows[i][2]);
-        }
-
-        private void CmB_1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filepath = tempDS.Tables[0].Rows[CmB_1.SelectedIndex][1].ToString();
-            Btn_Start.Enabled = true;
         }
 
         private void Btn_Start_Click(object sender, EventArgs e)
@@ -42,6 +33,34 @@ namespace WindowsFormsApp3
             Main Main_Diaglog = new Main();
             Main_Diaglog.ShowDialog();
             this.Visible = true;
+        }
+
+        private void load_file()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "XML Files (*.xml)|*.xml";
+            ofd.FilterIndex = 0;
+            ofd.DefaultExt = "xml";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (String.Equals(Path.GetExtension(ofd.FileName), ".xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    filepath = ofd.FileName;
+                    Btn_File.Text = Path.GetFileName(filepath);
+                }
+                else
+                {
+                    MessageBox.Show("Dieser Dateityp wird nicht unterstützt. Wählen Sie bitte eine XML Datei aus", "Falscher Dateityp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void Btn_File_Click(object sender, EventArgs e)
+        {
+            load_file();
+            Btn_Start.Enabled = true;
+            
         }
     }
 }

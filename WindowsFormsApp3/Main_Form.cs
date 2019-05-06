@@ -23,6 +23,7 @@ namespace WindowsFormsApp3
         string right_Answer, given_Answer;
         DataSet Eingelesene_Fragen = new DataSet();
         Button[] answers;
+        private Bitmap MyImage;
 
         Random rnd = new Random();
 
@@ -59,23 +60,28 @@ namespace WindowsFormsApp3
                     Anzahl_Kat++;
                 }
             }
+
             
+            pBx_1.SizeMode = PictureBoxSizeMode.StretchImage;
+            MyImage = new Bitmap(@"C:\Users\DomiHasi\Documents\Arbeit\Visual Studio\XML_Dateien\Quiz.png");
+            pBx_1.Image = (Image)MyImage;
+
         }
 
-       /* private void Btn_Answer1_TextChanged(object sender, EventArgs e)
+        private void Btn_Answer1_TextChanged(object sender, EventArgs e)
         {
-            string txt = Btn_Answer1.Text;
+            string txt = Btn_Answer_1.Text;
             if (txt.Length > 0)
             {
                 int best_size = 100;
-                int lbl_wid = Btn_Answer1.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer1.DisplayRectangle.Height - 5;
+                int lbl_wid = Btn_Answer_1.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer_1.DisplayRectangle.Height - 5;
 
-                using (Graphics gr = Btn_Answer1.CreateGraphics())
+                using (Graphics gr = Btn_Answer_1.CreateGraphics())
                 {
                     for (int i = 1; i <= 100; i++)
                     {
-                        using (Font test_font = new Font(Btn_Answer1.Font.FontFamily, i))
+                        using (Font test_font = new Font(Btn_Answer_1.Font.FontFamily, i))
                         {
                             SizeF text_size = gr.MeasureString(txt, test_font);
                             if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
@@ -90,7 +96,7 @@ namespace WindowsFormsApp3
                     {
                         for (int i = 1; i <= 100; i++)
                         {
-                            using (Font test_font = new Font(Btn_Answer1.Font.FontFamily, i))
+                            using (Font test_font = new Font(Btn_Answer_1.Font.FontFamily, i))
                             {
                                 SizeF text_size = gr.MeasureString(txt, test_font);
                                 if ((text_size.Width) > lbl_wid*2 || (text_size.Height > (lbl_hgt / 2.5)))
@@ -104,24 +110,24 @@ namespace WindowsFormsApp3
                    
                 }
 
-                Btn_Answer1.Font = new Font(Btn_Answer1.Font.FontFamily, best_size);
+                Btn_Answer_1.Font = new Font(Btn_Answer_1.Font.FontFamily, best_size);
             }
         }
 
         private void Btn_Answer2_TextChanged(object sender, EventArgs e)
         {
-            string txt = Btn_Answer2.Text;
+            string txt = Btn_Answer_2.Text;
             if (txt.Length > 0)
             {
                 int best_size = 100;
-                int lbl_wid = Btn_Answer2.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer2.DisplayRectangle.Height - 13;
+                int lbl_wid = Btn_Answer_2.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer_2.DisplayRectangle.Height - 13;
 
-                using (Graphics gr = Btn_Answer2.CreateGraphics())
+                using (Graphics gr = Btn_Answer_2.CreateGraphics())
                 {
                     for (int i = 1; i <= 100; i++)
                     {
-                        using (Font test_font = new Font(Btn_Answer2.Font.FontFamily, i))
+                        using (Font test_font = new Font(Btn_Answer_2.Font.FontFamily, i))
                         {
                             SizeF text_size = gr.MeasureString(txt, test_font);
                             if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
@@ -136,7 +142,7 @@ namespace WindowsFormsApp3
                     {
                         for (int i = 1; i <= 100; i++)
                         {
-                            using (Font test_font = new Font(Btn_Answer2.Font.FontFamily, i))
+                            using (Font test_font = new Font(Btn_Answer_2.Font.FontFamily, i))
                             {
                                 SizeF text_size = gr.MeasureString(txt, test_font);
                                 if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
@@ -150,24 +156,24 @@ namespace WindowsFormsApp3
 
                 }
 
-                Btn_Answer2.Font = new Font(Btn_Answer2.Font.FontFamily, best_size);
+                Btn_Answer_2.Font = new Font(Btn_Answer_2.Font.FontFamily, best_size);
             }
         }
 
         private void Btn_Answer3_TextChanged(object sender, EventArgs e)
         {
-            string txt = Btn_Answer3.Text;
+            string txt = Btn_Answer_3.Text;
             if (txt.Length > 0)
             {
                 int best_size = 100;
-                int lbl_wid = Btn_Answer3.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer3.DisplayRectangle.Height - 13;
+                int lbl_wid = Btn_Answer_3.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer_3.DisplayRectangle.Height - 13;
 
-                using (Graphics gr = Btn_Answer3.CreateGraphics())
+                using (Graphics gr = Btn_Answer_3.CreateGraphics())
                 {
                     for (int i = 1; i <= 100; i++)
                     {
-                        using (Font test_font = new Font(Btn_Answer3.Font.FontFamily, i))
+                        using (Font test_font = new Font(Btn_Answer_3.Font.FontFamily, i))
                         {
                             SizeF text_size = gr.MeasureString(txt, test_font);
                             if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
@@ -182,7 +188,7 @@ namespace WindowsFormsApp3
                     {
                         for (int i = 1; i <= 100; i++)
                         {
-                            using (Font test_font = new Font(Btn_Answer3.Font.FontFamily, i))
+                            using (Font test_font = new Font(Btn_Answer_3.Font.FontFamily, i))
                             {
                                 SizeF text_size = gr.MeasureString(txt, test_font);
                                 if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
@@ -196,24 +202,24 @@ namespace WindowsFormsApp3
 
                 }
 
-                Btn_Answer3.Font = new Font(Btn_Answer3.Font.FontFamily, best_size);
+                Btn_Answer_3.Font = new Font(Btn_Answer_3.Font.FontFamily, best_size);
             }
         }
 
         private void Btn_Answer4_TextChanged(object sender, EventArgs e)
         {
-            string txt = Btn_Answer4.Text;
+            string txt = Btn_Answer_4.Text;
             if (txt.Length > 0)
             {
                 int best_size = 100;
-                int lbl_wid = Btn_Answer4.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer4.DisplayRectangle.Height - 13;
+                int lbl_wid = Btn_Answer_4.DisplayRectangle.Width - 13;
+                int lbl_hgt = Btn_Answer_4.DisplayRectangle.Height - 13;
 
-                using (Graphics gr = Btn_Answer4.CreateGraphics())
+                using (Graphics gr = Btn_Answer_4.CreateGraphics())
                 {
                     for (int i = 1; i <= 100; i++)
                     {
-                        using (Font test_font = new Font(Btn_Answer4.Font.FontFamily, i))
+                        using (Font test_font = new Font(Btn_Answer_4.Font.FontFamily, i))
                         {
                             SizeF text_size = gr.MeasureString(txt, test_font);
                             if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
@@ -228,7 +234,7 @@ namespace WindowsFormsApp3
                     {
                         for (int i = 1; i <= 100; i++)
                         {
-                            using (Font test_font = new Font(Btn_Answer4.Font.FontFamily, i))
+                            using (Font test_font = new Font(Btn_Answer_4.Font.FontFamily, i))
                             {
                                 SizeF text_size = gr.MeasureString(txt, test_font);
                                 if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
@@ -242,10 +248,9 @@ namespace WindowsFormsApp3
 
                 }
 
-                Btn_Answer4.Font = new Font(Btn_Answer4.Font.FontFamily, best_size);
+                Btn_Answer_4.Font = new Font(Btn_Answer_4.Font.FontFamily, best_size);
             }
-        }*/
-
+        }
 
         private void Lbl_Question_TextChanged(object sender, EventArgs e)
         {
@@ -299,6 +304,7 @@ namespace WindowsFormsApp3
             {              
                 Hintergrundfarbe("");
                 (sender as Button).BackColor = Color.White;
+                
 
                 given_Answer = (sender as Button).Name;
             }
@@ -376,7 +382,7 @@ namespace WindowsFormsApp3
                         }
                     }
                     Next_was_pressed = true;
-                    tmr_Auswertung.Interval = 4000;
+                    tmr_Auswertung.Interval = 20000;
                     tmr_Auswertung.Start();
                     current_Q++;
                 }
@@ -436,10 +442,19 @@ namespace WindowsFormsApp3
             for (int i = 0; i < 4; i++)
             {
                 answers[i].Enabled = true;
-                answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q-1]][1][Zufallsantworten[i]];
+                if (!Fragenkatalog[Zufallsfragen[current_Q - 1]][1][Zufallsantworten[i]].EndsWith(".jpg"))
+                {
+                    answers[i].Text = Fragenkatalog[Zufallsfragen[current_Q - 1]][1][Zufallsantworten[i]];
+                    answers[i].BackgroundImage = null;
+                }
+                else
+                {
+                    answers[i].Text = "";
+                    answers[i].BackgroundImage = MyImage;
+                    
+                }
                 answers[i].ForeColor = Color.Black;
             }
-            
         }
 
         void Disable_and_clear_Ans_Buttons()
@@ -642,7 +657,7 @@ namespace WindowsFormsApp3
                     if (Fragenkatalog[i][2][0] != "right")
                     {
                         Fragenkatalog_neu[j] = new string[3][];
-                        Fragenkatalog_neu[j][0] = new string[3];
+                        Fragenkatalog_neu[j][0] = new string[4];
                         Fragenkatalog_neu[j][1] = new string[4];
                         Fragenkatalog_neu[j][2] = new string[2];
 
@@ -650,6 +665,7 @@ namespace WindowsFormsApp3
                         Fragenkatalog_neu[j][0][0] = Fragenkatalog[i][0][0];
                         Fragenkatalog_neu[j][0][1] = Fragenkatalog[i][0][1];
                         Fragenkatalog_neu[j][0][2] = Fragenkatalog[i][0][2];
+                        Fragenkatalog_neu[j][0][3] = Fragenkatalog[i][0][3];
                         Fragenkatalog_neu[j][1][0] = Fragenkatalog[i][1][0];
                         Fragenkatalog_neu[j][1][1] = Fragenkatalog[i][1][1];
                         Fragenkatalog_neu[j][1][2] = Fragenkatalog[i][1][2];
@@ -748,6 +764,16 @@ namespace WindowsFormsApp3
             Zeit_pro_Frage++;
         }
 
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Main_ResizeEnd(object sender, EventArgs e)
+        {
+           
+        }
+
         int[] Zufallszahlen_generieren(int how_many_numbers)
         {
             int[] Zufallszahlen = new int[how_many_numbers];
@@ -773,13 +799,14 @@ namespace WindowsFormsApp3
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Fragenkatalog[i] = new string[3][];
-                Fragenkatalog[i][0] = new string[3];
+                Fragenkatalog[i][0] = new string[4];
                 Fragenkatalog[i][1] = new string[4];
                 Fragenkatalog[i][2] = new string[2];
 
                 Fragenkatalog[i][0][0] = dt.Rows[i]["Themengebiet"].ToString();
                 Fragenkatalog[i][0][1] = dt.Rows[i]["Frage"].ToString();
                 Fragenkatalog[i][0][2] = dt.Rows[i]["Nummer"].ToString();
+                Fragenkatalog[i][0][3] = dt.Rows[i]["Bild"].ToString();
                 Fragenkatalog[i][1][0] = dt.Rows[i]["Antwort1"].ToString();
                 Fragenkatalog[i][1][1] = dt.Rows[i]["Antwort2"].ToString();
                 Fragenkatalog[i][1][2] = dt.Rows[i]["Antwort3"].ToString();
