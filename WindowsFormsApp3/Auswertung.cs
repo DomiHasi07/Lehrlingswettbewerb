@@ -44,7 +44,7 @@ namespace WindowsFormsApp3
         
         private void Auswertung_Load(object sender, EventArgs e)
         {
-            Fragen = Main.Fragenkatalog;
+            Fragen = Main_Frm.Fragenkatalog;
 
             for(int i = 0;i < Fragen.Length; i++)
             {

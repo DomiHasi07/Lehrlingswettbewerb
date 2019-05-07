@@ -49,12 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auswertung.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Auswertung.designer.cs">
-      <DependentUpon>Auswertung.cs</DependentUpon>
-    </Compile>
     <Compile Include="Main_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,9 +63,6 @@
     <Compile Include="Start_Screen.designer.cs">
       <DependentUpon>Start_Screen.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Auswertung.resx">
-      <DependentUpon>Auswertung.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </EmbeddedResource>

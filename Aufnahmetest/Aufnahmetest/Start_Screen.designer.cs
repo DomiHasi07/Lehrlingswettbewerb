@@ -34,7 +34,7 @@
             this.Btn_2 = new System.Windows.Forms.Button();
             this.Btn_4 = new System.Windows.Forms.Button();
             this.tbl_Main = new System.Windows.Forms.TableLayoutPanel();
-            this.tB_Name = new System.Windows.Forms.TextBox();
+            this.TBx_Name = new System.Windows.Forms.TextBox();
             this.Btn_Start = new System.Windows.Forms.Button();
             this.tbl_Buttons.SuspendLayout();
             this.tbl_Main.SuspendLayout();
@@ -66,8 +66,8 @@
             this.Btn_1.Name = "Btn_1";
             this.Btn_1.Size = new System.Drawing.Size(151, 62);
             this.Btn_1.TabIndex = 0;
-            this.Btn_1.Tag = "1";
-            this.Btn_1.Text = "button1";
+            this.Btn_1.Tag = "Allgemeines_Wissen";
+            this.Btn_1.Text = "Allgemeines Wissen";
             this.Btn_1.UseVisualStyleBackColor = true;
             this.Btn_1.Click += new System.EventHandler(this.Auswahl_getroffen);
             // 
@@ -78,8 +78,8 @@
             this.Btn_3.Name = "Btn_3";
             this.Btn_3.Size = new System.Drawing.Size(151, 63);
             this.Btn_3.TabIndex = 1;
-            this.Btn_3.Tag = "3";
-            this.Btn_3.Text = "button3";
+            this.Btn_3.Tag = "Technisches_Wissen";
+            this.Btn_3.Text = "Technisches Wissen";
             this.Btn_3.UseVisualStyleBackColor = true;
             this.Btn_3.Click += new System.EventHandler(this.Auswahl_getroffen);
             // 
@@ -90,8 +90,8 @@
             this.Btn_2.Name = "Btn_2";
             this.Btn_2.Size = new System.Drawing.Size(151, 62);
             this.Btn_2.TabIndex = 1;
-            this.Btn_2.Tag = "2";
-            this.Btn_2.Text = "button2";
+            this.Btn_2.Tag = "Rechnen";
+            this.Btn_2.Text = "Rechnen";
             this.Btn_2.UseVisualStyleBackColor = true;
             this.Btn_2.Click += new System.EventHandler(this.Auswahl_getroffen);
             // 
@@ -102,8 +102,8 @@
             this.Btn_4.Name = "Btn_4";
             this.Btn_4.Size = new System.Drawing.Size(151, 63);
             this.Btn_4.TabIndex = 2;
-            this.Btn_4.Tag = "4";
-            this.Btn_4.Text = "button4";
+            this.Btn_4.Tag = "Pysikalisches_Wissen";
+            this.Btn_4.Text = "Pysikalisches Wissen";
             this.Btn_4.UseVisualStyleBackColor = true;
             this.Btn_4.Click += new System.EventHandler(this.Auswahl_getroffen);
             // 
@@ -112,7 +112,7 @@
             this.tbl_Main.ColumnCount = 2;
             this.tbl_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Main.Controls.Add(this.tB_Name, 0, 0);
+            this.tbl_Main.Controls.Add(this.TBx_Name, 0, 0);
             this.tbl_Main.Controls.Add(this.tbl_Buttons, 0, 1);
             this.tbl_Main.Controls.Add(this.Btn_Start, 1, 1);
             this.tbl_Main.Location = new System.Drawing.Point(12, 12);
@@ -123,17 +123,17 @@
             this.tbl_Main.Size = new System.Drawing.Size(640, 183);
             this.tbl_Main.TabIndex = 1;
             // 
-            // tB_Name
+            // TBx_Name
             // 
-            this.tbl_Main.SetColumnSpan(this.tB_Name, 2);
-            this.tB_Name.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tB_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tB_Name.Location = new System.Drawing.Point(7, 3);
-            this.tB_Name.Margin = new System.Windows.Forms.Padding(7, 3, 4, 3);
-            this.tB_Name.Name = "tB_Name";
-            this.tB_Name.Size = new System.Drawing.Size(629, 29);
-            this.tB_Name.TabIndex = 2;
-            this.tB_Name.TextChanged += new System.EventHandler(this.tB_Name_TextChanged);
+            this.tbl_Main.SetColumnSpan(this.TBx_Name, 2);
+            this.TBx_Name.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TBx_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBx_Name.Location = new System.Drawing.Point(7, 3);
+            this.TBx_Name.Margin = new System.Windows.Forms.Padding(7, 3, 4, 3);
+            this.TBx_Name.Name = "TBx_Name";
+            this.TBx_Name.Size = new System.Drawing.Size(629, 29);
+            this.TBx_Name.TabIndex = 2;
+            this.TBx_Name.TextChanged += new System.EventHandler(this.tB_Name_TextChanged);
             // 
             // Btn_Start
             // 
@@ -143,7 +143,7 @@
             this.Btn_Start.Name = "Btn_Start";
             this.Btn_Start.Size = new System.Drawing.Size(314, 131);
             this.Btn_Start.TabIndex = 3;
-            this.Btn_Start.Text = "button1";
+            this.Btn_Start.Text = "Start";
             this.Btn_Start.UseVisualStyleBackColor = true;
             this.Btn_Start.Click += new System.EventHandler(this.Btn_Start_Click);
             // 
@@ -172,7 +172,7 @@
         private System.Windows.Forms.Button Btn_2;
         private System.Windows.Forms.Button Btn_4;
         private System.Windows.Forms.TableLayoutPanel tbl_Main;
-        private System.Windows.Forms.TextBox tB_Name;
+        private System.Windows.Forms.TextBox TBx_Name;
         private System.Windows.Forms.Button Btn_Start;
     }
 }

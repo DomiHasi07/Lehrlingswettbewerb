@@ -50,11 +50,13 @@
             // Btn_Start
             // 
             this.Btn_Start.BackColor = System.Drawing.SystemColors.Control;
+            this.tbl_Main.SetColumnSpan(this.Btn_Start, 2);
             this.Btn_Start.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Start.Enabled = false;
-            this.Btn_Start.Location = new System.Drawing.Point(213, 44);
+            this.Btn_Start.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Btn_Start.Location = new System.Drawing.Point(3, 3);
             this.Btn_Start.Name = "Btn_Start";
-            this.Btn_Start.Size = new System.Drawing.Size(204, 36);
+            this.Btn_Start.Size = new System.Drawing.Size(414, 35);
             this.Btn_Start.TabIndex = 2;
             this.Btn_Start.Text = "Quiz  starten";
             this.Btn_Start.UseVisualStyleBackColor = false;
@@ -66,12 +68,11 @@
             // 
             // Btn_File
             // 
-            this.tbl_Main.SetColumnSpan(this.Btn_File, 2);
             this.Btn_File.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_File.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Btn_File.Location = new System.Drawing.Point(3, 3);
+            this.Btn_File.Location = new System.Drawing.Point(213, 44);
             this.Btn_File.Name = "Btn_File";
-            this.Btn_File.Size = new System.Drawing.Size(414, 35);
+            this.Btn_File.Size = new System.Drawing.Size(204, 36);
             this.Btn_File.TabIndex = 3;
             this.Btn_File.Text = "Fragenkatalog auswählen";
             this.Btn_File.UseVisualStyleBackColor = true;
@@ -85,8 +86,8 @@
             this.tbl_Main.ColumnCount = 2;
             this.tbl_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Main.Controls.Add(this.Btn_File, 0, 0);
-            this.tbl_Main.Controls.Add(this.Btn_Start, 1, 1);
+            this.tbl_Main.Controls.Add(this.Btn_File, 1, 1);
+            this.tbl_Main.Controls.Add(this.Btn_Start, 0, 0);
             this.tbl_Main.Controls.Add(this.cb1, 0, 1);
             this.tbl_Main.Location = new System.Drawing.Point(12, 12);
             this.tbl_Main.MinimumSize = new System.Drawing.Size(420, 80);
@@ -94,6 +95,7 @@
             this.tbl_Main.RowCount = 2;
             this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tbl_Main.Size = new System.Drawing.Size(420, 83);
             this.tbl_Main.TabIndex = 4;
             // 

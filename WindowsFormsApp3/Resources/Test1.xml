@@ -74,10 +74,20 @@
     <Nummer>Test_1</Nummer>
     <Themengebiet>Test_1</Themengebiet>
     <Frage>Frage</Frage>
-    <Bild>Quiz.png</Bild>
+    <Bild>1.png</Bild>
     <RichtigeAntwort>Antwort</RichtigeAntwort>
     <Antwort2>jlj</Antwort2>
     <Antwort3>lajf</Antwort3>
     <Antwort4>jaslj</Antwort4>
+  </Fragenkatalog>
+  <Fragenkatalog>
+    <Nummer>Test_2</Nummer>
+    <Themengebiet>Themengebiet</Themengebiet>
+    <Frage>Tolle Frage die jeder versteht</Frage>
+    <Bild>2.png</Bild>
+    <RichtigeAntwort>tolle richtige Antwort</RichtigeAntwort>
+    <Antwort2>falsche</Antwort2>
+    <Antwort3>falsche</Antwort3>
+    <Antwort4>falsche</Antwort4>
   </Fragenkatalog>
 </Data>

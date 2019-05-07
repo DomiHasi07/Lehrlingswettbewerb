@@ -11,11 +11,15 @@ using System.Runtime.InteropServices;
 using System.IO;
 
 namespace WindowsFormsApp3
-{
-    
 
+{
     public partial class Main : Form
     {
+        [DllImport("user32")]
+        public static extern bool EnableMenuItem(IntPtr hMenu, uint itemId, uint uEnable);
+        [DllImport("user32")]
+        public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+        
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
         int current_Q = 1;
         float Zeit_pro_Frage = 0;
@@ -23,6 +27,7 @@ namespace WindowsFormsApp3
         DataSet Eingelesene_Fragen = new DataSet();
         Button[] answers;
         Button given_Answer;
+        int zus_höhe = 0;
 
         Random rnd = new Random();
 
@@ -38,13 +43,17 @@ namespace WindowsFormsApp3
         public Main()
         {
             InitializeComponent();
-
-            Eingelesene_Fragen.ReadXml("Test" + Start_Screen.pressed_Button.Tag.ToString() + ".xml");
+            string temp_path = @"Fragebogen\" + Start_Screen.pressed_Button.Tag.ToString() + ".xml";
+            Eingelesene_Fragen.ReadXml(temp_path);
 
             Fragenkatalog_OV();
 
             answers = new Button[] { Btn_Answer_1, Btn_Answer_2, Btn_Answer_3, Btn_Answer_4 };
+
+            EnableMenuItem(GetSystemMenu(this.Handle, false), 0xF060, 1);
         }
+
+        
 
        /* private void Btn_Answer1_TextChanged(object sender, EventArgs e)
         {
@@ -281,9 +290,18 @@ namespace WindowsFormsApp3
             if (!Next_was_pressed)
             {              
                 Hintergrundfarbe("");
-                (sender as Button).BackColor = Color.White;
-
-                given_Answer = (sender as Button);
+                if((sender as Button)!=given_Answer)
+                {
+                    (sender as Button).BackColor = Color.White;
+                    given_Answer = (sender as Button);
+                    Btn_Next.Text = "Antwort geben";
+                }
+                else
+                {
+                    given_Answer = null;
+                    Btn_Next.Text = "Frage überspringen";
+                }
+               
             }
         }
 
@@ -324,6 +342,7 @@ namespace WindowsFormsApp3
                     write_Question();
                     write_Answers();
                     tmr_Frage.Start();
+                    Btn_Next.Text = "Frage überspringen";
                 }
 
             }
@@ -332,7 +351,8 @@ namespace WindowsFormsApp3
                 int Anzahl_richtiger_Fragen = 0;
                 int Anzahl_skipped_Fragen = 0;
                 this.Close();
-                using (StreamWriter sw = File.CreateText("Test.Txt"))
+                string temp_path = @"Ergebnisse\" + Start_Screen.txt_Name + "_" + Start_Screen.pressed_Button.Tag.ToString() +  ".Txt";
+                using (StreamWriter sw = File.CreateText(temp_path))
                 {
                     for(int i = 1;i<Fragenkatalog.Length+1;i++)
                     {
@@ -391,6 +411,54 @@ namespace WindowsFormsApp3
         {
             lbl_Aufgaben_Gebiet.Text = Fragenkatalog[current_Q-1][0][0] +" "+ Fragenkatalog[current_Q-1][0][2] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
             lbl_Question.Text = Fragenkatalog[current_Q-1][0][1];
+            if (Fragenkatalog[current_Q - 1][0][3] != "")
+            {
+                try
+                {
+                    string temp_path = @"Bilder\" + Fragenkatalog[current_Q-1][0][3];
+                    Bitmap temp_file = new Bitmap(temp_path);
+
+                    pBx_1.Visible = true;
+                    pBx_1.Enabled = true;
+
+                    if (pBx_1.Image != null)
+                    {
+                        this.MinimumSize = new Size(746, 318);
+                        this.Width = this.Width + (temp_file.Width - pBx_1.Width);
+                        this.Height = this.Height - zus_höhe;
+                    }
+                    else
+                    {
+                        this.Width = this.Width + temp_file.Width + 6;
+                    }
+                    if (temp_file.Height > this.Height)
+                    {
+                        zus_höhe = temp_file.Height - this.Height;
+                        this.Height = temp_file.Height;
+                        pBx_1.Height = temp_file.Height;
+                    }
+
+                    pBx_1.Width = temp_file.Width;
+                    pBx_1.Image = temp_file;
+                    this.MinimumSize = new Size(this.Width, this.Height);
+                }
+                catch
+                {
+
+                }
+            }
+            else
+            {
+                if (pBx_1.Image != null)
+                {
+                    this.MinimumSize = new Size(746, 318);
+                    this.Width = this.Width - pBx_1.Width - 6;
+                    this.Height = this.Height - zus_höhe;
+                    pBx_1.Visible = false;
+                    pBx_1.Enabled = false;
+                    pBx_1.Image = null;
+                }
+            }
         }
 
         void write_Answers()
@@ -423,6 +491,8 @@ namespace WindowsFormsApp3
             Btn_Next.Enabled = true;
             Btn_Start.Text = "Reset";
 
+            Btn_Next.Text = "Frage überspringen";
+
             tmr_Frage.Start();
         }
 
@@ -430,6 +500,7 @@ namespace WindowsFormsApp3
         {
             lbl_Aufgaben_Gebiet.Text = "";
             lbl_Question.Text = "";
+            Btn_Next.Text = "";
             Disable_and_clear_Ans_Buttons();
 
             Btn_Next.Enabled = false;
@@ -441,8 +512,6 @@ namespace WindowsFormsApp3
 
             Btn_Start.Text = "Start";
 
-            Btn_Next.Text = "Next";
-
             Zeit_pro_Frage = 0;
         }
 
@@ -452,28 +521,6 @@ namespace WindowsFormsApp3
             {
                 answers[i].Enabled = false;
             }
-
-        }
-        
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (current_Q > Fragenkatalog.Length || Ende == true)
-            {
-                skip_mode();
-                tmr_Frage.Start();
-            }
-            else
-            {
-                Hintergrundfarbe("Clear");
-                write_Question();
-                write_Answers();
-                Next_was_pressed = false;
-                tmr_Frage.Start();
-            }
-        }
-
-        private void Btn_skip_Click(object sender, EventArgs e)
-        {
 
         }
 

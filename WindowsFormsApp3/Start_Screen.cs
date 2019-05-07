@@ -30,7 +30,7 @@ namespace WindowsFormsApp3
         {
             cb1_status = cb1.Checked;
             this.Visible = false;
-            Main Main_Diaglog = new Main();
+            Main_Frm Main_Diaglog = new Main_Frm();
             Main_Diaglog.ShowDialog();
             this.Visible = true;
         }
@@ -48,6 +48,7 @@ namespace WindowsFormsApp3
                 {
                     filepath = ofd.FileName;
                     Btn_File.Text = Path.GetFileName(filepath);
+                    Btn_Start.Enabled = true;
                 }
                 else
                 {
@@ -59,8 +60,6 @@ namespace WindowsFormsApp3
         private void Btn_File_Click(object sender, EventArgs e)
         {
             load_file();
-            Btn_Start.Enabled = true;
-            
         }
     }
 }

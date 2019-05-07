@@ -13,10 +13,13 @@ namespace WindowsFormsApp3
 {
     public partial class Start_Screen : Form
     {
+        
         public static Button pressed_Button;
+        public static string txt_Name;
         bool button_pressed = false;
         int Themen = 0;
-        
+        bool finished = false;
+       
         DataSet tempDS = new DataSet();
         Button[] buttons;
 
@@ -53,49 +56,59 @@ namespace WindowsFormsApp3
 
         private void Btn_Start_Click(object sender, EventArgs e)
         {
-            if(!button_pressed)
+            if (!finished)
             {
-                return;
+                if (!button_pressed)
+                {
+                    return;
+                }
+                else
+                {
+                    if (Themen < 4)
+                    {
+                        TBx_Name.ReadOnly = true;
+                        txt_Name = TBx_Name.Text.Replace(" ","_");
+                        pressed_Button.Enabled = false;
+                        pressed_Button.BackColor = SystemColors.ControlDarkDark;
+                        Main mainForm = new Main();
+                        this.Hide();
+                        mainForm.ShowDialog();
+                        this.Show();
+                        Themen++;
+                        if (Themen < 3)
+                        {
+                            button_pressed = false;
+                            Btn_Start.Enabled = false;
+                        }
+                        else if (Themen == 3)
+                        {
+                            foreach (Button button in buttons)
+                            {
+                                if (button.Enabled)
+                                {
+                                    pressed_Button = button;
+                                    button.Focus();
+                                }
+                            }
+                        }
+                        else if (Themen == 4)
+                        {
+                            Btn_Start.Text = "Beenden";
+                            pressed_Button = null;
+                            finished = true;
+                        }
+                    }
+                }
             }
             else
             {
-                if (Themen < 4)
-                {
-                    pressed_Button.Enabled = false;
-                    pressed_Button.BackColor = SystemColors.ControlDarkDark;
-                    Main mainForm = new Main();
-                    this.Hide();
-                    mainForm.ShowDialog();
-                    this.Show();
-                    Themen++;
-                    if (Themen < 3)
-                    {
-                        button_pressed = false;
-                        Btn_Start.Enabled = false;
-                    }
-                    else if (Themen == 3)
-                    {
-                        foreach (Button button in buttons)
-                        {
-                            if (button.Enabled)
-                            {
-                                pressed_Button = button;
-                                button.Focus();
-                            }
-                        }
-                    }
-                    else if (Themen == 4)
-                    {
-                        Btn_Start.Text = "Beenden";
-                        pressed_Button = null;
-                    }
-                }
+                this.Close();
             }
         }
 
         private void tB_Name_TextChanged(object sender, EventArgs e)
         {
-            if(tB_Name.TextLength > 0)
+            if(TBx_Name.TextLength > 0)
             {
                 tbl_Buttons.Enabled = true;
             }
