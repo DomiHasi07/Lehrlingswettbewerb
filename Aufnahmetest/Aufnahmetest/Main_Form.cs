@@ -395,6 +395,7 @@ namespace WindowsFormsApp3
                     }
                    
                 }
+                File.SetAttributes(temp_path, File.GetAttributes(temp_path) | FileAttributes.ReadOnly);
             }
             
         }
