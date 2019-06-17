@@ -53,192 +53,6 @@ namespace WindowsFormsApp3
             EnableMenuItem(GetSystemMenu(this.Handle, false), 0xF060, 1);
         }
 
-        
-
-       /* private void Btn_Answer1_TextChanged(object sender, EventArgs e)
-        {
-            string txt = Btn_Answer1.Text;
-            if (txt.Length > 0)
-            {
-                int best_size = 100;
-                int lbl_wid = Btn_Answer1.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer1.DisplayRectangle.Height - 5;
-
-                using (Graphics gr = Btn_Answer1.CreateGraphics())
-                {
-                    for (int i = 1; i <= 100; i++)
-                    {
-                        using (Font test_font = new Font(Btn_Answer1.Font.FontFamily, i))
-                        {
-                            SizeF text_size = gr.MeasureString(txt, test_font);
-                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
-                            {
-                                best_size = i - 1;
-                                break;
-                            }
-
-                        }
-                    }
-                    if (best_size < 12)
-                    {
-                        for (int i = 1; i <= 100; i++)
-                        {
-                            using (Font test_font = new Font(Btn_Answer1.Font.FontFamily, i))
-                            {
-                                SizeF text_size = gr.MeasureString(txt, test_font);
-                                if ((text_size.Width) > lbl_wid*2 || (text_size.Height > (lbl_hgt / 2.5)))
-                                {
-                                    best_size = i - 1;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                   
-                }
-
-                Btn_Answer1.Font = new Font(Btn_Answer1.Font.FontFamily, best_size);
-            }
-        }
-
-        private void Btn_Answer2_TextChanged(object sender, EventArgs e)
-        {
-            string txt = Btn_Answer2.Text;
-            if (txt.Length > 0)
-            {
-                int best_size = 100;
-                int lbl_wid = Btn_Answer2.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer2.DisplayRectangle.Height - 13;
-
-                using (Graphics gr = Btn_Answer2.CreateGraphics())
-                {
-                    for (int i = 1; i <= 100; i++)
-                    {
-                        using (Font test_font = new Font(Btn_Answer2.Font.FontFamily, i))
-                        {
-                            SizeF text_size = gr.MeasureString(txt, test_font);
-                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
-                            {
-                                best_size = i - 1;
-                                break;
-                            }
-
-                        }
-                    }
-                    if (best_size < 12)
-                    {
-                        for (int i = 1; i <= 100; i++)
-                        {
-                            using (Font test_font = new Font(Btn_Answer2.Font.FontFamily, i))
-                            {
-                                SizeF text_size = gr.MeasureString(txt, test_font);
-                                if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
-                                {
-                                    best_size = i - 1;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                }
-
-                Btn_Answer2.Font = new Font(Btn_Answer2.Font.FontFamily, best_size);
-            }
-        }
-
-        private void Btn_Answer3_TextChanged(object sender, EventArgs e)
-        {
-            string txt = Btn_Answer3.Text;
-            if (txt.Length > 0)
-            {
-                int best_size = 100;
-                int lbl_wid = Btn_Answer3.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer3.DisplayRectangle.Height - 13;
-
-                using (Graphics gr = Btn_Answer3.CreateGraphics())
-                {
-                    for (int i = 1; i <= 100; i++)
-                    {
-                        using (Font test_font = new Font(Btn_Answer3.Font.FontFamily, i))
-                        {
-                            SizeF text_size = gr.MeasureString(txt, test_font);
-                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
-                            {
-                                best_size = i - 1;
-                                break;
-                            }
-
-                        }
-                    }
-                    if (best_size < 12)
-                    {
-                        for (int i = 1; i <= 100; i++)
-                        {
-                            using (Font test_font = new Font(Btn_Answer3.Font.FontFamily, i))
-                            {
-                                SizeF text_size = gr.MeasureString(txt, test_font);
-                                if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
-                                {
-                                    best_size = i - 1;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                }
-
-                Btn_Answer3.Font = new Font(Btn_Answer3.Font.FontFamily, best_size);
-            }
-        }
-
-        private void Btn_Answer4_TextChanged(object sender, EventArgs e)
-        {
-            string txt = Btn_Answer4.Text;
-            if (txt.Length > 0)
-            {
-                int best_size = 100;
-                int lbl_wid = Btn_Answer4.DisplayRectangle.Width - 13;
-                int lbl_hgt = Btn_Answer4.DisplayRectangle.Height - 13;
-
-                using (Graphics gr = Btn_Answer4.CreateGraphics())
-                {
-                    for (int i = 1; i <= 100; i++)
-                    {
-                        using (Font test_font = new Font(Btn_Answer4.Font.FontFamily, i))
-                        {
-                            SizeF text_size = gr.MeasureString(txt, test_font);
-                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
-                            {
-                                best_size = i - 1;
-                                break;
-                            }
-
-                        }
-                    }
-                    if (best_size < 12)
-                    {
-                        for (int i = 1; i <= 100; i++)
-                        {
-                            using (Font test_font = new Font(Btn_Answer4.Font.FontFamily, i))
-                            {
-                                SizeF text_size = gr.MeasureString(txt, test_font);
-                                if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
-                                {
-                                    best_size = i - 1;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                }
-
-                Btn_Answer4.Font = new Font(Btn_Answer4.Font.FontFamily, best_size);
-            }
-        }*/
-
         private void Lbl_Question_TextChanged(object sender, EventArgs e)
         {
             string txt = lbl_Question.Text;
@@ -289,7 +103,7 @@ namespace WindowsFormsApp3
         {
             if (!Next_was_pressed)
             {              
-                Hintergrundfarbe("");
+                Hintergrundfarbe();
                 if((sender as Button)!=given_Answer)
                 {
                     (sender as Button).BackColor = Color.White;
@@ -311,6 +125,7 @@ namespace WindowsFormsApp3
             {
                 Start_Sequenz();
                 Start_was_pressed = true;
+                Btn_Start.Enabled = false;
             }
             else
             {
@@ -338,7 +153,7 @@ namespace WindowsFormsApp3
                 }
                 else
                 {
-                    Hintergrundfarbe("Clear");
+                    Hintergrundfarbe();
                     write_Question();
                     write_Answers();
                     tmr_Frage.Start();
@@ -352,6 +167,11 @@ namespace WindowsFormsApp3
                 int Anzahl_skipped_Fragen = 0;
                 this.Close();
                 string temp_path = @"Ergebnisse\" + Start_Screen.txt_Name + "_" + Start_Screen.pressed_Button.Tag.ToString() +  ".Txt";
+                if(File.Exists(temp_path))
+                {
+                    File.SetAttributes(temp_path, FileAttributes.Normal);
+                    File.Delete(temp_path);
+                }
                 using (StreamWriter sw = File.CreateText(temp_path))
                 {
                     for(int i = 1;i<Fragenkatalog.Length+1;i++)
@@ -400,7 +220,7 @@ namespace WindowsFormsApp3
             
         }
 
-        void Hintergrundfarbe(string x)
+        void Hintergrundfarbe()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -490,7 +310,6 @@ namespace WindowsFormsApp3
             write_Answers();
 
             Btn_Next.Enabled = true;
-            Btn_Start.Text = "Reset";
 
             Btn_Next.Text = "Frage überspringen";
 
@@ -507,7 +326,7 @@ namespace WindowsFormsApp3
             Btn_Next.Enabled = false;
             Next_was_pressed = false;
             Ende = false;
-            Hintergrundfarbe("Clear");
+            Hintergrundfarbe();
             given_Answer = null;
             current_Q = 1;
 
@@ -613,6 +432,12 @@ namespace WindowsFormsApp3
                     skip_question_mode = false;
                     Ende = true;
                     Btn_Next.Text = "Beenden";
+                    this.MinimumSize = new Size(746, 318);
+                    this.Width = this.Width - pBx_1.Width - 6;
+                    this.Height = this.Height - zus_höhe;
+                    pBx_1.Visible = false;
+                    pBx_1.Enabled = false;
+                    pBx_1.Image = null;
                 }
             }
             else
@@ -635,6 +460,12 @@ namespace WindowsFormsApp3
                 skip_question_mode = false;
                 Ende = true;
                 Btn_Next.Text = "Beenden";
+                this.MinimumSize = new Size(746, 318);
+                this.Width = this.Width - pBx_1.Width - 6;
+                this.Height = this.Height - zus_höhe;
+                pBx_1.Visible = false;
+                pBx_1.Enabled = false;
+                pBx_1.Image = null;
             }
         }
 
