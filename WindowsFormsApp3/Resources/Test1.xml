@@ -1,5 +1,25 @@
 <?xml version="1.0" standalone="yes"?>
-<Data xmlns="http://tempuri.org/Data.xsd">
+<DocumentElement xmlns="http://tempuri.org/Data.xsd">
+  <Fragenkatalog>
+    <Nummer>A1</Nummer>
+    <Themengebiet>Grundlagen EBT</Themengebiet>
+    <Frage>Wie verhält sich die Wärmeleistung einer Kochplatte, wenn diese statt 400V an 230V angeschlossen wird?</Frage>
+    <Bild />
+    <RichtigeAntwort>Die Wärmeleistung erhöht sich um das 3-fache.</RichtigeAntwort>
+    <Antwort2>Die Wärmeleistung bleibt gleich.</Antwort2>
+    <Antwort3>Die Wärmeleistung erhöht sich um das 1,73-fache.</Antwort3>
+    <Antwort4>Die Wärmeleistung erhöht sich um das 4-fache.</Antwort4>
+  </Fragenkatalog>
+  <Fragenkatalog>
+    <Nummer>A2</Nummer>
+    <Themengebiet>Grundlagen</Themengebiet>
+    <Frage>Fjlj</Frage>
+    <Bild />
+    <RichtigeAntwort>jlk</RichtigeAntwort>
+    <Antwort2>lkj</Antwort2>
+    <Antwort3>lkj</Antwort3>
+    <Antwort4>ljlj</Antwort4>
+  </Fragenkatalog>
   <Fragenkatalog>
     <Nummer>A26</Nummer>
     <Themengebiet>Grundlagen EBT</Themengebiet>
@@ -31,6 +51,16 @@
     <Antwort4>Basis-Schaltung</Antwort4>
   </Fragenkatalog>
   <Fragenkatalog>
+    <Nummer>A3</Nummer>
+    <Themengebiet>ljl</Themengebiet>
+    <Frage>jlkj</Frage>
+    <Bild />
+    <RichtigeAntwort>lkjl</RichtigeAntwort>
+    <Antwort2>ljlk</Antwort2>
+    <Antwort3>jlk</Antwort3>
+    <Antwort4>jljj</Antwort4>
+  </Fragenkatalog>
+  <Fragenkatalog>
     <Nummer>B1</Nummer>
     <Themengebiet>Elektrische Geräte</Themengebiet>
     <Frage>Warum ist der Kern bei einem Trafo aus einzenlen Blechen zusammengesetzt?</Frage>
@@ -49,16 +79,6 @@
     <Antwort2>Ober- und Unterspannungswicklung jeder Phase sind durch Isolationsmaterial in Serie geschalten.</Antwort2>
     <Antwort3>Ober- und Unterspannungswicklung jeder Phase sind jeweils antiparallel voneinander geschaltet.</Antwort3>
     <Antwort4>Ober- und Unterspannungswicklung jeder Phase sind parallel auf dem Joch geschalten.</Antwort4>
-  </Fragenkatalog>
-  <Fragenkatalog>
-    <Nummer>A1</Nummer>
-    <Themengebiet>Grundlagen EBT</Themengebiet>
-    <Frage>Wie verhält sich die Wärmeleistung einer Kochplatte, wenn diese statt 400V an 230V angeschlossen wird?</Frage>
-    <Bild />
-    <RichtigeAntwort>Die Wärmeleistung erhöht sich um das 3-fache.</RichtigeAntwort>
-    <Antwort2>Die Wärmeleistung bleibt gleich.</Antwort2>
-    <Antwort3>Die Wärmeleistung erhöht sich um das 1,73-fache.</Antwort3>
-    <Antwort4>Die Wärmeleistung erhöht sich um das 4-fache.</Antwort4>
   </Fragenkatalog>
   <Fragenkatalog>
     <Nummer>E1</Nummer>
@@ -80,14 +100,4 @@
     <Antwort3>lajf</Antwort3>
     <Antwort4>jaslj</Antwort4>
   </Fragenkatalog>
-  <Fragenkatalog>
-    <Nummer>Test_2</Nummer>
-    <Themengebiet>Themengebiet</Themengebiet>
-    <Frage>Tolle Frage die jeder versteht</Frage>
-    <Bild>2.png</Bild>
-    <RichtigeAntwort>tolle richtige Antwort</RichtigeAntwort>
-    <Antwort2>falsche</Antwort2>
-    <Antwort3>falsche</Antwort3>
-    <Antwort4>falsche</Antwort4>
-  </Fragenkatalog>
-</Data>
+</DocumentElement>

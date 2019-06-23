@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Security.Principal;
 
 namespace Aufnahmetest
 {
@@ -57,27 +58,12 @@ namespace Aufnahmetest
             */
         }
 
-        private void change_Path_conMenStr_1_Click(object sender, EventArgs e)
-        {
-            Control lbl = find_owner(sender);
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if (String.Equals(Path.GetExtension(openFileDialog1.FileName), ".xml", StringComparison.OrdinalIgnoreCase))
-                {
-                    string Name = lbl.Text.Split('|').First().Trim().Replace('_',' ');
-                    lbl.Text = Name + " | " + openFileDialog1.FileName;
-                }
-                else
-                {
-                    MessageBox.Show("Dieser Dateityp wird nicht unterstützt. Wählen Sie bitte eine XML Datei aus", "Falscher Dateityp", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             string temp_name = "";
             string temp_path = "";
+
+            openFileDialog1.FileName = "";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -86,19 +72,72 @@ namespace Aufnahmetest
                     temp_path = openFileDialog1.FileName;
                     temp_name = Path.GetFileNameWithoutExtension(temp_path).Replace('_',' ');
 
-                    Label lbl = new Label();
-                    lbl.Text = temp_name + " | " + temp_path;
-                    lbl.BorderStyle = BorderStyle.FixedSingle;
-                    lbl.ContextMenuStrip = conMenStr_1;
-                    lbl.Tag = temp_name;
-                    lbl.TextAlign = ContentAlignment.MiddleCenter;
-                    lbl.Margin = new System.Windows.Forms.Padding(3);
-                    lbl.AutoSize = true;
-                    lbl.Dock = DockStyle.Fill;
-                    lbl.Font = new Font(lbl.Font.FontFamily, 14);
-                    splitContainers.Add(splitContainer1);
-                    Control split = splitContainer1;
+                    SplitContainer split = new SplitContainer();
+                    TableLayoutPanel panel_1 = new TableLayoutPanel();
+                    TableLayoutPanel panel_2 = new TableLayoutPanel();
+                    Label label_1 = new Label();
+                    Label label_2 = new Label();
+                    Label label_3 = new Label();
+                    Label label_4 = new Label();
+
+                    split.ContextMenuStrip = conMenStr_1;
+                    split.BorderStyle = BorderStyle.Fixed3D;
+                    split.Dock = System.Windows.Forms.DockStyle.Fill; 
+                    split.MaximumSize = new System.Drawing.Size(0, 30); 
+                    split.MinimumSize = new System.Drawing.Size(150, 0);
+
+                    panel_1.ColumnCount = 2;
+                    panel_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+                    panel_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+                    panel_1.Dock = System.Windows.Forms.DockStyle.Fill;
+                    panel_1.RowCount = 1;
+                    panel_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+
+                    label_1.AutoSize = true;
+                    label_1.Dock = System.Windows.Forms.DockStyle.Fill;
+                    label_1.Text = "Anzeigename";
+                    label_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+                    label_2.AutoSize = true;
+                    label_2.BackColor = System.Drawing.Color.White;
+                    label_2.Dock = System.Windows.Forms.DockStyle.Fill;
+                    label_2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+                    label_2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                    label_2.Text = temp_name;
+
+                    panel_1.Controls.Add(label_1, 0, 0);
+                    panel_1.Controls.Add(label_2, 1, 0);
+
+                    panel_2.ColumnCount = 2;
+                    panel_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+                    panel_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+                    panel_2.Dock = System.Windows.Forms.DockStyle.Fill;
+                    panel_2.RowCount = 1;
+                    panel_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+
+                    label_3.AutoSize = true;
+                    label_3.Dock = System.Windows.Forms.DockStyle.Fill;
+                    label_3.Text = "Dateipfad";
+                    label_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+                    label_4.AutoSize = true;
+                    label_4.BackColor = System.Drawing.Color.White;
+                    label_4.Dock = System.Windows.Forms.DockStyle.Fill;
+                    label_4.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+                    label_4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                    label_4.Text = temp_path;
+
+                    panel_2.Controls.Add(label_3, 0, 0);
+                    panel_2.Controls.Add(label_4, 1, 0);
+
+                    split.Panel1.Controls.Add(panel_1);
+                    split.Panel2.Controls.Add(panel_2);
+
+                    splitContainers.Add(split);
+                    
                     flowLayoutPanel2.Controls.Add(split);
+                    
+                    change_size_split();
 
                 }
                 else
@@ -106,15 +145,6 @@ namespace Aufnahmetest
                     MessageBox.Show("Dieser Dateityp wird nicht unterstützt. Wählen Sie bitte eine XML Datei aus", "Falscher Dateityp", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-        }
-
-        private void change_Name_conMenStr_1_Click(object sender, EventArgs e)
-        {
-            Control lbl = find_owner(sender);
-            string Path = lbl.Text.Split('|').Last().Trim();
-            lbl.Text = "Hallo | " + Path;
-            lbl.Tag = "Hallo";
 
         }
 
@@ -125,19 +155,63 @@ namespace Aufnahmetest
 
         private Control find_owner (object sender)
         {
-            ContextMenuStrip owner = (sender as ToolStripItem).Owner as ContextMenuStrip;
+            ContextMenuStrip owner = new ContextMenuStrip();
+            owner = (sender as ToolStripItem).Owner as ContextMenuStrip;
             Control source = owner.SourceControl;
             return source;
         }
 
         private void TEST_Resize(object sender, EventArgs e)
         {
-            splitContainers.ForEach(x => x.MinimumSize = new System.Drawing.Size(flowLayoutPanel2.Width - 6, 30));
+            change_size_split();
         }
 
         private void TEST_Load(object sender, EventArgs e)
         {
             splitContainers = new List<SplitContainer>();
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                textBox1.Text = "kein Admin";
+            }
+            else
+            {
+                textBox1.Text = "Admin";
+            }
+
+        }
+
+        private void change_size_split()
+        {
+            splitContainers.ForEach(x => x.MinimumSize = new System.Drawing.Size(flowLayoutPanel2.Width - 6, 30));
+        }
+
+        private void change_Name_conMenStr_1_Click(object sender, EventArgs e)
+        {
+            SplitContainer split = (SplitContainer)find_owner(sender);
+            TableLayoutPanel tbl_lay = (TableLayoutPanel)split.Panel1.Controls[0];
+            Label label = (Label)tbl_lay.Controls[1];
+            label.Text = "Hallo";
+        }
+
+        private void change_Path_conMenStr_1_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (String.Equals(Path.GetExtension(openFileDialog1.FileName), ".xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    SplitContainer split = (SplitContainer)find_owner(sender);
+                    TableLayoutPanel tbl_lay = (TableLayoutPanel)split.Panel2.Controls[0];
+                    Label label = (Label)tbl_lay.Controls[1];
+                    label.Text = openFileDialog1.FileName;
+
+                }
+                else
+                {
+                    MessageBox.Show("Dieser Dateityp wird nicht unterstützt. Wählen Sie bitte eine XML Datei aus", "Falscher Dateityp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
