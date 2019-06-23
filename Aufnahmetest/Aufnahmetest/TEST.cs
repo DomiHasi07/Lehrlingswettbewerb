@@ -18,6 +18,8 @@ namespace Aufnahmetest
             InitializeComponent();
         }
 
+        List<SplitContainer> splitContainers;
+
         private void Btn_Add_Click(object sender, EventArgs e)
         {
             /*
@@ -94,7 +96,9 @@ namespace Aufnahmetest
                     lbl.AutoSize = true;
                     lbl.Dock = DockStyle.Fill;
                     lbl.Font = new Font(lbl.Font.FontFamily, 14);
-                    flowLayoutPanel2.Controls.Add(lbl);
+                    splitContainers.Add(splitContainer1);
+                    Control split = splitContainer1;
+                    flowLayoutPanel2.Controls.Add(split);
 
                 }
                 else
@@ -124,6 +128,16 @@ namespace Aufnahmetest
             ContextMenuStrip owner = (sender as ToolStripItem).Owner as ContextMenuStrip;
             Control source = owner.SourceControl;
             return source;
+        }
+
+        private void TEST_Resize(object sender, EventArgs e)
+        {
+            splitContainers.ForEach(x => x.MinimumSize = new System.Drawing.Size(flowLayoutPanel2.Width - 6, 30));
+        }
+
+        private void TEST_Load(object sender, EventArgs e)
+        {
+            splitContainers = new List<SplitContainer>();
         }
     }
 }
