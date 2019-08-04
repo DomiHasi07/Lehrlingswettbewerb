@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.conMenStr_1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.change_Path_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.change_Name_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.delete_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.postionVerändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nachObenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,8 +41,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.change_Name_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.change_Path_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.conMenStr_1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,13 +53,27 @@
             this.delete_conMenStr_1,
             this.postionVerändernToolStripMenuItem});
             this.conMenStr_1.Name = "contextMenuStrip1";
-            this.conMenStr_1.Size = new System.Drawing.Size(187, 136);
+            this.conMenStr_1.Size = new System.Drawing.Size(187, 114);
             // 
             // ändernToolStripMenuItem
             // 
             this.ändernToolStripMenuItem.Name = "ändernToolStripMenuItem";
             this.ändernToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.ändernToolStripMenuItem.Text = "Ändern";
+            // 
+            // change_Path_conMenStr_1
+            // 
+            this.change_Path_conMenStr_1.Name = "change_Path_conMenStr_1";
+            this.change_Path_conMenStr_1.Size = new System.Drawing.Size(186, 22);
+            this.change_Path_conMenStr_1.Text = "Pfad ändern";
+            this.change_Path_conMenStr_1.Click += new System.EventHandler(this.change_Path_conMenStr_1_Click);
+            // 
+            // change_Name_conMenStr_1
+            // 
+            this.change_Name_conMenStr_1.Name = "change_Name_conMenStr_1";
+            this.change_Name_conMenStr_1.Size = new System.Drawing.Size(186, 22);
+            this.change_Name_conMenStr_1.Text = "Anzeigename ändern";
+            this.change_Name_conMenStr_1.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
             // 
             // delete_conMenStr_1
             // 
@@ -80,13 +94,13 @@
             // nachObenToolStripMenuItem
             // 
             this.nachObenToolStripMenuItem.Name = "nachObenToolStripMenuItem";
-            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachObenToolStripMenuItem.Text = "nach oben";
             // 
             // nachUntenToolStripMenuItem
             // 
             this.nachUntenToolStripMenuItem.Name = "nachUntenToolStripMenuItem";
-            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachUntenToolStripMenuItem.Text = "nach unten";
             // 
             // flowLayoutPanel2
@@ -123,20 +137,6 @@
             this.textBox1.Size = new System.Drawing.Size(197, 20);
             this.textBox1.TabIndex = 6;
             // 
-            // change_Name_conMenStr_1
-            // 
-            this.change_Name_conMenStr_1.Name = "change_Name_conMenStr_1";
-            this.change_Name_conMenStr_1.Size = new System.Drawing.Size(186, 22);
-            this.change_Name_conMenStr_1.Text = "Anzeigename ändern";
-            this.change_Name_conMenStr_1.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
-            // 
-            // change_Path_conMenStr_1
-            // 
-            this.change_Path_conMenStr_1.Name = "change_Path_conMenStr_1";
-            this.change_Path_conMenStr_1.Size = new System.Drawing.Size(186, 22);
-            this.change_Path_conMenStr_1.Text = "Pfad ändern";
-            this.change_Path_conMenStr_1.Click += new System.EventHandler(this.change_Path_conMenStr_1_Click);
-            // 
             // TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,6 +148,7 @@
             this.Name = "TEST";
             this.Text = "TEST";
             this.Load += new System.EventHandler(this.TEST_Load);
+            this.ResizeBegin += new System.EventHandler(this.TEST_ResizeBegin);
             this.Resize += new System.EventHandler(this.TEST_Resize);
             this.conMenStr_1.ResumeLayout(false);
             this.ResumeLayout(false);

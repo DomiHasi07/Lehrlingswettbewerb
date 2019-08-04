@@ -19,7 +19,14 @@ namespace Aufnahmetest
             InitializeComponent();
         }
 
+        public partial class myform : Form
+        {
+            public string Return_Value1 { get; set; }
+
+        }
+
         List<SplitContainer> splitContainers;
+        List<Int32> cur_SpDist = new List<int>();
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
@@ -95,7 +102,7 @@ namespace Aufnahmetest
 
                     label_1.AutoSize = true;
                     label_1.Dock = System.Windows.Forms.DockStyle.Fill;
-                    label_1.Text = "Anzeigename";
+                    label_1.Text = "Anzeigename:";
                     label_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
                     label_2.AutoSize = true;
@@ -117,7 +124,7 @@ namespace Aufnahmetest
 
                     label_3.AutoSize = true;
                     label_3.Dock = System.Windows.Forms.DockStyle.Fill;
-                    label_3.Text = "Dateipfad";
+                    label_3.Text = "Dateipfad:";
                     label_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
                     label_4.AutoSize = true;
@@ -134,10 +141,15 @@ namespace Aufnahmetest
                     split.Panel2.Controls.Add(panel_2);
 
                     splitContainers.Add(split);
-                    
+
+                    Size Textsize = TextRenderer.MeasureText(temp_name, label_2.Font);
+                    split.Panel1MinSize = label_1.Width + 15 + Textsize.Width;
+
                     flowLayoutPanel2.Controls.Add(split);
-                    
+
                     change_size_split();
+
+                    splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
 
                 }
                 else
@@ -155,15 +167,20 @@ namespace Aufnahmetest
 
         private Control find_owner (object sender)
         {
-            ContextMenuStrip owner = new ContextMenuStrip();
-            owner = (sender as ToolStripItem).Owner as ContextMenuStrip;
-            Control source = owner.SourceControl;
+            Control source = ((ContextMenuStrip) (sender as ToolStripItem).Owner as ContextMenuStrip).SourceControl;
             return source;
         }
 
         private void TEST_Resize(object sender, EventArgs e)
         {
-            change_size_split();
+            if(splitContainers.Count > 0)
+            {
+                change_size_split();
+                for (int i = 0; i < splitContainers.Count; i++)
+                {
+                    splitContainers[i].SplitterDistance = cur_SpDist[i];
+                }
+            }
         }
 
         private void TEST_Load(object sender, EventArgs e)
@@ -179,20 +196,71 @@ namespace Aufnahmetest
             {
                 textBox1.Text = "Admin";
             }
-
         }
 
         private void change_size_split()
         {
-            splitContainers.ForEach(x => x.MinimumSize = new System.Drawing.Size(flowLayoutPanel2.Width - 6, 30));
+            splitContainers.ForEach(x => x.MinimumSize = new System.Drawing.Size(flowLayoutPanel2.Width - 6, 30));   
         }
 
         private void change_Name_conMenStr_1_Click(object sender, EventArgs e)
-        {
+        { 
             SplitContainer split = (SplitContainer)find_owner(sender);
             TableLayoutPanel tbl_lay = (TableLayoutPanel)split.Panel1.Controls[0];
             Label label = (Label)tbl_lay.Controls[1];
-            label.Text = "Hallo";
+
+            myform temp_Form = new myform();
+
+            temp_Form.Text = "Name ändern";
+            temp_Form.Name = "change_Name";
+
+            TableLayoutPanel temp_tbl = new TableLayoutPanel();
+
+            temp_tbl.ColumnCount = 2;
+            temp_tbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            temp_tbl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            temp_tbl.RowCount = 3;
+            temp_tbl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+
+            temp_tbl.Controls.Add(new Button() { Text = "Übernehmen", Name = "Btn_Ok", Dock = System.Windows.Forms.DockStyle.Fill }, 0, 2);
+            temp_tbl.Controls.Add(new Button() { Text = "Abrechen", Name = "Btn_Cancel", Dock = System.Windows.Forms.DockStyle.Fill }, 1, 2);
+            temp_tbl.Controls.Add(new TextBox() { Text = label.Text, Name = "tBx_Name", Dock = System.Windows.Forms.DockStyle.Fill }, 0, 1);
+            temp_tbl.Controls.Add(new Label() { Text = "neuer Anzeigename", Name = "lbl_Name",
+                Dock = System.Windows.Forms.DockStyle.Fill,TextAlign = System.Drawing.ContentAlignment.MiddleCenter }, 0, 0);
+            temp_tbl.SetColumnSpan(temp_tbl.Controls[3], 2);
+            temp_tbl.SetColumnSpan(temp_tbl.Controls[2], 2);
+            temp_tbl.Controls["Btn_Ok"].Click += sub_form_1_Btn_Ok_Click;
+            temp_tbl.Controls["Btn_Cancel"].Click += sub_form_1_Btn_Cancel_Click;
+            temp_Form.Controls.Add(temp_tbl);
+
+            var result = temp_Form.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                label.Text = temp_Form.Return_Value1;
+                Size Textsize = TextRenderer.MeasureText(label.Text, label.Font);
+                split.Panel1MinSize = tbl_lay.Controls[0].Width + 18 + Textsize.Width;
+                split.SplitterDistance = split.Panel1MinSize;
+            }
+
+        }
+
+        private void sub_form_1_Btn_Ok_Click(object sender, EventArgs e)
+        {
+            TableLayoutPanel temp = (TableLayoutPanel) (sender as Button).Parent;
+            myform sub_form = (myform)temp.Parent;
+            sub_form.Return_Value1 = temp.Controls[2].Text;
+            sub_form.DialogResult = DialogResult.OK;
+            sub_form.Close();
+        }
+
+        private void sub_form_1_Btn_Cancel_Click(object sender, EventArgs e)
+        {
+            TableLayoutPanel temp = (TableLayoutPanel)(sender as Button).Parent;
+            myform sub_form = (myform)temp.Parent;
+            sub_form.DialogResult = DialogResult.Cancel;
+            sub_form.Close();
         }
 
         private void change_Path_conMenStr_1_Click(object sender, EventArgs e)
@@ -210,6 +278,20 @@ namespace Aufnahmetest
                 else
                 {
                     MessageBox.Show("Dieser Dateityp wird nicht unterstützt. Wählen Sie bitte eine XML Datei aus", "Falscher Dateityp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void TEST_ResizeBegin(object sender, EventArgs e)
+        {
+            if(splitContainers.Count >0 )
+            {
+                if (cur_SpDist.Count > 0)
+                    cur_SpDist.Clear();
+
+                for (int i = 0; i < splitContainers.Count; i++)
+                {
+                    cur_SpDist.Add(splitContainers[i].SplitterDistance);
                 }
             }
         }
