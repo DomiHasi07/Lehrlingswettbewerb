@@ -93,6 +93,7 @@ namespace Aufnahmetest
                     split.MaximumSize = new Size(0, 30); 
                     split.MinimumSize = new Size(150, 0);
                     split.BackColor = Color.Gainsboro;
+                    split.IsSplitterFixed = true;
 
                     panel_1.ColumnCount = 2;
                     panel_1.ColumnStyles.Add(new ColumnStyle());
@@ -145,14 +146,16 @@ namespace Aufnahmetest
                     split.Panel1.Controls.Add(panel_1);
                     split.Panel2.Controls.Add(panel_2);
 
-                    splitContainers.Add(split);
-
                     Size Textsize = TextRenderer.MeasureText(temp_name, label_2.Font);
                     split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
 
                     flowLayoutPanel2.Controls.Add(split);
 
-                    textBox1.Text = flowLayoutPanel2.Controls.Count.ToString();
+                    splitContainers.Clear();
+                    for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+                    {
+                        splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
+                    }
 
                     change_size_split();
 
@@ -168,8 +171,16 @@ namespace Aufnahmetest
         }
 
         private void delete_conMenStr_1_Click(object sender, EventArgs e)
-        {         
+        {
             flowLayoutPanel2.Controls.Remove(conMenStr_1.SourceControl);
+            splitContainers.Clear();
+            if(flowLayoutPanel2.Controls.Count != 0)
+            {
+                for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+                {
+                    splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
+                }
+            }
         }
 
         private void TEST_Resize(object sender, EventArgs e)

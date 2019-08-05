@@ -41,6 +41,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.conMenStr_1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,14 +90,14 @@
             // nachObenToolStripMenuItem
             // 
             this.nachObenToolStripMenuItem.Name = "nachObenToolStripMenuItem";
-            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachObenToolStripMenuItem.Text = "nach oben";
             this.nachObenToolStripMenuItem.Click += new System.EventHandler(this.nachObenToolStripMenuItem_Click);
             // 
             // nachUntenToolStripMenuItem
             // 
             this.nachUntenToolStripMenuItem.Name = "nachUntenToolStripMenuItem";
-            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachUntenToolStripMenuItem.Text = "nach unten";
             this.nachUntenToolStripMenuItem.Click += new System.EventHandler(this.nachUntenToolStripMenuItem_Click);
             // 
@@ -104,7 +105,7 @@
             // 
             this.delete_conMenStr_1.Name = "delete_conMenStr_1";
             this.delete_conMenStr_1.Size = new System.Drawing.Size(173, 22);
-            this.delete_conMenStr_1.Text = "Löschen";
+            this.delete_conMenStr_1.Text = "Entfernen";
             this.delete_conMenStr_1.Click += new System.EventHandler(this.delete_conMenStr_1_Click);
             // 
             // flowLayoutPanel2
@@ -138,16 +139,26 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(520, 69);
+            this.textBox1.Location = new System.Drawing.Point(714, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(197, 20);
             this.textBox1.TabIndex = 6;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(401, 124);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(923, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -175,5 +186,6 @@
         private System.Windows.Forms.ToolStripMenuItem nachUntenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pfadändernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem anzeigenameToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
     }
 }
