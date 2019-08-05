@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Web;
 using WindowsFormsApp3;
+using System.Security.Principal;
 
 namespace Aufnahmetest
 {
@@ -18,8 +19,19 @@ namespace Aufnahmetest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Start_Screen());
-            Application.Run(new TEST());
+            
+
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                Application.Run(new Start_Screen()); //kein Admin
+            }
+            else
+            {
+                Application.Run(new TEST());//Admin
+            }
+            
         }
     }
 }
