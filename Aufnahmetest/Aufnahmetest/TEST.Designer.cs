@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.conMenStr_1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.change_Path_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.change_Name_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pfadändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anzeigenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delete_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.postionVerändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nachObenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,37 +48,39 @@
             // 
             this.conMenStr_1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ändernToolStripMenuItem,
-            this.change_Path_conMenStr_1,
-            this.change_Name_conMenStr_1,
             this.delete_conMenStr_1,
             this.postionVerändernToolStripMenuItem});
             this.conMenStr_1.Name = "contextMenuStrip1";
-            this.conMenStr_1.Size = new System.Drawing.Size(187, 114);
+            this.conMenStr_1.Size = new System.Drawing.Size(171, 70);
+            this.conMenStr_1.Opening += new System.ComponentModel.CancelEventHandler(this.conMenStr_1_Opening);
             // 
             // ändernToolStripMenuItem
             // 
+            this.ändernToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pfadändernToolStripMenuItem,
+            this.anzeigenameToolStripMenuItem});
             this.ändernToolStripMenuItem.Name = "ändernToolStripMenuItem";
-            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.ändernToolStripMenuItem.Text = "Ändern";
             // 
-            // change_Path_conMenStr_1
+            // pfadändernToolStripMenuItem
             // 
-            this.change_Path_conMenStr_1.Name = "change_Path_conMenStr_1";
-            this.change_Path_conMenStr_1.Size = new System.Drawing.Size(186, 22);
-            this.change_Path_conMenStr_1.Text = "Pfad ändern";
-            this.change_Path_conMenStr_1.Click += new System.EventHandler(this.change_Path_conMenStr_1_Click);
+            this.pfadändernToolStripMenuItem.Name = "pfadändernToolStripMenuItem";
+            this.pfadändernToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.pfadändernToolStripMenuItem.Text = "Pfad";
+            this.pfadändernToolStripMenuItem.Click += new System.EventHandler(this.change_Path_conMenStr_1_Click);
             // 
-            // change_Name_conMenStr_1
+            // anzeigenameToolStripMenuItem
             // 
-            this.change_Name_conMenStr_1.Name = "change_Name_conMenStr_1";
-            this.change_Name_conMenStr_1.Size = new System.Drawing.Size(186, 22);
-            this.change_Name_conMenStr_1.Text = "Anzeigename ändern";
-            this.change_Name_conMenStr_1.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
+            this.anzeigenameToolStripMenuItem.Name = "anzeigenameToolStripMenuItem";
+            this.anzeigenameToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.anzeigenameToolStripMenuItem.Text = "Anzeigename";
+            this.anzeigenameToolStripMenuItem.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
             // 
             // delete_conMenStr_1
             // 
             this.delete_conMenStr_1.Name = "delete_conMenStr_1";
-            this.delete_conMenStr_1.Size = new System.Drawing.Size(186, 22);
+            this.delete_conMenStr_1.Size = new System.Drawing.Size(170, 22);
             this.delete_conMenStr_1.Text = "Löschen";
             this.delete_conMenStr_1.Click += new System.EventHandler(this.delete_conMenStr_1_Click);
             // 
@@ -88,7 +90,7 @@
             this.nachObenToolStripMenuItem,
             this.nachUntenToolStripMenuItem});
             this.postionVerändernToolStripMenuItem.Name = "postionVerändernToolStripMenuItem";
-            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.postionVerändernToolStripMenuItem.Text = "Postion verändern";
             // 
             // nachObenToolStripMenuItem
@@ -96,18 +98,22 @@
             this.nachObenToolStripMenuItem.Name = "nachObenToolStripMenuItem";
             this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachObenToolStripMenuItem.Text = "nach oben";
+            this.nachObenToolStripMenuItem.Click += new System.EventHandler(this.nachObenToolStripMenuItem_Click);
             // 
             // nachUntenToolStripMenuItem
             // 
             this.nachUntenToolStripMenuItem.Name = "nachUntenToolStripMenuItem";
             this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachUntenToolStripMenuItem.Text = "nach unten";
+            this.nachUntenToolStripMenuItem.Click += new System.EventHandler(this.nachUntenToolStripMenuItem_Click);
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.AllowDrop = true;
             this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel2.AutoScroll = true;
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 153);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -167,7 +173,7 @@
         private System.Windows.Forms.ToolStripMenuItem postionVerändernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nachObenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nachUntenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem change_Path_conMenStr_1;
-        private System.Windows.Forms.ToolStripMenuItem change_Name_conMenStr_1;
+        private System.Windows.Forms.ToolStripMenuItem pfadändernToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem anzeigenameToolStripMenuItem;
     }
 }
