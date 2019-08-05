@@ -33,10 +33,10 @@
             this.ändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pfadändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anzeigenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.delete_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.postionVerändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nachObenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nachUntenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delete_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -48,10 +48,10 @@
             // 
             this.conMenStr_1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ändernToolStripMenuItem,
-            this.delete_conMenStr_1,
-            this.postionVerändernToolStripMenuItem});
+            this.postionVerändernToolStripMenuItem,
+            this.delete_conMenStr_1});
             this.conMenStr_1.Name = "contextMenuStrip1";
-            this.conMenStr_1.Size = new System.Drawing.Size(171, 70);
+            this.conMenStr_1.Size = new System.Drawing.Size(174, 70);
             this.conMenStr_1.Opening += new System.ComponentModel.CancelEventHandler(this.conMenStr_1_Opening);
             // 
             // ändernToolStripMenuItem
@@ -60,7 +60,7 @@
             this.pfadändernToolStripMenuItem,
             this.anzeigenameToolStripMenuItem});
             this.ändernToolStripMenuItem.Name = "ändernToolStripMenuItem";
-            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.ändernToolStripMenuItem.Text = "Ändern";
             // 
             // pfadändernToolStripMenuItem
@@ -77,35 +77,35 @@
             this.anzeigenameToolStripMenuItem.Text = "Anzeigename";
             this.anzeigenameToolStripMenuItem.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
             // 
-            // delete_conMenStr_1
-            // 
-            this.delete_conMenStr_1.Name = "delete_conMenStr_1";
-            this.delete_conMenStr_1.Size = new System.Drawing.Size(170, 22);
-            this.delete_conMenStr_1.Text = "Löschen";
-            this.delete_conMenStr_1.Click += new System.EventHandler(this.delete_conMenStr_1_Click);
-            // 
             // postionVerändernToolStripMenuItem
             // 
             this.postionVerändernToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nachObenToolStripMenuItem,
             this.nachUntenToolStripMenuItem});
             this.postionVerändernToolStripMenuItem.Name = "postionVerändernToolStripMenuItem";
-            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.postionVerändernToolStripMenuItem.Text = "Postion verändern";
+            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.postionVerändernToolStripMenuItem.Text = "Position verändern";
             // 
             // nachObenToolStripMenuItem
             // 
             this.nachObenToolStripMenuItem.Name = "nachObenToolStripMenuItem";
-            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nachObenToolStripMenuItem.Text = "nach oben";
             this.nachObenToolStripMenuItem.Click += new System.EventHandler(this.nachObenToolStripMenuItem_Click);
             // 
             // nachUntenToolStripMenuItem
             // 
             this.nachUntenToolStripMenuItem.Name = "nachUntenToolStripMenuItem";
-            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nachUntenToolStripMenuItem.Text = "nach unten";
             this.nachUntenToolStripMenuItem.Click += new System.EventHandler(this.nachUntenToolStripMenuItem_Click);
+            // 
+            // delete_conMenStr_1
+            // 
+            this.delete_conMenStr_1.Name = "delete_conMenStr_1";
+            this.delete_conMenStr_1.Size = new System.Drawing.Size(173, 22);
+            this.delete_conMenStr_1.Text = "Löschen";
+            this.delete_conMenStr_1.Click += new System.EventHandler(this.delete_conMenStr_1_Click);
             // 
             // flowLayoutPanel2
             // 

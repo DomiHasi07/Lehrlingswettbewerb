@@ -274,7 +274,25 @@ namespace Aufnahmetest
 
         private void conMenStr_1_Opening(object sender, CancelEventArgs e)
         {
+            ((ContextMenuStrip)sender).Items[1].Enabled = true;
+            ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[0].Enabled = true;
+            ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[1].Enabled = true;
+
             conMenu_Source = ((ContextMenuStrip)sender).SourceControl;
+            if(flowLayoutPanel2.Controls.Count==1)
+            {
+               ((ContextMenuStrip)sender).Items[1].Enabled = false;
+            }
+            else if(flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source)==0)
+            {
+                ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[0].Enabled = false;
+            }
+            else if (flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source) == flowLayoutPanel2.Controls.Count -1)
+            {
+                ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[1].Enabled = false;
+            }
+
+
         }
 
         private void change_Path_conMenStr_1_Click(object sender, EventArgs e)
