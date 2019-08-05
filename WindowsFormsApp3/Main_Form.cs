@@ -874,7 +874,6 @@ namespace WindowsFormsApp3
             dt.DefaultView.Sort = "Nummer ASC";
             dt = dt.DefaultView.ToTable();
 
-
             Fragenkatalog = new string[dt.Rows.Count][][];
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -892,7 +891,12 @@ namespace WindowsFormsApp3
                 Fragenkatalog[i][1][2] = dt.Rows[i]["Antwort3"].ToString();
                 Fragenkatalog[i][1][3] = dt.Rows[i]["Antwort4"].ToString();
             }
-        }    
-       
+            Start.Text = "Start";
+        }
+
+        private void Btn_Back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

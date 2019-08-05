@@ -46,6 +46,7 @@
             this.tmr_Frage = new System.Windows.Forms.Timer(this.components);
             this.pBx_1 = new System.Windows.Forms.PictureBox();
             this.tbl_Main = new System.Windows.Forms.TableLayoutPanel();
+            this.Btn_Back = new System.Windows.Forms.Button();
             this.tbl_1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBx_1)).BeginInit();
@@ -198,6 +199,7 @@
             this.tableLayoutPanel2.Controls.Add(this.Btn_Fragen_wiederholen, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.Next, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.Start, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.Btn_Back, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -262,6 +264,17 @@
             this.tbl_Main.Size = new System.Drawing.Size(706, 255);
             this.tbl_Main.TabIndex = 44;
             // 
+            // Btn_Back
+            // 
+            this.Btn_Back.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_Back.Location = new System.Drawing.Point(3, 3);
+            this.Btn_Back.Name = "Btn_Back";
+            this.Btn_Back.Size = new System.Drawing.Size(132, 36);
+            this.Btn_Back.TabIndex = 44;
+            this.Btn_Back.Text = "Zurück";
+            this.Btn_Back.UseVisualStyleBackColor = true;
+            this.Btn_Back.Click += new System.EventHandler(this.Btn_Back_Click);
+            // 
             // Main_Frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,5 +318,6 @@
         private System.Windows.Forms.Timer tmr_Frage;
         private System.Windows.Forms.PictureBox pBx_1;
         private System.Windows.Forms.TableLayoutPanel tbl_Main;
+        private System.Windows.Forms.Button Btn_Back;
     }
 }
