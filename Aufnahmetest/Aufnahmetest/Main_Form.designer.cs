@@ -54,9 +54,9 @@
             // 
             this.Btn_Next.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Next.Enabled = false;
-            this.Btn_Next.Location = new System.Drawing.Point(521, 3);
+            this.Btn_Next.Location = new System.Drawing.Point(479, 3);
             this.Btn_Next.Name = "Btn_Next";
-            this.Btn_Next.Size = new System.Drawing.Size(216, 43);
+            this.Btn_Next.Size = new System.Drawing.Size(199, 43);
             this.Btn_Next.TabIndex = 28;
             this.Btn_Next.UseVisualStyleBackColor = true;
             this.Btn_Next.Click += new System.EventHandler(this.Next_Click);
@@ -66,7 +66,7 @@
             this.Btn_Start.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Start.Location = new System.Drawing.Point(3, 3);
             this.Btn_Start.Name = "Btn_Start";
-            this.Btn_Start.Size = new System.Drawing.Size(216, 43);
+            this.Btn_Start.Size = new System.Drawing.Size(198, 43);
             this.Btn_Start.TabIndex = 27;
             this.Btn_Start.Text = "Start";
             this.Btn_Start.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@
             this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Buttons.Size = new System.Drawing.Size(740, 138);
+            this.tbl_Buttons.Size = new System.Drawing.Size(681, 191);
             this.tbl_Buttons.TabIndex = 41;
             // 
             // Btn_Answer_4
@@ -97,9 +97,9 @@
             this.Btn_Answer_4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Answer_4.Enabled = false;
             this.Btn_Answer_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Answer_4.Location = new System.Drawing.Point(373, 97);
+            this.Btn_Answer_4.Location = new System.Drawing.Point(343, 123);
             this.Btn_Answer_4.Name = "Btn_Answer_4";
-            this.Btn_Answer_4.Size = new System.Drawing.Size(364, 38);
+            this.Btn_Answer_4.Size = new System.Drawing.Size(335, 65);
             this.Btn_Answer_4.TabIndex = 45;
             this.Btn_Answer_4.Tag = "3";
             this.Btn_Answer_4.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             this.Btn_Answer_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Answer_1.Location = new System.Drawing.Point(3, 53);
             this.Btn_Answer_1.Name = "Btn_Answer_1";
-            this.Btn_Answer_1.Size = new System.Drawing.Size(364, 38);
+            this.Btn_Answer_1.Size = new System.Drawing.Size(334, 64);
             this.Btn_Answer_1.TabIndex = 43;
             this.Btn_Answer_1.Tag = "0";
             this.Btn_Answer_1.UseVisualStyleBackColor = true;
@@ -123,9 +123,9 @@
             this.Btn_Answer_3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Answer_3.Enabled = false;
             this.Btn_Answer_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Answer_3.Location = new System.Drawing.Point(373, 53);
+            this.Btn_Answer_3.Location = new System.Drawing.Point(343, 53);
             this.Btn_Answer_3.Name = "Btn_Answer_3";
-            this.Btn_Answer_3.Size = new System.Drawing.Size(364, 38);
+            this.Btn_Answer_3.Size = new System.Drawing.Size(335, 64);
             this.Btn_Answer_3.TabIndex = 44;
             this.Btn_Answer_3.Tag = "2";
             this.Btn_Answer_3.UseVisualStyleBackColor = true;
@@ -136,9 +136,9 @@
             this.Btn_Answer_2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Answer_2.Enabled = false;
             this.Btn_Answer_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Answer_2.Location = new System.Drawing.Point(3, 97);
+            this.Btn_Answer_2.Location = new System.Drawing.Point(3, 123);
             this.Btn_Answer_2.Name = "Btn_Answer_2";
-            this.Btn_Answer_2.Size = new System.Drawing.Size(364, 38);
+            this.Btn_Answer_2.Size = new System.Drawing.Size(334, 65);
             this.Btn_Answer_2.TabIndex = 43;
             this.Btn_Answer_2.Tag = "1";
             this.Btn_Answer_2.UseVisualStyleBackColor = true;
@@ -152,7 +152,7 @@
             this.lbl_Question.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Question.Location = new System.Drawing.Point(3, 0);
             this.lbl_Question.Name = "lbl_Question";
-            this.lbl_Question.Size = new System.Drawing.Size(734, 50);
+            this.lbl_Question.Size = new System.Drawing.Size(675, 50);
             this.lbl_Question.TabIndex = 46;
             this.lbl_Question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -171,7 +171,7 @@
             this.Tbl_Menu.RowCount = 1;
             this.Tbl_Menu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.Tbl_Menu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.Tbl_Menu.Size = new System.Drawing.Size(740, 49);
+            this.Tbl_Menu.Size = new System.Drawing.Size(681, 49);
             this.Tbl_Menu.TabIndex = 42;
             // 
             // lbl_Aufgaben_Gebiet
@@ -180,10 +180,10 @@
             this.lbl_Aufgaben_Gebiet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Aufgaben_Gebiet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Aufgaben_Gebiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Aufgaben_Gebiet.Location = new System.Drawing.Point(225, 4);
+            this.lbl_Aufgaben_Gebiet.Location = new System.Drawing.Point(207, 4);
             this.lbl_Aufgaben_Gebiet.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lbl_Aufgaben_Gebiet.Name = "lbl_Aufgaben_Gebiet";
-            this.lbl_Aufgaben_Gebiet.Size = new System.Drawing.Size(290, 41);
+            this.lbl_Aufgaben_Gebiet.Size = new System.Drawing.Size(266, 41);
             this.lbl_Aufgaben_Gebiet.TabIndex = 43;
             this.lbl_Aufgaben_Gebiet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_Aufgaben_Gebiet.Visible = false;
@@ -216,17 +216,17 @@
             this.tbL_Main.RowCount = 2;
             this.tbL_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tbL_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tbL_Main.Size = new System.Drawing.Size(766, 199);
+            this.tbL_Main.Size = new System.Drawing.Size(707, 252);
             this.tbL_Main.TabIndex = 44;
             // 
             // pBx_1
             // 
             this.pBx_1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBx_1.Enabled = false;
-            this.pBx_1.Location = new System.Drawing.Point(749, 3);
+            this.pBx_1.Location = new System.Drawing.Point(690, 3);
             this.pBx_1.Name = "pBx_1";
             this.tbL_Main.SetRowSpan(this.pBx_1, 2);
-            this.pBx_1.Size = new System.Drawing.Size(14, 193);
+            this.pBx_1.Size = new System.Drawing.Size(14, 246);
             this.pBx_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBx_1.TabIndex = 45;
             this.pBx_1.TabStop = false;
@@ -236,13 +236,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(789, 226);
+            this.ClientSize = new System.Drawing.Size(730, 279);
             this.Controls.Add(this.tbL_Main);
             this.Controls.Add(this.label1);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quiz";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.tbl_Buttons.ResumeLayout(false);
             this.tbl_Buttons.PerformLayout();
             this.Tbl_Menu.ResumeLayout(false);

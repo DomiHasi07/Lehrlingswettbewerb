@@ -384,5 +384,10 @@ namespace Aufnahmetest
                 split.SplitterDistance = split.Panel1MinSize;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
