@@ -12,9 +12,9 @@ using System.Security.Principal;
 
 namespace Aufnahmetest
 {
-    public partial class TEST : Form
+    public partial class Frm_Test : Form
     {
-        public TEST()
+        public Frm_Test()
         {
             InitializeComponent();
         }
@@ -23,6 +23,7 @@ namespace Aufnahmetest
         {
             public string Return_Value1 { get; set; }
         }
+
 
         List<SplitContainer> splitContainers;
         List<Int32> cur_SpDist = new List<int>();
@@ -76,91 +77,95 @@ namespace Aufnahmetest
             {
                 if (String.Equals(Path.GetExtension(openFileDialog1.FileName), ".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    temp_path = openFileDialog1.FileName;
-                    temp_name = Path.GetFileNameWithoutExtension(temp_path).Replace('_',' ');
-
-                    SplitContainer split = new SplitContainer();
-                    TableLayoutPanel panel_1 = new TableLayoutPanel();
-                    TableLayoutPanel panel_2 = new TableLayoutPanel();
-                    Label label_1 = new Label();
-                    Label label_2 = new Label();
-                    Label label_3 = new Label();
-                    Label label_4 = new Label();
-
-                    split.ContextMenuStrip = conMenStr_1;
-                    split.BorderStyle = BorderStyle.FixedSingle;
-                    split.Dock = DockStyle.Fill; 
-                    split.MaximumSize = new Size(0, 30); 
-                    split.MinimumSize = new Size(150, 0);
-                    split.BackColor = Color.Gainsboro;
-                    split.IsSplitterFixed = true;
-
-                    panel_1.ColumnCount = 2;
-                    panel_1.ColumnStyles.Add(new ColumnStyle());
-                    panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-                    panel_1.Dock = DockStyle.Fill;
-                    panel_1.RowCount = 1;
-                    panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-                    label_1.AutoSize = true;
-                    label_1.Dock = DockStyle.Fill;
-                    label_1.Text = "Anzeigename:";
-                    label_1.TextAlign = ContentAlignment.MiddleCenter;
-                    label_1.BackColor = Color.Gainsboro;
-                    label_1.Margin = new Padding(0, 0, 0, 0);
-
-                    label_2.AutoSize = true;
-                    label_2.BackColor = Color.White;
-                    label_2.Dock = DockStyle.Fill;
-                    label_2.Margin = new Padding(3, 0, 0, 0);
-                    label_2.TextAlign = ContentAlignment.MiddleLeft;
-                    label_2.Text = temp_name;
-
-                    panel_1.Controls.Add(label_1, 0, 0);
-                    panel_1.Controls.Add(label_2, 1, 0);
-
-                    panel_2.ColumnCount = 2;
-                    panel_2.ColumnStyles.Add(new ColumnStyle());
-                    panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-                    panel_2.Dock = DockStyle.Fill;
-                    panel_2.RowCount = 1;
-                    panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-                    label_3.AutoSize = true;
-                    label_3.Dock = DockStyle.Fill;
-                    label_3.Text = "Dateipfad:";
-                    label_3.TextAlign = ContentAlignment.MiddleCenter;
-                    label_3.BackColor = Color.Gainsboro;
-                    label_3.Margin = new Padding(0, 0, 0, 0);
-
-                    label_4.AutoSize = true;
-                    label_4.BackColor = Color.White;
-                    label_4.Dock = DockStyle.Fill;
-                    label_4.Margin = new Padding(3, 0, 0, 0);
-                    label_4.TextAlign = ContentAlignment.MiddleLeft;
-                    label_4.Text = temp_path;
-
-                    panel_2.Controls.Add(label_3, 0, 0);
-                    panel_2.Controls.Add(label_4, 1, 0);
-
-                    split.Panel1.Controls.Add(panel_1);
-                    split.Panel2.Controls.Add(panel_2);
-
-                    Size Textsize = TextRenderer.MeasureText(temp_name, label_2.Font);
-                    split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
-
-                    flowLayoutPanel2.Controls.Add(split);
-
-                    splitContainers.Clear();
-                    for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+                    int xy = 0;
+                    while(xy < 6)
                     {
-                        splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
+                        temp_path = openFileDialog1.FileName;
+                        temp_name = Path.GetFileNameWithoutExtension(temp_path).Replace('_', ' ');
+
+                        SplitContainer split = new SplitContainer();
+                        TableLayoutPanel panel_1 = new TableLayoutPanel();
+                        TableLayoutPanel panel_2 = new TableLayoutPanel();
+                        Label label_1 = new Label();
+                        Label label_2 = new Label();
+                        Label label_3 = new Label();
+                        Label label_4 = new Label();
+
+                        split.ContextMenuStrip = conMenStr_1;
+                        split.BorderStyle = BorderStyle.FixedSingle;
+                        split.Dock = DockStyle.Fill;
+                        split.MaximumSize = new Size(0, 30);
+                        split.MinimumSize = new Size(130, 0);
+                        split.BackColor = Color.Gainsboro;
+                        split.IsSplitterFixed = true;
+
+                        panel_1.ColumnCount = 2;
+                        panel_1.ColumnStyles.Add(new ColumnStyle());
+                        panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+                        panel_1.Dock = DockStyle.Fill;
+                        panel_1.RowCount = 1;
+                        panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+                        label_1.AutoSize = true;
+                        label_1.Dock = DockStyle.Fill;
+                        label_1.Text = "Anzeigename:";
+                        label_1.TextAlign = ContentAlignment.MiddleCenter;
+                        label_1.BackColor = Color.Gainsboro;
+                        label_1.Margin = new Padding(0, 0, 0, 0);
+
+                        label_2.AutoSize = true;
+                        label_2.BackColor = Color.White;
+                        label_2.Dock = DockStyle.Fill;
+                        label_2.Margin = new Padding(3, 0, 0, 0);
+                        label_2.TextAlign = ContentAlignment.MiddleLeft;
+                        label_2.Text = temp_name;
+
+                        panel_1.Controls.Add(label_1, 0, 0);
+                        panel_1.Controls.Add(label_2, 1, 0);
+
+                        panel_2.ColumnCount = 2;
+                        panel_2.ColumnStyles.Add(new ColumnStyle());
+                        panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+                        panel_2.Dock = DockStyle.Fill;
+                        panel_2.RowCount = 1;
+                        panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+                        label_3.AutoSize = true;
+                        label_3.Dock = DockStyle.Fill;
+                        label_3.Text = "Dateipfad:";
+                        label_3.TextAlign = ContentAlignment.MiddleCenter;
+                        label_3.BackColor = Color.Gainsboro;
+                        label_3.Margin = new Padding(0, 0, 0, 0);
+
+                        label_4.AutoSize = true;
+                        label_4.BackColor = Color.White;
+                        label_4.Dock = DockStyle.Fill;
+                        label_4.Margin = new Padding(3, 0, 0, 0);
+                        label_4.TextAlign = ContentAlignment.MiddleLeft;
+                        label_4.Text = temp_path;
+
+                        panel_2.Controls.Add(label_3, 0, 0);
+                        panel_2.Controls.Add(label_4, 1, 0);
+
+                        split.Panel1.Controls.Add(panel_1);
+                        split.Panel2.Controls.Add(panel_2);
+
+                        Size Textsize = TextRenderer.MeasureText(temp_name, label_2.Font);
+                        split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
+
+                        flowLayoutPanel2.Controls.Add(split);
+
+                        splitContainers.Clear();
+                        for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+                        {
+                            splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
+                        }
+
+                        change_size_split();
+
+                        splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
+                        xy++;
                     }
-
-                    change_size_split();
-
-                    splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
-
                 }
                 else
                 {
@@ -181,15 +186,19 @@ namespace Aufnahmetest
                     splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
                 }
             }
+            change_size_split();
         }
 
         private void TEST_Resize(object sender, EventArgs e)
         {
+            change_size_split();
+            Btn_Add.Location =  new Point((this.Width/2)-(Btn_Add.Width/2),Btn_Add.Location.Y);
+            Btn_Ok.Location = new Point(this.Width - 314, this.Height - 81);
+            Btn_Cancel.Location = new Point(this.Width - 168, this.Height - 81);
             try
             {
                 if (splitContainers.Count > 0)
                 {
-                    change_size_split();
                     for (int i = 0; i < splitContainers.Count; i++)
                     {
                         splitContainers[i].SplitterDistance = cur_SpDist[i];
@@ -206,17 +215,26 @@ namespace Aufnahmetest
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
             {
-                textBox1.Text = "kein Admin";
+               // textBox1.Text = "kein Admin";
             }
             else
             {
-                textBox1.Text = "Admin";
+              //  textBox1.Text = "Admin";
             }
         }
 
         private void change_size_split()
         {
-            splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 6, 30));   
+            if(flowLayoutPanel2.VerticalScroll.Visible)
+            {
+                splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 30, 30));
+                splitContainers.ForEach(x => x.Margin = new Padding(3, 3, 0, 3));
+                flowLayoutPanel2.Controls[flowLayoutPanel2.Controls.Count - 1].Margin = new Padding(3, 3, 0, 12);
+            }
+            else
+            {
+                splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 16, 30));
+            }
         }
 
         private void Sub_Form_1_KeyDown(object sender, KeyEventArgs e)
@@ -389,5 +407,6 @@ namespace Aufnahmetest
         {
 
         }
+
     }
 }

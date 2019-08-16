@@ -1,6 +1,6 @@
 ﻿namespace Aufnahmetest
 {
-    partial class TEST
+    partial class Frm_Test
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Test));
             this.conMenStr_1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pfadändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,10 +39,10 @@
             this.nachUntenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delete_conMenStr_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_Add = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Btn_Ok = new System.Windows.Forms.Button();
+            this.Btn_Cancel = new System.Windows.Forms.Button();
             this.conMenStr_1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,26 +111,28 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.AllowDrop = true;
-            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel2.AutoScroll = true;
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 153);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 53);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(899, 285);
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(900, 191);
             this.flowLayoutPanel2.TabIndex = 3;
+            this.flowLayoutPanel2.WrapContents = false;
             // 
-            // button1
+            // Btn_Add
             // 
-            this.button1.Location = new System.Drawing.Point(320, 124);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button4";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Btn_Add.Location = new System.Drawing.Point(392, 12);
+            this.Btn_Add.Name = "Btn_Add";
+            this.Btn_Add.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Add.TabIndex = 5;
+            this.Btn_Add.Text = "Fragebogen hinzufügen";
+            this.Btn_Add.UseVisualStyleBackColor = true;
+            this.Btn_Add.Click += new System.EventHandler(this.button1_Click);
             // 
             // openFileDialog1
             // 
@@ -137,40 +140,45 @@
             this.openFileDialog1.Filter = "XML Files (*.xml)|*.xml";
             this.openFileDialog1.FilterIndex = 0;
             // 
-            // textBox1
+            // Btn_Ok
             // 
-            this.textBox1.Location = new System.Drawing.Point(714, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(197, 20);
-            this.textBox1.TabIndex = 6;
+            this.Btn_Ok.Location = new System.Drawing.Point(626, 255);
+            this.Btn_Ok.Name = "Btn_Ok";
+            this.Btn_Ok.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Ok.TabIndex = 7;
+            this.Btn_Ok.Text = "Änderungen übernehmen";
+            this.Btn_Ok.UseVisualStyleBackColor = true;
+            this.Btn_Ok.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button2
+            // Btn_Cancel
             // 
-            this.button2.Location = new System.Drawing.Point(401, 124);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Btn_Cancel.Location = new System.Drawing.Point(772, 255);
+            this.Btn_Cancel.Name = "Btn_Cancel";
+            this.Btn_Cancel.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Cancel.TabIndex = 8;
+            this.Btn_Cancel.Text = "Änderungen verwerfen";
+            this.Btn_Cancel.UseVisualStyleBackColor = true;
             // 
-            // TEST
+            // Frm_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.Color.SeaShell;
+            this.ClientSize = new System.Drawing.Size(924, 297);
+            this.Controls.Add(this.Btn_Cancel);
+            this.Controls.Add(this.Btn_Ok);
+            this.Controls.Add(this.Btn_Add);
             this.Controls.Add(this.flowLayoutPanel2);
-            this.Name = "TEST";
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(940, 336);
+            this.Name = "Frm_Test";
             this.Text = "TEST";
             this.Load += new System.EventHandler(this.TEST_Load);
             this.ResizeBegin += new System.EventHandler(this.TEST_ResizeBegin);
             this.Resize += new System.EventHandler(this.TEST_Resize);
             this.conMenStr_1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -178,15 +186,15 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.ContextMenuStrip conMenStr_1;
         private System.Windows.Forms.ToolStripMenuItem delete_conMenStr_1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Btn_Add;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem ändernToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripMenuItem postionVerändernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nachObenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nachUntenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pfadändernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem anzeigenameToolStripMenuItem;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Btn_Ok;
+        private System.Windows.Forms.Button Btn_Cancel;
     }
 }
