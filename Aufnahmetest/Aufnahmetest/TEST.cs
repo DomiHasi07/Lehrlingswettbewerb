@@ -77,95 +77,91 @@ namespace Aufnahmetest
             {
                 if (String.Equals(Path.GetExtension(openFileDialog1.FileName), ".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    int xy = 0;
-                    while(xy < 6)
+                    temp_path = openFileDialog1.FileName;
+                    temp_name = Path.GetFileNameWithoutExtension(temp_path).Replace('_', ' ');
+
+                    SplitContainer split = new SplitContainer();
+                    TableLayoutPanel panel_1 = new TableLayoutPanel();
+                    TableLayoutPanel panel_2 = new TableLayoutPanel();
+                    Label label_1 = new Label();
+                    Label label_2 = new Label();
+                    Label label_3 = new Label();
+                    Label label_4 = new Label();
+
+                    split.ContextMenuStrip = conMenStr_1;
+                    split.BorderStyle = BorderStyle.FixedSingle;
+                    split.Dock = DockStyle.Fill;
+                    split.MaximumSize = new Size(0, 30);
+                    split.MinimumSize = new Size(130, 0);
+                    split.BackColor = Color.Gainsboro;
+                    split.IsSplitterFixed = true;
+
+                    panel_1.ColumnCount = 2;
+                    panel_1.ColumnStyles.Add(new ColumnStyle());
+                    panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+                    panel_1.Dock = DockStyle.Fill;
+                    panel_1.RowCount = 1;
+                    panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+                    label_1.AutoSize = true;
+                    label_1.Dock = DockStyle.Fill;
+                    label_1.Text = "Anzeigename:";
+                    label_1.TextAlign = ContentAlignment.MiddleCenter;
+                    label_1.BackColor = Color.Gainsboro;
+                    label_1.Margin = new Padding(0, 0, 0, 0);
+
+                    label_2.AutoSize = true;
+                    label_2.BackColor = Color.White;
+                    label_2.Dock = DockStyle.Fill;
+                    label_2.Margin = new Padding(3, 0, 0, 0);
+                    label_2.TextAlign = ContentAlignment.MiddleLeft;
+                    label_2.Text = temp_name;
+
+                    panel_1.Controls.Add(label_1, 0, 0);
+                    panel_1.Controls.Add(label_2, 1, 0);
+
+                    panel_2.ColumnCount = 2;
+                    panel_2.ColumnStyles.Add(new ColumnStyle());
+                    panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+                    panel_2.Dock = DockStyle.Fill;
+                    panel_2.RowCount = 1;
+                    panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+                    label_3.AutoSize = true;
+                    label_3.Dock = DockStyle.Fill;
+                    label_3.Text = "Dateipfad:";
+                    label_3.TextAlign = ContentAlignment.MiddleCenter;
+                    label_3.BackColor = Color.Gainsboro;
+                    label_3.Margin = new Padding(0, 0, 0, 0);
+
+                    label_4.AutoSize = true;
+                    label_4.BackColor = Color.White;
+                    label_4.Dock = DockStyle.Fill;
+                    label_4.Margin = new Padding(3, 0, 0, 0);
+                    label_4.TextAlign = ContentAlignment.MiddleLeft;
+                    label_4.Text = temp_path;
+
+                    panel_2.Controls.Add(label_3, 0, 0);
+                    panel_2.Controls.Add(label_4, 1, 0);
+
+                    split.Panel1.Controls.Add(panel_1);
+                    split.Panel2.Controls.Add(panel_2);
+
+                    Size Textsize = TextRenderer.MeasureText(temp_name, label_2.Font);
+                    split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
+
+                    flowLayoutPanel2.Controls.Add(split);
+
+                    splitContainers.Clear();
+                    for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
                     {
-                        temp_path = openFileDialog1.FileName;
-                        temp_name = Path.GetFileNameWithoutExtension(temp_path).Replace('_', ' ');
-
-                        SplitContainer split = new SplitContainer();
-                        TableLayoutPanel panel_1 = new TableLayoutPanel();
-                        TableLayoutPanel panel_2 = new TableLayoutPanel();
-                        Label label_1 = new Label();
-                        Label label_2 = new Label();
-                        Label label_3 = new Label();
-                        Label label_4 = new Label();
-
-                        split.ContextMenuStrip = conMenStr_1;
-                        split.BorderStyle = BorderStyle.FixedSingle;
-                        split.Dock = DockStyle.Fill;
-                        split.MaximumSize = new Size(0, 30);
-                        split.MinimumSize = new Size(130, 0);
-                        split.BackColor = Color.Gainsboro;
-                        split.IsSplitterFixed = true;
-
-                        panel_1.ColumnCount = 2;
-                        panel_1.ColumnStyles.Add(new ColumnStyle());
-                        panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-                        panel_1.Dock = DockStyle.Fill;
-                        panel_1.RowCount = 1;
-                        panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-                        label_1.AutoSize = true;
-                        label_1.Dock = DockStyle.Fill;
-                        label_1.Text = "Anzeigename:";
-                        label_1.TextAlign = ContentAlignment.MiddleCenter;
-                        label_1.BackColor = Color.Gainsboro;
-                        label_1.Margin = new Padding(0, 0, 0, 0);
-
-                        label_2.AutoSize = true;
-                        label_2.BackColor = Color.White;
-                        label_2.Dock = DockStyle.Fill;
-                        label_2.Margin = new Padding(3, 0, 0, 0);
-                        label_2.TextAlign = ContentAlignment.MiddleLeft;
-                        label_2.Text = temp_name;
-
-                        panel_1.Controls.Add(label_1, 0, 0);
-                        panel_1.Controls.Add(label_2, 1, 0);
-
-                        panel_2.ColumnCount = 2;
-                        panel_2.ColumnStyles.Add(new ColumnStyle());
-                        panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-                        panel_2.Dock = DockStyle.Fill;
-                        panel_2.RowCount = 1;
-                        panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-                        label_3.AutoSize = true;
-                        label_3.Dock = DockStyle.Fill;
-                        label_3.Text = "Dateipfad:";
-                        label_3.TextAlign = ContentAlignment.MiddleCenter;
-                        label_3.BackColor = Color.Gainsboro;
-                        label_3.Margin = new Padding(0, 0, 0, 0);
-
-                        label_4.AutoSize = true;
-                        label_4.BackColor = Color.White;
-                        label_4.Dock = DockStyle.Fill;
-                        label_4.Margin = new Padding(3, 0, 0, 0);
-                        label_4.TextAlign = ContentAlignment.MiddleLeft;
-                        label_4.Text = temp_path;
-
-                        panel_2.Controls.Add(label_3, 0, 0);
-                        panel_2.Controls.Add(label_4, 1, 0);
-
-                        split.Panel1.Controls.Add(panel_1);
-                        split.Panel2.Controls.Add(panel_2);
-
-                        Size Textsize = TextRenderer.MeasureText(temp_name, label_2.Font);
-                        split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
-
-                        flowLayoutPanel2.Controls.Add(split);
-
-                        splitContainers.Clear();
-                        for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
-                        {
-                            splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
-                        }
-
-                        change_size_split();
-
-                        splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
-                        xy++;
+                        splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
                     }
+
+                    change_size_split();
+
+                    splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
+                      
                 }
                 else
                 {
