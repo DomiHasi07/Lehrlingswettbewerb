@@ -16,10 +16,6 @@ namespace WindowsFormsApp3
 {
     public partial class Start_Screen : Form
     {
-        [DllImport("user32")]
-        public static extern bool EnableMenuItem(IntPtr hMenu, uint itemId, uint uEnable);
-        [DllImport("user32")]
-        public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 
         public static Button pressed_Button;
         public static string txt_Name;
@@ -115,6 +111,7 @@ namespace WindowsFormsApp3
                                 {
                                     pressed_Button = button;
                                     button.Focus();
+                                    button.BackColor = SystemColors.ControlLight;
                                 }
                             }
                         }
