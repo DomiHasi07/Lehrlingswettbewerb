@@ -40,7 +40,7 @@ namespace WindowsFormsApp3
         public Main()
         {
             InitializeComponent();
-            string temp_path = @"Fragebogen\" + Start_Screen.pressed_Button.Tag.ToString() + ".xml";
+            string temp_path = @"Fragebogen\" + Start_Screen.pressed_Button.Tag.ToString();
             Eingelesene_Fragen.ReadXml(temp_path);
 
             Fragenkatalog_OV();

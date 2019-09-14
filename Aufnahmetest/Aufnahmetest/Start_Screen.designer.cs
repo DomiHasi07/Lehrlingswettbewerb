@@ -32,14 +32,9 @@
             this.tbl_Main = new System.Windows.Forms.TableLayoutPanel();
             this.TBx_Name = new System.Windows.Forms.TextBox();
             this.Btn_Start = new System.Windows.Forms.Button();
-            this.tbl_Buttons = new System.Windows.Forms.TableLayoutPanel();
-            this.Btn_1 = new System.Windows.Forms.Button();
-            this.Btn_2 = new System.Windows.Forms.Button();
-            this.Btn_4 = new System.Windows.Forms.Button();
-            this.Btn_3 = new System.Windows.Forms.Button();
             this.Btn_Settings = new System.Windows.Forms.Button();
+            this.flowP_1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tbl_Main.SuspendLayout();
-            this.tbl_Buttons.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbl_Main
@@ -49,7 +44,7 @@
             this.tbl_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Main.Controls.Add(this.TBx_Name, 0, 0);
             this.tbl_Main.Controls.Add(this.Btn_Start, 1, 1);
-            this.tbl_Main.Controls.Add(this.tbl_Buttons, 0, 1);
+            this.tbl_Main.Controls.Add(this.flowP_1, 0, 1);
             this.tbl_Main.Location = new System.Drawing.Point(12, 12);
             this.tbl_Main.Name = "tbl_Main";
             this.tbl_Main.RowCount = 2;
@@ -82,72 +77,6 @@
             this.Btn_Start.UseVisualStyleBackColor = true;
             this.Btn_Start.Click += new System.EventHandler(this.Btn_Start_Click);
             // 
-            // tbl_Buttons
-            // 
-            this.tbl_Buttons.ColumnCount = 2;
-            this.tbl_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Buttons.Controls.Add(this.Btn_1, 0, 0);
-            this.tbl_Buttons.Controls.Add(this.Btn_2, 1, 0);
-            this.tbl_Buttons.Controls.Add(this.Btn_4, 1, 1);
-            this.tbl_Buttons.Controls.Add(this.Btn_3, 0, 1);
-            this.tbl_Buttons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbl_Buttons.Location = new System.Drawing.Point(3, 43);
-            this.tbl_Buttons.Name = "tbl_Buttons";
-            this.tbl_Buttons.RowCount = 2;
-            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Buttons.Size = new System.Drawing.Size(314, 137);
-            this.tbl_Buttons.TabIndex = 4;
-            // 
-            // Btn_1
-            // 
-            this.Btn_1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_1.Location = new System.Drawing.Point(3, 3);
-            this.Btn_1.Name = "Btn_1";
-            this.Btn_1.Size = new System.Drawing.Size(151, 62);
-            this.Btn_1.TabIndex = 0;
-            this.Btn_1.Tag = "Allgemeines_Wissen";
-            this.Btn_1.Text = "Allgemeines Wissen";
-            this.Btn_1.UseVisualStyleBackColor = true;
-            this.Btn_1.Click += new System.EventHandler(this.Auswahl_getroffen);
-            // 
-            // Btn_2
-            // 
-            this.Btn_2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_2.Location = new System.Drawing.Point(160, 3);
-            this.Btn_2.Name = "Btn_2";
-            this.Btn_2.Size = new System.Drawing.Size(151, 62);
-            this.Btn_2.TabIndex = 1;
-            this.Btn_2.Tag = "Rechnen";
-            this.Btn_2.Text = "Rechnen";
-            this.Btn_2.UseVisualStyleBackColor = true;
-            this.Btn_2.Click += new System.EventHandler(this.Auswahl_getroffen);
-            // 
-            // Btn_4
-            // 
-            this.Btn_4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_4.Location = new System.Drawing.Point(160, 71);
-            this.Btn_4.Name = "Btn_4";
-            this.Btn_4.Size = new System.Drawing.Size(151, 63);
-            this.Btn_4.TabIndex = 2;
-            this.Btn_4.Tag = "Pysikalisches_Wissen";
-            this.Btn_4.Text = "Pysikalisches Wissen";
-            this.Btn_4.UseVisualStyleBackColor = true;
-            this.Btn_4.Click += new System.EventHandler(this.Auswahl_getroffen);
-            // 
-            // Btn_3
-            // 
-            this.Btn_3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_3.Location = new System.Drawing.Point(3, 71);
-            this.Btn_3.Name = "Btn_3";
-            this.Btn_3.Size = new System.Drawing.Size(151, 63);
-            this.Btn_3.TabIndex = 1;
-            this.Btn_3.Tag = "Technisches_Wissen";
-            this.Btn_3.Text = "Technisches Wissen";
-            this.Btn_3.UseVisualStyleBackColor = true;
-            this.Btn_3.Click += new System.EventHandler(this.Auswahl_getroffen);
-            // 
             // Btn_Settings
             // 
             this.Btn_Settings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Settings.BackgroundImage")));
@@ -160,6 +89,14 @@
             this.Btn_Settings.UseVisualStyleBackColor = true;
             this.Btn_Settings.Visible = false;
             this.Btn_Settings.Click += new System.EventHandler(this.Btn_Settings_Click);
+            // 
+            // flowP_1
+            // 
+            this.flowP_1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowP_1.Location = new System.Drawing.Point(3, 43);
+            this.flowP_1.Name = "flowP_1";
+            this.flowP_1.Size = new System.Drawing.Size(314, 137);
+            this.flowP_1.TabIndex = 4;
             // 
             // Start_Screen
             // 
@@ -175,7 +112,6 @@
             this.Load += new System.EventHandler(this.Start_Screen_Load);
             this.tbl_Main.ResumeLayout(false);
             this.tbl_Main.PerformLayout();
-            this.tbl_Buttons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -190,10 +126,6 @@
         private System.Windows.Forms.TextBox TBx_Name;
         private System.Windows.Forms.Button Btn_Start;
         private System.Windows.Forms.Button Btn_Settings;
-        private System.Windows.Forms.TableLayoutPanel tbl_Buttons;
-        private System.Windows.Forms.Button Btn_1;
-        private System.Windows.Forms.Button Btn_2;
-        private System.Windows.Forms.Button Btn_4;
-        private System.Windows.Forms.Button Btn_3;
+        private System.Windows.Forms.FlowLayoutPanel flowP_1;
     }
 }

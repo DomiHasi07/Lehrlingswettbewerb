@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Security.Principal;
 using System.Runtime.InteropServices;
 using Aufnahmetest;
+using System.Xml;
 
 namespace WindowsFormsApp3
 {
@@ -26,18 +27,16 @@ namespace WindowsFormsApp3
        
         DataSet tempDS = new DataSet();
         Button[] buttons;
+        DataSet Settings = new DataSet();
 
         public Start_Screen()
         {
             InitializeComponent();
-            buttons = new Button[] { Btn_1, Btn_2, Btn_3, Btn_4 };
-            tbl_Buttons.Enabled = false;
-            Btn_Start.Enabled = false;
 
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
 
-            
+
             if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
             {
                 this.ControlBox = false;
@@ -49,6 +48,58 @@ namespace WindowsFormsApp3
                 Admin = true;
                 //Admin
             }
+
+            if (!File.Exists(@"settings.xml"))
+            {
+                if (MessageBox.Show("Datei Settings konnte nicht gefunden werden. Wollen Sie eine erstellen?" + "\n" + "(ohne Settings Datei kann das Programm nicht gestartet werden)", "Settings Datei nicht gefunden", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    using (FileStream filestream = new FileStream("Settings.xml", FileMode.Create))
+                    using (StreamWriter sw = new StreamWriter(filestream))
+                    using (XmlTextWriter Writer = new XmlTextWriter(sw))
+                    {
+                        Writer.Formatting = Formatting.Indented;
+                        Writer.Indentation = 4;
+                        Writer.WriteStartElement("Settings");
+                        Writer.WriteStartElement("Daten");
+                        Writer.WriteElementString("Anzeige_Name", "");
+                        Writer.WriteElementString("Dateipfad", "");
+                        Writer.WriteElementString("Anzahl_Fragebögen", "0");
+                        Writer.WriteEndElement();
+                        Writer.WriteEndElement();
+                    }
+                    Settings.ReadXml(@"settings.xml");
+
+                    Frm_Test sub_frm = new Frm_Test();
+                    var result = sub_frm.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        Buttons_hinzu();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Es wurde eine Settings Datei erstellt, sie enthält aber keine Fragebögen. " + "\n" +
+                            "Um Fragebögen hinzuzufügen starten Sie das Programm bitte als Administrator neu und drücken Sie dann den Einstellungen Button");
+                        this.ControlBox = true;
+                    }
+
+                }
+                else
+                {
+                    this.Close();
+                    System.Environment.Exit(1);
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                Buttons_hinzu();
+            }
+
+
+            //buttons = new Button[] { Btn_1, Btn_2, Btn_3, Btn_4 };
+            //tbl_Buttons.Enabled = false;
+            Btn_Start.Enabled = false;
+            
         }
 
         private void Start_Screen_Load(object sender, EventArgs e)
@@ -66,7 +117,7 @@ namespace WindowsFormsApp3
 
         private void Button_Farbe()
         {
-            foreach (Button button in buttons)
+            foreach (Button button in flowP_1.Controls)
             {
                 if(button.BackColor!= SystemColors.ControlDarkDark)
                     button.BackColor = SystemColors.ControlLight;
@@ -134,12 +185,12 @@ namespace WindowsFormsApp3
         {
             if(TBx_Name.TextLength > 0)
             {
-                tbl_Buttons.Enabled = true;
+                //tbl_Buttons.Enabled = true;
             }
             else
             {
                 Button_Farbe();
-                tbl_Buttons.Enabled = false;
+                //tbl_Buttons.Enabled = false;
                 Btn_Start.Enabled = false;
             }
         }
@@ -152,6 +203,39 @@ namespace WindowsFormsApp3
             {
 
             }
+        }
+
+        private void Buttons_hinzu()
+        {
+            string temp_name;
+            string temp_file;
+            int anz_buttons;
+            Settings.ReadXml(@"Settings.xml");
+
+            anz_buttons = Int32.Parse(Settings.Tables[0].Rows[0][2].ToString());
+
+
+            if(anz_buttons == 0 && !Admin)
+            {
+                MessageBox.Show("In der Settings Datei sind keine Fragebögen definiert." + "\n" + "Bitte starten Sie das Programm als Admin neu, um Fragebögen hinzufügen zu können","Fehler: Keine Fragen definiert");
+                this.ControlBox = true;
+            }
+            
+            for (int i = 0; i < anz_buttons; i++)
+            {
+                temp_name = Settings.Tables[0].Rows[i + 1][0].ToString();
+                temp_file = Settings.Tables[0].Rows[i + 1][1].ToString();
+
+                Button btn = new Button();
+                btn.Text = temp_name;
+                btn.Tag = temp_file;
+                btn.Size = new Size(100, 100);
+                btn.Click += new System.EventHandler(Auswahl_getroffen);
+
+                flowP_1.Controls.Add(btn);
+            }
+
+
         }
     }
 }

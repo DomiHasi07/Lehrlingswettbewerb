@@ -151,7 +151,6 @@ namespace Aufnahmetest
             {
                 if(MessageBox.Show("Datei Settings konnte nicht gefunden werden. Wollen Sie eine erstellen?", "Settings Datei nicht gefunden", MessageBoxButtons.YesNo)==DialogResult.Yes)
                 {
-
                     using (FileStream filestream = new FileStream("Settings.xml", FileMode.Create))
                     using (StreamWriter sw = new StreamWriter(filestream))
                     using (XmlTextWriter Writer = new XmlTextWriter(sw))
