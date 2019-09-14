@@ -9,16 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Security.Principal;
 
 namespace WindowsFormsApp3
 
 {
     public partial class Main : Form
     {
-        [DllImport("user32")]
-        public static extern bool EnableMenuItem(IntPtr hMenu, uint itemId, uint uEnable);
-        [DllImport("user32")]
-        public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
         
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
         int current_Q = 1;
@@ -50,7 +47,15 @@ namespace WindowsFormsApp3
 
             answers = new Button[] { Btn_Answer_1, Btn_Answer_2, Btn_Answer_3, Btn_Answer_4 };
 
-            EnableMenuItem(GetSystemMenu(this.Handle, false), 0xF060, 1);
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+
+
+            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                this.ControlBox = false;
+            }
+
         }
 
         private void Lbl_Question_TextChanged(object sender, EventArgs e)
@@ -166,7 +171,7 @@ namespace WindowsFormsApp3
                 int Anzahl_richtiger_Fragen = 0;
                 int Anzahl_skipped_Fragen = 0;
                 this.Close();
-                string temp_path = @"Ergebnisse\" + Start_Screen.txt_Name + "_" + Start_Screen.pressed_Button.Tag.ToString() +  ".Txt";
+                string temp_path = @"Ergebnisse\"+ DateTime.Today.ToString("ddMMyyyy") + "_" + Start_Screen.txt_Name + "_" + Start_Screen.pressed_Button.Tag.ToString() +  ".Txt";
                 if(File.Exists(temp_path))
                 {
                     File.SetAttributes(temp_path, FileAttributes.Normal);
@@ -280,6 +285,7 @@ namespace WindowsFormsApp3
                     pBx_1.Image = null;
                 }
             }
+            this.CenterToScreen();
         }
 
         void write_Answers()
@@ -435,6 +441,7 @@ namespace WindowsFormsApp3
                     this.MinimumSize = new Size(746, 318);
                     this.Width = this.Width - pBx_1.Width - 6;
                     this.Height = this.Height - zus_höhe;
+                    this.CenterToScreen();
                     pBx_1.Visible = false;
                     pBx_1.Enabled = false;
                     pBx_1.Image = null;
@@ -463,6 +470,7 @@ namespace WindowsFormsApp3
                 this.MinimumSize = new Size(746, 318);
                 this.Width = this.Width - pBx_1.Width - 6;
                 this.Height = this.Height - zus_höhe;
+                this.CenterToScreen();
                 pBx_1.Visible = false;
                 pBx_1.Enabled = false;
                 pBx_1.Image = null;

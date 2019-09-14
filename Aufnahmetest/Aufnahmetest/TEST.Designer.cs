@@ -146,9 +146,9 @@
             this.Btn_Ok.Name = "Btn_Ok";
             this.Btn_Ok.Size = new System.Drawing.Size(140, 30);
             this.Btn_Ok.TabIndex = 7;
-            this.Btn_Ok.Text = "Änderungen übernehmen";
+            this.Btn_Ok.Text = "Ändern und schließen";
             this.Btn_Ok.UseVisualStyleBackColor = true;
-            this.Btn_Ok.Click += new System.EventHandler(this.button2_Click);
+            this.Btn_Ok.Click += new System.EventHandler(this.Btn_OK_Click);
             // 
             // Btn_Cancel
             // 
@@ -158,6 +158,7 @@
             this.Btn_Cancel.TabIndex = 8;
             this.Btn_Cancel.Text = "Änderungen verwerfen";
             this.Btn_Cancel.UseVisualStyleBackColor = true;
+            this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
             // Frm_Test
             // 

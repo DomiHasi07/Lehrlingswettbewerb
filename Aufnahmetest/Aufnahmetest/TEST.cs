@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Security.Principal;
+using System.Configuration;
+using System.Xml;
 
 namespace Aufnahmetest
 {
     public partial class Frm_Test : Form
     {
+
         public Frm_Test()
         {
             InitializeComponent();
@@ -24,10 +27,21 @@ namespace Aufnahmetest
             public string Return_Value1 { get; set; }
         }
 
+        public class Fragebogen
+        {
+            public String Name { get; set; }
+            public String Pfad { get; set; }
+           
+        }
+
 
         List<SplitContainer> splitContainers;
         List<Int32> cur_SpDist = new List<int>();
         private Control conMenu_Source;
+        DataSet Settings = new DataSet();
+        List<Fragebogen> changed_Fragebögen = new List<Fragebogen>();
+        List<Fragebogen> org_Fragebögen = new List<Fragebogen>();
+
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
@@ -77,91 +91,11 @@ namespace Aufnahmetest
             {
                 if (String.Equals(Path.GetExtension(openFileDialog1.FileName), ".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    temp_path = openFileDialog1.FileName;
-                    temp_name = Path.GetFileNameWithoutExtension(temp_path).Replace('_', ' ');
+                    temp_path = Path.GetFileName(openFileDialog1.FileName);
+                    temp_name = Path.GetFileNameWithoutExtension(openFileDialog1.FileName).Replace('_', ' ');
 
-                    SplitContainer split = new SplitContainer();
-                    TableLayoutPanel panel_1 = new TableLayoutPanel();
-                    TableLayoutPanel panel_2 = new TableLayoutPanel();
-                    Label label_1 = new Label();
-                    Label label_2 = new Label();
-                    Label label_3 = new Label();
-                    Label label_4 = new Label();
-
-                    split.ContextMenuStrip = conMenStr_1;
-                    split.BorderStyle = BorderStyle.FixedSingle;
-                    split.Dock = DockStyle.Fill;
-                    split.MaximumSize = new Size(0, 30);
-                    split.MinimumSize = new Size(130, 0);
-                    split.BackColor = Color.Gainsboro;
-                    split.IsSplitterFixed = true;
-
-                    panel_1.ColumnCount = 2;
-                    panel_1.ColumnStyles.Add(new ColumnStyle());
-                    panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-                    panel_1.Dock = DockStyle.Fill;
-                    panel_1.RowCount = 1;
-                    panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-                    label_1.AutoSize = true;
-                    label_1.Dock = DockStyle.Fill;
-                    label_1.Text = "Anzeigename:";
-                    label_1.TextAlign = ContentAlignment.MiddleCenter;
-                    label_1.BackColor = Color.Gainsboro;
-                    label_1.Margin = new Padding(0, 0, 0, 0);
-
-                    label_2.AutoSize = true;
-                    label_2.BackColor = Color.White;
-                    label_2.Dock = DockStyle.Fill;
-                    label_2.Margin = new Padding(3, 0, 0, 0);
-                    label_2.TextAlign = ContentAlignment.MiddleLeft;
-                    label_2.Text = temp_name;
-
-                    panel_1.Controls.Add(label_1, 0, 0);
-                    panel_1.Controls.Add(label_2, 1, 0);
-
-                    panel_2.ColumnCount = 2;
-                    panel_2.ColumnStyles.Add(new ColumnStyle());
-                    panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-                    panel_2.Dock = DockStyle.Fill;
-                    panel_2.RowCount = 1;
-                    panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-                    label_3.AutoSize = true;
-                    label_3.Dock = DockStyle.Fill;
-                    label_3.Text = "Dateipfad:";
-                    label_3.TextAlign = ContentAlignment.MiddleCenter;
-                    label_3.BackColor = Color.Gainsboro;
-                    label_3.Margin = new Padding(0, 0, 0, 0);
-
-                    label_4.AutoSize = true;
-                    label_4.BackColor = Color.White;
-                    label_4.Dock = DockStyle.Fill;
-                    label_4.Margin = new Padding(3, 0, 0, 0);
-                    label_4.TextAlign = ContentAlignment.MiddleLeft;
-                    label_4.Text = temp_path;
-
-                    panel_2.Controls.Add(label_3, 0, 0);
-                    panel_2.Controls.Add(label_4, 1, 0);
-
-                    split.Panel1.Controls.Add(panel_1);
-                    split.Panel2.Controls.Add(panel_2);
-
-                    Size Textsize = TextRenderer.MeasureText(temp_name, label_2.Font);
-                    split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
-
-                    flowLayoutPanel2.Controls.Add(split);
-
-                    splitContainers.Clear();
-                    for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
-                    {
-                        splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
-                    }
-
-                    change_size_split();
-
-                    splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
-                      
+                    Neues_Label_hinzu(temp_name, temp_path);
+                    check_nach_Änderung();
                 }
                 else
                 {
@@ -183,6 +117,7 @@ namespace Aufnahmetest
                 }
             }
             change_size_split();
+            check_nach_Änderung();
         }
 
         private void TEST_Resize(object sender, EventArgs e)
@@ -206,16 +141,55 @@ namespace Aufnahmetest
 
         private void TEST_Load(object sender, EventArgs e)
         {
+            string temp_name, temp_path;
+            int anz_label = 0;
+
             splitContainers = new List<SplitContainer>();
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
-            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+
+            
+            if(!File.Exists(@"settings.xml"))
             {
-               // textBox1.Text = "kein Admin";
+                if(MessageBox.Show("Datei Settings konnte nicht gefunden werden. Wollen Sie eine erstellen?", "Settings Datei nicht gefunden", MessageBoxButtons.YesNo)==DialogResult.Yes)
+                {
+
+                    using (FileStream filestream = new FileStream("Settings.xml", FileMode.Create))
+                    using (StreamWriter sw = new StreamWriter(filestream))
+                    using (XmlTextWriter Writer = new XmlTextWriter(sw))
+                    {
+                        Writer.Formatting = Formatting.Indented;
+                        Writer.Indentation = 4;
+                        Writer.WriteStartElement("Settings");
+                        Writer.WriteStartElement("Daten");
+                        Writer.WriteElementString("Anzeige_Name", "");
+                        Writer.WriteElementString("Dateipfad", "");
+                        Writer.WriteElementString("Anzahl_Fragebögen", "0");
+                        Writer.WriteEndElement();
+                        Writer.WriteEndElement();
+                    }
+                    Settings.ReadXml(@"settings.xml");
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
+                }
             }
             else
             {
-              //  textBox1.Text = "Admin";
+                Settings.ReadXml(@"settings.xml");
+
+                anz_label = Int32.Parse(Settings.Tables[0].Rows[0][2].ToString());
+                org_Fragebögen.Clear();
+
+                for (int i = 0; i < anz_label; i++)
+                {
+                    temp_name = Settings.Tables[0].Rows[i + 1][0].ToString();
+                    temp_path = Settings.Tables[0].Rows[i + 1][1].ToString();
+
+                    org_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path });
+                    Neues_Label_hinzu(temp_name, temp_path);
+                }
+                check_nach_Änderung();
             }
         }
 
@@ -290,11 +264,13 @@ namespace Aufnahmetest
         private void nachUntenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             flowLayoutPanel2.Controls.SetChildIndex(conMenu_Source, flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source)+1);
+            check_nach_Änderung();
         }
 
         private void nachObenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             flowLayoutPanel2.Controls.SetChildIndex(conMenu_Source, flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source) - 1);
+            check_nach_Änderung();
         }
 
         private void conMenStr_1_Opening(object sender, CancelEventArgs e)
@@ -316,8 +292,6 @@ namespace Aufnahmetest
             {
                 ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[1].Enabled = false;
             }
-
-
         }
 
         private void change_Path_conMenStr_1_Click(object sender, EventArgs e)
@@ -329,8 +303,8 @@ namespace Aufnahmetest
                     SplitContainer split = (SplitContainer)conMenu_Source;
                     TableLayoutPanel tbl_lay = (TableLayoutPanel)split.Panel2.Controls[0];
                     Label label = (Label)tbl_lay.Controls[1];
-                    label.Text = openFileDialog1.FileName;
-
+                    label.Text = Path.GetFileName(openFileDialog1.FileName);
+                    check_nach_Änderung();
                 }
                 else
                 {
@@ -396,13 +370,158 @@ namespace Aufnahmetest
                 Size Textsize = TextRenderer.MeasureText(label.Text, label.Font);
                 split.Panel1MinSize = tbl_lay.Controls[0].Width + 6 + Textsize.Width;
                 split.SplitterDistance = split.Panel1MinSize;
+                check_nach_Änderung();
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Btn_OK_Click(object sender, EventArgs e)
         {
+            Settings.Tables[0].Rows[0][2] = changed_Fragebögen.Count;
+            for (int i = 0; i < changed_Fragebögen.Count; i++)
+            {
+                if(i+1 < Settings.Tables[0].Rows.Count)
+                {
+                    Settings.Tables[0].Rows[i + 1][0] = changed_Fragebögen[i].Name;
+                    Settings.Tables[0].Rows[i + 1][1] = changed_Fragebögen[i].Pfad;
+                }
+                else
+                {
+                    DataRow rw = Settings.Tables[0].NewRow();
+                    rw[0] = changed_Fragebögen[i].Name;
+                    rw[1] = changed_Fragebögen[i].Pfad;
+                    rw[2] = "";
 
+                    Settings.Tables[0].Rows.Add(rw);
+                }
+            }
+            
+            
+            Settings.WriteXml(@"settings.xml");
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
+        private void Neues_Label_hinzu(string Name,string Filepath)
+        {
+            SplitContainer split = new SplitContainer();
+            TableLayoutPanel panel_1 = new TableLayoutPanel();
+            TableLayoutPanel panel_2 = new TableLayoutPanel();
+            Label label_1 = new Label();
+            Label label_2 = new Label();
+            Label label_3 = new Label();
+            Label label_4 = new Label();
+
+            split.ContextMenuStrip = conMenStr_1;
+            split.BorderStyle = BorderStyle.FixedSingle;
+            split.Dock = DockStyle.Fill;
+            split.MaximumSize = new Size(0, 30);
+            split.MinimumSize = new Size(130, 0);
+            split.BackColor = Color.Gainsboro;
+            split.IsSplitterFixed = true;
+
+            panel_1.ColumnCount = 2;
+            panel_1.ColumnStyles.Add(new ColumnStyle());
+            panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panel_1.Dock = DockStyle.Fill;
+            panel_1.RowCount = 1;
+            panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+            label_1.AutoSize = true;
+            label_1.Dock = DockStyle.Fill;
+            label_1.Text = "Anzeigename:";
+            label_1.TextAlign = ContentAlignment.MiddleCenter;
+            label_1.BackColor = Color.Gainsboro;
+            label_1.Margin = new Padding(0, 0, 0, 0);
+
+            label_2.AutoSize = true;
+            label_2.BackColor = Color.White;
+            label_2.Dock = DockStyle.Fill;
+            label_2.Margin = new Padding(3, 0, 0, 0);
+            label_2.TextAlign = ContentAlignment.MiddleLeft;
+            label_2.Text = Name;
+
+            panel_1.Controls.Add(label_1, 0, 0);
+            panel_1.Controls.Add(label_2, 1, 0);
+
+            panel_2.ColumnCount = 2;
+            panel_2.ColumnStyles.Add(new ColumnStyle());
+            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panel_2.Dock = DockStyle.Fill;
+            panel_2.RowCount = 1;
+            panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+            label_3.AutoSize = true;
+            label_3.Dock = DockStyle.Fill;
+            label_3.Text = "Dateiname:";
+            label_3.TextAlign = ContentAlignment.MiddleCenter;
+            label_3.BackColor = Color.Gainsboro;
+            label_3.Margin = new Padding(0, 0, 0, 0);
+
+            label_4.AutoSize = true;
+            label_4.BackColor = Color.White;
+            label_4.Dock = DockStyle.Fill;
+            label_4.Margin = new Padding(3, 0, 0, 0);
+            label_4.TextAlign = ContentAlignment.MiddleLeft;
+            label_4.Text = Filepath;
+
+            panel_2.Controls.Add(label_3, 0, 0);
+            panel_2.Controls.Add(label_4, 1, 0);
+
+            split.Panel1.Controls.Add(panel_1);
+            split.Panel2.Controls.Add(panel_2);
+
+            Size Textsize = TextRenderer.MeasureText(Name, label_2.Font);
+            split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
+
+            flowLayoutPanel2.Controls.Add(split);
+
+            splitContainers.Clear();
+            for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
+            {
+                splitContainers.Add((SplitContainer)flowLayoutPanel2.Controls[i]);
+            }
+
+            change_size_split();
+
+            splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
+        }
+
+        private void check_nach_Änderung()
+        {
+            string temp_name;
+            string temp_path;
+            changed_Fragebögen.Clear();
+            for(int i = 0;i<flowLayoutPanel2.Controls.Count;i++)
+            {
+                temp_name = flowLayoutPanel2.Controls[i].Controls[0].Controls[0].Controls[1].Text;
+                temp_path = flowLayoutPanel2.Controls[i].Controls[1].Controls[0].Controls[1].Text;
+                changed_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path } );
+            }
+
+            Btn_Ok.Enabled = false;
+            if(changed_Fragebögen.Count != org_Fragebögen.Count)
+            {
+                Btn_Ok.Enabled = true;
+                return;
+            }
+            else
+            {
+                for(int i = 0;i<org_Fragebögen.Count;i++)
+                {
+                    if((org_Fragebögen[i].Name != changed_Fragebögen[i].Name)||(org_Fragebögen[i].Pfad != changed_Fragebögen[i].Pfad))
+                    {
+                        Btn_Ok.Enabled = true;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void Btn_Cancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }

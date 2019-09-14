@@ -21,19 +21,8 @@ namespace Aufnahmetest
             Application.SetCompatibleTextRenderingDefault(false);
             
 
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
-            /*
-            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
-            {
-                Application.Run(new Start_Screen()); //kein Admin
-            }
-            else
-            {
-                Application.Run(new TEST());//Admin
-            }
-            */
-            Application.Run(new Frm_Test());
+
+            Application.Run(new Start_Screen());
 
         }
     }

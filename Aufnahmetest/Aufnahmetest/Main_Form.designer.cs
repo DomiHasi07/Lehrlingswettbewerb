@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.Btn_Next = new System.Windows.Forms.Button();
             this.Btn_Start = new System.Windows.Forms.Button();
             this.tmr_Auswertung = new System.Windows.Forms.Timer(this.components);
@@ -239,6 +240,7 @@
             this.ClientSize = new System.Drawing.Size(730, 279);
             this.Controls.Add(this.tbL_Main);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quiz";
