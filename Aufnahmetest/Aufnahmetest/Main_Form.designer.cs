@@ -38,17 +38,19 @@
             this.Btn_Answer_1 = new System.Windows.Forms.Button();
             this.Btn_Answer_3 = new System.Windows.Forms.Button();
             this.Btn_Answer_2 = new System.Windows.Forms.Button();
-            this.lbl_Question = new System.Windows.Forms.Label();
             this.Tbl_Menu = new System.Windows.Forms.TableLayoutPanel();
             this.lbl_Aufgaben_Gebiet = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tmr_Frage = new System.Windows.Forms.Timer(this.components);
             this.tbL_Main = new System.Windows.Forms.TableLayoutPanel();
             this.pBx_1 = new System.Windows.Forms.PictureBox();
+            this.lbl_Question = new System.Windows.Forms.Label();
+            this.pBx_2 = new System.Windows.Forms.PictureBox();
             this.tbl_Buttons.SuspendLayout();
             this.Tbl_Menu.SuspendLayout();
             this.tbL_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBx_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBx_2)).BeginInit();
             this.SuspendLayout();
             // 
             // Btn_Next
@@ -84,13 +86,13 @@
             this.tbl_Buttons.Controls.Add(this.Btn_Answer_2, 0, 2);
             this.tbl_Buttons.Controls.Add(this.lbl_Question, 0, 0);
             this.tbl_Buttons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbl_Buttons.Location = new System.Drawing.Point(3, 58);
+            this.tbl_Buttons.Location = new System.Drawing.Point(3, 123);
             this.tbl_Buttons.Name = "tbl_Buttons";
             this.tbl_Buttons.RowCount = 3;
             this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tbl_Buttons.Size = new System.Drawing.Size(681, 191);
+            this.tbl_Buttons.Size = new System.Drawing.Size(681, 152);
             this.tbl_Buttons.TabIndex = 41;
             // 
             // Btn_Answer_4
@@ -98,9 +100,9 @@
             this.Btn_Answer_4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Answer_4.Enabled = false;
             this.Btn_Answer_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Answer_4.Location = new System.Drawing.Point(343, 123);
+            this.Btn_Answer_4.Location = new System.Drawing.Point(343, 104);
             this.Btn_Answer_4.Name = "Btn_Answer_4";
-            this.Btn_Answer_4.Size = new System.Drawing.Size(335, 65);
+            this.Btn_Answer_4.Size = new System.Drawing.Size(335, 45);
             this.Btn_Answer_4.TabIndex = 45;
             this.Btn_Answer_4.Tag = "3";
             this.Btn_Answer_4.UseVisualStyleBackColor = true;
@@ -113,7 +115,7 @@
             this.Btn_Answer_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Answer_1.Location = new System.Drawing.Point(3, 53);
             this.Btn_Answer_1.Name = "Btn_Answer_1";
-            this.Btn_Answer_1.Size = new System.Drawing.Size(334, 64);
+            this.Btn_Answer_1.Size = new System.Drawing.Size(334, 45);
             this.Btn_Answer_1.TabIndex = 43;
             this.Btn_Answer_1.Tag = "0";
             this.Btn_Answer_1.UseVisualStyleBackColor = true;
@@ -126,7 +128,7 @@
             this.Btn_Answer_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Answer_3.Location = new System.Drawing.Point(343, 53);
             this.Btn_Answer_3.Name = "Btn_Answer_3";
-            this.Btn_Answer_3.Size = new System.Drawing.Size(335, 64);
+            this.Btn_Answer_3.Size = new System.Drawing.Size(335, 45);
             this.Btn_Answer_3.TabIndex = 44;
             this.Btn_Answer_3.Tag = "2";
             this.Btn_Answer_3.UseVisualStyleBackColor = true;
@@ -137,25 +139,13 @@
             this.Btn_Answer_2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_Answer_2.Enabled = false;
             this.Btn_Answer_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Answer_2.Location = new System.Drawing.Point(3, 123);
+            this.Btn_Answer_2.Location = new System.Drawing.Point(3, 104);
             this.Btn_Answer_2.Name = "Btn_Answer_2";
-            this.Btn_Answer_2.Size = new System.Drawing.Size(334, 65);
+            this.Btn_Answer_2.Size = new System.Drawing.Size(334, 45);
             this.Btn_Answer_2.TabIndex = 43;
             this.Btn_Answer_2.Tag = "1";
             this.Btn_Answer_2.UseVisualStyleBackColor = true;
             this.Btn_Answer_2.Click += new System.EventHandler(this.Answer_Button_Click);
-            // 
-            // lbl_Question
-            // 
-            this.lbl_Question.AutoSize = true;
-            this.tbl_Buttons.SetColumnSpan(this.lbl_Question, 2);
-            this.lbl_Question.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_Question.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Question.Location = new System.Drawing.Point(3, 0);
-            this.lbl_Question.Name = "lbl_Question";
-            this.lbl_Question.Size = new System.Drawing.Size(675, 50);
-            this.lbl_Question.TabIndex = 46;
-            this.lbl_Question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Tbl_Menu
             // 
@@ -167,7 +157,7 @@
             this.Tbl_Menu.Controls.Add(this.Btn_Next, 2, 0);
             this.Tbl_Menu.Controls.Add(this.Btn_Start, 0, 0);
             this.Tbl_Menu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Tbl_Menu.Location = new System.Drawing.Point(3, 3);
+            this.Tbl_Menu.Location = new System.Drawing.Point(3, 68);
             this.Tbl_Menu.Name = "Tbl_Menu";
             this.Tbl_Menu.RowCount = 1;
             this.Tbl_Menu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -199,6 +189,7 @@
             // 
             // tmr_Frage
             // 
+            this.tmr_Frage.Interval = 6000;
             this.tmr_Frage.Tick += new System.EventHandler(this.tmr_Frage_Tick);
             // 
             // tbL_Main
@@ -209,35 +200,62 @@
             this.tbL_Main.ColumnCount = 2;
             this.tbL_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tbL_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tbL_Main.Controls.Add(this.pBx_1, 1, 0);
-            this.tbL_Main.Controls.Add(this.Tbl_Menu, 0, 0);
-            this.tbL_Main.Controls.Add(this.tbl_Buttons, 0, 1);
+            this.tbL_Main.Controls.Add(this.pBx_1, 1, 1);
+            this.tbL_Main.Controls.Add(this.Tbl_Menu, 0, 1);
+            this.tbL_Main.Controls.Add(this.tbl_Buttons, 0, 2);
+            this.tbL_Main.Controls.Add(this.pBx_2, 0, 0);
             this.tbL_Main.Location = new System.Drawing.Point(12, 12);
             this.tbL_Main.Name = "tbL_Main";
-            this.tbL_Main.RowCount = 2;
+            this.tbL_Main.RowCount = 3;
+            this.tbL_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tbL_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tbL_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tbL_Main.Size = new System.Drawing.Size(707, 252);
+            this.tbL_Main.Size = new System.Drawing.Size(707, 278);
             this.tbL_Main.TabIndex = 44;
             // 
             // pBx_1
             // 
             this.pBx_1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBx_1.Enabled = false;
-            this.pBx_1.Location = new System.Drawing.Point(690, 3);
+            this.pBx_1.Location = new System.Drawing.Point(690, 68);
             this.pBx_1.Name = "pBx_1";
             this.tbL_Main.SetRowSpan(this.pBx_1, 2);
-            this.pBx_1.Size = new System.Drawing.Size(14, 246);
+            this.pBx_1.Size = new System.Drawing.Size(14, 207);
             this.pBx_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBx_1.TabIndex = 45;
             this.pBx_1.TabStop = false;
             this.pBx_1.Visible = false;
             // 
+            // lbl_Question
+            // 
+            this.lbl_Question.AutoSize = true;
+            this.tbl_Buttons.SetColumnSpan(this.lbl_Question, 2);
+            this.lbl_Question.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_Question.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Question.Location = new System.Drawing.Point(3, 0);
+            this.lbl_Question.Name = "lbl_Question";
+            this.lbl_Question.Size = new System.Drawing.Size(675, 50);
+            this.lbl_Question.TabIndex = 46;
+            this.lbl_Question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pBx_2
+            // 
+            this.pBx_2.BackColor = System.Drawing.Color.White;
+            this.pBx_2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pBx_2.BackgroundImage")));
+            this.pBx_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pBx_2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pBx_2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pBx_2.InitialImage")));
+            this.pBx_2.Location = new System.Drawing.Point(3, 3);
+            this.pBx_2.Name = "pBx_2";
+            this.pBx_2.Size = new System.Drawing.Size(681, 59);
+            this.pBx_2.TabIndex = 46;
+            this.pBx_2.TabStop = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 279);
+            this.ClientSize = new System.Drawing.Size(730, 299);
             this.Controls.Add(this.tbL_Main);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -252,6 +270,7 @@
             this.Tbl_Menu.PerformLayout();
             this.tbL_Main.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBx_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBx_2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,9 +288,10 @@
         private System.Windows.Forms.Button Btn_Answer_3;
         private System.Windows.Forms.Button Btn_Answer_4;
         private System.Windows.Forms.Label lbl_Aufgaben_Gebiet;
-        private System.Windows.Forms.Label lbl_Question;
         private System.Windows.Forms.Timer tmr_Frage;
         private System.Windows.Forms.TableLayoutPanel tbL_Main;
         private System.Windows.Forms.PictureBox pBx_1;
+        private System.Windows.Forms.Label lbl_Question;
+        private System.Windows.Forms.PictureBox pBx_2;
     }
 }

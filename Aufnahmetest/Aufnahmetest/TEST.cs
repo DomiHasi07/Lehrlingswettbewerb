@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Security.Principal;
-using System.Configuration;
 using System.Xml;
+using System.Configuration;
 
 namespace Aufnahmetest
 {
@@ -31,6 +31,7 @@ namespace Aufnahmetest
         {
             public String Name { get; set; }
             public String Pfad { get; set; }
+            public String Zeit { get; set; }
            
         }
 
@@ -94,7 +95,7 @@ namespace Aufnahmetest
                     temp_path = Path.GetFileName(openFileDialog1.FileName);
                     temp_name = Path.GetFileNameWithoutExtension(openFileDialog1.FileName).Replace('_', ' ');
 
-                    Neues_Label_hinzu(temp_name, temp_path);
+                    Neues_Label_hinzu(temp_name, temp_path,"10");
                     check_nach_Änderung();
                 }
                 else
@@ -141,7 +142,7 @@ namespace Aufnahmetest
 
         private void TEST_Load(object sender, EventArgs e)
         {
-            string temp_name, temp_path;
+            string temp_name, temp_path, temp_Zeit;
             int anz_label = 0;
 
             splitContainers = new List<SplitContainer>();
@@ -161,6 +162,7 @@ namespace Aufnahmetest
                         Writer.WriteStartElement("Daten");
                         Writer.WriteElementString("Anzeige_Name", "");
                         Writer.WriteElementString("Dateipfad", "");
+                        Writer.WriteElementString("Zeit", "");
                         Writer.WriteElementString("Anzahl_Fragebögen", "0");
                         Writer.WriteEndElement();
                         Writer.WriteEndElement();
@@ -177,16 +179,17 @@ namespace Aufnahmetest
             {
                 Settings.ReadXml(@"settings.xml");
 
-                anz_label = Int32.Parse(Settings.Tables[0].Rows[0][2].ToString());
+                anz_label = Int32.Parse(Settings.Tables[0].Rows[0][3].ToString());
                 org_Fragebögen.Clear();
 
                 for (int i = 0; i < anz_label; i++)
                 {
                     temp_name = Settings.Tables[0].Rows[i + 1][0].ToString();
                     temp_path = Settings.Tables[0].Rows[i + 1][1].ToString();
+                    temp_Zeit = Settings.Tables[0].Rows[i + 1][2].ToString();
 
-                    org_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path });
-                    Neues_Label_hinzu(temp_name, temp_path);
+                    org_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path, Zeit = temp_Zeit });
+                    Neues_Label_hinzu(temp_name, temp_path,temp_Zeit);
                 }
                 check_nach_Änderung();
             }
@@ -375,13 +378,14 @@ namespace Aufnahmetest
 
         private void Btn_OK_Click(object sender, EventArgs e)
         {
-            Settings.Tables[0].Rows[0][2] = changed_Fragebögen.Count;
+            Settings.Tables[0].Rows[0][3] = changed_Fragebögen.Count;
             for (int i = 0; i < changed_Fragebögen.Count; i++)
             {
                 if(i+1 < Settings.Tables[0].Rows.Count)
                 {
                     Settings.Tables[0].Rows[i + 1][0] = changed_Fragebögen[i].Name;
                     Settings.Tables[0].Rows[i + 1][1] = changed_Fragebögen[i].Pfad;
+                    Settings.Tables[0].Rows[i + 1][2] = changed_Fragebögen[i].Zeit;
                 }
                 else
                 {
@@ -393,15 +397,26 @@ namespace Aufnahmetest
                     Settings.Tables[0].Rows.Add(rw);
                 }
             }
-            
-            
+            Boolean weiter = false;
+            if (Settings.Tables[0].Rows.Count > changed_Fragebögen.Count + 1)
+            {
+                while (!weiter)
+                {
+                    Settings.Tables[0].Rows.RemoveAt(Settings.Tables[0].Rows.Count - 1);
+                    if (Settings.Tables[0].Rows.Count == changed_Fragebögen.Count + 1)
+                        weiter = true;
+                }
+                
+            }
+                
             Settings.WriteXml(@"settings.xml");
+            
 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void Neues_Label_hinzu(string Name,string Filepath)
+        private void Neues_Label_hinzu(string Name,string Filepath, string Zeit)
         {
             SplitContainer split = new SplitContainer();
             TableLayoutPanel panel_1 = new TableLayoutPanel();
@@ -410,6 +425,8 @@ namespace Aufnahmetest
             Label label_2 = new Label();
             Label label_3 = new Label();
             Label label_4 = new Label();
+            Label label_5 = new Label();
+            Label label_6 = new Label();
 
             split.ContextMenuStrip = conMenStr_1;
             split.BorderStyle = BorderStyle.FixedSingle;
@@ -443,9 +460,11 @@ namespace Aufnahmetest
             panel_1.Controls.Add(label_1, 0, 0);
             panel_1.Controls.Add(label_2, 1, 0);
 
-            panel_2.ColumnCount = 2;
+            panel_2.ColumnCount = 4;
             panel_2.ColumnStyles.Add(new ColumnStyle());
             panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             panel_2.Dock = DockStyle.Fill;
             panel_2.RowCount = 1;
             panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -464,8 +483,24 @@ namespace Aufnahmetest
             label_4.TextAlign = ContentAlignment.MiddleLeft;
             label_4.Text = Filepath;
 
+            label_5.Size = new Size(20, 20);
+            label_5.Dock = DockStyle.Fill;
+            label_5.Text = "Zeit:";
+            label_5.TextAlign = ContentAlignment.MiddleCenter;
+            label_5.BackColor = Color.Gainsboro;
+            label_5.Margin = new Padding(0, 0, 0, 0);
+
+            label_6.AutoSize = true;
+            label_6.BackColor = Color.White;
+            label_6.Dock = DockStyle.Fill;
+            label_6.Margin = new Padding(3, 0, 0, 0);
+            label_6.TextAlign = ContentAlignment.MiddleLeft;
+            label_6.Text = Zeit;
+
             panel_2.Controls.Add(label_3, 0, 0);
             panel_2.Controls.Add(label_4, 1, 0);
+            panel_2.Controls.Add(label_5, 2, 0);
+            panel_2.Controls.Add(label_6, 3, 0);
 
             split.Panel1.Controls.Add(panel_1);
             split.Panel2.Controls.Add(panel_2);
@@ -490,12 +525,14 @@ namespace Aufnahmetest
         {
             string temp_name;
             string temp_path;
+            string temp_zeit;
             changed_Fragebögen.Clear();
             for(int i = 0;i<flowLayoutPanel2.Controls.Count;i++)
             {
                 temp_name = flowLayoutPanel2.Controls[i].Controls[0].Controls[0].Controls[1].Text;
                 temp_path = flowLayoutPanel2.Controls[i].Controls[1].Controls[0].Controls[1].Text;
-                changed_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path } );
+                temp_zeit = flowLayoutPanel2.Controls[i].Controls[1].Controls[0].Controls[3].Text;
+                changed_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path,Zeit=temp_zeit } );
             }
 
             Btn_Ok.Enabled = false;
@@ -508,7 +545,7 @@ namespace Aufnahmetest
             {
                 for(int i = 0;i<org_Fragebögen.Count;i++)
                 {
-                    if((org_Fragebögen[i].Name != changed_Fragebögen[i].Name)||(org_Fragebögen[i].Pfad != changed_Fragebögen[i].Pfad))
+                    if((org_Fragebögen[i].Name != changed_Fragebögen[i].Name)||(org_Fragebögen[i].Pfad != changed_Fragebögen[i].Pfad)|| (org_Fragebögen[i].Zeit != changed_Fragebögen[i].Zeit))
                     {
                         Btn_Ok.Enabled = true;
                         return;
@@ -521,6 +558,64 @@ namespace Aufnahmetest
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void zeitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SplitContainer split = (SplitContainer)conMenu_Source;
+            TableLayoutPanel tbl_lay = (TableLayoutPanel)split.Panel2.Controls[0];
+            Label label = (Label)tbl_lay.Controls[3];
+
+            myform temp_Form = new myform();
+
+            temp_Form.Text = "Name ändern";
+            temp_Form.Name = "change_Name";
+            temp_Form.Size = new Size(421, 132);
+            temp_Form.Load += Sub_Form_1_Load;
+
+            temp_Form.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            TableLayoutPanel temp_tbl = new TableLayoutPanel();
+
+            temp_tbl.Location = new Point(3, 0);
+            temp_tbl.Size = new Size(400, 90);
+            temp_tbl.ColumnCount = 2;
+            temp_tbl.Name = "Tbl_1";
+            temp_tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            temp_tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            temp_tbl.RowCount = 3;
+            temp_tbl.RowStyles.Add(new RowStyle(SizeType.AutoSize, 40F));
+            temp_tbl.RowStyles.Add(new RowStyle(SizeType.AutoSize, 40F));
+            temp_tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+
+            temp_tbl.Controls.Add(new Button() { Text = "Übernehmen", Name = "Btn_Ok", Dock = DockStyle.Fill, Size = new Size(50, 20) }, 0, 2);
+            temp_tbl.Controls.Add(new Button() { Text = "Abrechen", Name = "Btn_Cancel", Dock = DockStyle.Fill, Size = new Size(50, 20) }, 1, 2);
+            temp_tbl.Controls.Add(new TextBox() { Text = label.Text, Name = "tBx_Name", Dock = DockStyle.Fill }, 0, 1);
+            temp_tbl.Controls.Add(new Label()
+            {
+                Text = "Zeit",
+                Name = "lbl_Name",
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleCenter
+            }, 0, 0);
+            temp_tbl.Controls["lbl_Name"].Margin = new Padding(3, 3, 3, 0);
+            temp_tbl.Controls["tBx_Name"].Margin = new Padding(3, 0, 3, 3);
+            temp_tbl.Controls["Btn_Ok"].Click += sub_form_1_Btn_Ok_Click;
+            temp_tbl.Controls["Btn_Cancel"].Click += sub_form_1_Btn_Cancel_Click;
+
+            temp_tbl.SetColumnSpan(temp_tbl.Controls[3], 2);
+            temp_tbl.SetColumnSpan(temp_tbl.Controls[2], 2);
+
+            temp_tbl.Controls["tBx_Name"].KeyDown += Sub_Form_1_KeyDown;
+
+            temp_Form.Controls.Add(temp_tbl);
+
+            var result = temp_Form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                label.Text = temp_Form.Return_Value1;
+                check_nach_Änderung();
+            }
         }
     }
 }

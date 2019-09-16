@@ -16,7 +16,11 @@ namespace WindowsFormsApp3
 {
     public partial class Main : Form
     {
-        
+
+        public int return_richtige { get; set; }
+        public int return_skipped { get; set; }
+        public int return_falsche { get; set; }
+        public int return_Anzahl { get; set; }
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
         int current_Q = 1;
         float Zeit_pro_Frage = 0;
@@ -25,6 +29,7 @@ namespace WindowsFormsApp3
         Button[] answers;
         Button given_Answer;
         int zus_höhe = 0;
+        int Abrechen = 0;
 
         Random rnd = new Random();
 
@@ -35,12 +40,17 @@ namespace WindowsFormsApp3
 
         public static string[][][] Fragenkatalog;
         string[][][] answered_Qestions;
+
         
+
 
         public Main()
         {
             InitializeComponent();
-            string temp_path = @"Fragebogen\" + Start_Screen.pressed_Button.Tag.ToString();
+            string temp_data = Start_Screen.pressed_Button.Tag.ToString();
+            string[] arr_temp_data = temp_data.Split(new[] { "-_-_-" }, StringSplitOptions.None);
+            string temp_path = @"Fragebogen\" + arr_temp_data[0];
+            Zeit_pro_Frage = float.Parse(arr_temp_data[1]);
             Eingelesene_Fragen.ReadXml(temp_path);
 
             Fragenkatalog_OV();
@@ -144,7 +154,6 @@ namespace WindowsFormsApp3
         {
             if(!Ende)
             {
-                tmr_Frage.Stop();
                 Disable_Ans_Buttons();
                 Fragenauswertung();
 
@@ -153,74 +162,19 @@ namespace WindowsFormsApp3
                 if (current_Q > Fragenkatalog.Length)
                 {
                     skip_mode();
-                    if (!Ende)
-                        tmr_Frage.Start();
                 }
                 else
                 {
                     Hintergrundfarbe();
                     write_Question();
                     write_Answers();
-                    tmr_Frage.Start();
                     Btn_Next.Text = "Frage überspringen";
                 }
 
             }
             else
             {
-                int Anzahl_richtiger_Fragen = 0;
-                int Anzahl_skipped_Fragen = 0;
-                this.Close();
-                string temp_path = @"Ergebnisse\"+ DateTime.Today.ToString("ddMMyyyy") + "_" + Start_Screen.txt_Name + "_" + Start_Screen.pressed_Button.Tag.ToString() +  ".Txt";
-                if(File.Exists(temp_path))
-                {
-                    File.SetAttributes(temp_path, FileAttributes.Normal);
-                    File.Delete(temp_path);
-                }
-                using (StreamWriter sw = File.CreateText(temp_path))
-                {
-                    for(int i = 1;i<Fragenkatalog.Length+1;i++)
-                    {
-                        if(Fragenkatalog[i-1][2][0]=="right")
-                        {
-                            sw.WriteLine("Frage " + i + " wurde richtig beantwortet");
-                            Anzahl_richtiger_Fragen++;
-                        }
-                        else if(Fragenkatalog[i-1][2][0]=="skipped")
-                        {
-                            sw.WriteLine("Frage " + i  + " wurde übersprungen");
-                            Anzahl_skipped_Fragen++;
-                        }
-                        else
-                        {
-                            sw.WriteLine("Frage " + i + " wurde falsch beantwortet");
-                        }
-                    }
-                    sw.WriteLine("");
-                    if(Anzahl_richtiger_Fragen==Fragenkatalog.Length)
-                    {
-                        sw.WriteLine("Alle Fragen wurden richtig beantwortet");
-                    }
-                    else if(Anzahl_richtiger_Fragen == 0)
-                    {
-                        sw.WriteLine("Keine Frage wurde richtig beantwortet");
-                    }
-                    else
-                    {
-                        if (Anzahl_richtiger_Fragen == 1)
-                            sw.WriteLine(Anzahl_richtiger_Fragen + " von " + Fragenkatalog.Length + " Fragen wurde richtig beantwortet");
-                        else
-                            sw.WriteLine(Anzahl_richtiger_Fragen + " von " + Fragenkatalog.Length + " Fragen wurden richtig beantwortet");
-                        if (Anzahl_skipped_Fragen == 1)
-                            sw.WriteLine(Anzahl_skipped_Fragen + " Frage wurde übersprungen");
-                        else if (Anzahl_skipped_Fragen > 1)
-                            sw.WriteLine(Anzahl_skipped_Fragen + " Fragen wurden übersprungen");
-                        else if (Anzahl_skipped_Fragen == 0)
-                            sw.WriteLine("Es wurde keine Frage übersprungen");
-                    }
-                   
-                }
-                File.SetAttributes(temp_path, File.GetAttributes(temp_path) | FileAttributes.ReadOnly);
+                Endauswertung();
             }
             
         }
@@ -246,10 +200,11 @@ namespace WindowsFormsApp3
 
                     pBx_1.Visible = true;
                     pBx_1.Enabled = true;
+                    tbL_Main.SetColumnSpan(pBx_2, 2);
 
                     if (pBx_1.Image != null)
                     {
-                        this.MinimumSize = new Size(746, 318);
+                        this.MinimumSize = new Size(746, 340);
                         this.Width = this.Width + (temp_file.Width - pBx_1.Width);
                         this.Height = this.Height - zus_höhe;
                     }
@@ -277,12 +232,13 @@ namespace WindowsFormsApp3
             {
                 if (pBx_1.Image != null)
                 {
-                    this.MinimumSize = new Size(746, 318);
+                    this.MinimumSize = new Size(746, 340);
                     this.Width = this.Width - pBx_1.Width - 6;
                     this.Height = this.Height - zus_höhe;
                     pBx_1.Visible = false;
                     pBx_1.Enabled = false;
                     pBx_1.Image = null;
+                    tbL_Main.SetColumnSpan(pBx_2, 1);
                 }
             }
             this.CenterToScreen();
@@ -338,7 +294,6 @@ namespace WindowsFormsApp3
 
             Btn_Start.Text = "Start";
 
-            Zeit_pro_Frage = 0;
         }
 
         void Disable_Ans_Buttons()
@@ -381,9 +336,6 @@ namespace WindowsFormsApp3
                 Fragenkatalog[current_Q - 1][2][0] = "skipped";               
             }
             given_Answer = null;
-
-            Fragenkatalog[current_Q - 1][2][1] = (Zeit_pro_Frage / 10).ToString("0.0");
-            Zeit_pro_Frage = 0;
 
             return Fragenkatalog[current_Q - 1][2][0] != "skipped";
         }
@@ -438,13 +390,20 @@ namespace WindowsFormsApp3
                     skip_question_mode = false;
                     Ende = true;
                     Btn_Next.Text = "Beenden";
-                    this.MinimumSize = new Size(746, 318);
+                    this.MinimumSize = new Size(746, 340);
                     this.Width = this.Width - pBx_1.Width - 6;
                     this.Height = this.Height - zus_höhe;
                     this.CenterToScreen();
                     pBx_1.Visible = false;
                     pBx_1.Enabled = false;
                     pBx_1.Image = null;
+                    Disable_and_clear_Ans_Buttons();
+                    lbl_Aufgaben_Gebiet.Enabled = false;
+                    lbl_Aufgaben_Gebiet.Text = "";
+                    lbl_Question.Text = "";
+                    tmr_Frage.Stop();
+                    tbL_Main.SetColumnSpan(pBx_2, 1);
+
                 }
             }
             else
@@ -467,19 +426,31 @@ namespace WindowsFormsApp3
                 skip_question_mode = false;
                 Ende = true;
                 Btn_Next.Text = "Beenden";
-                this.MinimumSize = new Size(746, 318);
+                this.MinimumSize = new Size(746, 340);
                 this.Width = this.Width - pBx_1.Width - 6;
                 this.Height = this.Height - zus_höhe;
                 this.CenterToScreen();
                 pBx_1.Visible = false;
                 pBx_1.Enabled = false;
                 pBx_1.Image = null;
+                Disable_and_clear_Ans_Buttons();
+                lbl_Aufgaben_Gebiet.Enabled = false;
+                lbl_Aufgaben_Gebiet.Text = "";
+                lbl_Question.Text = "";
+                tmr_Frage.Stop();
+                tbL_Main.SetColumnSpan(pBx_2, 1);
             }
         }
 
         private void tmr_Frage_Tick(object sender, EventArgs e)
         {
-            Zeit_pro_Frage++;
+            Abrechen++;
+            if (Abrechen >= Zeit_pro_Frage)
+            {
+                tmr_Frage.Stop();
+                MessageBox.Show("Die Zeit ist abgelaufen", "Zeit abgelaufen");
+                Endauswertung();
+            }
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -530,6 +501,70 @@ namespace WindowsFormsApp3
         private void Main_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Endauswertung()
+        {
+            int Anzahl_richtiger_Fragen = 0;
+            int Anzahl_skipped_Fragen = 0;
+            this.Close();
+
+            string temp_data = Start_Screen.pressed_Button.Tag.ToString();
+            string[] arr_temp_data = temp_data.Split(new[] { "-_-_-" },StringSplitOptions.None);
+            string temp_path = @"Ergebnisse\" + DateTime.Today.ToString("ddMMyyyy") + "_" + Start_Screen.txt_Name + "_" + arr_temp_data[0].Replace(".xml", "") + ".Txt";
+            if (File.Exists(temp_path))
+            {
+                File.SetAttributes(temp_path, FileAttributes.Normal);
+                File.Delete(temp_path);
+            }
+            using (StreamWriter sw = File.CreateText(temp_path))
+            {
+                for (int i = 1; i < Fragenkatalog.Length + 1; i++)
+                {
+                    if (Fragenkatalog[i - 1][2][0] == "right")
+                    {
+                        sw.WriteLine("Frage " + i + " wurde richtig beantwortet");
+                        Anzahl_richtiger_Fragen++;
+                    }
+                    else if (Fragenkatalog[i - 1][2][0] == "skipped")
+                    {
+                        sw.WriteLine("Frage " + i + " wurde übersprungen");
+                        Anzahl_skipped_Fragen++;
+                    }
+                    else
+                    {
+                        sw.WriteLine("Frage " + i + " wurde falsch beantwortet");
+                    }
+                }
+                sw.WriteLine("");
+                if (Anzahl_richtiger_Fragen == Fragenkatalog.Length)
+                {
+                    sw.WriteLine("Alle Fragen wurden richtig beantwortet");
+                }
+                else if (Anzahl_richtiger_Fragen == 0)
+                {
+                    sw.WriteLine("Keine Frage wurde richtig beantwortet");
+                }
+                else
+                {
+                    if (Anzahl_richtiger_Fragen == 1)
+                        sw.WriteLine(Anzahl_richtiger_Fragen + " von " + Fragenkatalog.Length + " Fragen wurde richtig beantwortet");
+                    else
+                        sw.WriteLine(Anzahl_richtiger_Fragen + " von " + Fragenkatalog.Length + " Fragen wurden richtig beantwortet");
+                    if (Anzahl_skipped_Fragen == 1)
+                        sw.WriteLine(Anzahl_skipped_Fragen + " Frage wurde übersprungen");
+                    else if (Anzahl_skipped_Fragen > 1)
+                        sw.WriteLine(Anzahl_skipped_Fragen + " Fragen wurden übersprungen");
+                    else if (Anzahl_skipped_Fragen == 0)
+                        sw.WriteLine("Es wurde keine Frage übersprungen");
+                }
+                return_richtige = Anzahl_richtiger_Fragen;
+                return_Anzahl = Fragenkatalog.Length;
+                return_falsche = Fragenkatalog.Length - Anzahl_skipped_Fragen - Anzahl_richtiger_Fragen;
+                return_skipped = Anzahl_skipped_Fragen;
+
+            }
+            File.SetAttributes(temp_path, File.GetAttributes(temp_path) | FileAttributes.ReadOnly);
         }
     }
 }

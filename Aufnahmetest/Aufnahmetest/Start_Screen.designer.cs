@@ -31,10 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Start_Screen));
             this.tbl_Main = new System.Windows.Forms.TableLayoutPanel();
             this.TBx_Name = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowP_1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Btn_Start = new System.Windows.Forms.Button();
             this.Btn_Settings = new System.Windows.Forms.Button();
-            this.flowP_1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tbl_Main.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbl_Main
@@ -43,8 +45,8 @@
             this.tbl_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_Main.Controls.Add(this.TBx_Name, 0, 0);
+            this.tbl_Main.Controls.Add(this.panel1, 0, 1);
             this.tbl_Main.Controls.Add(this.Btn_Start, 1, 1);
-            this.tbl_Main.Controls.Add(this.flowP_1, 0, 1);
             this.tbl_Main.Location = new System.Drawing.Point(12, 12);
             this.tbl_Main.Name = "tbl_Main";
             this.tbl_Main.RowCount = 2;
@@ -64,6 +66,27 @@
             this.TBx_Name.Size = new System.Drawing.Size(629, 29);
             this.TBx_Name.TabIndex = 2;
             this.TBx_Name.TextChanged += new System.EventHandler(this.tB_Name_TextChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.flowP_1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 43);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(314, 137);
+            this.panel1.TabIndex = 3;
+            // 
+            // flowP_1
+            // 
+            this.flowP_1.AutoSize = true;
+            this.flowP_1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowP_1.Location = new System.Drawing.Point(0, 0);
+            this.flowP_1.MinimumSize = new System.Drawing.Size(314, 137);
+            this.flowP_1.Name = "flowP_1";
+            this.flowP_1.Size = new System.Drawing.Size(314, 137);
+            this.flowP_1.TabIndex = 4;
+            this.flowP_1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowP_1_Paint);
             // 
             // Btn_Start
             // 
@@ -90,14 +113,6 @@
             this.Btn_Settings.Visible = false;
             this.Btn_Settings.Click += new System.EventHandler(this.Btn_Settings_Click);
             // 
-            // flowP_1
-            // 
-            this.flowP_1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowP_1.Location = new System.Drawing.Point(3, 43);
-            this.flowP_1.Name = "flowP_1";
-            this.flowP_1.Size = new System.Drawing.Size(314, 137);
-            this.flowP_1.TabIndex = 4;
-            // 
             // Start_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,6 +127,8 @@
             this.Load += new System.EventHandler(this.Start_Screen_Load);
             this.tbl_Main.ResumeLayout(false);
             this.tbl_Main.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -127,5 +144,6 @@
         private System.Windows.Forms.Button Btn_Start;
         private System.Windows.Forms.Button Btn_Settings;
         private System.Windows.Forms.FlowLayoutPanel flowP_1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

@@ -26,8 +26,18 @@ namespace WindowsFormsApp3
         bool Admin = false;
        
         DataSet tempDS = new DataSet();
-        Button[] buttons;
         DataSet Settings = new DataSet();
+
+        List<Auswertung> Auswertung_Fragen = new List<Auswertung>();
+
+        public class Auswertung
+        {
+            public int Anzahl_falsche { get; set; }
+            public int Anzahl_Fragen { get; set; }
+            public int Anzahl_richtige { get; set; }
+            public int Anzahl_skipped { get; set; }
+            public string Themengebiet { get; set; }
+        }
 
         public Start_Screen()
         {
@@ -49,6 +59,7 @@ namespace WindowsFormsApp3
                 //Admin
             }
 
+
             if (!File.Exists(@"settings.xml"))
             {
                 if (MessageBox.Show("Datei Settings konnte nicht gefunden werden. Wollen Sie eine erstellen?" + "\n" + "(ohne Settings Datei kann das Programm nicht gestartet werden)", "Settings Datei nicht gefunden", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -63,6 +74,7 @@ namespace WindowsFormsApp3
                         Writer.WriteStartElement("Daten");
                         Writer.WriteElementString("Anzeige_Name", "");
                         Writer.WriteElementString("Dateipfad", "");
+                        Writer.WriteElementString("Zeit", "");
                         Writer.WriteElementString("Anzahl_Fragebögen", "0");
                         Writer.WriteEndElement();
                         Writer.WriteEndElement();
@@ -95,10 +107,10 @@ namespace WindowsFormsApp3
                 Buttons_hinzu();
             }
 
-
-            //buttons = new Button[] { Btn_1, Btn_2, Btn_3, Btn_4 };
-            //tbl_Buttons.Enabled = false;
+            flowP_1.Enabled = false;
             Btn_Start.Enabled = false;
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
             
         }
 
@@ -134,7 +146,7 @@ namespace WindowsFormsApp3
                 }
                 else
                 {
-                    if (Themen < 4)
+                    if (Themen < flowP_1.Controls.Count)
                     {
                         TBx_Name.ReadOnly = true;
                         txt_Name = TBx_Name.Text.Replace(" ","_");
@@ -147,16 +159,24 @@ namespace WindowsFormsApp3
                         }
                         this.Hide();
                         mainForm.ShowDialog();
+                        Auswertung_Fragen.Add(new Auswertung
+                        {
+                            Anzahl_falsche = mainForm.return_falsche,
+                            Anzahl_Fragen = mainForm.return_Anzahl,
+                            Anzahl_richtige = mainForm.return_richtige,
+                            Anzahl_skipped = mainForm.return_skipped,
+                            Themengebiet = pressed_Button.Text
+                        });
                         this.Show();
                         Themen++;
-                        if (Themen < 3)
+                        if (Themen < flowP_1.Controls.Count -1)
                         {
                             button_pressed = false;
                             Btn_Start.Enabled = false;
                         }
-                        else if (Themen == 3)
+                        else if (Themen == flowP_1.Controls.Count -1)
                         {
-                            foreach (Button button in buttons)
+                            foreach (Button button in flowP_1.Controls)
                             {
                                 if (button.Enabled)
                                 {
@@ -166,7 +186,7 @@ namespace WindowsFormsApp3
                                 }
                             }
                         }
-                        else if (Themen == 4)
+                        else if (Themen == flowP_1.Controls.Count)
                         {
                             Btn_Start.Text = "Beenden";
                             pressed_Button = null;
@@ -177,6 +197,75 @@ namespace WindowsFormsApp3
             }
             else
             {
+                string temp_path = @"Ergebnisse\" + DateTime.Today.ToString("ddMMyyyy") + "_" + Start_Screen.txt_Name + "_Endergebnis.Txt";
+                if (File.Exists(temp_path))
+                {
+                    File.SetAttributes(temp_path, FileAttributes.Normal);
+                    File.Delete(temp_path);
+                }
+                using (StreamWriter sw = File.CreateText(temp_path))
+                {
+                    Boolean weiter = false;
+                    int j = 0;
+                    int insgesamt_richtige = 0;
+                    int insgesamt_Fragen = 0;
+                    int Länge_text = 0;
+                    foreach (var Auswertung in Auswertung_Fragen)
+                    {
+                        StringBuilder temp_str = new StringBuilder();
+                        int nextTabStop;
+                        nextTabStop = (Auswertung.Themengebiet.Length + 8) / 8 * 8;
+                        if (nextTabStop > Länge_text)
+                        {
+                            Länge_text = nextTabStop;
+                        }
+                    }
+                    for (int i = 0;i<Auswertung_Fragen.Count;i++)
+                    {
+                        sw.Write(Auswertung_Fragen[i].Themengebiet);
+                        weiter = false;
+                        j = 0;
+                        while (!weiter)
+                        {
+                            sw.Write("\t");
+                            j++;
+                            if (Auswertung_Fragen[i].Themengebiet.Length + j*8 >= Länge_text)
+                            {
+                                weiter = true;
+                            }
+                            
+                        }
+                        sw.Write(Auswertung_Fragen[i].Anzahl_richtige + "/" + Auswertung_Fragen[i].Anzahl_Fragen);
+                        sw.WriteLine();
+                        sw.WriteLine();
+                        insgesamt_Fragen = insgesamt_Fragen + Auswertung_Fragen[i].Anzahl_Fragen;
+                        insgesamt_richtige = insgesamt_richtige + Auswertung_Fragen[i].Anzahl_richtige;
+                    }
+                    weiter = false;
+                    j = 0;
+                    sw.Write("Gesamt");
+                    while (!weiter)
+                    {
+                        sw.Write("\t");
+                        j++;
+                        if(6+j*8 >= Länge_text)
+                            weiter = true;
+                    }
+                    sw.Write(insgesamt_richtige + "/" + insgesamt_Fragen);
+                    sw.WriteLine();
+
+                    weiter = false;
+                    j = 0;
+                    while (!weiter)
+                    {
+                        sw.Write("-");
+                        j++;
+                        string temp_str = insgesamt_Fragen + "/" + insgesamt_richtige;
+                        if (j >= Länge_text + temp_str.Length)
+                            weiter = true;
+                    }
+                }
+                File.SetAttributes(temp_path, File.GetAttributes(temp_path) | FileAttributes.ReadOnly);
                 this.Close();
             }
         }
@@ -185,12 +274,12 @@ namespace WindowsFormsApp3
         {
             if(TBx_Name.TextLength > 0)
             {
-                //tbl_Buttons.Enabled = true;
+                flowP_1.Enabled = true;
             }
             else
             {
                 Button_Farbe();
-                //tbl_Buttons.Enabled = false;
+                flowP_1.Enabled = false;
                 Btn_Start.Enabled = false;
             }
         }
@@ -201,7 +290,7 @@ namespace WindowsFormsApp3
             var result = sub_frm.ShowDialog();
             if(result == DialogResult.OK)
             {
-
+                Buttons_hinzu();
             }
         }
 
@@ -209,10 +298,13 @@ namespace WindowsFormsApp3
         {
             string temp_name;
             string temp_file;
+            string temp_Zeit;
             int anz_buttons;
+            flowP_1.Controls.Clear();
+            Settings.Clear();
             Settings.ReadXml(@"Settings.xml");
 
-            anz_buttons = Int32.Parse(Settings.Tables[0].Rows[0][2].ToString());
+            anz_buttons = Int32.Parse(Settings.Tables[0].Rows[0][3].ToString());
 
 
             if(anz_buttons == 0 && !Admin)
@@ -225,16 +317,30 @@ namespace WindowsFormsApp3
             {
                 temp_name = Settings.Tables[0].Rows[i + 1][0].ToString();
                 temp_file = Settings.Tables[0].Rows[i + 1][1].ToString();
+                temp_Zeit = Settings.Tables[0].Rows[i + 1][2].ToString();
 
-                Button btn = new Button();
-                btn.Text = temp_name;
-                btn.Tag = temp_file;
-                btn.Size = new Size(100, 100);
+                Button btn = new Button
+                {
+                    Text = temp_name,
+                    Tag = temp_file + "-_-_-" + temp_Zeit,
+                    Size = new Size(140, 62)
+                };
                 btn.Click += new System.EventHandler(Auswahl_getroffen);
+                if (i%2 != 0)
+                {
+                    flowP_1.SetFlowBreak(btn, true);
+                }
+                
 
                 flowP_1.Controls.Add(btn);
             }
 
+
+
+        }
+
+        private void flowP_1_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
