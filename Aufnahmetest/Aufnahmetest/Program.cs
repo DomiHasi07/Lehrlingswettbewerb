@@ -20,7 +20,8 @@ namespace Aufnahmetest
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Start_Screen());
-
         }
+
+        
     }
 }

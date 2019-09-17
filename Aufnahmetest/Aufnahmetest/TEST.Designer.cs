@@ -34,6 +34,7 @@
             this.ändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pfadändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anzeigenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zeitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postionVerändernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nachObenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nachUntenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Btn_Ok = new System.Windows.Forms.Button();
             this.Btn_Cancel = new System.Windows.Forms.Button();
-            this.zeitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Btn_Schlüssel = new System.Windows.Forms.Button();
             this.conMenStr_1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             this.postionVerändernToolStripMenuItem,
             this.delete_conMenStr_1});
             this.conMenStr_1.Name = "contextMenuStrip1";
-            this.conMenStr_1.Size = new System.Drawing.Size(181, 92);
+            this.conMenStr_1.Size = new System.Drawing.Size(174, 70);
             this.conMenStr_1.Opening += new System.ComponentModel.CancelEventHandler(this.conMenStr_1_Opening);
             // 
             // ändernToolStripMenuItem
@@ -64,22 +65,29 @@
             this.anzeigenameToolStripMenuItem,
             this.zeitToolStripMenuItem});
             this.ändernToolStripMenuItem.Name = "ändernToolStripMenuItem";
-            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.ändernToolStripMenuItem.Text = "Ändern";
             // 
             // pfadändernToolStripMenuItem
             // 
             this.pfadändernToolStripMenuItem.Name = "pfadändernToolStripMenuItem";
-            this.pfadändernToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pfadändernToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.pfadändernToolStripMenuItem.Text = "Datei";
             this.pfadändernToolStripMenuItem.Click += new System.EventHandler(this.change_Path_conMenStr_1_Click);
             // 
             // anzeigenameToolStripMenuItem
             // 
             this.anzeigenameToolStripMenuItem.Name = "anzeigenameToolStripMenuItem";
-            this.anzeigenameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.anzeigenameToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.anzeigenameToolStripMenuItem.Text = "Anzeigename";
             this.anzeigenameToolStripMenuItem.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
+            // 
+            // zeitToolStripMenuItem
+            // 
+            this.zeitToolStripMenuItem.Name = "zeitToolStripMenuItem";
+            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.zeitToolStripMenuItem.Text = "Zeit";
+            this.zeitToolStripMenuItem.Click += new System.EventHandler(this.zeitToolStripMenuItem_Click);
             // 
             // postionVerändernToolStripMenuItem
             // 
@@ -128,7 +136,7 @@
             // 
             // Btn_Add
             // 
-            this.Btn_Add.Location = new System.Drawing.Point(392, 12);
+            this.Btn_Add.Location = new System.Drawing.Point(319, 12);
             this.Btn_Add.Name = "Btn_Add";
             this.Btn_Add.Size = new System.Drawing.Size(140, 30);
             this.Btn_Add.TabIndex = 5;
@@ -162,12 +170,15 @@
             this.Btn_Cancel.UseVisualStyleBackColor = true;
             this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
-            // zeitToolStripMenuItem
+            // Btn_Schlüssel
             // 
-            this.zeitToolStripMenuItem.Name = "zeitToolStripMenuItem";
-            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.zeitToolStripMenuItem.Text = "Zeit";
-            this.zeitToolStripMenuItem.Click += new System.EventHandler(this.zeitToolStripMenuItem_Click);
+            this.Btn_Schlüssel.Location = new System.Drawing.Point(465, 12);
+            this.Btn_Schlüssel.Name = "Btn_Schlüssel";
+            this.Btn_Schlüssel.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Schlüssel.TabIndex = 9;
+            this.Btn_Schlüssel.Text = "Notenschlüssel einstellen";
+            this.Btn_Schlüssel.UseVisualStyleBackColor = true;
+            this.Btn_Schlüssel.Click += new System.EventHandler(this.Btn_Schlüssel_Click);
             // 
             // Frm_Test
             // 
@@ -175,6 +186,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(924, 297);
+            this.Controls.Add(this.Btn_Schlüssel);
             this.Controls.Add(this.Btn_Cancel);
             this.Controls.Add(this.Btn_Ok);
             this.Controls.Add(this.Btn_Add);
@@ -207,5 +219,6 @@
         private System.Windows.Forms.Button Btn_Ok;
         private System.Windows.Forms.Button Btn_Cancel;
         private System.Windows.Forms.ToolStripMenuItem zeitToolStripMenuItem;
+        private System.Windows.Forms.Button Btn_Schlüssel;
     }
 }

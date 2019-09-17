@@ -23,7 +23,7 @@ namespace WindowsFormsApp3
         public int return_Anzahl { get; set; }
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
         int current_Q = 1;
-        float Zeit_pro_Frage = 0;
+        float maximale_Zeit = 0;
         int[] Zufallsantworten = new int[4];
         DataSet Eingelesene_Fragen = new DataSet();
         Button[] answers;
@@ -41,7 +41,31 @@ namespace WindowsFormsApp3
         public static string[][][] Fragenkatalog;
         string[][][] answered_Qestions;
 
-        
+        private const int WM_SYSCOMMAND = 0x0112;
+        private const int SC_MINIMIZE = 0xf120;
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_SYSCOMMAND)
+            {
+                if (m.WParam.ToInt32() == SC_MINIMIZE || m.WParam.ToInt32() == 0xf020)
+                {
+                    m.Result = IntPtr.Zero;
+                    return;
+                }
+
+                if (m.WParam.ToInt32() == 0xf060 && !Ende)
+                {
+                    m.Result = IntPtr.Zero;
+                    return;
+                }
+                else if (m.WParam.ToInt32() == 0xf060 && Ende)
+                {
+                    Endauswertung();
+                }
+            }
+            base.WndProc(ref m);
+        }
 
 
         public Main()
@@ -50,68 +74,20 @@ namespace WindowsFormsApp3
             string temp_data = Start_Screen.pressed_Button.Tag.ToString();
             string[] arr_temp_data = temp_data.Split(new[] { "-_-_-" }, StringSplitOptions.None);
             string temp_path = @"Fragebogen\" + arr_temp_data[0];
-            Zeit_pro_Frage = float.Parse(arr_temp_data[1]);
+            maximale_Zeit = float.Parse(arr_temp_data[1]);
             Eingelesene_Fragen.ReadXml(temp_path);
 
             Fragenkatalog_OV();
 
             answers = new Button[] { Btn_Answer_1, Btn_Answer_2, Btn_Answer_3, Btn_Answer_4 };
 
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
-
-
-            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
-            {
-                this.ControlBox = false;
-            }
-
+            this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
         }
 
         private void Lbl_Question_TextChanged(object sender, EventArgs e)
         {
-            string txt = lbl_Question.Text;
-            if(txt.Length>0)
-            {
-                int best_size = 100;
-                int lbl_wid = lbl_Question.DisplayRectangle.Width - 3;
-                int lbl_hgt = lbl_Question.DisplayRectangle.Height - 3;
-
-                using (Graphics gr = lbl_Question.CreateGraphics())
-                {
-                    for (int i = 1; i <= 100; i++)
-                    {
-                        using (Font test_font = new Font(lbl_Question.Font.FontFamily, i))
-                        {
-                            SizeF text_size = gr.MeasureString(txt, test_font);
-                            if((text_size.Height>lbl_hgt)||( text_size.Width > lbl_wid))
-                            {
-                                best_size = i - 1;
-                                break;
-                            }
-                            
-                        }
-                    }
-                    if (best_size < 12)
-                    {
-                        for (int i = 1; i <= 100; i++)
-                        {
-                            using (Font test_font = new Font(lbl_Question.Font.FontFamily, i))
-                            {
-                                SizeF text_size = gr.MeasureString(txt, test_font);
-                                if ((text_size.Width/2)>lbl_wid||(text_size.Height > (lbl_hgt / 2)))
-                                {
-                                    best_size = i - 1;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-
-                lbl_Question.Font = new Font(lbl_Question.Font.FontFamily, best_size);
-            }
+            
         }
 
         private void Answer_Button_Click(object sender, EventArgs e)
@@ -189,7 +165,7 @@ namespace WindowsFormsApp3
         
         void write_Question()
         {
-            lbl_Aufgaben_Gebiet.Text = Fragenkatalog[current_Q-1][0][0] +" "+ Fragenkatalog[current_Q-1][0][2] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
+            lbl_Aufgaben_Gebiet.Text = Fragenkatalog[current_Q-1][0][0] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
             lbl_Question.Text = Fragenkatalog[current_Q-1][0][1];
             if (Fragenkatalog[current_Q - 1][0][3] != "")
             {
@@ -201,6 +177,7 @@ namespace WindowsFormsApp3
                     pBx_1.Visible = true;
                     pBx_1.Enabled = true;
                     tbL_Main.SetColumnSpan(pBx_2, 2);
+                   
 
                     if (pBx_1.Image != null)
                     {
@@ -221,7 +198,7 @@ namespace WindowsFormsApp3
 
                     pBx_1.Width = temp_file.Width;
                     pBx_1.Image = temp_file;
-                    this.MinimumSize = new Size(this.Width, this.Height);
+                    Textsize_Question();
                 }
                 catch
                 {
@@ -445,7 +422,7 @@ namespace WindowsFormsApp3
         private void tmr_Frage_Tick(object sender, EventArgs e)
         {
             Abrechen++;
-            if (Abrechen >= Zeit_pro_Frage)
+            if (Abrechen >= maximale_Zeit)
             {
                 tmr_Frage.Stop();
                 MessageBox.Show("Die Zeit ist abgelaufen", "Zeit abgelaufen");
@@ -565,6 +542,52 @@ namespace WindowsFormsApp3
 
             }
             File.SetAttributes(temp_path, File.GetAttributes(temp_path) | FileAttributes.ReadOnly);
+        }
+
+        private void Textsize_Question()
+        {
+            string txt = lbl_Question.Text;
+            if (txt.Length > 0)
+            {
+                int best_size = 100;
+                int lbl_wid = lbl_Question.DisplayRectangle.Width - 3;
+                int lbl_hgt = lbl_Question.DisplayRectangle.Height - 3;
+
+                using (Graphics gr = lbl_Question.CreateGraphics())
+                {
+                    for (int i = 1; i <= 100; i++)
+                    {
+                        using (Font test_font = new Font(lbl_Question.Font.FontFamily, i))
+                        {
+                            SizeF text_size = gr.MeasureString(txt, test_font);
+                            if ((text_size.Height > lbl_hgt) || (text_size.Width > lbl_wid))
+                            {
+                                best_size = i - 1;
+                                break;
+                            }
+
+                        }
+                    }
+                    if (best_size < 12)
+                    {
+                        for (int i = 1; i <= 100; i++)
+                        {
+                            using (Font test_font = new Font(lbl_Question.Font.FontFamily, i))
+                            {
+                                SizeF text_size = gr.MeasureString(txt, test_font);
+                                if ((text_size.Width / 2) > lbl_wid || (text_size.Height > (lbl_hgt / 2)))
+                                {
+                                    best_size = i - 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                lbl_Question.Font = new Font(lbl_Question.Font.FontFamily, best_size);
+            }
         }
     }
 }

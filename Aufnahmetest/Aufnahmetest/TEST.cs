@@ -39,52 +39,16 @@ namespace Aufnahmetest
         List<SplitContainer> splitContainers;
         List<Int32> cur_SpDist = new List<int>();
         private Control conMenu_Source;
-        DataSet Settings = new DataSet();
+        public static DataSet Settings = new DataSet();
         List<Fragebogen> changed_Fragebögen = new List<Fragebogen>();
         List<Fragebogen> org_Fragebögen = new List<Fragebogen>();
 
-
-        private void Btn_Add_Click(object sender, EventArgs e)
-        {
-            /*
-            Button button = new Button();
-            button.Text = "TEST";
-            button.Click += new System.EventHandler(this.Farbe);
-            flowLayoutPanel1.Controls.Add(button);
-            Label lbl = new Label();
-            lbl.Text = "Test" + flowLayoutPanel2.Controls.Count;
-            lbl.BorderStyle = BorderStyle.FixedSingle;
-            lbl.ContextMenuStrip = contextMenuStrip1;
-            lbl.Tag = flowLayoutPanel2.Controls.Count;
-            lbl.TextAlign = ContentAlignment.MiddleCenter;
-            lbl.Margin =  new Padding(3);
-            flowLayoutPanel2.Controls.Add(lbl);
-            */
-        }
-
-        private void Btn_Remve_Click(object sender, EventArgs e)
-        {
-            /*
-            if (flowLayoutPanel1.Controls.Count > 0)
-                flowLayoutPanel1.Controls.RemoveAt(flowLayoutPanel1.Controls.Count - 1);
-            */
-        }
-
-        private void Farbe(object sender, EventArgs e)
-        {
-            /*
-            foreach (Button Btn in flowLayoutPanel1.Controls)
-            {
-                Btn.BackColor = SystemColors.ControlLight;
-            }
-            (sender as Button).BackColor = Color.White;
-            */
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string temp_name = "";
             string temp_path = "";
+            string temp_zeit = "10";
 
             openFileDialog1.FileName = "";
 
@@ -95,7 +59,7 @@ namespace Aufnahmetest
                     temp_path = Path.GetFileName(openFileDialog1.FileName);
                     temp_name = Path.GetFileNameWithoutExtension(openFileDialog1.FileName).Replace('_', ' ');
 
-                    Neues_Label_hinzu(temp_name, temp_path,"10");
+                    Neues_Label_hinzu(temp_name, temp_path,temp_zeit);
                     check_nach_Änderung();
                 }
                 else
@@ -392,7 +356,8 @@ namespace Aufnahmetest
                     DataRow rw = Settings.Tables[0].NewRow();
                     rw[0] = changed_Fragebögen[i].Name;
                     rw[1] = changed_Fragebögen[i].Pfad;
-                    rw[2] = "";
+                    rw[2] = changed_Fragebögen[i].Zeit;
+                    rw[3] = "";
 
                     Settings.Tables[0].Rows.Add(rw);
                 }
@@ -568,8 +533,8 @@ namespace Aufnahmetest
 
             myform temp_Form = new myform();
 
-            temp_Form.Text = "Name ändern";
-            temp_Form.Name = "change_Name";
+            temp_Form.Text = "Zeit ändern";
+            temp_Form.Name = "change_Time";
             temp_Form.Size = new Size(421, 132);
             temp_Form.Load += Sub_Form_1_Load;
 
@@ -616,6 +581,12 @@ namespace Aufnahmetest
                 label.Text = temp_Form.Return_Value1;
                 check_nach_Änderung();
             }
+        }
+
+        private void Btn_Schlüssel_Click(object sender, EventArgs e)
+        {
+            Frm_Einstellung_Schlüssel frm = new Frm_Einstellung_Schlüssel();
+            frm.Show();
         }
     }
 }
