@@ -45,7 +45,9 @@
             this.Btn_Ok = new System.Windows.Forms.Button();
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_Schlüssel = new System.Windows.Forms.Button();
+            this.tbl_1 = new System.Windows.Forms.TableLayoutPanel();
             this.conMenStr_1.SuspendLayout();
+            this.tbl_1.SuspendLayout();
             this.SuspendLayout();
             // 
             // conMenStr_1
@@ -136,9 +138,10 @@
             // 
             // Btn_Add
             // 
-            this.Btn_Add.Location = new System.Drawing.Point(319, 12);
+            this.Btn_Add.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_Add.Location = new System.Drawing.Point(3, 3);
             this.Btn_Add.Name = "Btn_Add";
-            this.Btn_Add.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Add.Size = new System.Drawing.Size(179, 29);
             this.Btn_Add.TabIndex = 5;
             this.Btn_Add.Text = "Fragebogen hinzufügen";
             this.Btn_Add.UseVisualStyleBackColor = true;
@@ -172,13 +175,28 @@
             // 
             // Btn_Schlüssel
             // 
-            this.Btn_Schlüssel.Location = new System.Drawing.Point(465, 12);
+            this.Btn_Schlüssel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_Schlüssel.Location = new System.Drawing.Point(188, 3);
             this.Btn_Schlüssel.Name = "Btn_Schlüssel";
-            this.Btn_Schlüssel.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Schlüssel.Size = new System.Drawing.Size(179, 29);
             this.Btn_Schlüssel.TabIndex = 9;
             this.Btn_Schlüssel.Text = "Notenschlüssel einstellen";
             this.Btn_Schlüssel.UseVisualStyleBackColor = true;
             this.Btn_Schlüssel.Click += new System.EventHandler(this.Btn_Schlüssel_Click);
+            // 
+            // tbl_1
+            // 
+            this.tbl_1.ColumnCount = 2;
+            this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_1.Controls.Add(this.Btn_Schlüssel, 1, 0);
+            this.tbl_1.Controls.Add(this.Btn_Add, 0, 0);
+            this.tbl_1.Location = new System.Drawing.Point(285, 12);
+            this.tbl_1.Name = "tbl_1";
+            this.tbl_1.RowCount = 1;
+            this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbl_1.Size = new System.Drawing.Size(370, 35);
+            this.tbl_1.TabIndex = 10;
             // 
             // Frm_Test
             // 
@@ -186,10 +204,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(924, 297);
-            this.Controls.Add(this.Btn_Schlüssel);
+            this.Controls.Add(this.tbl_1);
             this.Controls.Add(this.Btn_Cancel);
             this.Controls.Add(this.Btn_Ok);
-            this.Controls.Add(this.Btn_Add);
             this.Controls.Add(this.flowLayoutPanel2);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -200,6 +217,7 @@
             this.ResizeBegin += new System.EventHandler(this.TEST_ResizeBegin);
             this.Resize += new System.EventHandler(this.TEST_Resize);
             this.conMenStr_1.ResumeLayout(false);
+            this.tbl_1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -220,5 +238,6 @@
         private System.Windows.Forms.Button Btn_Cancel;
         private System.Windows.Forms.ToolStripMenuItem zeitToolStripMenuItem;
         private System.Windows.Forms.Button Btn_Schlüssel;
+        private System.Windows.Forms.TableLayoutPanel tbl_1;
     }
 }

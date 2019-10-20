@@ -21,6 +21,7 @@ namespace WindowsFormsApp3
         public int return_skipped { get; set; }
         public int return_falsche { get; set; }
         public int return_Anzahl { get; set; }
+        public int return_Zeit { get; set; }
         Font currentFont = new Font(FontFamily.GenericSansSerif, 10);
         int current_Q = 1;
         float maximale_Zeit = 0;
@@ -364,65 +365,19 @@ namespace WindowsFormsApp3
                 }
                 else
                 {
-                    skip_question_mode = false;
-                    Ende = true;
-                    Btn_Next.Text = "Beenden";
-                    this.MinimumSize = new Size(746, 340);
-                    this.Width = this.Width - pBx_1.Width - 6;
-                    this.Height = this.Height - zus_höhe;
-                    this.CenterToScreen();
-                    pBx_1.Visible = false;
-                    pBx_1.Enabled = false;
-                    pBx_1.Image = null;
-                    Disable_and_clear_Ans_Buttons();
-                    lbl_Aufgaben_Gebiet.Enabled = false;
-                    lbl_Aufgaben_Gebiet.Text = "";
-                    lbl_Question.Text = "";
-                    tmr_Frage.Stop();
-                    tbL_Main.SetColumnSpan(pBx_2, 1);
-
+                    Form_Ende();
                 }
             }
             else
             {
-                string[][][] temp = new string[Fragenkatalog.Length + answered_Qestions.Length][][];
-
-                for (int i = 0; i < answered_Qestions.Length; i++)
-                {
-                    temp[x] = answered_Qestions[i];
-                    x++;
-                }
-
-                for (int i = 0; i < Fragenkatalog.Length; i++)
-                {
-                    temp[x] = Fragenkatalog[i];
-                    x++;
-                }
-
-                Fragenkatalog = temp;
-                skip_question_mode = false;
-                Ende = true;
-                Btn_Next.Text = "Beenden";
-                this.MinimumSize = new Size(746, 340);
-                this.Width = this.Width - pBx_1.Width - 6;
-                this.Height = this.Height - zus_höhe;
-                this.CenterToScreen();
-                pBx_1.Visible = false;
-                pBx_1.Enabled = false;
-                pBx_1.Image = null;
-                Disable_and_clear_Ans_Buttons();
-                lbl_Aufgaben_Gebiet.Enabled = false;
-                lbl_Aufgaben_Gebiet.Text = "";
-                lbl_Question.Text = "";
-                tmr_Frage.Stop();
-                tbL_Main.SetColumnSpan(pBx_2, 1);
+                Form_Ende();
             }
         }
 
         private void tmr_Frage_Tick(object sender, EventArgs e)
         {
             Abrechen++;
-            if (Abrechen >= maximale_Zeit)
+            if (((float)Abrechen)/60 >= maximale_Zeit)
             {
                 tmr_Frage.Stop();
                 MessageBox.Show("Die Zeit ist abgelaufen", "Zeit abgelaufen");
@@ -482,13 +437,37 @@ namespace WindowsFormsApp3
 
         private void Endauswertung()
         {
+
+            int x = 0;
+            if(answered_Qestions != null )
+            {
+                string[][][] temp = new string[Fragenkatalog.Length + answered_Qestions.Length][][];
+                for (int i = 0; i < answered_Qestions.Length; i++)
+                {
+                    temp[x] = answered_Qestions[i];
+                    x++;
+                }
+
+                for (int i = 0; i < Fragenkatalog.Length; i++)
+                {
+                    temp[x] = Fragenkatalog[i];
+                    x++;
+                }
+
+                Fragenkatalog = temp;
+            }
+            
             int Anzahl_richtiger_Fragen = 0;
             int Anzahl_skipped_Fragen = 0;
-            this.Close();
 
             string temp_data = Start_Screen.pressed_Button.Tag.ToString();
             string[] arr_temp_data = temp_data.Split(new[] { "-_-_-" },StringSplitOptions.None);
-            string temp_path = @"Ergebnisse\" + DateTime.Today.ToString("ddMMyyyy") + "_" + Start_Screen.txt_Name + "_" + arr_temp_data[0].Replace(".xml", "") + ".Txt";
+
+            string new_path = @"Ergebnisse\" + Start_Screen.txt_Name.Replace(" ", "_") + "_" + DateTime.Today.ToString("ddMMyyyy");
+            System.IO.Directory.CreateDirectory(new_path);
+
+            string temp_path = new_path + @"\" + Start_Screen.txt_Name.Replace(" ", "_") + "_" + DateTime.Today.ToString("ddMMyyyy") + "_" + arr_temp_data[0].Replace(".xml", "") + ".Txt";
+
             if (File.Exists(temp_path))
             {
                 File.SetAttributes(temp_path, FileAttributes.Normal);
@@ -539,6 +518,9 @@ namespace WindowsFormsApp3
                 return_Anzahl = Fragenkatalog.Length;
                 return_falsche = Fragenkatalog.Length - Anzahl_skipped_Fragen - Anzahl_richtiger_Fragen;
                 return_skipped = Anzahl_skipped_Fragen;
+                return_Zeit = Abrechen;
+
+                this.Close();
 
             }
             File.SetAttributes(temp_path, File.GetAttributes(temp_path) | FileAttributes.ReadOnly);
@@ -588,6 +570,26 @@ namespace WindowsFormsApp3
 
                 lbl_Question.Font = new Font(lbl_Question.Font.FontFamily, best_size);
             }
+        }
+
+        private void Form_Ende()
+        {
+            skip_question_mode = false;
+            Ende = true;
+            Btn_Next.Text = "Weiter";
+            this.MinimumSize = new Size(746, 340);
+            this.Width = this.Width - pBx_1.Width - 6;
+            this.Height = this.Height - zus_höhe;
+            this.CenterToScreen();
+            pBx_1.Visible = false;
+            pBx_1.Enabled = false;
+            pBx_1.Image = null;
+            Disable_and_clear_Ans_Buttons();
+            lbl_Aufgaben_Gebiet.Enabled = false;
+            lbl_Aufgaben_Gebiet.Text = "";
+            lbl_Question.Text = "";
+            tmr_Frage.Stop();
+            tbL_Main.SetColumnSpan(pBx_2, 1);
         }
     }
 }

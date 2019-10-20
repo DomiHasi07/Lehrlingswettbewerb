@@ -203,7 +203,7 @@
             // 
             // tmr_Frage
             // 
-            this.tmr_Frage.Interval = 60000;
+            this.tmr_Frage.Interval = 1000;
             this.tmr_Frage.Tick += new System.EventHandler(this.tmr_Frage_Tick);
             // 
             // tbL_Main
@@ -231,10 +231,10 @@
             // 
             this.pBx_1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pBx_1.Enabled = false;
-            this.pBx_1.Location = new System.Drawing.Point(690, 78);
+            this.pBx_1.Location = new System.Drawing.Point(1009, 223);
             this.pBx_1.Name = "pBx_1";
             this.tbL_Main.SetRowSpan(this.pBx_1, 2);
-            this.pBx_1.Size = new System.Drawing.Size(14, 197);
+            this.pBx_1.Size = new System.Drawing.Size(14, 274);
             this.pBx_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pBx_1.TabIndex = 45;
             this.pBx_1.TabStop = false;

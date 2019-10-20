@@ -88,9 +88,9 @@ namespace Aufnahmetest
         private void TEST_Resize(object sender, EventArgs e)
         {
             change_size_split();
-            Btn_Add.Location =  new Point((this.Width/2)-(Btn_Add.Width/2),Btn_Add.Location.Y);
             Btn_Ok.Location = new Point(this.Width - 314, this.Height - 81);
             Btn_Cancel.Location = new Point(this.Width - 168, this.Height - 81);
+            tbl_1.Location = new Point((this.Width / 2) - (tbl_1.Width / 2), tbl_1.Location.Y);
             try
             {
                 if (splitContainers.Count > 0)

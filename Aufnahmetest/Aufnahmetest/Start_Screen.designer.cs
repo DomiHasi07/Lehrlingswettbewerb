@@ -58,7 +58,7 @@
             this.tbl_Main.RowCount = 3;
             this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 220F));
             this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tbl_Main.Size = new System.Drawing.Size(1050, 605);
             this.tbl_Main.TabIndex = 1;
             // 
@@ -72,7 +72,7 @@
             this.TBx_Name.Name = "TBx_Name";
             this.TBx_Name.Size = new System.Drawing.Size(1039, 47);
             this.TBx_Name.TabIndex = 2;
-            this.TBx_Name.Text = "Bitte Name eingeben";
+            this.TBx_Name.Text = "Bitte Name und Geburtsdatum eingeben";
             this.TBx_Name.TextChanged += new System.EventHandler(this.tB_Name_TextChanged);
             this.TBx_Name.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TBx_Name_KeyDown);
             // 

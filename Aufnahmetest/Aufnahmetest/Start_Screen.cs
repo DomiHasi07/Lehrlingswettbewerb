@@ -34,6 +34,9 @@ namespace WindowsFormsApp3
         private const int WM_SYSCOMMAND = 0x0112;
         private const int SC_MINIMIZE = 0xf120;
 
+        [DllImport("gdi32.dll")]
+        static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_SYSCOMMAND)
@@ -67,6 +70,7 @@ namespace WindowsFormsApp3
             public int Anzahl_Fragen { get; set; }
             public int Anzahl_richtige { get; set; }
             public int Anzahl_skipped { get; set; }
+            public int Zeit { get; set; }
             public string Themengebiet { get; set; }
         }
 
@@ -80,9 +84,6 @@ namespace WindowsFormsApp3
         {
 
             InitializeComponent();
-
-            Taskbar.Hide();
-
 
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
@@ -154,7 +155,12 @@ namespace WindowsFormsApp3
 
             flowP_1.Enabled = false;
             Btn_Start.Enabled = false;
-            
+
+            tbl_Main.RowStyles[0] = new RowStyle(SizeType.Absolute, 220 / scaling_Factor());
+            tbl_Main.RowStyles[1] = new RowStyle(SizeType.Absolute, 55 / scaling_Factor());
+            panel1.Size = new Size((int)(519/scaling_Factor()),(int)(324/scaling_Factor()));
+            TBx_Name.Font = new Font(TBx_Name.Font.FontFamily, (int)(26/scaling_Factor()));
+
         }
 
         private void Start_Screen_Load(object sender, EventArgs e)
@@ -206,6 +212,7 @@ namespace WindowsFormsApp3
                             Anzahl_Fragen = mainForm.return_Anzahl,
                             Anzahl_richtige = mainForm.return_richtige,
                             Anzahl_skipped = mainForm.return_skipped,
+                            Zeit = mainForm.return_Zeit,
                             Themengebiet = pressed_Button.Text
                         });
                         this.Show();
@@ -294,9 +301,16 @@ namespace WindowsFormsApp3
                 {
                     Text = temp_name,
                     Tag = temp_file + "-_-_-" + temp_Zeit,
-                    Size = new Size(446, 350),
                     Font = new Font(Font.Name, 20)
                 };
+                if(scaling_Factor() == 1)
+                {
+                    btn.Size = new Size(444, 350);
+                }
+                else
+                {
+                    btn.Size = new Size((int)(452 / scaling_Factor()) - (int)(8 * scaling_Factor()), (int)(369 / scaling_Factor()) - (int)(21 * scaling_Factor()));
+                }
                 btn.Click += new System.EventHandler(Auswahl_getroffen);
                 if (i%2 != 0)
                 {
@@ -315,11 +329,15 @@ namespace WindowsFormsApp3
 
         private void Endergebnis()
         {
-            string temp_path = @"Ergebnisse\" + DateTime.Today.ToString("ddMMyyyy") + "_" + Start_Screen.txt_Name + "_Endergebnis.Txt";
+            TimeSpan time = new TimeSpan();
+            string new_path = @"Ergebnisse\" + Start_Screen.txt_Name.Replace(" ", "_") + "_" + DateTime.Today.ToString("ddMMyyyy");
+            System.IO.Directory.CreateDirectory(new_path);
+
+            string temp_path = new_path + @"\" + Start_Screen.txt_Name.Replace(" ", "_") + "_" + DateTime.Today.ToString("ddMMyyyy") + "_Endergebnis.txt";
             if (File.Exists(temp_path))
             {
                 File.SetAttributes(temp_path, FileAttributes.Normal);
-                File.Delete(temp_path);
+                File.Delete(temp_path); 
             }
             using (StreamWriter sw = File.CreateText(temp_path))
             {
@@ -327,6 +345,7 @@ namespace WindowsFormsApp3
                 int j = 0;
                 int insgesamt_richtige = 0;
                 int insgesamt_Fragen = 0;
+                int insgesamt_Zeit = 0;
                 int Länge_text = 0;
                 float prozent_richtige;
                 foreach (var Auswertung in Auswertung_Fragen)
@@ -357,11 +376,12 @@ namespace WindowsFormsApp3
                         }
 
                     }
-                    sw.Write(Auswertung_Fragen[i].Anzahl_richtige + "/" + Auswertung_Fragen[i].Anzahl_Fragen);
-                    sw.WriteLine();
+                    time = TimeSpan.FromSeconds(Auswertung_Fragen[i].Zeit);
+                    sw.Write(Auswertung_Fragen[i].Anzahl_richtige + "/" + Auswertung_Fragen[i].Anzahl_Fragen + "\t" + (int) time.TotalMinutes + " min " + time.Seconds + " sek");
                     sw.WriteLine();
                     insgesamt_Fragen = insgesamt_Fragen + Auswertung_Fragen[i].Anzahl_Fragen;
                     insgesamt_richtige = insgesamt_richtige + Auswertung_Fragen[i].Anzahl_richtige;
+                    insgesamt_Zeit = insgesamt_Zeit + Auswertung_Fragen[i].Zeit;
                 }
                 weiter = false;
                 j = 0;
@@ -386,6 +406,8 @@ namespace WindowsFormsApp3
                         weiter = true;
                 }
                 sw.Write(insgesamt_richtige + "/" + insgesamt_Fragen);
+                time = TimeSpan.FromSeconds(insgesamt_Zeit);
+                sw.Write("\t" + time.Minutes + " min " + time.Seconds + " sek");
                 sw.WriteLine();
                 sw.WriteLine();
                 sw.Write("Ergebnis:");
@@ -466,6 +488,26 @@ namespace WindowsFormsApp3
                 Name_eingeben = true;
             }
             
+        }
+
+        public enum DeviceCap
+        {
+            VERTRES = 10,
+            DESKTOPVERTRES = 117,
+
+            // http://pinvoke.net/default.aspx/gdi32/GetDeviceCaps.html
+        }
+
+        public float scaling_Factor()
+        {
+            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+            IntPtr desktop = g.GetHdc();
+            int LogicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+            int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+
+            float ScreenScalingFactor = (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+
+            return ScreenScalingFactor; 
         }
     }
 }
