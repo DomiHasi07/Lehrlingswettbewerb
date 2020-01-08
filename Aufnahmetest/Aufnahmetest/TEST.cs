@@ -35,14 +35,16 @@ namespace Aufnahmetest
            
         }
 
-
         List<SplitContainer> splitContainers;
         List<Int32> cur_SpDist = new List<int>();
         private Control conMenu_Source;
         public static DataSet Settings = new DataSet();
         List<Fragebogen> changed_Fragebögen = new List<Fragebogen>();
         List<Fragebogen> org_Fragebögen = new List<Fragebogen>();
-
+        private Point MouseDownLocation;
+        public Control test_Button;
+        public Boolean button_got_moved = false;
+        private int moved_splitter_Loc;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -245,19 +247,26 @@ namespace Aufnahmetest
             ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[0].Enabled = true;
             ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[1].Enabled = true;
 
+
             conMenu_Source = ((ContextMenuStrip)sender).SourceControl;
-            if(flowLayoutPanel2.Controls.Count==1)
+            
+            if (conMenu_Source.Parent == flowLayoutPanel2)
             {
-               ((ContextMenuStrip)sender).Items[1].Enabled = false;
+                if (flowLayoutPanel2.Controls.Count == 1)
+                {
+                    ((ContextMenuStrip)sender).Items[1].Enabled = false;
+                }
+                else if (flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source) == 0)
+                {
+                    ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[0].Enabled = false;
+                }
+                else if (flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source) == flowLayoutPanel2.Controls.Count - 1)
+                {
+                    ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[1].Enabled = false;
+                }
             }
-            else if(flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source)==0)
-            {
-                ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[0].Enabled = false;
-            }
-            else if (flowLayoutPanel2.Controls.GetChildIndex(conMenu_Source) == flowLayoutPanel2.Controls.Count -1)
-            {
-                ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[1].Enabled = false;
-            }
+
+           
         }
 
         private void change_Path_conMenStr_1_Click(object sender, EventArgs e)
@@ -383,97 +392,8 @@ namespace Aufnahmetest
 
         private void Neues_Label_hinzu(string Name,string Filepath, string Zeit)
         {
-            SplitContainer split = new SplitContainer();
-            TableLayoutPanel panel_1 = new TableLayoutPanel();
-            TableLayoutPanel panel_2 = new TableLayoutPanel();
-            Label label_1 = new Label();
-            Label label_2 = new Label();
-            Label label_3 = new Label();
-            Label label_4 = new Label();
-            Label label_5 = new Label();
-            Label label_6 = new Label();
 
-            split.ContextMenuStrip = conMenStr_1;
-            split.BorderStyle = BorderStyle.FixedSingle;
-            split.Dock = DockStyle.Fill;
-            split.MaximumSize = new Size(0, 30);
-            split.MinimumSize = new Size(130, 0);
-            split.BackColor = Color.Gainsboro;
-            split.IsSplitterFixed = true;
-
-            panel_1.ColumnCount = 2;
-            panel_1.ColumnStyles.Add(new ColumnStyle());
-            panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            panel_1.Dock = DockStyle.Fill;
-            panel_1.RowCount = 1;
-            panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-            label_1.AutoSize = true;
-            label_1.Dock = DockStyle.Fill;
-            label_1.Text = "Anzeigename:";
-            label_1.TextAlign = ContentAlignment.MiddleCenter;
-            label_1.BackColor = Color.Gainsboro;
-            label_1.Margin = new Padding(0, 0, 0, 0);
-
-            label_2.AutoSize = true;
-            label_2.BackColor = Color.White;
-            label_2.Dock = DockStyle.Fill;
-            label_2.Margin = new Padding(3, 0, 0, 0);
-            label_2.TextAlign = ContentAlignment.MiddleLeft;
-            label_2.Text = Name;
-
-            panel_1.Controls.Add(label_1, 0, 0);
-            panel_1.Controls.Add(label_2, 1, 0);
-
-            panel_2.ColumnCount = 4;
-            panel_2.ColumnStyles.Add(new ColumnStyle());
-            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
-            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            panel_2.Dock = DockStyle.Fill;
-            panel_2.RowCount = 1;
-            panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-            label_3.AutoSize = true;
-            label_3.Dock = DockStyle.Fill;
-            label_3.Text = "Dateiname:";
-            label_3.TextAlign = ContentAlignment.MiddleCenter;
-            label_3.BackColor = Color.Gainsboro;
-            label_3.Margin = new Padding(0, 0, 0, 0);
-
-            label_4.AutoSize = true;
-            label_4.BackColor = Color.White;
-            label_4.Dock = DockStyle.Fill;
-            label_4.Margin = new Padding(3, 0, 0, 0);
-            label_4.TextAlign = ContentAlignment.MiddleLeft;
-            label_4.Text = Filepath;
-
-            label_5.Size = new Size(20, 20);
-            label_5.Dock = DockStyle.Fill;
-            label_5.Text = "Zeit:";
-            label_5.TextAlign = ContentAlignment.MiddleCenter;
-            label_5.BackColor = Color.Gainsboro;
-            label_5.Margin = new Padding(0, 0, 0, 0);
-
-            label_6.AutoSize = true;
-            label_6.BackColor = Color.White;
-            label_6.Dock = DockStyle.Fill;
-            label_6.Margin = new Padding(3, 0, 0, 0);
-            label_6.TextAlign = ContentAlignment.MiddleLeft;
-            label_6.Text = Zeit;
-
-            panel_2.Controls.Add(label_3, 0, 0);
-            panel_2.Controls.Add(label_4, 1, 0);
-            panel_2.Controls.Add(label_5, 2, 0);
-            panel_2.Controls.Add(label_6, 3, 0);
-
-            split.Panel1.Controls.Add(panel_1);
-            split.Panel2.Controls.Add(panel_2);
-
-            Size Textsize = TextRenderer.MeasureText(Name, label_2.Font);
-            split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
-
-            flowLayoutPanel2.Controls.Add(split);
+            flowLayoutPanel2.Controls.Add(Label_erstellen(Name, Filepath, Zeit));
 
             splitContainers.Clear();
             for (int i = 0; i < flowLayoutPanel2.Controls.Count; i++)
@@ -485,6 +405,99 @@ namespace Aufnahmetest
 
             splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
         }
+
+        private void Split_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                
+                test_Button.Location = new Point(this.PointToClient(Cursor.Position).X - MouseDownLocation.X,this.PointToClient(Cursor.Position).Y - MouseDownLocation.Y);
+                button_got_moved = true;
+            }
+
+        }
+
+        private void Split_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                if (!button_got_moved)
+                {
+                    SplitContainer temp_split;
+                    if (sender.GetType().Name == "Label")
+                    {
+                        temp_split = (SplitContainer)((SplitterPanel)((TableLayoutPanel)((Label)sender).Parent).Parent).Parent;
+                    }
+                    else
+                    {
+                        temp_split = (SplitContainer)sender;
+                    }
+
+                    MouseDownLocation = temp_split.PointToClient(Cursor.Position);
+
+                    moved_splitter_Loc = flowLayoutPanel2.Controls.GetChildIndex(temp_split);
+
+                    
+
+                    foreach (Label lbl in temp_split.Panel1.Controls[0].Controls)
+                    {
+                        lbl.MouseUp += Test_MouseMove;
+                    }
+
+                    foreach (Label lbl in temp_split.Panel2.Controls[0].Controls)
+                    {
+                        lbl.MouseUp += Test_MouseMove;
+                    }
+
+                    temp_split.ContextMenuStrip = null;
+                    temp_split.Controls[0].Controls[0].MouseUp += Test_MouseMove;
+                    temp_split.MouseUp += Test_MouseMove;
+                    this.Controls.Add(temp_split);
+                    temp_split.Dock = DockStyle.None;
+                    temp_split.BringToFront();
+
+                    test_Button = temp_split;
+                    temp_split.Location = new Point(this.PointToClient(Cursor.Position).X -MouseDownLocation.X, this.PointToClient(Cursor.Position).Y-MouseDownLocation.Y);
+
+                    button_got_moved = true;
+                }
+                
+            }
+        }
+
+        private void Test_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left && button_got_moved)
+            {
+                List<int> Entfernung = new List<int>();
+                Entfernung.Clear();
+
+                foreach(Control ctrl in flowLayoutPanel2.Controls)
+                {
+                    Entfernung.Add(Math.Abs(flowLayoutPanel2.PointToClient(Cursor.Position).Y-ctrl.Location.Y));
+                }
+
+                int n = -1;
+                int min_dist = Entfernung.Min();
+                foreach (int temp in Entfernung)
+                {
+                    if (temp == min_dist)
+                        n = Entfernung.IndexOf(temp);
+                }
+
+                flowLayoutPanel2.Controls.Add(test_Button);
+
+                if (n == flowLayoutPanel2.Controls.Count-2 && min_dist > 40)
+                    flowLayoutPanel2.Controls.SetChildIndex(test_Button, n + 1);
+                else
+                    flowLayoutPanel2.Controls.SetChildIndex(test_Button, n);
+
+                test_Button.ContextMenuStrip = conMenStr_1;
+                check_nach_Änderung();
+                button_got_moved = false;
+            }
+        }
+
 
         private void check_nach_Änderung()
         {
@@ -588,5 +601,119 @@ namespace Aufnahmetest
             Frm_Einstellung_Schlüssel frm = new Frm_Einstellung_Schlüssel();
             frm.Show();
         }
+
+        private SplitContainer Label_erstellen(string Name,string Filepath,string Zeit)
+        {
+            SplitContainer split = new SplitContainer();
+            TableLayoutPanel panel_1 = new TableLayoutPanel();
+            TableLayoutPanel panel_2 = new TableLayoutPanel();
+            Label label_1 = new Label();
+            Label label_2 = new Label();
+            Label label_3 = new Label();
+            Label label_4 = new Label();
+            Label label_5 = new Label();
+            Label label_6 = new Label();
+
+            split.ContextMenuStrip = conMenStr_1;
+            split.BorderStyle = BorderStyle.FixedSingle;
+            split.Dock = DockStyle.Fill;
+            split.MaximumSize = new Size(0, 30);
+            split.MinimumSize = new Size(130, 0);
+            split.BackColor = Color.Gainsboro;
+            split.IsSplitterFixed = true;
+
+            panel_1.ColumnCount = 2;
+            panel_1.ColumnStyles.Add(new ColumnStyle());
+            panel_1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panel_1.Dock = DockStyle.Fill;
+            panel_1.RowCount = 1;
+            panel_1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+            label_1.AutoSize = true;
+            label_1.Dock = DockStyle.Fill;
+            label_1.Text = "Anzeigename:";
+            label_1.TextAlign = ContentAlignment.MiddleCenter;
+            label_1.BackColor = Color.Gainsboro;
+            label_1.Margin = new Padding(0, 0, 0, 0);
+
+            label_2.AutoSize = true;
+            label_2.BackColor = Color.White;
+            label_2.Dock = DockStyle.Fill;
+            label_2.Margin = new Padding(3, 0, 0, 0);
+            label_2.TextAlign = ContentAlignment.MiddleLeft;
+            label_2.Text = Name;
+
+            panel_1.Controls.Add(label_1, 0, 0);
+            panel_1.Controls.Add(label_2, 1, 0);
+
+            panel_2.ColumnCount = 4;
+            panel_2.ColumnStyles.Add(new ColumnStyle());
+            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            panel_2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            panel_2.Dock = DockStyle.Fill;
+            panel_2.RowCount = 1;
+            panel_2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+            label_3.AutoSize = true;
+            label_3.Dock = DockStyle.Fill;
+            label_3.Text = "Dateiname:";
+            label_3.TextAlign = ContentAlignment.MiddleCenter;
+            label_3.BackColor = Color.Gainsboro;
+            label_3.Margin = new Padding(0, 0, 0, 0);
+
+            label_4.AutoSize = true;
+            label_4.BackColor = Color.White;
+            label_4.Dock = DockStyle.Fill;
+            label_4.Margin = new Padding(3, 0, 0, 0);
+            label_4.TextAlign = ContentAlignment.MiddleLeft;
+            label_4.Text = Filepath;
+
+            label_5.Size = new Size(20, 20);
+            label_5.Dock = DockStyle.Fill;
+            label_5.Text = "Zeit:";
+            label_5.TextAlign = ContentAlignment.MiddleCenter;
+            label_5.BackColor = Color.Gainsboro;
+            label_5.Margin = new Padding(0, 0, 0, 0);
+
+            label_6.AutoSize = true;
+            label_6.BackColor = Color.White;
+            label_6.Dock = DockStyle.Fill;
+            label_6.Margin = new Padding(3, 0, 0, 0);
+            label_6.TextAlign = ContentAlignment.MiddleLeft;
+            label_6.Text = Zeit;
+
+
+            panel_2.Controls.Add(label_3, 0, 0);
+            panel_2.Controls.Add(label_4, 1, 0);
+            panel_2.Controls.Add(label_5, 2, 0);
+            panel_2.Controls.Add(label_6, 3, 0);
+
+            foreach (Label lbl in panel_2.Controls)
+            {
+                lbl.MouseDown += Split_MouseDown;
+                lbl.MouseMove += Split_MouseMove;
+            }
+
+            foreach (Label lbl in panel_1.Controls)
+            {
+                lbl.MouseDown += Split_MouseDown;
+                lbl.MouseMove += Split_MouseMove;
+            }
+
+            split.Panel1.Controls.Add(panel_1);
+            split.Panel2.Controls.Add(panel_2);
+
+            Size Textsize = TextRenderer.MeasureText(Name, label_2.Font);
+            split.Panel1MinSize = label_1.Width + 6 + Textsize.Width;
+            split.MouseDown += Split_MouseDown;
+            split.MouseMove += Split_MouseMove;
+
+           
+
+            return split;
+        }
+
+        
     }
 }

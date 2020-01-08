@@ -49,7 +49,7 @@ namespace WindowsFormsApp3
 
 
                 
-                if (m.WParam.ToInt32() == 0xf060 && !finished)
+                if (m.WParam.ToInt32() == 0xf060 && !finished && !Admin)
                 {
                     m.Result = IntPtr.Zero;
                     return;
@@ -88,17 +88,12 @@ namespace WindowsFormsApp3
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
 
-            if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
-            {
-                this.Size = new Size(718, 306);
-            }
-            else
+            
+            if (principal.IsInRole(WindowsBuiltInRole.Administrator) || System.Diagnostics.Debugger.IsAttached)
             {
                 Btn_Settings.Visible = true;
                 Admin = true;
-                //Admin
             }
-
 
             if (!File.Exists(@"settings.xml"))
             {
@@ -462,6 +457,7 @@ namespace WindowsFormsApp3
                 {
                     sw.Write("sehr gut geeignet");
                 }
+                sw.Write("\t" + prozent_richtige.ToString("0") +"%");
                 sw.WriteLine();
                 sw.WriteLine();
                 sw.WriteLine(Settings.Tables[1].Rows[0][0].ToString() + "\t nicht geeignet");

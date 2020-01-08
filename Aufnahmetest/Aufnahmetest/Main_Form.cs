@@ -31,6 +31,7 @@ namespace WindowsFormsApp3
         Button given_Answer;
         int zus_höhe = 0;
         int Abrechen = 0;
+        int Anzahl_Fragen = 0;
 
         Random rnd = new Random();
 
@@ -84,6 +85,7 @@ namespace WindowsFormsApp3
 
             this.WindowState = FormWindowState.Maximized;
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            
         }
 
         private void Lbl_Question_TextChanged(object sender, EventArgs e)
@@ -118,12 +120,8 @@ namespace WindowsFormsApp3
                 Start_Sequenz();
                 Start_was_pressed = true;
                 Btn_Start.Enabled = false;
-            }
-            else
-            {
-                Reset();
-                Fragenkatalog_OV();
-                Start_was_pressed = false;
+                Btn_Start.BackColor = Color.White;
+                Btn_Start.Text = TimeSpan.FromMinutes(maximale_Zeit).ToString(@"mm\:ss");
             }
         }
 
@@ -166,7 +164,7 @@ namespace WindowsFormsApp3
         
         void write_Question()
         {
-            lbl_Aufgaben_Gebiet.Text = Fragenkatalog[current_Q-1][0][0] + " Frage: " + current_Q + " / " + Fragenkatalog.Length;
+            lbl_Aufgaben_Gebiet.Text = Fragenkatalog[current_Q-1][0][0] + " Frage: " + Fragenkatalog[current_Q-1][0][2] + " / " + Anzahl_Fragen;
             lbl_Question.Text = Fragenkatalog[current_Q-1][0][1];
             if (Fragenkatalog[current_Q - 1][0][3] != "")
             {
@@ -269,8 +267,6 @@ namespace WindowsFormsApp3
             Hintergrundfarbe();
             given_Answer = null;
             current_Q = 1;
-
-            Btn_Start.Text = "Start";
 
         }
 
@@ -383,6 +379,7 @@ namespace WindowsFormsApp3
                 MessageBox.Show("Die Zeit ist abgelaufen", "Zeit abgelaufen");
                 Endauswertung();
             }
+            Btn_Start.Text = TimeSpan.FromSeconds(maximale_Zeit*60 - Abrechen).ToString(@"mm\:ss");
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -428,6 +425,8 @@ namespace WindowsFormsApp3
                 Fragenkatalog[i][1][2] = dt.Rows[i]["Antwort3"].ToString();
                 Fragenkatalog[i][1][3] = dt.Rows[i]["Antwort4"].ToString();
             }
+
+            Anzahl_Fragen = Fragenkatalog.Length;
         }
 
         private void Main_Load(object sender, EventArgs e)
