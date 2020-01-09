@@ -23,12 +23,23 @@ namespace Aufnahmetest
             string data;
             for (int i =0;i<5;i++)
             {
-                data = Settings.Tables[1].Rows[0][i].ToString();
+                data = Settings.Tables["Schlüssel"].Rows[0][i].ToString();
                 string[] arr_data = data.Split('-');
-                if(i>0)
-                    this.Controls[0].Controls["TxB_" + (i+1).ToString()].Text = arr_data[0];
-                if(i<4)
-                    this.Controls[0].Controls["TxB_" + (i + 6).ToString()].Text = arr_data[1];
+                switch(i)
+                {
+                    case 0:
+                        this.Controls[0].Controls["TxB_6"].Text = arr_data[1];
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                        this.Controls[0].Controls["TxB_" + (i + 1).ToString()].Text = arr_data[0];
+                        this.Controls[0].Controls["TxB_" + (i + 6).ToString()].Text = arr_data[1];
+                        break;
+                    case 4:
+                        this.Controls[0].Controls["TxB_5"].Text = arr_data[0];
+                        break;
+                }
             }
             after_Start = true;
         }

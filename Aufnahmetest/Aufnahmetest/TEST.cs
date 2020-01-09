@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
@@ -45,7 +46,7 @@ namespace Aufnahmetest
         public Control test_Button;
         public Boolean button_got_moved = false;
         private int moved_splitter_Loc;
-        public Boolean started_ready_for_resize = false;
+        private Boolean started_ready_for_resize = false;
    
 
         private void button1_Click(object sender, EventArgs e)
@@ -91,20 +92,8 @@ namespace Aufnahmetest
 
         private void TEST_Resize(object sender, EventArgs e)
         {
-            change_size_split();
             tbl_1.Location = new Point((this.Width / 2) - (tbl_1.Width / 2), tbl_1.Location.Y);
-            tlp_Speichern.Location = new Point(this.Width - 420, this.Height - 100);
-            try
-            {
-                if (splitContainers.Count > 0)
-                {
-                    for (int i = 0; i < splitContainers.Count; i++)
-                    {
-                        splitContainers[i].SplitterDistance = cur_SpDist[i];
-                    }
-                }
-            }
-            catch { }
+            tbl_Speichern.Location = new Point(this.Width - 317, this.Height - 87);
         }
 
         private void TEST_Load(object sender, EventArgs e)
@@ -113,6 +102,7 @@ namespace Aufnahmetest
             int anz_label = 0;
 
             splitContainers = new List<SplitContainer>();
+            started_ready_for_resize = true;
 
             if (!File.Exists(@"settings.xml"))
             {
@@ -158,7 +148,6 @@ namespace Aufnahmetest
                     org_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path, Zeit = temp_Zeit });
                     Neues_Label_hinzu(temp_name, temp_path,temp_Zeit);
                 }
-                started_ready_for_resize = true;
                 check_nach_Änderung();
                 change_size_split();
             }
@@ -168,15 +157,26 @@ namespace Aufnahmetest
         {
             if(started_ready_for_resize)
             {
+                List<int> Länge = new List<int>();
+                foreach(SplitContainer x in splitContainers)
+                {
+                    Länge.Add(TextRenderer.MeasureText(x.Panel1.Controls[0].Controls["Name"].Text,x.Panel1.Controls[0].Controls["Name"].Font).Width + x.Panel1.Controls[0].Controls["Name_Beschr"].Width + 35);
+                    x.SplitterDistance = Länge.Max();
+                }
+                Länge.Clear();
+
                 if (flowLayoutPanel2.VerticalScroll.Visible)
                 {
                     splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 30, 30));
+                    splitContainers.ForEach(x => x.MaximumSize = new Size(flowLayoutPanel2.Width - 30, 30));
                     splitContainers.ForEach(x => x.Margin = new Padding(3, 3, 0, 3));
                     flowLayoutPanel2.Controls[flowLayoutPanel2.Controls.Count - 1].Margin = new Padding(3, 3, 0, 12);
                 }
                 else
                 {
                     splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 16, 30));
+                    splitContainers.ForEach(x => x.MaximumSize = new Size(flowLayoutPanel2.Width - 16, 30));
+                    splitContainers.ForEach(x => x.Margin = new Padding(3, 3, 0, 3));
                 }
             }
             
@@ -224,16 +224,7 @@ namespace Aufnahmetest
 
         private void TEST_ResizeBegin(object sender, EventArgs e)
         {
-            if(splitContainers.Count >0 )
-            {
-                if (cur_SpDist.Count > 0)
-                    cur_SpDist.Clear();
-
-                for (int i = 0; i < splitContainers.Count; i++)
-                {
-                    cur_SpDist.Add(splitContainers[i].SplitterDistance);
-                }
-            }
+            
         }
 
         private void nachUntenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -349,7 +340,6 @@ namespace Aufnahmetest
                 label.Text = temp_Form.Return_Value1;
                 Size Textsize = TextRenderer.MeasureText(label.Text, label.Font);
                 split.Panel1MinSize = tbl_lay.Controls[0].Width + 6 + Textsize.Width;
-                split.SplitterDistance = split.Panel1MinSize;
                 check_nach_Änderung();
             }
         }
@@ -408,14 +398,13 @@ namespace Aufnahmetest
 
             change_size_split();
 
-            splitContainers[splitContainers.Count - 1].SplitterDistance = splitContainers[splitContainers.Count - 1].Panel1MinSize;
+            timer_Button_got_added.Start();
         }
 
         private void Split_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && (flowLayoutPanel2.Controls.Count > 1 || (flowLayoutPanel2.Controls.Count == 1 && button_got_moved)) && !timer_Button_got_added.Enabled)
             {
-                
                 test_Button.Location = new Point(this.PointToClient(Cursor.Position).X - MouseDownLocation.X,this.PointToClient(Cursor.Position).Y - MouseDownLocation.Y);
                 button_got_moved = true;
             }
@@ -424,9 +413,10 @@ namespace Aufnahmetest
 
         private void Split_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && flowLayoutPanel2.Controls.Count > 1 && !timer_Button_got_added.Enabled)
             {
-                if (!button_got_moved)
+                if (!button_got_moved )
                 {
                     SplitContainer temp_split;
                     if (sender.GetType().Name == "Label")
@@ -498,7 +488,9 @@ namespace Aufnahmetest
                     flowLayoutPanel2.Controls.SetChildIndex(test_Button, n);
 
                 test_Button.ContextMenuStrip = conMenStr_1;
+                
                 check_nach_Änderung();
+                change_size_split();
                 button_got_moved = false;
             }
         }
@@ -640,6 +632,7 @@ namespace Aufnahmetest
             label_1.TextAlign = ContentAlignment.MiddleCenter;
             label_1.BackColor = Color.Gainsboro;
             label_1.Margin = new Padding(0, 0, 0, 0);
+            label_1.Name = "Name_Beschr";
 
             label_2.AutoSize = true;
             label_2.BackColor = Color.White;
@@ -647,6 +640,7 @@ namespace Aufnahmetest
             label_2.Margin = new Padding(3, 0, 0, 0);
             label_2.TextAlign = ContentAlignment.MiddleLeft;
             label_2.Text = Name;
+            label_2.Name = "Name";
 
             panel_1.Controls.Add(label_1, 0, 0);
             panel_1.Controls.Add(label_2, 1, 0);
@@ -666,6 +660,7 @@ namespace Aufnahmetest
             label_3.TextAlign = ContentAlignment.MiddleCenter;
             label_3.BackColor = Color.Gainsboro;
             label_3.Margin = new Padding(0, 0, 0, 0);
+            label_3.Name = "filename_Beschr";
 
             label_4.AutoSize = true;
             label_4.BackColor = Color.White;
@@ -673,6 +668,7 @@ namespace Aufnahmetest
             label_4.Margin = new Padding(3, 0, 0, 0);
             label_4.TextAlign = ContentAlignment.MiddleLeft;
             label_4.Text = Filepath;
+            label_4.Name = "filename";
 
             label_5.Size = new Size(20, 20);
             label_5.Dock = DockStyle.Fill;
@@ -680,6 +676,7 @@ namespace Aufnahmetest
             label_5.TextAlign = ContentAlignment.MiddleCenter;
             label_5.BackColor = Color.Gainsboro;
             label_5.Margin = new Padding(0, 0, 0, 0);
+            label_6.Name = "Zeit_Beschr";
 
             label_6.AutoSize = true;
             label_6.BackColor = Color.White;
@@ -687,6 +684,7 @@ namespace Aufnahmetest
             label_6.Margin = new Padding(3, 0, 0, 0);
             label_6.TextAlign = ContentAlignment.MiddleLeft;
             label_6.Text = Zeit;
+            label_6.Name = "Zeit";
 
 
             panel_2.Controls.Add(label_3, 0, 0);
@@ -715,6 +713,18 @@ namespace Aufnahmetest
             split.MouseMove += Split_MouseMove;
 
             return split;
+        }
+
+        private void Frm_Test_ResizeEnd(object sender, EventArgs e)
+        {
+            Thread.Sleep(10);
+            change_size_split();
+            change_size_split();
+        }
+
+        private void timer_Button_got_added_Tick(object sender, EventArgs e)
+        {
+            timer_Button_got_added.Stop();
         }
     }
 }

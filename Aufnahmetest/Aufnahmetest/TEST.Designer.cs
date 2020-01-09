@@ -46,10 +46,11 @@
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_Schlüssel = new System.Windows.Forms.Button();
             this.tbl_1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tlp_Speichern = new System.Windows.Forms.TableLayoutPanel();
+            this.tbl_Speichern = new System.Windows.Forms.TableLayoutPanel();
+            this.timer_Button_got_added = new System.Windows.Forms.Timer(this.components);
             this.conMenStr_1.SuspendLayout();
             this.tbl_1.SuspendLayout();
-            this.tlp_Speichern.SuspendLayout();
+            this.tbl_Speichern.SuspendLayout();
             this.SuspendLayout();
             // 
             // conMenStr_1
@@ -60,7 +61,7 @@
             this.postionVerändernToolStripMenuItem,
             this.delete_conMenStr_1});
             this.conMenStr_1.Name = "contextMenuStrip1";
-            this.conMenStr_1.Size = new System.Drawing.Size(208, 82);
+            this.conMenStr_1.Size = new System.Drawing.Size(174, 70);
             this.conMenStr_1.Opening += new System.ComponentModel.CancelEventHandler(this.conMenStr_1_Opening);
             // 
             // ändernToolStripMenuItem
@@ -70,27 +71,27 @@
             this.anzeigenameToolStripMenuItem,
             this.zeitToolStripMenuItem});
             this.ändernToolStripMenuItem.Name = "ändernToolStripMenuItem";
-            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.ändernToolStripMenuItem.Text = "Ändern";
             // 
             // pfadändernToolStripMenuItem
             // 
             this.pfadändernToolStripMenuItem.Name = "pfadändernToolStripMenuItem";
-            this.pfadändernToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.pfadändernToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.pfadändernToolStripMenuItem.Text = "Datei";
             this.pfadändernToolStripMenuItem.Click += new System.EventHandler(this.change_Path_conMenStr_1_Click);
             // 
             // anzeigenameToolStripMenuItem
             // 
             this.anzeigenameToolStripMenuItem.Name = "anzeigenameToolStripMenuItem";
-            this.anzeigenameToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.anzeigenameToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.anzeigenameToolStripMenuItem.Text = "Anzeigename";
             this.anzeigenameToolStripMenuItem.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
             // 
             // zeitToolStripMenuItem
             // 
             this.zeitToolStripMenuItem.Name = "zeitToolStripMenuItem";
-            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.zeitToolStripMenuItem.Text = "Zeit";
             this.zeitToolStripMenuItem.Click += new System.EventHandler(this.zeitToolStripMenuItem_Click);
             // 
@@ -100,27 +101,27 @@
             this.nachObenToolStripMenuItem,
             this.nachUntenToolStripMenuItem});
             this.postionVerändernToolStripMenuItem.Name = "postionVerändernToolStripMenuItem";
-            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
+            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.postionVerändernToolStripMenuItem.Text = "Position verändern";
             // 
             // nachObenToolStripMenuItem
             // 
             this.nachObenToolStripMenuItem.Name = "nachObenToolStripMenuItem";
-            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachObenToolStripMenuItem.Text = "nach oben";
             this.nachObenToolStripMenuItem.Click += new System.EventHandler(this.nachObenToolStripMenuItem_Click);
             // 
             // nachUntenToolStripMenuItem
             // 
             this.nachUntenToolStripMenuItem.Name = "nachUntenToolStripMenuItem";
-            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.nachUntenToolStripMenuItem.Text = "nach unten";
             this.nachUntenToolStripMenuItem.Click += new System.EventHandler(this.nachUntenToolStripMenuItem_Click);
             // 
             // delete_conMenStr_1
             // 
             this.delete_conMenStr_1.Name = "delete_conMenStr_1";
-            this.delete_conMenStr_1.Size = new System.Drawing.Size(207, 26);
+            this.delete_conMenStr_1.Size = new System.Drawing.Size(173, 22);
             this.delete_conMenStr_1.Text = "Entfernen";
             this.delete_conMenStr_1.Click += new System.EventHandler(this.delete_conMenStr_1_Click);
             // 
@@ -132,21 +133,19 @@
             this.flowLayoutPanel2.AutoScroll = true;
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 65);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 53);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1200, 235);
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(5);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(900, 190);
             this.flowLayoutPanel2.TabIndex = 3;
             this.flowLayoutPanel2.WrapContents = false;
             // 
             // Btn_Add
             // 
             this.Btn_Add.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Add.Location = new System.Drawing.Point(4, 4);
-            this.Btn_Add.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_Add.Location = new System.Drawing.Point(3, 3);
             this.Btn_Add.Name = "Btn_Add";
-            this.Btn_Add.Size = new System.Drawing.Size(238, 37);
+            this.Btn_Add.Size = new System.Drawing.Size(179, 31);
             this.Btn_Add.TabIndex = 5;
             this.Btn_Add.Text = "Fragebogen hinzufügen";
             this.Btn_Add.UseVisualStyleBackColor = true;
@@ -161,10 +160,10 @@
             // Btn_Ok
             // 
             this.Btn_Ok.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Ok.Location = new System.Drawing.Point(4, 4);
-            this.Btn_Ok.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_Ok.Location = new System.Drawing.Point(0, 0);
+            this.Btn_Ok.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.Btn_Ok.Name = "Btn_Ok";
-            this.Btn_Ok.Size = new System.Drawing.Size(185, 43);
+            this.Btn_Ok.Size = new System.Drawing.Size(142, 39);
             this.Btn_Ok.TabIndex = 7;
             this.Btn_Ok.Text = "Ändern und schließen";
             this.Btn_Ok.UseVisualStyleBackColor = true;
@@ -173,10 +172,10 @@
             // Btn_Cancel
             // 
             this.Btn_Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Cancel.Location = new System.Drawing.Point(197, 4);
-            this.Btn_Cancel.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
+            this.Btn_Cancel.Location = new System.Drawing.Point(148, 0);
+            this.Btn_Cancel.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.Btn_Cancel.Name = "Btn_Cancel";
-            this.Btn_Cancel.Size = new System.Drawing.Size(189, 43);
+            this.Btn_Cancel.Size = new System.Drawing.Size(142, 39);
             this.Btn_Cancel.TabIndex = 8;
             this.Btn_Cancel.Text = "Änderungen verwerfen";
             this.Btn_Cancel.UseVisualStyleBackColor = true;
@@ -185,10 +184,9 @@
             // Btn_Schlüssel
             // 
             this.Btn_Schlüssel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Schlüssel.Location = new System.Drawing.Point(250, 4);
-            this.Btn_Schlüssel.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_Schlüssel.Location = new System.Drawing.Point(188, 3);
             this.Btn_Schlüssel.Name = "Btn_Schlüssel";
-            this.Btn_Schlüssel.Size = new System.Drawing.Size(239, 37);
+            this.Btn_Schlüssel.Size = new System.Drawing.Size(179, 31);
             this.Btn_Schlüssel.TabIndex = 9;
             this.Btn_Schlüssel.Text = "Notenschlüssel einstellen";
             this.Btn_Schlüssel.UseVisualStyleBackColor = true;
@@ -201,50 +199,53 @@
             this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_1.Controls.Add(this.Btn_Schlüssel, 1, 0);
             this.tbl_1.Controls.Add(this.Btn_Add, 0, 0);
-            this.tbl_1.Location = new System.Drawing.Point(380, 13);
-            this.tbl_1.Margin = new System.Windows.Forms.Padding(4);
+            this.tbl_1.Location = new System.Drawing.Point(285, 11);
             this.tbl_1.Name = "tbl_1";
             this.tbl_1.RowCount = 1;
             this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tbl_1.Size = new System.Drawing.Size(493, 45);
+            this.tbl_1.Size = new System.Drawing.Size(370, 37);
             this.tbl_1.TabIndex = 10;
             // 
-            // tlp_Speichern
+            // tbl_Speichern
             // 
-            this.tlp_Speichern.ColumnCount = 2;
-            this.tlp_Speichern.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Speichern.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_Speichern.Controls.Add(this.Btn_Ok, 0, 0);
-            this.tlp_Speichern.Controls.Add(this.Btn_Cancel, 1, 0);
-            this.tlp_Speichern.Location = new System.Drawing.Point(830, 307);
-            this.tlp_Speichern.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.tlp_Speichern.Name = "tlp_Speichern";
-            this.tlp_Speichern.RowCount = 1;
-            this.tlp_Speichern.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Speichern.Size = new System.Drawing.Size(386, 51);
-            this.tlp_Speichern.TabIndex = 11;
+            this.tbl_Speichern.ColumnCount = 2;
+            this.tbl_Speichern.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Speichern.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbl_Speichern.Controls.Add(this.Btn_Ok, 0, 0);
+            this.tbl_Speichern.Controls.Add(this.Btn_Cancel, 1, 0);
+            this.tbl_Speichern.Location = new System.Drawing.Point(622, 249);
+            this.tbl_Speichern.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.tbl_Speichern.Name = "tbl_Speichern";
+            this.tbl_Speichern.RowCount = 1;
+            this.tbl_Speichern.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tbl_Speichern.Size = new System.Drawing.Size(290, 39);
+            this.tbl_Speichern.TabIndex = 11;
+            // 
+            // timer_Button_got_added
+            // 
+            this.timer_Button_got_added.Tick += new System.EventHandler(this.timer_Button_got_added_Tick);
             // 
             // Frm_Test
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(1232, 366);
-            this.Controls.Add(this.tlp_Speichern);
+            this.ClientSize = new System.Drawing.Size(924, 296);
+            this.Controls.Add(this.tbl_Speichern);
             this.Controls.Add(this.tbl_1);
             this.Controls.Add(this.flowLayoutPanel2);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1247, 403);
+            this.MinimumSize = new System.Drawing.Size(939, 335);
             this.Name = "Frm_Test";
             this.Text = "TEST";
             this.Load += new System.EventHandler(this.TEST_Load);
             this.ResizeBegin += new System.EventHandler(this.TEST_ResizeBegin);
+            this.ResizeEnd += new System.EventHandler(this.Frm_Test_ResizeEnd);
             this.Resize += new System.EventHandler(this.TEST_Resize);
             this.conMenStr_1.ResumeLayout(false);
             this.tbl_1.ResumeLayout(false);
-            this.tlp_Speichern.ResumeLayout(false);
+            this.tbl_Speichern.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,6 +267,7 @@
         private System.Windows.Forms.ToolStripMenuItem zeitToolStripMenuItem;
         private System.Windows.Forms.Button Btn_Schlüssel;
         private System.Windows.Forms.TableLayoutPanel tbl_1;
-        private System.Windows.Forms.TableLayoutPanel tlp_Speichern;
+        private System.Windows.Forms.TableLayoutPanel tbl_Speichern;
+        private System.Windows.Forms.Timer timer_Button_got_added;
     }
 }

@@ -53,14 +53,13 @@
             this.tbl_Main.Controls.Add(this.panel1, 0, 2);
             this.tbl_Main.Controls.Add(this.Btn_Start, 1, 2);
             this.tbl_Main.Controls.Add(this.pictureBox1, 0, 0);
-            this.tbl_Main.Location = new System.Drawing.Point(16, 15);
-            this.tbl_Main.Margin = new System.Windows.Forms.Padding(4);
+            this.tbl_Main.Location = new System.Drawing.Point(12, 12);
             this.tbl_Main.Name = "tbl_Main";
             this.tbl_Main.RowCount = 3;
-            this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 271F));
-            this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 220F));
+            this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tbl_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tbl_Main.Size = new System.Drawing.Size(1400, 745);
+            this.tbl_Main.Size = new System.Drawing.Size(1050, 605);
             this.tbl_Main.TabIndex = 1;
             // 
             // TBx_Name
@@ -68,10 +67,10 @@
             this.tbl_Main.SetColumnSpan(this.TBx_Name, 2);
             this.TBx_Name.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TBx_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBx_Name.Location = new System.Drawing.Point(9, 275);
-            this.TBx_Name.Margin = new System.Windows.Forms.Padding(9, 4, 5, 4);
+            this.TBx_Name.Location = new System.Drawing.Point(7, 223);
+            this.TBx_Name.Margin = new System.Windows.Forms.Padding(7, 3, 4, 3);
             this.TBx_Name.Name = "TBx_Name";
-            this.TBx_Name.Size = new System.Drawing.Size(1386, 57);
+            this.TBx_Name.Size = new System.Drawing.Size(1039, 47);
             this.TBx_Name.TabIndex = 2;
             this.TBx_Name.Text = "Bitte Name und Geburtsdatum eingeben";
             this.TBx_Name.TextChanged += new System.EventHandler(this.tB_Name_TextChanged);
@@ -82,10 +81,9 @@
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.flowP_1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(4, 343);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(3, 278);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(692, 399);
+            this.panel1.Size = new System.Drawing.Size(519, 325);
             this.panel1.TabIndex = 3;
             // 
             // flowP_1
@@ -93,20 +91,19 @@
             this.flowP_1.AutoSize = true;
             this.flowP_1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowP_1.Location = new System.Drawing.Point(0, 0);
-            this.flowP_1.Margin = new System.Windows.Forms.Padding(4);
-            this.flowP_1.MinimumSize = new System.Drawing.Size(419, 169);
+            this.flowP_1.MinimumSize = new System.Drawing.Size(314, 137);
             this.flowP_1.Name = "flowP_1";
-            this.flowP_1.Size = new System.Drawing.Size(692, 169);
+            this.flowP_1.Size = new System.Drawing.Size(519, 137);
             this.flowP_1.TabIndex = 4;
             this.flowP_1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowP_1_Paint);
             // 
             // Btn_Start
             // 
             this.Btn_Start.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Start.Location = new System.Drawing.Point(704, 346);
-            this.Btn_Start.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.Btn_Start.Location = new System.Drawing.Point(528, 281);
+            this.Btn_Start.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.Btn_Start.Name = "Btn_Start";
-            this.Btn_Start.Size = new System.Drawing.Size(692, 393);
+            this.Btn_Start.Size = new System.Drawing.Size(519, 319);
             this.Btn_Start.TabIndex = 3;
             this.Btn_Start.Text = "Start";
             this.Btn_Start.UseVisualStyleBackColor = true;
@@ -119,10 +116,9 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tbl_Main.SetColumnSpan(this.pictureBox1, 2);
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(4, 4);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1392, 263);
+            this.pictureBox1.Size = new System.Drawing.Size(1044, 214);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -132,10 +128,10 @@
             this.Btn_Settings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Btn_Settings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_Settings.BackgroundImage")));
             this.Btn_Settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Btn_Settings.Location = new System.Drawing.Point(1420, 18);
+            this.Btn_Settings.Location = new System.Drawing.Point(1065, 15);
             this.Btn_Settings.Margin = new System.Windows.Forms.Padding(0);
             this.Btn_Settings.Name = "Btn_Settings";
-            this.Btn_Settings.Size = new System.Drawing.Size(40, 36);
+            this.Btn_Settings.Size = new System.Drawing.Size(30, 29);
             this.Btn_Settings.TabIndex = 2;
             this.Btn_Settings.UseVisualStyleBackColor = true;
             this.Btn_Settings.Visible = false;
@@ -143,13 +139,12 @@
             // 
             // Start_Screen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1483, 774);
+            this.ClientSize = new System.Drawing.Size(1112, 629);
             this.Controls.Add(this.Btn_Settings);
             this.Controls.Add(this.tbl_Main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Start_Screen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Start_Screen";
