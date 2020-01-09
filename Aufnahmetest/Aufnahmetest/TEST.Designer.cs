@@ -46,18 +46,21 @@
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_Schlüssel = new System.Windows.Forms.Button();
             this.tbl_1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlp_Speichern = new System.Windows.Forms.TableLayoutPanel();
             this.conMenStr_1.SuspendLayout();
             this.tbl_1.SuspendLayout();
+            this.tlp_Speichern.SuspendLayout();
             this.SuspendLayout();
             // 
             // conMenStr_1
             // 
+            this.conMenStr_1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.conMenStr_1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ändernToolStripMenuItem,
             this.postionVerändernToolStripMenuItem,
             this.delete_conMenStr_1});
             this.conMenStr_1.Name = "contextMenuStrip1";
-            this.conMenStr_1.Size = new System.Drawing.Size(174, 70);
+            this.conMenStr_1.Size = new System.Drawing.Size(208, 82);
             this.conMenStr_1.Opening += new System.ComponentModel.CancelEventHandler(this.conMenStr_1_Opening);
             // 
             // ändernToolStripMenuItem
@@ -67,27 +70,27 @@
             this.anzeigenameToolStripMenuItem,
             this.zeitToolStripMenuItem});
             this.ändernToolStripMenuItem.Name = "ändernToolStripMenuItem";
-            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.ändernToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.ändernToolStripMenuItem.Text = "Ändern";
             // 
             // pfadändernToolStripMenuItem
             // 
             this.pfadändernToolStripMenuItem.Name = "pfadändernToolStripMenuItem";
-            this.pfadändernToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.pfadändernToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.pfadändernToolStripMenuItem.Text = "Datei";
             this.pfadändernToolStripMenuItem.Click += new System.EventHandler(this.change_Path_conMenStr_1_Click);
             // 
             // anzeigenameToolStripMenuItem
             // 
             this.anzeigenameToolStripMenuItem.Name = "anzeigenameToolStripMenuItem";
-            this.anzeigenameToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.anzeigenameToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.anzeigenameToolStripMenuItem.Text = "Anzeigename";
             this.anzeigenameToolStripMenuItem.Click += new System.EventHandler(this.change_Name_conMenStr_1_Click);
             // 
             // zeitToolStripMenuItem
             // 
             this.zeitToolStripMenuItem.Name = "zeitToolStripMenuItem";
-            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.zeitToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.zeitToolStripMenuItem.Text = "Zeit";
             this.zeitToolStripMenuItem.Click += new System.EventHandler(this.zeitToolStripMenuItem_Click);
             // 
@@ -97,27 +100,27 @@
             this.nachObenToolStripMenuItem,
             this.nachUntenToolStripMenuItem});
             this.postionVerändernToolStripMenuItem.Name = "postionVerändernToolStripMenuItem";
-            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.postionVerändernToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.postionVerändernToolStripMenuItem.Text = "Position verändern";
             // 
             // nachObenToolStripMenuItem
             // 
             this.nachObenToolStripMenuItem.Name = "nachObenToolStripMenuItem";
-            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.nachObenToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.nachObenToolStripMenuItem.Text = "nach oben";
             this.nachObenToolStripMenuItem.Click += new System.EventHandler(this.nachObenToolStripMenuItem_Click);
             // 
             // nachUntenToolStripMenuItem
             // 
             this.nachUntenToolStripMenuItem.Name = "nachUntenToolStripMenuItem";
-            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.nachUntenToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.nachUntenToolStripMenuItem.Text = "nach unten";
             this.nachUntenToolStripMenuItem.Click += new System.EventHandler(this.nachUntenToolStripMenuItem_Click);
             // 
             // delete_conMenStr_1
             // 
             this.delete_conMenStr_1.Name = "delete_conMenStr_1";
-            this.delete_conMenStr_1.Size = new System.Drawing.Size(173, 22);
+            this.delete_conMenStr_1.Size = new System.Drawing.Size(207, 26);
             this.delete_conMenStr_1.Text = "Entfernen";
             this.delete_conMenStr_1.Click += new System.EventHandler(this.delete_conMenStr_1_Click);
             // 
@@ -129,19 +132,21 @@
             this.flowLayoutPanel2.AutoScroll = true;
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 53);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(16, 65);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(5);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(900, 191);
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1200, 235);
             this.flowLayoutPanel2.TabIndex = 3;
             this.flowLayoutPanel2.WrapContents = false;
             // 
             // Btn_Add
             // 
             this.Btn_Add.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Add.Location = new System.Drawing.Point(3, 3);
+            this.Btn_Add.Location = new System.Drawing.Point(4, 4);
+            this.Btn_Add.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Add.Name = "Btn_Add";
-            this.Btn_Add.Size = new System.Drawing.Size(179, 29);
+            this.Btn_Add.Size = new System.Drawing.Size(238, 37);
             this.Btn_Add.TabIndex = 5;
             this.Btn_Add.Text = "Fragebogen hinzufügen";
             this.Btn_Add.UseVisualStyleBackColor = true;
@@ -155,9 +160,11 @@
             // 
             // Btn_Ok
             // 
-            this.Btn_Ok.Location = new System.Drawing.Point(626, 255);
+            this.Btn_Ok.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_Ok.Location = new System.Drawing.Point(4, 4);
+            this.Btn_Ok.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Ok.Name = "Btn_Ok";
-            this.Btn_Ok.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Ok.Size = new System.Drawing.Size(185, 43);
             this.Btn_Ok.TabIndex = 7;
             this.Btn_Ok.Text = "Ändern und schließen";
             this.Btn_Ok.UseVisualStyleBackColor = true;
@@ -165,9 +172,11 @@
             // 
             // Btn_Cancel
             // 
-            this.Btn_Cancel.Location = new System.Drawing.Point(772, 255);
+            this.Btn_Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_Cancel.Location = new System.Drawing.Point(197, 4);
+            this.Btn_Cancel.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
             this.Btn_Cancel.Name = "Btn_Cancel";
-            this.Btn_Cancel.Size = new System.Drawing.Size(140, 30);
+            this.Btn_Cancel.Size = new System.Drawing.Size(189, 43);
             this.Btn_Cancel.TabIndex = 8;
             this.Btn_Cancel.Text = "Änderungen verwerfen";
             this.Btn_Cancel.UseVisualStyleBackColor = true;
@@ -176,9 +185,10 @@
             // Btn_Schlüssel
             // 
             this.Btn_Schlüssel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Btn_Schlüssel.Location = new System.Drawing.Point(188, 3);
+            this.Btn_Schlüssel.Location = new System.Drawing.Point(250, 4);
+            this.Btn_Schlüssel.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Schlüssel.Name = "Btn_Schlüssel";
-            this.Btn_Schlüssel.Size = new System.Drawing.Size(179, 29);
+            this.Btn_Schlüssel.Size = new System.Drawing.Size(239, 37);
             this.Btn_Schlüssel.TabIndex = 9;
             this.Btn_Schlüssel.Text = "Notenschlüssel einstellen";
             this.Btn_Schlüssel.UseVisualStyleBackColor = true;
@@ -191,26 +201,42 @@
             this.tbl_1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbl_1.Controls.Add(this.Btn_Schlüssel, 1, 0);
             this.tbl_1.Controls.Add(this.Btn_Add, 0, 0);
-            this.tbl_1.Location = new System.Drawing.Point(285, 12);
+            this.tbl_1.Location = new System.Drawing.Point(380, 13);
+            this.tbl_1.Margin = new System.Windows.Forms.Padding(4);
             this.tbl_1.Name = "tbl_1";
             this.tbl_1.RowCount = 1;
             this.tbl_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tbl_1.Size = new System.Drawing.Size(370, 35);
+            this.tbl_1.Size = new System.Drawing.Size(493, 45);
             this.tbl_1.TabIndex = 10;
+            // 
+            // tlp_Speichern
+            // 
+            this.tlp_Speichern.ColumnCount = 2;
+            this.tlp_Speichern.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Speichern.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_Speichern.Controls.Add(this.Btn_Ok, 0, 0);
+            this.tlp_Speichern.Controls.Add(this.Btn_Cancel, 1, 0);
+            this.tlp_Speichern.Location = new System.Drawing.Point(830, 307);
+            this.tlp_Speichern.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.tlp_Speichern.Name = "tlp_Speichern";
+            this.tlp_Speichern.RowCount = 1;
+            this.tlp_Speichern.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Speichern.Size = new System.Drawing.Size(386, 51);
+            this.tlp_Speichern.TabIndex = 11;
             // 
             // Frm_Test
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(924, 297);
+            this.ClientSize = new System.Drawing.Size(1232, 366);
+            this.Controls.Add(this.tlp_Speichern);
             this.Controls.Add(this.tbl_1);
-            this.Controls.Add(this.Btn_Cancel);
-            this.Controls.Add(this.Btn_Ok);
             this.Controls.Add(this.flowLayoutPanel2);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(940, 336);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1247, 403);
             this.Name = "Frm_Test";
             this.Text = "TEST";
             this.Load += new System.EventHandler(this.TEST_Load);
@@ -218,6 +244,7 @@
             this.Resize += new System.EventHandler(this.TEST_Resize);
             this.conMenStr_1.ResumeLayout(false);
             this.tbl_1.ResumeLayout(false);
+            this.tlp_Speichern.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -239,5 +266,6 @@
         private System.Windows.Forms.ToolStripMenuItem zeitToolStripMenuItem;
         private System.Windows.Forms.Button Btn_Schlüssel;
         private System.Windows.Forms.TableLayoutPanel tbl_1;
+        private System.Windows.Forms.TableLayoutPanel tlp_Speichern;
     }
 }

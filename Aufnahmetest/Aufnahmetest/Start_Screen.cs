@@ -12,6 +12,8 @@ using System.Security.Principal;
 using System.Runtime.InteropServices;
 using Aufnahmetest;
 using System.Xml;
+using System.Windows.Media;
+
 
 namespace WindowsFormsApp3
 {
@@ -33,6 +35,7 @@ namespace WindowsFormsApp3
 
         private const int WM_SYSCOMMAND = 0x0112;
         private const int SC_MINIMIZE = 0xf120;
+        
 
         [DllImport("gdi32.dll")]
         static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
@@ -167,7 +170,7 @@ namespace WindowsFormsApp3
         private void Auswahl_getroffen(object sender, EventArgs e)
         {
             Button_Farbe();
-            (sender as Button).BackColor = Color.White;
+            (sender as Button).BackColor = System.Drawing.Color.White;
             pressed_Button = (sender as Button);
             button_pressed = true;
             Btn_Start.Enabled = true;
@@ -496,14 +499,30 @@ namespace WindowsFormsApp3
 
         public float scaling_Factor()
         {
-            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
-            IntPtr desktop = g.GetHdc();
-            int LogicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
-            int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+            Graphics graphics = this.CreateGraphics();
+            float dpiX = graphics.DpiX;
+            float dpiY = graphics.DpiY;
+            float ScreenScalingFactor;
 
-            float ScreenScalingFactor = (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+            switch (dpiY)
+            {
+                case 100:
+                    ScreenScalingFactor = 1;
+                    break;
+                case 120:
+                    ScreenScalingFactor = 1.25F;
+                    break;
+                default:
+                    ScreenScalingFactor = 1;
+                    break;
+            }
 
             return ScreenScalingFactor; 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

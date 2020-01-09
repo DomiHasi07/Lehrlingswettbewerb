@@ -45,6 +45,8 @@ namespace Aufnahmetest
         public Control test_Button;
         public Boolean button_got_moved = false;
         private int moved_splitter_Loc;
+        public Boolean started_ready_for_resize = false;
+   
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -90,9 +92,8 @@ namespace Aufnahmetest
         private void TEST_Resize(object sender, EventArgs e)
         {
             change_size_split();
-            Btn_Ok.Location = new Point(this.Width - 314, this.Height - 81);
-            Btn_Cancel.Location = new Point(this.Width - 168, this.Height - 81);
             tbl_1.Location = new Point((this.Width / 2) - (tbl_1.Width / 2), tbl_1.Location.Y);
+            tlp_Speichern.Location = new Point(this.Width - 420, this.Height - 100);
             try
             {
                 if (splitContainers.Count > 0)
@@ -113,8 +114,7 @@ namespace Aufnahmetest
 
             splitContainers = new List<SplitContainer>();
 
-            
-            if(!File.Exists(@"settings.xml"))
+            if (!File.Exists(@"settings.xml"))
             {
                 if(MessageBox.Show("Datei Settings konnte nicht gefunden werden. Wollen Sie eine erstellen?", "Settings Datei nicht gefunden", MessageBoxButtons.YesNo)==DialogResult.Yes)
                 {
@@ -140,6 +140,7 @@ namespace Aufnahmetest
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
                 }
+                
             }
             else
             {
@@ -157,22 +158,28 @@ namespace Aufnahmetest
                     org_Fragebögen.Add(new Fragebogen { Name = temp_name, Pfad = temp_path, Zeit = temp_Zeit });
                     Neues_Label_hinzu(temp_name, temp_path,temp_Zeit);
                 }
+                started_ready_for_resize = true;
                 check_nach_Änderung();
+                change_size_split();
             }
         }
 
         private void change_size_split()
         {
-            if(flowLayoutPanel2.VerticalScroll.Visible)
+            if(started_ready_for_resize)
             {
-                splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 30, 30));
-                splitContainers.ForEach(x => x.Margin = new Padding(3, 3, 0, 3));
-                flowLayoutPanel2.Controls[flowLayoutPanel2.Controls.Count - 1].Margin = new Padding(3, 3, 0, 12);
+                if (flowLayoutPanel2.VerticalScroll.Visible)
+                {
+                    splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 30, 30));
+                    splitContainers.ForEach(x => x.Margin = new Padding(3, 3, 0, 3));
+                    flowLayoutPanel2.Controls[flowLayoutPanel2.Controls.Count - 1].Margin = new Padding(3, 3, 0, 12);
+                }
+                else
+                {
+                    splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 16, 30));
+                }
             }
-            else
-            {
-                splitContainers.ForEach(x => x.MinimumSize = new Size(flowLayoutPanel2.Width - 16, 30));
-            }
+            
         }
 
         private void Sub_Form_1_KeyDown(object sender, KeyEventArgs e)
@@ -265,8 +272,6 @@ namespace Aufnahmetest
                     ((ToolStripMenuItem)((ContextMenuStrip)sender).Items[1]).DropDown.Items[1].Enabled = false;
                 }
             }
-
-           
         }
 
         private void change_Path_conMenStr_1_Click(object sender, EventArgs e)
@@ -709,11 +714,7 @@ namespace Aufnahmetest
             split.MouseDown += Split_MouseDown;
             split.MouseMove += Split_MouseMove;
 
-           
-
             return split;
         }
-
-        
     }
 }
