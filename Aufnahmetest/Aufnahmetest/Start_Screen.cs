@@ -502,7 +502,6 @@ namespace WindowsFormsApp3
             int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
 
             float ScreenScalingFactor = (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
-
             return ScreenScalingFactor; 
         }
     }
